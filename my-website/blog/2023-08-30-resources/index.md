@@ -78,7 +78,7 @@ If you've made it this far and possibly explored some of the suggested resources
 
 Whitepapers are short, focused  papers explaining a particular topic in KDB/Q. These topics cover a broad spectrum, ranging from direct association with the Q programming language, its application, and interfaces to strategies for managing large data and systems. Furthermore, there exists a segment dedicated to delving into Machine Learning within the realm of KDB/Q. Notably, the complexity of these whitepapers varies significantly, with the majority catering to more seasoned developers.
 
-It's worth mentioning that while some of these whitepapers may lack in-depth explanations of the presented code or practical implementation guidance, this should not deter you from exploring them. Below, I've compiled a list of whitepapers that I've personally perused and find exceptionally well-written and valuable for expanding your knowledge. Do keep in mind that I haven't read all whitepapers available [here](www.code.kx.com) and I can't comment on every single one of them
+It's worth mentioning that while some of these whitepapers may lack in-depth explanations of the presented code or practical implementation guidance, this should not deter you from exploring them. Below, I've compiled a list of whitepapers that I've personally perused and find exceptionally well-written and valuable for expanding your knowledge. Do keep in mind that I haven't read all whitepapers available [here](https://code.kx.com/q/wp/) and I can't comment on every single one of them
 
  - [Building real-time tick subscribers](https://code.kx.com/q/wp/rt-tick/) by Nathan Perrem
  - [Common design principles for kdb+ gateways](https://code.kx.com/q/wp/gateway-design/) by Michael McClintock
