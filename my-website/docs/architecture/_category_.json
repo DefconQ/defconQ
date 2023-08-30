@@ -2,6 +2,7 @@
   "label": "KDB Architecture",
   "position": 3,
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "description": "This section focuses on KDB/Q Tick architecture. Starting with the plain vanilla Tick setup we will describe and explain more complex architecture and design decisions. We will show you how you can build modular, easy extensible code."
   }
 }

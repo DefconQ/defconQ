@@ -41,15 +41,15 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+            // 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          //editUrl:
+            //'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -67,14 +67,14 @@ const config = {
         id: 'announcementBar',
         backgroundColor: '#74e8a3',
         isCloseable: true,
-        content:'If you would like to connect, please reach out on Linkedin '
+        content: 'If you would like to connect, please reach out on Linkedin',
       },
       navbar: {
         title: 'DefconQ',
-        //logo: {
-        //  alt: 'My Site Logo',
-        //  src: 'img/logo.svg',
-        //},
+        logo: {
+          alt: 'My Site Logo',
+          src: 'img/logo.svg',
+        },
         items: [
           {
             type: 'docSidebar',
@@ -85,7 +85,7 @@ const config = {
           {to: '/blog', label: 'Blog', position: 'left'},
           {to: '/about/about', label: 'About', position: 'left'},
           {to: '/cv/cv', label: 'CV', position: 'left'},
-          {to: '/services/services', label: 'Services', position: 'left'},
+          /** {to: '/services/services', label: 'Services', position: 'left'},  **/
           {
             href: 'https://github.com/DefconQ',
             label: 'GitHub',
@@ -110,7 +110,7 @@ const config = {
             items: [
               {
                 label: 'Linkedin',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                href: 'https://www.linkedin.com/company/defconq/',
               },
             ],
           },
@@ -128,7 +128,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DefconQ Ltd. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} DefconQ Ltd. This website is maintained by Alexander Unterrainer. Disclaimer: All content shared on this website reflect solely his personal thoughts and opinions, and is not representative of any past, current, or future employers or affiliations.`,
       },
       prism: {
         theme: lightCodeTheme,

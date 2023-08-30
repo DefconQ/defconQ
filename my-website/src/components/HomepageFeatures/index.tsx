@@ -14,7 +14,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_developer.svg').default,
     description: (
       <>
-       Years of experience  
+       Years of hands on development experience in some of the largest investment banks and hours of self-study combined with a passion for teaching
       </>
     ),
   },
@@ -23,7 +23,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_software_engineer.svg').default,
     description: (
       <>
-       Whether you have designed a tick system before or not, we try to explain different levels of architectural design as comprehensive as possible. Starting from the plain vanilla tick setup building up to more complex systems.  
+       Whether you have designed a tick system before or are just starting out, we try to explain different levels of architectural design as comprehensive as possible. Starting from the plain vanilla tick setup building up to more complex systems 
       </>
     ),
   },
@@ -32,8 +32,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_code_thinking.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+	We break complex KDB/Q concepts down into small, easy understandable lessons that allow you to master the step learning curve of KDB/Q
       </>
     ),
   },
