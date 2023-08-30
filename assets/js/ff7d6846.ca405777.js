@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[396],{2940:e=>{e.exports=JSON.parse('{"label":"QTips","permalink":"/defconQ/blog/tags/q-tips","allTagsPath":"/defconQ/blog/tags","count":1}')}}]);
