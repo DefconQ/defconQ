@@ -14,7 +14,7 @@ const config = {
   url: 'https://DefconQ.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/defconQ/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -74,6 +74,7 @@ const config = {
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
+	  srcDark: 'img/logoLight.svg',
         },
         items: [
           {
