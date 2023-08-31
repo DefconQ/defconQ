@@ -31,6 +31,6 @@ Buckle up, because this is a journey you won't want to miss. Whether you're aspi
 So, stick around, bookmark us, and get ready to embark on a tech adventure that'll leave you with newfound knowledge, skills, and an unquenchable thirst for all things tech. Welcome to DefconQ - where we're turning tech novices into tech savvy superheroes, one blog post at a time!
 
 
-![Docusaurus Plushie](./HelloWorld.png)
+![Hello World](./HelloWorld.png)
 
 

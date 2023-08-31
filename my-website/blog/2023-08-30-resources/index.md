@@ -34,7 +34,7 @@ Chapter 9 introduces q-sql and its role in querying and manipulating tables, whi
 
 Written in a highly accessible manner, the book is accompanied by illustrative coding examples and snippets, allowing for easy comprehension and hands-on learning. After completing a full read-through, you can revisit specific chapters whenever needed to reinforce your understanding and delve deeper into the content for a more solid grasp.
 
-![Docusaurus Plushie](./qfm3.jpg)
+![Q For Mortals](./qfm3.jpg)
 
 #### Q-Tips by Nick Psaris
 
@@ -46,7 +46,7 @@ In this context, Nick not only illustrates how to efficiently capture, store, an
 
 As you can see from the image of my well-worn copy of Q-Tips below I have read the book several times from front to back and I wholeheartedly recommend Q-Tips to anyone who wants to bring their KDB/Q programming skills to the next level.
 
-![Docusaurus Plushie](./qtips.jpg)
+![Q Tips](./qtips.jpg)
 
 ### Online resources
 
@@ -60,7 +60,7 @@ The Advanced section of KX Academy builds up on your previously acquired knowled
 
 After completing each section, you have the opportunity to validate your understanding by obtaining either of the two certificates, putting your knowledge to test. 
 
-![Docusaurus Plushie](./KXAcademy.png)
+![KX Academy](./KXAcademy.png)
 
 #### Data Intellect's Blog
 
@@ -68,7 +68,7 @@ After completing each section, you have the opportunity to validate your underst
 
 But that's not all. The best part is that Data Intellect provides a complete, production ready KDB/Q framework called [TorQ](https://dataintellect.com/thoughts/?_sft_category=blog) for free as OPEN SOURCE. Yes, you read that right. Go and check it out for yourself, you can find TorQ [here](https://github.com/DataIntellectTech/TorQ)
  
-![Docusaurus Plushie](./DataIntellect.png)
+![Data Intellect Blog](./DataIntellect.png)
 
 ### What's next
 
@@ -95,7 +95,7 @@ The final resource I'd like to introduce is akin to a Swiss pocket knife in the 
 
 I find the Reference Card to be an indispensable asset, to the extent that I routinely keep it open in one of my web browser tabs. Whether you're seeking a swift verification of a keyword's functionality, exploring operators that align with your requirements, or revisiting subjects that may have become rusty over time, the Reference Card stands as your go-to resource.
 
-![Docusaurus Plushie](./reference.png)
+![KX Reference](./reference.png)
 
 And thus, we conclude our journey. Wishing you joyful learning and coding endeavors ahead
 
