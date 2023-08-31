@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[413],{5150:e=>{e.exports=JSON.parse('{"label":"QForMortals","permalink":"/defconQ/blog/tags/q-for-mortals","allTagsPath":"/defconQ/blog/tags","count":1}')}}]);
