@@ -4,4 +4,4 @@ sidebar_position: 1
 
 # Intro
 
-COMMING SOON
+![Hello World](/img/comingSoon.png)
