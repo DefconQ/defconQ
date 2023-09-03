@@ -95,10 +95,12 @@ const config = {
         content: 'If you would like to connect, please reach out on Linkedin',
       },
       navbar: {
-        title: 'DefconQ',
+        title: '',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
+	  width: 50,
+	  height: 150,
 	  srcDark: 'img/logoLight.svg',
         },
         items: [

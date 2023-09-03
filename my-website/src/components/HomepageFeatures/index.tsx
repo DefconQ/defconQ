@@ -32,7 +32,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_code_thinking.svg').default,
     description: (
       <>
-	We break complex KDB/Q concepts down into small, easy understandable lessons that allow you to master the step learning curve of KDB/Q
+	We break complex KDB/Q concepts down into small, easy understandable lessons that allow you to master the steep learning curve of KDB/Q
       </>
     ),
   },

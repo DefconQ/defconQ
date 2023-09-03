@@ -123,7 +123,7 @@ Italian, British
 ## Driving Licence
 B
 ## Interests outside work
-Finance, Quantitative Finance, Financial Markets, Code golf, Fitness (GYM, weight lifting), Martial Arts (Muay Thai, Brazilian Jiu-Jitsu), Dancing (Salsa), Music (EDM, Classic, Rock, Jazz), Djing (Pioneer DDJ 400)
+Finance, Quantitative Finance, Financial Markets, Code golf, Fitness (GYM, weight lifting), Martial Arts (Muay Thai, Brazilian Jiu-Jitsu), Music
 
 
 
