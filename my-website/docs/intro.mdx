@@ -1,0 +1,59 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+# Intro
+
+Before we can start learning KDB/Q we first need to have a running version of q installed. Let's kickstart our journey! Please note, I will only cover the installation for personal use. If you are trying to install a commercial version of KDB/Q, please follow the guide on [code.kx.com](www.code.kx.com).
+
+## Getting Started
+
+The easiest way to install is to head over to [code.kx.com](www.code.kx.com) and follow the installation guide [here](https://code.kx.com/q/learn/install/). However, for simplicity I will also include the steps here. 
+
+At the time of writing, KX offers a 64-bit Personal Edition for non-commerical use. This version of KDB/Q is not licenced for cloud usage and requires an internet connection to be run. 
+
+## Step 1: Downloading KDB/Q
+
+Head over to code.kx.com and download the current version of KDB/Q from [here](https://kx.com/kdb-personal-edition-download/). KX offers a version for all three main operating systems: Linux, macOS or Winwos.
+
+After completing the download form, the download should kick off and you should receive an email with your ```kc.lic``` licence file
+
+## Step 2: Unzip your download
+
+:::caution
+Here we assume you install kdb+ in your `HOME` directory on Linux or macOS; or in `C:\` on Windows, and set the environment variable `QHOME` accordingly.
+:::
+
+```txt
+os        QHOME
+---------------
+Linux     ~/q
+macOS     ~/q
+Windows   c:\q
+```
+
+:::info
+You can install kdb+ anywhere as long as you set the path in QHOME.
+:::
+
+Open a command shell and cd to your downloads directory.
+
+Unzip the downloaded ZIP to produce a folder q in your install location.
+
+<Tabs groupId="operating-system">
+  <TabItem value="linux" label="Linux" default>
+    unzip l64.zip -d $HOME/q
+  </TabItem>
+  <TabItem value="macOS" label="macOS">
+    unzip m64.zip -d $HOME/q
+  </TabItem>
+  <TabItem value="windows" label="Windows">
+    Expand-Archive w64.zip -DestinationPath C:\q
+  </TabItem>
+</Tabs>
+
+![Hello World](/img/comingSoon.png)
