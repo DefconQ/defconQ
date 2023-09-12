@@ -22,6 +22,8 @@ Nevertheless, if we deconstruct the code into smaller components and methodicall
 
 ![Lego Block](./lego_block.jpg)
 
+## Dividing code into smaller components
+
 That's precisely the method we'll employ in this blog post. We'll dissect a line of KDB/Q code that could appear complex initially - maybe we won't even grasp its purpose at first glance. However, by breaking it down into small, discrete expressions and evaluating them sequentially, we'll unravel its underlying logic and functionality.
 
 We are accomplishing this by examining a fascinating pattern introduced by Stephen Taylor, the KX Librarian, as outlined in this [post](https://community.kx.com/t5/Community-Blogs/Meet-the-Zen-monks/ba-p/11604). Take a glance at the code provided below and take a moment to make an educated guess about its purpose.
@@ -80,6 +82,8 @@ q)
 :::tip
 It's strongly advised to have the [KX reference card](https://code.kx.com/q/ref/) readily available, particularly when you're starting your KDB/Q journey and are still becoming acquainted with various operators, their overloads, and functionalities.
 :::
+
+## The power of Iterators and their applications
 
 The `'` operator exemplifies another unique concept within KDB/Q, which is the concept of [iterators](https://code.kx.com/q/basics/iteration/). Iterators can be described as functions that take values as arguments and generate new functions that apply those values repetitively. In this specific instance, the `'` operator signifies ["each"](https://code.kx.com/q/ref/maps/#each) and applies a value item-by-item to a dictionary, list, or conforming combinations of lists and dictionaries.
 
@@ -173,7 +177,9 @@ q)reverse 0 1 2 3 4 5
 ```
 The string `Hello World` becomes `dlroW olleH` and the list `0 1 2 3 4 5` becomes `5 4 3 2 1 0`
 
-Now, it's time to address the most intricate part of this code snippet - the `1 function\input` pattern. The `\` operator is referred to as "Scan". To clarify the scan operator, we must first explain the "Over" iterator. *"The [Over](https://code.kx.com/q4m3/6_Functions/#676-over-for-accumulation) iterator `/` is a higher-order function that provides the principal mechanism for recursion in q. In its simplest form it modifies a binary function to accumulate results over a list"*.
+## Exploring the versatility of Scan and Over
+
+Now, it's time to address the most intricate part of this code snippet - the `1 function\input` pattern. The `\` operator is referred to as "Scan". To clarify the "Scan" iterator, we must first explain the "Over" iterator. *"The [Over](https://code.kx.com/q4m3/6_Functions/#676-over-for-accumulation) iterator `/` is a higher-order function that provides the principal mechanism for recursion in q. In its simplest form it modifies a binary function to accumulate results over a list"*.
 
 *"The [Scan](https://code.kx.com/q4m3/6_Functions/#678-scan) iterator `\` is a higher-order function that behaves just like `/` except that it returns all the intermediate accumulations instead of just the final one".* 
 
@@ -286,6 +292,8 @@ Next, we encounter another lambda function combined with an iterator, but in thi
 x{y _ x}/1 -1*(1 reverse\" "<>x)?'1b
 ```
 
+## Other KDB/Q operators
+
 Let's take a closer look at the functionality of the operator `_` inside the lambda does: `_` also called [Drop](https://code.kx.com/q/ref/drop/), drops items from a list, entries from a dictionary or columns from a table 
 
 :::caution
@@ -333,9 +341,11 @@ v2/[x;y]
 
 meaning that the `x` we observe in front of the lambda function `{y _ x}/` is the first parameter to the function.
 
-If we take a closer look at the entire code, we'll notice that the input to the primary lambda function is the string we intend to trim. Additionally, the `y` parameter in the lambda corresponds to the two indexes, 3 and -2. If you recall from the initial part of the code, when we reverse the boolean mask, we obtain the first index of a "true" flag in the "original" boolean mask and the first index of a "true' flag in the "reversed" boolean mask. However, let's pause for a moment and consider this. The first index of a "true" flag in the "reversed" boolean mask is, in fact, the same as the first index of the "original" boolean mask when we count from the opposite end of the boolean maski (namely from the back/end).
+## Putting it all together
 
-Haven't we recently discovered that 'drop' used in conjunction with a negative number will discard the last 'n' elements? Indeed, we have! So, the remaining piece of the puzzle is to grasp how 'Over' is applied to this function. Yet, we're already acquainted with this concept, as 'Over' serves as a higher-order function that facilitates recursion in q. In its basic form, it adapts a binary function to accumulate results over a list.
+If we take a closer look at the entire code, we'll notice that the input to the primary lambda function is the string we intend to trim. Additionally, the `y` parameter in the lambda corresponds to the two indexes, 3 and -2. If you recall from the initial part of the code, when we reverse the boolean mask, we obtain the first index of a "true" flag in the "original" boolean mask and the first index of a "true' flag in the "reversed" boolean mask. However, let's pause for a moment and consider this. The first index of a "true" flag in the "reversed" boolean mask is, in fact, the same as the first index of the "original" boolean mask when we count from the opposite end of the boolean mask (namely from the back/end).
+
+Haven't we recently discovered that "drop" used in conjunction with a negative number will discard the last "n" elements? Indeed, we have! So, the remaining piece of the puzzle is to grasp how "Over" is applied to this function. Yet, we're already acquainted with this concept, as "Over" serves as a higher-order function that facilitates recursion in q. In its basic form, it adapts a binary function to accumulate results over a list.
 
 Let's take a peek. To simplify matters, I'll display some of the intermediate outcomes rather than the entire expression
 .
@@ -345,10 +355,10 @@ q)"   Trim the spaces.  "{y _ x}/3 -2
 ```
 
 :::tip
-A helpful technique for debugging and comprehending the actions of 'Over' is to initially employ 'Scan' and examine all the interim outcomes. This can provide valuable insights into the ultimate result.
+A helpful technique for debugging and comprehending the actions of "Over" is to initially employ "Scan" and examine all the interim outcomes. This can provide valuable insights into the ultimate result.
 :::
 
-Let's give this technique a try. You can observe how 'Scan' begins by removing the first three (empty) characters from the string and subsequently discards the last two (empty) characters, resulting in the desired outcome: a string that has been trimmed of all leading and trailing spaces.
+Let's give this technique a try. You can observe how "Scan" begins by removing the first three (empty) characters from the string and subsequently discards the last two (empty) characters, resulting in the desired outcome: a string that has been trimmed of all leading and trailing spaces.
 
 ```
 q)"   Trim the spaces.  "{y _ x}\3 -2
@@ -366,19 +376,4 @@ q){x{y _ x}/1 -1*(1 reverse\" "<>x)?'1b}"   Trim the spaces.  "
 As an exercise, you can delve into the second code example from the original [post](https://community.kx.com/t5/Community-Blogs/Meet-the-Zen-monks/ba-p/11604) by Stephen Taylor and attempt to decipher it independently. If you encounter any queries or uncertainties along the way, don't hesitate to reach out for assistance. 
 
 Happy coding!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
