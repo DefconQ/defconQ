@@ -4,56 +4,169 @@ sidebar_position: 1
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
+import CodeBlock from '@theme/CodeBlock';
 
 # Intro
 
-Before we can start learning KDB/Q we first need to have a running version of q installed. Let's kickstart our journey! Please note, I will only cover the installation for personal use. If you are trying to install a commercial version of KDB/Q, please follow the guide on [code.kx.com](www.code.kx.com).
+Before we can start learning KDB/Q we first need to have a running version of q installed. Let's kickstart our journey! 
+
+:::danger
+Please note, I will only cover the installation for personal use. If you are trying to install a commercial version of KDB/Q, please follow the guide on [code.kx.com](www.code.kx.com).
+:::
 
 ## Getting Started
 
-The easiest way to install is to head over to [code.kx.com](www.code.kx.com) and follow the installation guide [here](https://code.kx.com/q/learn/install/). However, for simplicity I will also include the steps here. 
+The easiest way to install KDB/Q is to head over to [code.kx.com](www.code.kx.com) and follow the installation guide [here](https://code.kx.com/q/learn/install/). However, for simplicity I will also include the steps in this blog. 
 
 At the time of writing, KX offers a 64-bit Personal Edition for non-commerical use. This version of KDB/Q is not licenced for cloud usage and requires an internet connection to be run. 
 
 ## Step 1: Downloading KDB/Q
 
-Head over to code.kx.com and download the current version of KDB/Q from [here](https://kx.com/kdb-personal-edition-download/). KX offers a version for all three main operating systems: Linux, macOS or Winwos.
+Navigate to ```code.kx.com``` and download the current version of KDB/Q from [here](https://kx.com/kdb-personal-edition-download/). KX offers a version for all three main operating systems: Linux, macOS or Winwos.
 
-After completing the download form, the download should kick off and you should receive an email with your ```kc.lic``` licence file
+After completing the download form, the download should start and you should receive an email with your ```kc.lic``` licence file
 
 ## Step 2: Unzip your download
 
 :::caution
-Here we assume you install kdb+ in your `HOME` directory on Linux or macOS; or in `C:\` on Windows, and set the environment variable `QHOME` accordingly.
+I will presume that you will be installing KDB/Q in your `HOME` directory on Linux or macOS; or in `C:\` on Windows, and subsequently configure the environment variable `QHOME` accordingly.
 :::
 
-```txt
-os        QHOME
----------------
-Linux     ~/q
-macOS     ~/q
-Windows   c:\q
-```
+<Tabs groupId="operating-system">
+  <TabItem value="linux" label="Linux" default>
+    <CodeBlock language="jsx">QHOME should be set to ~/q</CodeBlock>
+  </TabItem>
+  <TabItem value="macOS" label="macOS">
+    <CodeBlock language="jsx">QHOME should be set to ~/q</CodeBlock>
+  </TabItem>
+  <TabItem value="windows" label="Windows">
+    <CodeBlock language="jsx">QHOME should be set to c:\q</CodeBlock>
+  </TabItem>
+</Tabs>
+
 
 :::info
 You can install kdb+ anywhere as long as you set the path in QHOME.
 :::
 
-Open a command shell and cd to your downloads directory.
+Open a command shell and ```cd``` to your downloads directory.
 
-Unzip the downloaded ZIP to produce a folder q in your install location.
+Unzip the downloaded ZIP and create a folder ```q``` in your install location.
 
 <Tabs groupId="operating-system">
   <TabItem value="linux" label="Linux" default>
-    unzip l64.zip -d $HOME/q
+    <CodeBlock language="jsx">unzip l64.zip -d $HOME/q</CodeBlock>
   </TabItem>
   <TabItem value="macOS" label="macOS">
-    unzip m64.zip -d $HOME/q
+    <CodeBlock language="jsx">unzip m64.zip -d $HOME/q</CodeBlock>
   </TabItem>
   <TabItem value="windows" label="Windows">
-    Expand-Archive w64.zip -DestinationPath C:\q
+    <CodeBlock language="jsx">Expand-Archive w64.zip -DestinationPath C:\q</CodeBlock>
   </TabItem>
 </Tabs>
 
-![Hello World](/img/comingSoon.png)
+:::tip
+For Linux and macOS users, the rlwrap command enhances the q session by enabling the use of the Up arrow to recall previous expressions. This feature is highly advantageous and makes you more productive. I highly recommend its installation. 
+[Unwrapping rlwrap](https://kx.com/blog/unwrapping-rlwrap/)
+
+Ask for its version number: `rlwrap -v`. If you see one, `rlwrap` is already installed. Otherwise, you will see `rlwrap: command not found`.
+
+Install `rlwrap` using your [package manager](https://en.wikipedia.org/wiki/Package_manager "Wikipedia"). (Common package managers: `apt`, `dnf` and `yum` for Linux; [Homebrew](https://brew.sh/) and [MacPorts](https://www.macports.org/) for macOS.)
+:::
+
+## Step 3: Install the licence file
+
+As mentioned earlier, you should have received an email from `KX` with your personal ```kc.lic``` file which you have to put in your ```QHOME``` directory
+
+Your ```QHOME``` directory should then look like the following:
+
+<Tabs groupId="operating-system">
+  <TabItem value="linux" label="Linux" default>
+    <CodeBlock language="jsx">{`
+	|- kc.lic
+	|- l64
+	   - q
+	|- q.k	`}
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="macOS" label="macOS">
+    <CodeBlock language="jsx">{`
+	|- kc.lic
+	|- m64
+	   - q
+	|- q.k 	`}
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="windows" label="Windows">
+    <CodeBlock language="jsx">{`
+	|- kc.lic
+	|- w64
+	   - q
+	|- q.k	`}
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+:::info
+KDB/Q is looking for a licence file in ```QHOME```. You can change the location of your licence file by setting the path to the licence file in the evironment variable ```QLIC```. You can find more information [here](https://code.kx.com/q4m3/14_Introduction_to_Kdb%2B/#148-theres-no-place-like-qhome)
+:::
+
+
+## Step 4: Start a KDB/Q process
+
+In order to confirm that KDB/Q is working launch your first q session. `cd` into your `QHOME` directory and lanch the application
+ 
+<Tabs groupId="operating-system">
+  <TabItem value="linux" label="Linux" default>
+    <CodeBlock language="jsx">q/l64/q</CodeBlock>
+  </TabItem>
+  <TabItem value="macOS" label="macOS">
+    <CodeBlock language="jsx">q/m64/q</CodeBlock>
+  </TabItem>
+  <TabItem value="windows" label="Windows">
+    <CodeBlock language="jsx">c:\g\w64\q</CodeBlock>
+  </TabItem>
+</Tabs>
+
+Your `q` session should start with a banner like this
+
+```
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-mbp 192.168.1.102 EXPIRE 2024.02.17 your.email@gmail.com KOD #5012923
+
+q)
+```
+
+
+## Step 5: [Optional] Create an alias
+
+Creating an alias for `q` allows you to start a KDB/Q session without having to specify the path each time. So let's do that
+
+<Tabs groupId="operating-system">
+  <TabItem value="linux" label="Linux" default>
+    <CodeBlock language="bash">{`
+	1. Open your ~/.bash_profile in a text editor and add the following line
+	2. alias q='QHOME=~/q rlwrap -r ~/q/l64/q'
+	3. In the command shell, load the updated profile with 'source .bash_profile'
+	`}</CodeBlock>
+  </TabItem>
+  <TabItem value="macOS" label="macOS">
+    <CodeBlock language="bash">{`
+	1. Open your ~/.zshrc file in a text editor and add the following line
+	2. alias q='QHOME=~/q rlwrap -r ~/q/m64/q'
+	3. In the command shell, load the updated profile with 'source ~/.zshrc'
+	`}</CodeBlock>
+  </TabItem>
+  <TabItem value="windows" label="Windows">
+    <CodeBlock language="PowerShell">{`
+	In the command shell run the following commands:
+	
+	1. setx QHOME "C:\\q"
+	2. setx PATH "%PATH%;C:\\q\\w64"
+    	 `}</CodeBlock>
+  </TabItem>
+</Tabs>
+
+
+# Happy Coding
+![Looney Tunes](/img/looneyTunes.jpg)
