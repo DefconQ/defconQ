@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2936],{3121:e=>{e.exports=JSON.parse('{"label":"KX Community","permalink":"/blog/tags/kx-community","allTagsPath":"/blog/tags","count":1}')}}]);
