@@ -107,12 +107,12 @@ competitive setting. Effective and efficient time management to allow working ex
 
 ## Skills Matrix
 
-|Area			|Beginner	|Intermediate							|Advanced			|Expert |
-|-----------------------|---------------|--------------------------------------------------------------	|-------------------------------|-------|
-|Languages		|K,Shakti	|Python,Java,Bash, Matlab, VBA					|KDB/Q				|	|
-|Architecture		|		|								|KDB Tick			|	|
-|Business Knowledge	|Time Series	|FX, Quantitative Finance, Options				|Equities, Tick data		|	|
-|Other			|		|Confluence, git, JIRA, Bloomberg, Thomson Reuters, Panopticon	|				|	|
+|Area			|Beginner	|Intermediate							|Advanced			|
+|-----------------------|---------------|--------------------------------------------------------------	|-------------------------------|
+|Languages		|K,Shakti	|Python,Java,Bash, Matlab, VBA					|KDB/Q				|
+|Architecture		|		|								|KDB Tick			|
+|Business Knowledge	|Time Series	|FX, Quantitative Finance, Options				|Equities, Tick data		|
+|Other			|		|Confluence, git, JIRA, Bloomberg, Thomson Reuters, Panopticon	|				|
 
 
 ## Personal Details
