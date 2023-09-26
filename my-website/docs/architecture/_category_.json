@@ -3,6 +3,6 @@
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "This section focuses on KDB/Q Tick architecture. Starting with the plain vanilla Tick setup we will describe and explain more complex architecture and design decisions. We will show you how you can build modular, easy extensible code."
+    "description": "In this section of the blog, our primary focus will be on the realm of KDB/Q Tick architecture. We will start with the plain vanilla tick setup, examining every single process in detail, describing the role of each indvidual process, their memory usage over the course of the day, explorer essential design considerations, and potential pitfalls to be mindful of. We will then move on to more advanced tick configurations, unveiling additional services you can build to enhance the foundational tick configuration."
   }
 }
