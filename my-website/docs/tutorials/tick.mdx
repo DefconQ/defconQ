@@ -1,0 +1,675 @@
+---
+sidebar_position: 1
+---
+
+# KDB Tick Explained: A Walkthrough [PART 1]
+
+In this blog post, we're diving into the code of a simple Tickerplant. We'll break it down line by line, explaining what each part does and how it fits into the big picture. This will not only demystify Tickerplants but also shed light on important KDB/Q programming concepts. By doing so, you'll gain insights into the inner workings of a Tickerplant and acquire a deeper understanding of key concepts in the KDB/Q programming language.
+
+We'll also chat about the limitations of a basic Tickerplant, get cozy with fundamental KDB/Q operators, and explore their many flavors. To make the most of this, prior knowledge of the Tick architecture is crucial. If you need a refresher, check out my previous post [here](https://defconq.tech/docs/architecture/plain).
+
+Our approach will involve a systematic breakdown. We will start with an in-depth explanation of each function, highlighting its purpose and contextual relevance. Following this, we will broaden our perspective to examine the entire code comprehensively in a line-by-line analysis of the code, delving into the specifics of input and output for each function.
+
+You can access the KDB Tick code on the official KX GitHub page [here](https://github.com/KxSystems/kdb-tick/tree/master). Note, this blog post is based on the code as of November 2023 and any future change need to be re-examined.
+
+To enhance readability and minimize the need to switch between this blog and the codebase, I'm providing the code here:
+
+## The Tickerplant Core `tick.q`
+```
+  1 system"l tick/",(src:first .z.x,enlist"sym"),".q"
+  2
+  3 if[not system"p";system"p 5010"]
+  4
+  5 \l tick/u.q
+  6 \d .u
+  7 ld:{
+  8   if[not type key L::`$(-10_string L),string x;.[L;();:;()]];i::j::-11!(-2;L);if[0<=type i;-2 (string L)," is a corrupt log. Truncate to length ",(string last i)," and restart";    exit 1];hopen L};
+  9
+ 10 tick:{
+ 11   init[];
+ 12   if[not min(`time`sym~2#key flip value@)each t;'`timesym];
+ 13   @[;`sym;`g#]each t;
+ 14   d::.z.D;
+ 15   if[l::count y;L::`$":",y,"/",x,10#".";l::ld d]};
+ 16
+ 17 endofday:{
+ 18   end d;
+ 19   d+:1;
+ 20   if[l;hclose l;l::0(`.u.ld;d)]};
+ 21
+ 22 ts:{
+ 23   if[d<x;if[d<x-1;system"t 0";'"more than one day?"];endofday[]]};
+ 24
+ 25 if[system"t";
+ 26   .z.ts:{pub'[t;value each t];@[`.;t;@[;`sym;`g#]0#];i::j;ts .z.D};
+ 27   upd:{[t;x]
+ 28   if[not -16=type first first x;if[d<"d"$a:.z.P;.z.ts[]];a:"n"$a;x:$[0>type first x;a,x;(enlist(count first x)#a),x]];
+ 29   t insert x;if[l;l enlist (`upd;t;x);j+:1];}];
+ 30
+ 31 if[not system"t";system"t 1000";
+ 32   .z.ts:{ts .z.D};
+ 33   upd:{[t;x]ts"d"$a:.z.P;
+ 34   if[not -16=type first first x;a:"n"$a;x:$[0>type first x;a,x;(enlist(count first x)#a),x]];
+ 35   f:key flip value t;
+ 36   pub[t;$[0>type first x;enlist f!x;flip f!x]];if[l;l enlist (`upd;t;x);i+:1];}];
+ 37
+ 38 \d .
+ 39
+ 40 .u.tick[src;.z.x 1];
+```
+## Helper Functions - `u.q`
+```
+  1 \d .u
+  2 init:{w::t!(count t::tables`.)#()}
+  3
+  4 del:{w[x]_:w[x;;0]?y};
+  5
+  6 .z.pc:{del[;x]each t};
+  7
+  8 sel:{$[`~y;x;select from x where sym in y]}
+  9
+ 10 pub:{[t;x] {[t;x;w]if[count x:sel[x]w 1;(neg first w)(`upd;t;x)]}[t;x]each w t}
+ 11
+ 12 add:{
+ 13   $[(count w x)>i:w[x;;0]?.z.w;.[`.u.w;(x;i;1);union;y];w[x],:enlist(.z.w;y)];
+ 14   (x;$[99=type v:value x;sel[v]y;@[0#v;`sym;`g#]])}
+ 15
+ 16 sub:{
+ 17   if[x~`;:sub[;y]each t];
+ 18   if[not x in t;'x];
+ 19   del[x].z.w;
+ 20   add[x;y]}
+ 21
+ 22 end:{(neg union/[w[;;0]])@\:(`.u.end;x)}
+```
+## The Real-Time Database (RDB) code - `r.q`
+```
+  1 if[not "w"=first string .z.o;system "sleep 1"];
+  2
+  3 upd:insert;
+  4
+  5 .u.x:.z.x,(count .z.x)_(":5010";":5012");
+  6
+  7 .u.end:{
+  8   t:tables`.;
+  9   t@:where `g=attr each t@\:`sym;
+ 10   .Q.hdpf[`$":",.u.x 1;`:.;x;`sym];
+ 11   @[;`sym;`g#] each t;};
+ 12
+ 13 .u.rep:{
+ 14   (.[;();:;].)each x;
+ 15   if[null first y;:()];
+ 16   -11!y;
+ 17   system "cd ",1_-10_string first reverse y };
+ 18
+ 19 .u.rep .(hopen `$":",.u.x 0)"(.u.sub[`;`];`.u `i`L)";
+```
+It's remarkable to see how much you can accomplish in KDB/Q with such concise code. In a little over 80 lines, we've established the fundamental processes of a KDB/Q Tick system. Let's now have a closer look at the content of each file and the functions in it:
+
+## KDB/Q Tick demystified
+
+Before we have a deeper look into the code in each file, let's have a look at the global variables used in a Tickerplant.
+
+## Global variables
+
+```
+ .u.w - A dictionary mapping all available tables to the handles of the real-time subscribers and the symbols they subscribe to
+ .u.i - The message count in the TP log file. Note, because we can receive several records (rows) per message, this does not represent the total number of rows, but total numberof messages received
+ .u.j - The total message count (TP log file plus those messages held in memory if we run the Tickerplant in batch mode)
+ .u.t - All table names available in the Tickerplant
+ .u.L - The Tickerplant Log filename, e.g. `:./sym2023.10.11
+ .u.l - The handle to the Tickerplant Log file
+ .u.d - The date for which the Tickerplant processes data
+```
+
+While the majority of the global variables explained above are pretty much straight forward, `.u.w` deserves a closer look: 
+
+If we connect to a running Tickerplant and look at `.u.w` we will observe the following
+
+```
+q).u.w
+quote| 8i ` 9i `
+trade| 8i ` 9i `
+q).u.w[`quote]
+8i `
+9i `
+```
+We soon realise, that `.u.w` is a dictionary, mapping each table to a list of lists, where each element is a pair consisting of the handle of the real-time subscriber and the list of symbols they subscribe to. If we wanted to recreate such a dictionary we could do so using the following code:
+
+```
+q).u.w:`trade`quote!(((8;`);(9;`));((8;`);(9;`)))
+q).u.w
+trade| 8 ` 9 `
+quote| 8 ` 9 `
+q).u.w[`trade]
+8 `
+9 `
+q)0N!.u.w[`trade]	// Note: 0N! is a very helpful tool to output data to the console. This comes especially handy when debugging code.
+((8;`);(9;`))
+8 `
+9 `
+```
+
+It's crucial to grasp the structure of this dictionary, as it proves beneficial when accessing information about the real-time subscribers.
+
+## Walkthrough
+
+Let's now start with our walkthrough and look at the code.
+
+We start the Tickerplant by running the below command in our terminal passing the following parameters:
+
+- **tick.q** - the KDB/Q file containing the Tickerplant functions and logic
+- **SOURCE** - the name of the file with the table defintions which is also used as directory name for where we want to store the data and the initial part of the Tickerplant Log file name
+- **DESTINATION** [optional] - the location of where we want to store our data
+- **`-p PORT`** [optional] - the port on which we want the Tickerplant to run on
+
+```
+// q tick.q SOURCE DESTINATION[optional] -p 5010[optional]
+// Example: 
+Alexander@Alexanders-MBP:~/Desktop/kdb/tick
+⇒q tick.q sym  .  -p 5010	
+```
+### The `sym.q` file
+
+`tick.q` starts by loading the `sym.q` file into memory. The `sym.q` file contains all the table definitions of the tables we want to capture and is a prerequisite for the Tickerplant. A simple example can be found below:
+
+```
+  1 // sym.q
+  2 // quote table schema
+  3 quote:([]time:`timespan$();sym:`g#`symbol$();bid:`float$();ask:`float$();bsize:`int$();asize:`int$());
+  4 // trade table schema
+  5 trade:([]time:`timespan$();sym:`g#`symbol$();price:`float$();size:`int$());
+```
+Below code loads our schemas:
+
+```
+system "l tick/",(src:first .z.x,enlist"sym"),".q"
+```
+
+`.z.x` contains the parameters we passed to the KDB/Q process. In case there were no parameters passed, we append the string `"sym"` to the list and then select the first element of this list. Note: we have to enlist our string `"sym"` otherwise it would be concatenated character by character to the existing list. The below code should illustrate this:
+
+```
+q).z.x
+"sym"
+,"."
+q).z.x,"sym"
+"sym"
+,"."
+"s"
+"y"
+"m"
+q)first .z.x,enlist "sym"
+"sym"
+```
+As a next step we will append `".q"` the file extenstion to the sym file and prepend the rest of the path to the location of the sym file. We then use the `system "l"` command to load the content of the `sym.q` file. This will load all table definitions into memory.
+
+Next we check if the port of the Tickerplant has been set on startup with the `-p` flag and if not we set it to `5010`. All our KDB/Q processes need to run on a specific port in order for other services to connect to them. We do so by using an `if` statement and the `system` command:
+
+```
+if[not system"p";system"p 5010"]
+```
+
+We then load the code stored in the `u.q` file which loads all the `.u` helper functions used in the Tickerplant
+
+```
+\l tick/u.q
+```
+
+## `u.q` Helper functions
+
+The first line within `u.q` changes the default namespace into a `.u` namespace. In order to avoid name clashes of varibales or functions within the same processs, KDB/Q introduces the concept of namespaces. If you are not familiar with namespaces, you can read about this concept in [Chapter 12](https://code.kx.com/q4m3/12_Workspace_Organization/#121-namespaces) of "Q for Mortals". 
+
+```
+\d .u		// Change the namespace from default to .u
+```
+
+For simplicity and readability, we will include the full, compound name (including namespace and context) of each function when describing them. I will describe the functions in a logical order, which will help you to comprehend the flow of the code. This order may slightly deviate from the order of the function definitions in `u.q`.
+
+## `.u.init`
+
+Even though `.u.init` only consists of one line of code, it performs two very important tasks:
+- it defines the list of tables `.u.t` a real-time subscribers can subscribe to
+- it creates a dictionary `.u.w` to keep track of the handles of all real-time subscribers and the tables and symbols they subscribe to. It does so by mapping each table name to a list of pairs consisting of the handle of the real-time subscriber and the corresponding symbols they susbcribe to. An example of a symbol would be the ticker symbol of an equity.
+
+`.u.init` is called inside the `.u.tick` function, the entry function of the Tickerplant, which is the first function called when the Tickerplant comes up. 
+
+```
+// @ param:		 	None
+// @ return:		None
+.u.init:{[]
+        .u.w::.u.t!(count .u.t::tables `.)#()
+        };
+```
+
+As we already know, KDB/Q is read [left-of-right](https://code.kx.com/q4m3/4_Operators/#412-left-of-right-evaluation) (or read from the right-to-left) which means we have to start at the end of the line. ```(count .u.t::tables `.)#()``` creates a list of empty lists of length ```count tables `.```. We first retrieve the names of all tables defined in the Tickerplant (the ones we defined in the `sym.q` file and loaded at the beginning) and assign this list to the global variable `.u.t` using the `::` operator. If you're within a function and want to assign a variable as global variable, which will exist beyond the scope of the current function, you can do so by using the `::` operators. We use `count` to identify how many tables exist and create a list of empty lists of exactly that length using the take [`#`](https://code.kx.com/q/ref/take/) operator. Next we map this list of empty lists to the table names we stored in `.u.t` creating a dictionary and finally we assign this dictionary to `.u.w` using a global variable assignment. As explained previously, `.u.w` keeps track of the handles of all real-time subscribers and the tables and symbols they subscribe to.
+
+:::info
+You can also use [`set`](https://code.kx.com/q/ref/get/#set) to assign global variables and [`get`](https://code.kx.com/q/ref/get/#get) to access them.
+::: 
+
+:::tip
+If you are following along this blog post, break the code down into each individual command. For example, you can split up above code into the following pieces:
+```
+q)tables `.
+`s#`quote`trade
+q)count .u.t:tables `.
+2
+q)0N!(count .u.t:tables `.)#()		// Note: 0N! is a helpful tool to output variables to the console, especially during debugging. The empty list () wouldn't be printed otherwise
+(();())
+
+
+q)0N!.u.t!(count .u.t::tables `.)#()
+`s#`quote`trade!(();())
+quote|
+trade|
+q).u.w::.u.t!(count .u.t::tables `.)#()
+q).u.t
+`s#`quote`trade
+q)0N!.u.w
+`s#`quote`trade!(();())
+quote|
+trade|
+```
+Observe each output in your console and inspect the content of `.u.t` and `.u.w` when you are done!
+:::
+
+## `.u.sub`
+
+`.u.sub` is the function utilized by real-time subscribers (e.g. Real-time Database) to subscribe to particular tables and symbols published by the Tickerplant. This function has the capability to add a subscription to a specific table when the corresponding table name is passed as a parameter. Alternatively, if an empty symbol is passed, it subscribes to all tables. It first ensures that the specified table is among the subscribable tables, then clears all existing subscriptions for the caller by invoking `.u.del`, and finally adds the new subscription using `.u.add`. This sequence helps prevent duplicate subscriptions. In the context of `.u.add`, the schemas of all tables are retrieved, which are then used to initialize the tables on the real-time subscriber. 
+
+```
+// Examples: 1. Subscribe to all tables and all symbols .u.sub[`;`]
+//           2. Subscribe to specific tables and symbols .u.sub[`trade`quote;`AAPL`GOOG]
+
+// @param: 	x (symbol) 	- the table name to subscribe to, empty symbol ` for all tables
+// @param: 	y (symbolList) 	- list of symbols to subscribe to, empty symbol ` for all symbols
+// @return:	A list of lists (to be more specific a list of pairs) is returned. Because .u.add returns a pair consisting of (`tableName;schema) and we invoke .u.add
+//		for every table, `.u.sub` returns a list of list (pairs) containing the name of each table and the corresponding schema.
+//		((table1;schema1);(table2;schema2); ... ; (tableN;schemaN))	
+.u.sub:{[x;y]
+        if[x~`;:.u.sub[;y] each .u.t];
+        if[not x in .u.t;'x];
+        .u.del[x].z.w;
+        .u.add[x;y]
+        };
+
+```
+
+We first check if the real-time subscriber wants to subscribe to all tables (empty symbol) and if so, we call `.u.sub` recursively for the symbols `y` they want to subscribe to. This will be invoked for all tables defined in `.u.t`. We do so by creating a projection on `.u.sub` and looping over every table name stored in `.u.t`.
+```
+if[x~`;:.u.sub[;y] each .u.t];
+```
+If the table the real-time subscriber wants to subscribe to is not in the list of subscribable tables we throw an error (`'` is used to throw errors)
+```
+if[not x in .u.t;'x];
+```
+Next we call `.u.del` for the table `x` and the real time subscriber who called `.u.sub`. `.z.w` is the connection handle of the process which invoked the function, in this case the real-time subscriber. `.u.del` is a dyadic function which will remove all subscriptions for table` x` and subscriber `.z.w` if there exists one already.
+```
+.u.del[x].z.w;
+```
+Lastly we add a new subscription for table `x` and symbols `y`. This will add the details of the real time subscriber to `.u.w` the dictionary containing all details about real time subscribers and which tables they subscribe to.
+```
+.u.add[x;y]
+```
+
+:::danger
+It is crucial that we omit the last semicolon after `.u.add[x;y]`. The semicolon suppresses the result of a function from being returned. In the case of `.u.add`, the result is a list of table names and their corresponding schemas. This information is used by the real-time subscriber to initialize the tables. Suppressing this result would be counterproductive as the real-time subscriber can't initialise the tables they receive updates for.
+:::
+
+## `.u.del`
+
+`.u.del` will remove an existing subscription for a specific real-time subscriber and the corresponding table within `.u.w`, the dictionary storing all information about real time subscribers. This is done to avoid duplicate subscriptions. `.u.del` is called within `.u.sub`, the function a real-time subscriber would call to subscribe to the Tickerplant
+
+```
+// @param:	x (symbol) - the name of the table for which we need to remove the subscriber 
+// @param:	y (int)	   - the handle of the subscriber
+// @return:	None
+.u.del:{[x;y]
+        .u.w[x]_:.u.w[x;;0]?y;
+        };
+```
+
+As evident, the `.u.del` function appears to consist of just a single line of code, but there's more complexity beneath the surface. Let's take a brief detour to delve into the drop operator `_`, the concept of eliding, and in-place assignment:
+
+### The drop operator `_`
+According to the official documentation [here](https://code.kx.com/q/ref/drop/), the drop operator `_`:*"Drop items from a list, entries from a dictionary or columns from a table"*. Like many other KDB/Q operators, the drop operator has multiple overloads depending on the input parameters. While a comprehensive explanation of all these overloads is beyond the scope of this blog post, I recommend exploring the various use cases of the drop operator as they can be quite useful. Let's examine a specific use case: removing the i-th element from a list, which is precisely what we observe in `.u.del`:
+
+Given a list of N elements, the below code will drop the ith element from the list
+
+```
+q)1 2 3 _ 1
+1 3
+```
+As you can see, he drop operator eliminated the element at index 1 from the list 1 2 3 and returned the updated list. Be sure to review the remaining use cases and grasp their functionalities.
+
+### Eliding
+
+[Eliding](https://code.kx.com/q4m3/3_Lists/#310-elided-indices) is the concept of providing only a "partial" index when accessing data structures at depth. Let's illustrate this important concept with an example. Consider the 4 by 4 matrix m:
+
+```
+q)m:(1 2 3 4;10 20 30 40;100 200 300 400;1000 2000 3000 4000)
+q)m
+1    2    3    4
+10   20   30   40
+100  200  300  400
+1000 2000 3000 4000
+```
+If we want to access all elements of the first row we could use the following
+
+```
+q)m[0;0 1 2 3]
+1 2 3 4
+```
+:::note
+In KDB/Q indexing starts at index 0
+:::
+
+Nonetheless, this approach can be cumbersome and inefficient, especially when dealing with larger matrices that have numerous columns. For instance, if we have a matrix with 100 columns, would we need to write out all 100 indexes? This is where eliding becomes useful. We can achieve the same outcome by simply omitting the second index.
+
+```
+q)m[0;]                 
+1 2 3 4
+// Note: m[0] obtains the same result but for readability it's better to add the ; making it clear that we are eliding the second index
+q)m[0]
+1 2 3 4
+```
+
+As described in [Q for Mortals](https://code.kx.com/q4m3/3_Lists/#310-elided-indices): *"This indeed works because eliding an index in any slot is equivalent to specifying all legitimate indices for that slot."*
+
+Note, that if we wish to access only the second column of our matrix, we can do so using the following method:
+```
+q)m[;1]
+2 20 200 2000
+```
+Eliding is a versatile technique and extends to more than two dimensions. Let's examine its use in the context of `.u.w`, which is utilized in our Tickerplant. This dictionary stores the handles of subscribers, tables they are subscribed to, and the symbols they have subscribed to.
+
+```
+q).u.w:`trade`quote!(((8;`);(9;`));((8;`);(9;`)))
+q).u.w
+trade| 8 ` 9 `
+quote| 8 ` 9 `
+```
+Suppose we have two real-time subscribers with handles 8 and 9, both subscribing to the tables `trade` and `quote` and all symbols. The dictionary `.u.w` represents this mapping. Now, let's say you want to retrieve the list of pairs that represent all subscriber handles and the symbols they subscribe to for the `trade` table. How can you achieve this? Well, you can simply elide into the dictionary `.u.w` with ```.u.w[`trade]```, resulting in the following output:
+
+```
+q).u.w[`trade]
+8 `
+9 `
+q)0N!.u.w[`trade]      
+((8;`);(9;`))
+8 `
+9 `
+```
+Now, suppose we want only the first element from all pairs. How can we accomplish this? Given the list ```((8;`);(9;`))```, which represents our intermediate result, we can simply elide the first index and use 0 as the second index. Eliding the first index is equivalent to selecting all elements at the first level.
+
+```
+q)((8;`);(9;`))[;0]
+8 9
+q)((8;`);(9;`))[0 1;0]		// Eliding the first index is equivalent to selecting all elements at depth level 1
+8 9
+```
+Combining this knowledge, we can now retrieve the handles of all real-time subscribers that subscribe to table `trade`
+```
+q).u.w[`trade;;0]
+8 9
+```
+Eliding is an important and powerful concept, make sure you fully understand it and how to use it. You can find more details about it [here](https://code.kx.com/q4m3/3_Lists/#310-elided-indices)
+
+### Assignment in place
+
+If you are transitioning from another programming language such as Java or C++, you might be familiar with the concept of assignment in place. Assignment in place, or [amend](https://code.kx.com/q4m3/4_Operators/#46-amend) how it's referenced in KDB/Q, is essentially a way to achieve the same result with less code, providing a more concise syntax.
+
+```
+q)a:0
+q)a+:1
+q)a
+1
+q)a:0
+q)a:a+1
+q)a
+1
+```
+
+Now we can return to our Tickerplant code and examine the `.u.del` function in detail
+
+```
+.u.del:{[x;y]
+        .u.w[x]_:.u.w[x;;0]?y
+        };
+```
+
+We start again reading from the right and can see that our first operation involves find `?`. If you remember, `y` is the handle of the subscriber we are trying to remove from the dictionary and thus the operation `expression?y` is searching for the handle of the subscriber in the list on the left of the `?` operator. From the previous section, we know that 
+
+```
+q).u.w[`tablename;;0]
+q).u.w[`trade;;0]
+8 9
+``` 
+will return all the handles of the real-time subscribers that subscribe to that particular table. In the above case, we retrieve all the handles of the subscribers of the `trade` table. 
+
+:::note
+Even though find `?` only returns the index of the first element found, we don't have to worry about this as there should be no duplication in the list of handles. If you need to search a list of non-unique elements be aware that find will only return the index of the first element.
+:::
+
+Once we found the index of the handle of the real-time subscriber we want to remove from the dictionary, we use drop `_` to remove the element and re-assign the modified list to the key that matches table `x` in place. The entry for table `x` is thus updated and the real time subscriber has been removedi.
+
+Example:
+```
+q).u.w:`trade`quote!(((8;`);(9;`));((8;`);(9;`)))
+q).u.w
+trade| 8 ` 9 `
+quote| 8 ` 9 `
+q).u.w[`trade] _ .u.w[`trade;;0]?9	// Removing handle 9 for table trade from the dictionary
+8 `
+```
+
+## `.u.add`
+`.u.add` is the second function invoked by `.u.sub`. This function adds a new subscription for a real time subscriber by adding the handle of the subscriber and the table it subscribes to, to the dictionary `.u.w`. It then returns the empty schema of the table that has been subscribed to.
+
+```
+// @param:	x (symbol)	 	- the name of the table we want to subscribe to
+// @param:	y (symbolList)	- List of symbols we want to subscribe to. Empty symbol ` for all symbols
+// @return:	List (pair)		- List containing the table name for which we added the subscription and the corresponding schema  
+.u.add:{[x;y]
+        $[(count .u.w[x])>i:.u.w[x;;0]?.z.w;
+                .[`.u.w;(x;i;1);union;y];
+                .u.w[x],:enlist(.z.w;y)];
+        (x;$[99=type v:value x;.u.sel[v]y;@[0#v;`sym;`g#]])
+        };
+```
+
+This is the lengthiest function we've encountered thus far, and it's the most extensive function in the `u.q` file. However, by dissecting each line into its constituent steps, we can gain a clear understanding of its operation. 
+
+We are already familiar with the first part of the code `.u.w[x;;0]?.z.w` as this is similar to what we have seen in `.u.del`. We retrieve the index of the real-time subscriber that invoked the function for a particular table `x`. Remember, `.z.w` is the connection handle of the process which called the function. We then store this index in variable `i` as we will use it later in the function. 
+
+Before we continue, let's pause for a moment and observe what the find `?` operator returns when we are searching for an element that isn't present in the list we searching in.
+
+```
+q)1 2 3?2       // If the element we search for, is in the list, find will return its index
+1
+// However, if the element we're searching for isn't within the list, the find operator will return 
+// count[list]+1, indicating the index at which the element would be appended
+q)1 2 3?4       
+3
+```
+Knowing this, we can establish two cases we check for:
+- **Case 1**: `(count .u.w[x])>i` the length of the list of pairs for table `x` (established with `count .u.w[x]`), is larger than the index `i` returned by find. This means the handle of the real-time subscriber has been found within the list of pairs and is therefore already present
+- **Case 2**: `(count .u.w[x])>i` the length of the list of pairs for table `x` is smaller than the index `i`. This means that the handle isn't present yet
+
+We can now use the conditional operator `$` (similar to an if-else statement) to action on these two cases:
+
+**Case 1**: If the handle of the subscriber is already there. We use amend to add the new symbols `y` we want to subscribe for table `x`, to the already existing ones. **Note**: Because `.u.w` is not a simple dictionary but its values are list of lists, we need to use the `.` version of amend using nested indexes. **Remember**: the list of pairs consists of (handle;symbols) elements, thus the symbols are at index 1, while handles are at index 0.
+
+```
+// Using the nested index `(x;i;1)` we retrieve the symbols this particular subscriber is interested 
+// in and create the union with the new symbols that we need to add. `i` contains the index of the 
+// subscriber in the list of pairs for the table `x`
+.[`.u.w;(x;i;1);union;y]		
+```
+
+Let's illustrate above with an example.
+
+```
+// Recreate .u.w
+q).u.w:`trade`quote!(((8;`GOOG`APPL);(9;`MSFT`GS));((10;`IBM`TSLA);(11;`C`NVDA)))	
+q).u.w
+trade| 8 `GOOG`APPL 9 `MSFT`GS
+quote| 10 `IBM`TSLA 11 `C`NVDA
+// Assume we are interested in subscriber at index 1 for table `trade. This retrieves all 
+// symbols they currently subscribe to
+q).u.w[`trade;1;1]
+`MSFT`GS
+// Append two new symbols to the symbols already subscribed to.
+q).[`.u.w;(`trade;1;1);union;`GOOG`APPL]		
+q).u.w
+trade| 8 `GOOG`APPL         9 `MSFT`GS`GOOG`APPL
+quote| 10 `IBM`TSLA         11 `C`NVDA
+```
+
+**Case 2**: The subscriber is not yet present in `.u.w`. In this case we simply have to add the new entry to the enties already present for table `x`
+```
+// We are using `enlist` to create a singleton list of a pair containing the handle of the subscriber 
+// .z.w and the symbols they want to subscribe to and add it to the already existing list for table x 
+.u.w[x],:enlist (.z.w;y)
+```
+The last remaining step is to return a pair consisting of the table name x and an empty schema.
+
+:::warning
+Nevertheless, there is one section of the code that remains somewhat unclear to me. In the conditional evaluation, we verify whether the table is a keyed table. However, the tables in the Tickerplant are normal tables and not keyed. I haven't encountered a production system where the Tickerplant stores keyed tables.
+:::
+
+Below code creates a tuple/pair consisting of `x` the table name and an expression that will evaluate to the schema of the corresponding table. Let's have a look at it:
+```
+(x;$[99=type v:value x;.u.sel[v]y;@[0#v;`sym;`g#]])
+```
+The first part of the tuple is straightforward, it's simply the table name. The second part is a conditional evaluation. Because `x` only contains the symbol name of the table, we first have to apply `value` to it in order to retrieve the actual content of the table. We then check if the type of this data is 99, which corresponds to a keyed table. I have never seen a Tickerplant that processes keyed tables, so this evaluation should be always false. However, in case this evaluates to true, we apply the `.u.sel` function to the data we stored in `v` for the symbols `y` and return the result. 
+For the case the table isn't keyed (this should be always the case) we return the following:
+
+```
+@[0#v;`sym;`g#]
+```
+We first take 0 rows from the data stored in `v` using `0#v`. This basically creates an empty table. We then use this construct in combination with the apply at `@` operator to apply the grouped attribute `g` to the `sym` column. If you are not familiar with with the behaviour of **Apply At** you can have a read [here](https://code.kx.com/q/ref/apply/#apply-at-index-at).
+
+## `.u.sel` 
+
+This function is responsible for extracting a specific set of rows from a table using a list of symbols. It is used within both `.u.add` and `.u.pub` to fetch the subset of rows corresponding to the symbols that a real-time subscriber is interested in.
+
+```
+// @param:		x (table)		- the data we want to select from
+// @param:		y (symbolList)	- the list of symbols we are interested in
+// @return: 	A table containing the relevant data
+.u.sel:{[x;y]
+        $[`~y;x;select from x where sym in y]
+        };
+```
+This function is another one-liner and is relatively straight forward. We first distinguish whether the real-time subscriber is interested in all symbols, passing the empty symbol ``` ` ``` to the function, or in a specific list of symbols. In the former case, the function returns the complete data stored in parameter `x`. In the latter case, where the subscriber is only interested in a specific subset of symbols, the function uses q-sql to retrieve the relevant data and returns it.
+
+## `.u.pub`
+
+This function publishes all relevant data to the interested real-time subscribers and is used within `.z.ts`, if the Tickerplant runs in batch mode on a timer, or within `.u.upd` if the Tickerplant publishes every incoming row straight away.
+
+```
+// @param:	x (symbol)	- the table name
+// @param:	y (table)	- the corresponding data stored in table x at the time of publishing
+// @return:	None
+.u.pub:{[t;x]
+        {[t;x;w] if[count x:.u.sel[x] w 1;(neg first w)(`upd;t;x)]}[t;x] each .u.w[t]
+        };
+```
+
+While `.u.pub` is a concise function, it involves multiple steps. It starts by creating a projection of a three-parameter anonymous function. This effectively fixes the parameters `t` and `x`, which denote the table name and the actual data. 
+
+```
+// Create a projecton of a triadic function fixing the first two parameters.
+{[t;x;w] ... }[t;x]
+```
+
+We proceed by iterating through each pair, which consists of the subscriber handle and the list of symbols they are interested in for the table `t` we aim to publish data for, involing the anonymous function.
+
+Inside the lambda function, we initially confirm the data's relevance to the subscriber by fetching the symbols of interest for that subscriber (stored in `w 1`). We then combine this list of symbols with the data and pass it to `.u.sel`, which will provide us with the relevant data. If there is any data available for publishing, we do so asynchronously to the real-time subscriber. 
+
+We send an asynchronous message by utilizing the negative handle of the real-time subscriber. The data is sent in the form of a parse tree where the first element of the parse tree represents the function to be called on the real-time subscriber, and the subsequent elements are the parameters passed to that function. In our context, we invoke the `update` function `upd` on the subscriber, with `t` as the table name and `x` as the data to be inserted. It is important to note that the `upd` function must be defined on the real-time subscriber; otherwise, an error will be thrown on the real-time subscriber. 
+
+```
+// Send the data asynchronously to the real time subscriber
+(neg first x)(`upd;t;x)
+```
+
+:::tipIMPORTANT
+Communication between the Tickerplant and the real-time subscriber should always be asynchronous when publishing data. Not only do we not need a response from the real-time subscriber (we don't really care whether the real-time subscriber received the message or not) but we avoid waiting for a response from the real-time subscriber to prevent potential delays and the risk of the Tickerplant crashing, which can occur with synchronous messaging
+:::
+
+## `.u.end`
+`.u.end` sends an asynchronous message to all real time subscribers invoking their `.u.end` function at the end of the day. It is triggered within the `.u.endofday` function of the Tickerplant.
+
+```
+// @param:	x (date) - the date of the day that just ended, basically yesterday's date
+// @return:	None
+.u.end:{ (neg union/[w[;;0]])@\:(`.u.end;x) }
+```
+This concise function, although just a single line, covers various significant KDB/Q concepts, including iterators, eliding, asynchronous IPC, and parse trees.
+
+### Parse trees
+
+Starting from the right, we first encounter a parse tree. The expression ```(`.u.end;x)``` represents a parse tree that, upon evaluation, will trigger the `.u.end` function with the parameter `x`. If you are not familiar with parse trees, I encourage you to read this very informative [whitepaper](https://code.kx.com/q/wp/parse-trees/). In simple terms, a parse tree is a list containing a function, which could be in the form of an anonymous lambda function or the name of a function if it's defined within the process. It is followed by a list of parameters that serve as arguments for the function. A straightforward example would be:
+
+```
+q)value (+;2;2)
+4
+q)value ({x*y};2;2)
+4
+```
+
+### Each-left 
+
+The function then employs an each-left operation in conjunction with apply to execute the given parse tree on each element of the left expression. Each-left is one of the eight Iterators, which were previously referred to as Averbs. You can find a more in-depth explanation of iterators [here](https://code.kx.com/q/basics/iteration/). Let me illustrate how each-left functions with the following example:
+
+```
+q)"ABC",\:"XY"		// We apply the whole list of characters "XY" to each element on the left
+"AXY"
+"BXY"
+"CXY"
+// In comparison, each-right, applies the whole list of characters "ABC" to each element on the right
+q)"ABC",/:"XY"
+"ABCX"
+"ABCY"
+```
+
+Let's now have a look at the expression on the left:
+```
+(neg union/[w[;;0]])
+```
+
+We come across another iterator in the code. First, we extract all the handles of real-time subscribers by using elide operations on the dictionary containing subscriber information. By omitting the first index, we access all the details for all tables initially. Then, by excluding the second index, we obtain all pairs in the form of `(handle; symbolList)`, and finally, by accessing elements at index 0, we effectively retrieve all the handles.
+
+```
+q).u.w:`trade`quote!(((8;`);(9;`));((10;`);(11;`)))
+q).u.w
+trade| 8 `  9 `
+quote| 10 ` 11 `
+q).u.w[;;0]
+trade| 8  9
+quote| 10 11
+```
+
+We subsequently employ the Iterator `Over /` in conjunction with the `union` operator to obtain the union of all the handles. Like many KDB/Q operators, `Over` has multiple overloads. In this particular scenario, `Over` functions as an accumulator. For a comprehensive understanding of `Over`, you can refer to the documentation linked [here](https://code.kx.com/q/ref/accumulators/).
+
+```
+q)union/[.u.w[;;0]]
+8 9 10 11
+```
+
+Next, we apply the `neg` operator to negate all the handles, as we intend to send an asynchronous message.
+```
+q)(neg union/[.u.w[;;0]])
+-8 -9 -10 -11
+```
+To recap, we send an asynchronous message to all real-time subscribers, triggering the execution of their `.u.end` function with the current date as the parameter.
+
+```
+(neg union/[w[;;0]])@\:(`.u.end;x)
+```
+
+We have now completed the detailed exploration of all the functions in the `u.q` file. We've covered a substantial amount of material up to this point. Let's take a brief pause for reflection and review what we've learned so far. This will allow you to consolidate your understanding of the topics we've covered before we proceed to delve into the remaining code of our Tick system. Stay tuned for more insights!
+
+Happy Coding!

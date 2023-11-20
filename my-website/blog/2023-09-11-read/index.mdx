@@ -328,7 +328,7 @@ c| 3
 
 Now, the remaining task is to integrate our understanding of "drop" with our knowledge of "Over." In this scenario, "Over" is applied to a binary function where "drop" takes two parameters, `x` and `y.` Upon closer examination of the code, it's apparent that within the lambda, we apply `y _ x` rather than `x _ y.` However, you might be wondering about the additional `x` preceding the lambda. This variation arises from the different notation forms offered in KDB/Q. Functions can be expressed in either prefix or infix notation.
 
-Application of a binary function `f` on arguments `x` and `y` is written `f[x;y]` in **prefix** or `x f y` in **infix**. 
+Application of a binary function `f` on arguments `x` and `y` is written `f[x;y]` in **prefix** or `x f y` in **infix**. Note: **infix** notation only works for Q functions, while functions defined by yourself can only be used in **prefix** notation.
 
 You can find the different applications of iterators and their valence [here](https://code.kx.com/q/ref/accumulators/)
 

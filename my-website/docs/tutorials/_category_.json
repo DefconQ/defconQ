@@ -3,6 +3,6 @@
   "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "Coming soon"
+    "description": "In this tutorial section of the blog, we provide step-by-step guides to help you understand and learn how to build KDB/Q services and applications. We focus on explaining important concepts of the Q programming language through hands-on examples. These tutorials are designed to walk you through the process of creating various KDB/Q services, all while gaining a deep understanding of the core concepts that underlie this powerful language. Whether you're new to KDB/Q or looking to expand your knowledge, these tutorials are a valuable resource to enhance your skills and build robust KDB/Q applications."
   }
 }

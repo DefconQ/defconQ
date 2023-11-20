@@ -10,11 +10,11 @@ A basic KDB/Q Tick setup consists of three  essential elements such as a Tickerp
 
 ## External Processes
 
-In a broad sense, a KDB/Q Tick system primarily consists of KDB/Q processes. However, the main task of a KDB/Q tick system is to capture data and thus relies on external data. Typically, this data originates from a Data Feed, an external source, and is sent to the Feed Handler. The Feed Handler is responsible for processing and prepping the data for ingestion into the KDB/Q tick plant. Since Data Deeds and Feed Handlers not only distribute data to KDB/Q processes but also to various other applications, they are typically not implemented using KDB/Q. Let's dive deeper into these two essential processes.
+In a broad sense, a KDB/Q Tick system primarily consists of KDB/Q processes. However, the main task of a KDB/Q tick system is to capture data and thus relies on external data. Typically, this data originates from a Data Feed, an external source, and is sent to the Feed Handler. The Feed Handler is responsible for processing and prepping the data for ingestion into the KDB/Q tick plant. Since Data Feeds and Feed Handlers not only distribute data to KDB/Q processes but also to various other applications, they are typically not implemented using KDB/Q. Let's dive deeper into these two essential processes.
 
 ### Data Feed
 
-The Data Feed serves as the primary data source we aim to capture. In the context of KDB/Q, particularly within the financial industry, this often refers to entities like financial exchanges (e.g., CME, LSE) or financial data providers like Bloomberg or Reuters. However, given the rising interest in cryptocurrencies, crypto exchanges have also become valuable data sources for KDB/Q tick systems. It's important to note that a KDB/Q system is not restricted solely to financial data; it can efficiently store and process various data types, ranging from Formula 1 statistics to air traffic information or any other data that can be streamed to a KDB/Q tick plant. 
+The Data Feed serves as the primary data source we aim to capture. In the context of KDB/Q, particularly within the financial industry, this often refers to entities like financial exchanges (e.g., Chicago Mercantile Exchange, London Stock Exchange) or financial data providers like Bloomberg or Reuters. However, given the rising interest in cryptocurrencies, crypto exchanges have also become valuable data sources for KDB/Q tick systems. It's important to note that a KDB/Q system is not restricted solely to financial data; it can efficiently store and process various data types, ranging from Formula 1 statistics to air traffic information or any other data that can be streamed to a KDB/Q tick plant. 
 
 ### Feed Handler
 
