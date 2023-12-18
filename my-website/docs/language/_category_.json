@@ -1,8 +1,8 @@
 {
-  "label": "Q-Language",
+  "label": "KDB/Q Language",
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "Q made easy. Complex concepts explained like you're 5 years old"
+    "description": "In this segment of the blog, we discuss crucial and foundational aspects of the KDB/Q programming language, its history and evolution and why you should use KDB/Q. By exploring these key concepts, readers gain insights into why KDB/Q stands as a formidable choice for data-intensive applications, offering unparalleled efficiency and versatility in handling time-series data and big datasets."
   }
 }
