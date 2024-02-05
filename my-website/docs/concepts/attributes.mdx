@@ -429,12 +429,12 @@ q)get `:l
 
 While adding Attributes to your structured list can enhance performance significantly, they also introduce some memory overhead. All Attributes except the **sorted** Attribute will contribute to memory overhead in your processes. Only the **sorted** Attribute will not introduce any memory overhead. The subsequent section will discuss his memory overhead and should be thoroughly examined for the optimal application of Attributes. Individual testing is recommended to assess whether the performance improvement resulting from the application of an Attribute is justified.
 
-Attribute | Memory overhead in bytes [*]
----------------------|-------------------------
-sorted ``` `s# ```   | 0
-unique ``` `u# ```   | 16*n
-parted ``` `p# ```   | 24*u
-grouped ``` `g# ```  | (24\*u)+4\*n
+Attribute | Memory overhead in bytes [*]| Notes |
+---------------------|-------------------------|----------| 
+sorted ``` `s# ```   | 0		       |
+unique ``` `u# ```   | 16*n                    |
+parted ``` `p# ```   | 24*u                    |
+grouped ``` `g# ```  | (24\*u)+4\*n	       | Since Q [v3.0](https://code.kx.com/q/releases/ChangesIn3.0/) this should be 8 bytes as integer changed from 32bit to 64 bit 	
 
 [*] Source: [https://code.kx.com/q/wp/data-management/](https://code.kx.com/q/wp/data-management/)
 
