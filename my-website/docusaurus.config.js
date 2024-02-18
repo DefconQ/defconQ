@@ -92,7 +92,7 @@ const config = {
         id: 'announcementBar',
         backgroundColor: '#74e8a3',
         isCloseable: true,
-        content: 'If you would like to connect, please reach out on Linkedin',
+        content: 'If you would like to connect, please reach out on <a href="https://www.linkedin.com/in/alexanderunterrainer/">Linkedin</a>',
       },
       navbar: {
         title: '',
