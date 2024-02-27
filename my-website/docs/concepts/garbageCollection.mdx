@@ -1,0 +1,312 @@
+---
+sidebar_position: 3
+---
+
+# Garbage Collection
+
+In this blog post, we cover another crucial concept, which if fully understood, can set you apart. Today's topic is Garbage Collection, and here's the news upfront: There's no such thing as Garbage in KDB/Q!! Yes, you read it correctly. Don't be caught off guard like I was, discovering this information in a job interview with **"the QGOD"** among all KDB/Q developers. Keep reading and learn everything you need to know about this essential topic.
+
+:::danger
+To fully comprehend Garbage Collection in KDB/Q, a solid understanding of Memory Management in KDB/Q is required, which you can find in detail in my previous blog post [here](https://www.defconq.tech/docs/concepts/memoryManagement)
+:::
+
+## Memory Allocation
+
+As explained in my previous [post](https://www.defconq.tech/docs/concepts/memoryManagement), KDB/Q employs a memory allocation strategy in blocks of powers of two, reserving the next larger memory block for the storage of the object. This memory allocation draws from the heap memory of KDB/Q processes, allocated during startup. The maximum memory allocated to a KDB/Q process can be defined by specifying a memory limit using the [`-w`](https://code.kx.com/q/basics/syscmds/#w-workspace) flag at startup. Alternatively, if no memory limit is specified, KDB/Q assumes there is none and utilizes all available memory as required. You can observe the above behaviour in the following code snippet:
+
+```
+// Starting a KDB/Q process without memory limit
+Alexander@Alexanders-MacBook-Pro:~/repos|
+⇒  qq
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-macbook-pro.local 127.0.0.1 EXPIRE 2025.02.21 XXXX@gmail.com KDB PLUS TRIAL #5018719
+
+q).Q.w[]
+used| 359200
+heap| 67108864
+peak| 67108864
+wmax| 0
+mmap| 0
+mphy| 8589934592
+syms| 668
+symw| 28611
+// Starting a KBD/Q process with 200MB memory limit
+Alexander@Alexanders-MacBook-Pro:~/repos|
+⇒  qq -w 200
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-macbook-pro.local 127.0.0.1 EXPIRE 2025.02.21 XXXX@gmail.com KDB PLUS TRIAL #5018719
+
+q).Q.w[]
+used| 359296
+heap| 67108864
+peak| 67108864
+wmax| 209715200
+mmap| 0
+mphy| 8589934592
+syms| 668
+symw| 28611
+```
+
+The system command [`.Q.w[]`](https://code.kx.com/q/ref/dotq/#w-memory-stats) provides essential memory statistics in a user-friendly format. Key entries to examine include `used`, denoting the amount of heap memory currently utilized, `heap`, representing the total size of the heap, `peak`, the largest heap memory size we have observed so far, `wmax`, indicating the memory limit established by the `-w` flag on startup, and `mphy` the physical available memory of the system. As evident, the first case has a memory limit of 0, indicating an absence of limitations. In the second instance, we've set the memory limit to 200MB for the specified process, as reflected in `wmax` returned by `.Q.w[]`. 
+
+Another important observation we can make is the fact that even though we initiated our KDB/Q process with a 200MB memory limit in the second example, the initial heap is only allocated at 64MB. This behavior stems from KDB/Q's approach of not allocating the entire memory at once but rather expanding the heap in 64MB increments. If there is a memory limit set and our process breaches this limit the KDB/Q process will terminate with a `wsfull` error. 
+
+:::danger
+It's crucial to understand that in the absence of a set memory limit, the effective memory limit is not equivalent to the physical memory, as indicated by `mphy`, but rather twice that amount [5, p.131]. This discrepancy arises from the fact that most operating systems utilize a concept of [Virtual Memory](https://www.techtarget.com/searchstorage/definition/virtual-memory), where secondary memory can be used as if it were a part of the main memory, basically functioning as an extension of the main memory.
+:::
+
+## Reference Counting
+
+Now, let's dive into the most critical section of this article, so fasten your seatbelt and focus. KDB/Q employs a concept known as reference counting to track live objects. This means that once an object is no longer referenced, the associated memory allocated to this object is reclaimed and returned to the heap of our KDB/Q process (or to the OS if the system command `-g` is set to `1`, and the freed memory is greater than or equal to 64MB. Further details on this will be covered in a later section).
+
+Let's pause for a moment and that information. If you were paying attention, you will realise, that what we just learned, means that **THERE IS NO SUCH THING AS GARBAGE in KDB/Q**. Yes, that's right. Since the memory occupied by an object is immediately reclaimed when the object is no longer referenced, and this freed memory can be assigned to a new object, we can affirm that there is no garbage in KDB/Q.
+
+The system command [`-16!`](https://code.kx.com/q/basics/internal/#-16x-ref-count)  provides the reference count of a variable. The following code snippet demonstrates this feature.
+
+```
+q)x:2
+q)-16!x
+1i
+q)x:y:z:2
+q)-16!x
+3i
+q)
+```
+
+## `Q.gc[]` and Coalescing Memory
+
+Now that we know that there is no such thing as garbage, let's explore the functionality of [`.Q.gc[]`](https://code.kx.com/q/ref/dotq/#gc-garbage-collect). As mentioned in my earlier blog [post](https://www.defconq.tech/docs/concepts/memoryManagement), KDB/Q allocates memory in blocks of power of 2, with the initial block being 64MB. When our KDB/Q process starts up, a 64MB heap is allocated. As we store data in variables, memory blocks of corresponding power-of-two sizes are created to accommodate the new data. However, if these variables are no longer referenced and the memory is no longer needed, calling `.Q.gc[]` in KDB/Q attempts to coalesce all free and adjacent memory blocks into the next larger power-of-two block. Moreover, any memory blocks larger or equal to 64MB will be returned to the operating system.
+
+Let's have a look at this behaviour in practice
+
+```
+// First we start a new KDB/Q process and inspect the memory usage
+Alexander@Alexanders-MacBook-Pro:~/repos|
+⇒  qq
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-macbook-pro.local 127.0.0.1 EXPIRE 2025.02.21 XXXX@gmail.com KDB PLUS TRIAL #5018719
+q).Q.w[]*1e-6
+used| 0.359376
+heap| 67.10886
+peak| 67.10886
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.000668
+symw| 0.028611
+// We now create a vector with 10000000 numbers and see how much space that took
+q)v:til 10000000
+q).Q.w[]*1e-6
+used| 134.5758
+heap| 201.3266
+peak| 201.3266
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.000668
+symw| 0.028611
+// As you can see, this takes roughly 200MB of space
+// Deleting the variable v however will not free up the memory
+q)delete v from `.
+`.
+// v no longer exists as you can observe
+q)v
+'v
+  [0]  v
+       ^
+// However, the memory hasn't been returned to the OS and is still reservered for the KDB/Q heap
+q).Q.w[]*1e-6
+used| 0.359392
+heap| 201.3266
+peak| 201.3266
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.000668
+symw| 0.028611
+// Only when we invoke .Q.gc[] the free memory blocks are coalesced (defragmented) and returned to the OS
+q).Q.gc[]
+134217728
+q).Q.w[]*1e-6
+used| 0.35808
+heap| 67.10886
+peak| 201.3266
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.000669
+symw| 0.028641
+// You can see that after calling .Q.gc[] the size of the heap decreased to the same size we started with, roughly 67MB
+```
+In the example above, we started a new KDB/Q process and observed that the initial memory allocated to the process's heap was 67MB (**NOTE**: slightly larger than the 64MB mentioned earlier in this article). Next, we created a vector containing 10 million long values and can observe that the memory occupied by our KBD/Q process increased to roughly 200MB. But why did the memory increase by that much? With 10 million long values, we'd expect roughly 80MB of space to be occupied, not 134MB. As explained in my previous blog post, KDB/Q allocates memory in power-of-two blocks, and the next larger block required to store 80MB of data is actually 134MB, totaling 200MB of heap memory. Finally we deleted our variable and inspect our memory stats one more time. But hold on, why does the heap still occupy 200MB? Why hasn't the memory been released to the OS? This is because KDB/Q doesn't automatically release memory to the OS unless the KDB/Q process is started with the `-g` flag set to true. Only when invoking .Q.gc[] will the memory be returned to the OS, as demonstrated in the example above.
+
+Let's now have a closer look at the `-g` flag.
+
+## The system command `-g`
+
+The system command [`-g`](https://code.kx.com/q/basics/syscmds/#g-garbage-collection-mode), often referred to as garbage collection mode (although, in my opinion, this is misleading as there is no such thing as garbage in KDB/Q), can be used to return unreferenced memory to the OS immediately. The `g` flag can take one of two values:
+- `-g 0`: the deferred (default) mode, which returns memory to the OS when either .Q.gc[] is called or an allocation fails, offering a performance advantage but potentially posing challenges in dimensioning or managing memory requirements. If the freed memory isn't returned to the OS, our KDB/Q process might occupy free memory that could be used otherwise by another process
+- `-g 1`: the immediate mode, which returns memory blocks equal to or larger than 64MB to the OS as soon as they are no longer referenced, but this comes with an associated performance overhead.
+
+When starting a KDB/Q process without the -g flag specified, the flag will automatically set to 0 as this is the default mode, meaning that "garbage collection" is deferred. We have already seen this behaviour in our previous example, showing that the unreferenced memory is only returned when .Q.gc[] was invoked. Let's now look in more detail what happens when we set the -g flag to true.
+
+```
+Alexander@Alexanders-MacBook-Pro:~/repos|
+// We first start a KDB/Q process with the -g flag set to true
+⇒  qq -g 1
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-macbook-pro.local 127.0.0.1 EXPIRE 2025.02.21 XXXXr@gmail.com KDB PLUS TRIAL #5018719
+// We then create the same vector of 10000000 long values and inspect the memory usage
+q)v:til 10000000
+q).Q.w[]*1e-6
+used| 134.5772
+heap| 201.3266
+peak| 201.3266
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.000668
+symw| 0.028611
+// Next we delete the variable v
+q)delete v from `.
+`.
+// v no longer exists
+q)v
+'v
+  [0]  v
+       ^
+// We can observe that the unreferenced memory was returned to the OS immediately as the heap decreased
+q).Q.w[]*1e-6
+used| 0.359488
+heap| 67.10886
+peak| 201.3266
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.000668
+symw| 0.028611
+q)
+```
+
+As you can see, having the `-g` flag set to true will return unreferenced memory that is larger or equal than 64MB immediately to the OS. It is crucial to emphasize that only unreferenced memory above his 64MB threshold is returned to the OS. We will discuss this in the following section.
+
+## Why .Q.gc[] and `-g 1` can be bad
+
+While freeing up memory might seem like a generally good practice, it's not always the case, particularly in low-latency, high-frequency applications where performance is key. Allow me to elablorate on the reasons behind this:
+
+We first look into the aspect of `.Q.gc[]`: As outlined earlier in this blog post, when initiating a KDB/Q process without a set memory limit, the actual allocated memory is twice the available physical memory due to the utilization of virtual memory. This characteristic introduces uncertainty regarding the duration of `.Q.gc[]` completion. Imagine a scenario with a substantial production box boasting hundreds or even thousands of gigabytes of RAM; the coalescence of unreferenced memory blocks could consume a considerable amount of time. Undoubtedly, you wouldn't want your trading applications to experience disruptions during this process.
+
+Now, let's explore the `-g` flag, and you might already anticipate the issue with it. As a reminder, when the `-g` flag is set to true, unreferenced memory is released to the OS immediately. However, unlike `.Q.gc[]`, the `-g` flag doesn't consolidate free memory blocks, it solely releases free memory blocks that are larger or equal to 64MB. This implies that if you allocate a large number of small variables consuming less than 64MB, deleting them won't result in the return of this unreferenced memory to the OS. Let me illustrate this for you:
+
+(**Note**: This example has been partially taken from [Garbage Collection in KDB+](https://dataintellect.com/blog/garbage-collection-kdb/) by Data Intellect )
+```
+Alexander@Alexanders-MacBook-Pro:~/repos|
+// Again, we first start a KDB/Q process with the -g flag set to true
+⇒  qq -g 1
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-macbook-pro.local 127.0.0.1 EXPIRE 2025.02.21 XXXXr@gmail.com KDB PLUS TRIAL #5018719
+// We then create 10000 variables and store 3000 long numbers in each of them
+q)a:upper -10000?`4
+q){@[`.;x;:;til 3000]} each a;
+// Let's have a look at the memory stats
+q).Q.w[]*1e-6
+used| 328.4331
+heap| 335.5443
+peak| 335.5443
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.020665
+symw| 1.124617
+// As you can see, our heap increased by 335MB
+// However, each individual variable only takes 14bytes
+q)-22!first a
+14
+// Helper code: Creating 10000 vectors with 3000 long values each
+q){til 3000} each til 10000
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 ..
+..
+// Whereas collectively, they amount to 240MB
+q)1e-6*-22!{til 3000} each til 10000
+240.06
+// Having another look at the memory stats, we can observe that the peak inreased even further
+q).Q.w[]*1e-6
+used| 328.4331
+heap| 671.0886
+peak| 671.0886
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.020665
+symw| 1.124617
+// We now delete all variables
+q){value"delete ",(string x)," from `."}each a;
+// But as you can see, the unreferenced memory was not returned to the OS
+// The heap is still 671MB 
+q).Q.w[]*1e-6
+used| 0.490992
+heap| 671.0886
+peak| 671.0886
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.020665
+symw| 1.124617
+// Only when invoking .Q.gc[], the unreferenced memory is defragmented and then released
+q).Q.gc[]
+603979776
+// Our heap now decreased to 67MB, the smallest memory block allocated on startup
+q).Q.w[]*1e-6
+used| 0.48968
+heap| 67.10886
+peak| 671.0886
+wmax| 0
+mmap| 0
+mphy| 8589.935
+syms| 0.020666
+symw| 1.124647
+``` 
+In the example above, we initially created a list of 10,000 variables, each holding 3,000 long values. It's evident that our heap memory increased from the initial 67MB allocated on startup to 335MB. However, upon inspecting the memory size of the first individual variable among the 10,000, we observed that it only required 14 bytes. Whereas the collective size of our list of variables amounted to 240MB, as indicated by our helper code. (**Note**: The reason it's 240MB and not 335MB is due to adding the initial block of 67MB to the 240MB and accounting for some overhead of the pointers to each list stored in the individual variables. In KDB/Q, each list has an associated pointer to the list, consuming 8 bytes of memory). After deleting all the variables, we noticed that our heap memory didn't decrease, even though the `-g` flag was set to true. (The heap size is actually 671MB because our helper code also consumed some memory). This is because, unlike `.Q.gc[]`, the `-g` flag doesn't coalesce unreferenced memory and only releases memory blocks larger or equal to 64MB to the OS. Since all variables only consume 14 bytes, no memory is released. It's only when invoking `.Q.gc[]` that the unreferenced memory is defragmented, releasing all memory larger or equal to 64MB to the OS. Inspecting the memory usage after `.Q.gc[]` confirms this. 
+
+## Recent changes in `.Q.gc[]`
+
+Starting from version 4.1t (released in July 2022), [`.Q.gc[0]`](https://code.kx.com/q/ref/dotq/#gc-garbage-collect)  has been introduced to execute a subset of operations performed by `.Q.gc[]`, specifically, returning only unused blocks >= 64MB to the OS. This offers the advantage of faster execution compared to `.Q.gc[]`, but it comes with the drawback of not defragmenting unused memory blocks of smaller sizes and hence, it may not free as much unused memory.  
+
+
+## Conclusion 
+
+In conclusion, understanding memory management and garbage collection is pivotal when working with KDB/Q to ensure optimal performance in real-time data processing. Contrary to traditional concepts of garbage collection, KDB/Q adopts a reference counting mechanism, promptly releasing memory whenever an object is no longer referenced. This eliminates the concept of "garbage" in KDB/Q, as unreferenced memory is efficiently reallocated for new data. The system command `.Q.gc[]` and the `-g` flag, when set to 1, provide means to return unreferenced memory blocks larger or equal to 64MB to the OS. However, the careful use of these tools is crucial, as `.Q.gc[]` defragments unused memory, whereas `-g 1` may not efficiently free smaller-sized memory blocks. Considerations about latency and performance implications are essential, especially in high-frequency applications, urging developers to weigh the trade-offs when deciding to invoke garbage collection operations in KDB/Q.
+
+As usual, feel free to reach out if you have any questions. 
+
+
+
+
+Resources:
+1. [Memory Management in KDB](https://www.timestored.com/kdb-guides/memory-management) by Ryan Hamilton
+2. [Garbage Collection in KDB+](https://dataintellect.com/blog/garbage-collection-kdb/) by Data Intellect
+3. [.Q.gc](https://code.kx.com/q/ref/dotq/#gc-garbage-collect) KX Reference Card 
+4. [Memory Management and Query Optimization](https://kx.com/academy/modules/memory-management-query-optimization/#memory-management-query-optimization) KX Academy
+5. [Q Tips](https://www.amazon.co.uk/Tips-Scalable-Maintainable-19-Mar-2015-Paperback/dp/B011T8G1BI/ref=sr_1_1?crid=24RJTTLOLGLDL&dib=eyJ2IjoiMSJ9.lmMNTN0zZdbFzy5nD8D0YA.vuxL-ioxwBocxvLYxn43KZMqCNrm2IaHLGZ_Z-NqUhc&dib_tag=se&keywords=nick+psaris&qid=1708596183&sprefix=%2Caps%2C61&sr=8-1) by Nick Psaris
+6. [Virtual Memory](https://www.techtarget.com/searchstorage/definition/virtual-memory) by Alexander S. Gillis
