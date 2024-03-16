@@ -595,7 +595,7 @@ We send an asynchronous message by utilizing the negative handle of the real-tim
 (neg first x)(`upd;t;x)
 ```
 
-:::tipIMPORTANT
+:::tip
 Communication between the Tickerplant and the real-time subscriber should always be asynchronous when publishing data. Not only do we not need a response from the real-time subscriber (we don't really care whether the real-time subscriber received the message or not) but we avoid waiting for a response from the real-time subscriber to prevent potential delays and the risk of the Tickerplant crashing, which can occur with synchronous messaging
 :::
 

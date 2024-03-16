@@ -123,7 +123,7 @@ if[not min (`time`sym~2#key flip value@)each .u.t;'`timesym]
 ```
 Let's break this code further down: We first iterate over every table defined in `.u.t` using the `each` iterator. Within the parenthesis we then apply `value` in order to obtain the actual content of each table. Remember, `.u.t` only contains the symbol names of all tables. Using `value` we can actually retrieve the data stored in a variable. We then `flip` the table transforming the table into a dictionary. 
 
-:::tipIMPORTANT
+:::tip
 A table is essentially a flipped column dictionary and is stored as such. A column dictionary is a dictionary where each key in the dictionary has the same number of elements as their corresponding values, making the column dictionary rectangular. When we flip such a column dictionary, it transforms into a table. However, it's important to note that KDB/Q doesn't actually transpose the data; it merely marks the data as a table. By keeping the data stored as lists, KDB/Q minimizes memory usage and enhances performance by allowing vectorized operations. This also simplifies the process of storing the table to disk. If we examine the internal representation of a table, we can observe that it is, in fact, a flipped column dictionary.
 ```
 q)0N!flip `key1`key2`key3!(`valueA`valueB`valueC;`valueX`valueY`valueZ;`E`F`G)
