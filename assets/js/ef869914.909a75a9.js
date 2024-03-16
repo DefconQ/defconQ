@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[7169],{5469:e=>{e.exports=JSON.parse('{"label":"Qbie","permalink":"/blog/tags/qbie","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
