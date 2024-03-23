@@ -120,6 +120,7 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
 	{to: '/about/about', label: 'About', position: 'left'},
 	{to: '/cv/cv', label: 'CV', position: 'left'},
+	{href: 'https://defconq.tech/blog/rss.xml', label: 'RSS', position: 'right'},
         {
           href: 'https://github.com/DefconQ',
           label: 'GitHub',
