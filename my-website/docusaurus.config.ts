@@ -163,6 +163,9 @@ const config: Config = {
 	    { label: 'RSS Feed',
 	      href: 'https://defconq.tech/blog/rss.xml',
 	    },
+	    { label: 'YouTube Channel',
+	      href: 'https://www.youtube.com/@DefconQ',
+	    },
             {
               label: 'GitHub',
               href: 'https://github.com/DefconQ',
