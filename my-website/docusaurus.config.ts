@@ -24,7 +24,7 @@ const config: Config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
-  i18n: {
+   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
@@ -51,7 +51,7 @@ const config: Config = {
 		const {blogPosts, defaultCreateFeedItems} = params;
 		return defaultCreateFeedItems({
 		  // keep only the 10 most recent blog posts in the feed
-		  blogPosts: blogPosts.filter((item, index) => index < 10),
+		  blogPosts: blogPosts.filter((item, index) => index < 100),
 		});
 	    },
 	  },
@@ -165,7 +165,7 @@ const config: Config = {
 	    },
 	    { label: 'YouTube Channel',
 	      href: 'https://www.youtube.com/@DefconQ',
-	    },
+            },
             {
               label: 'GitHub',
               href: 'https://github.com/DefconQ',
