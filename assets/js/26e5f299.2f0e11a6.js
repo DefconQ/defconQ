@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[4395],{6753:a=>{a.exports=JSON.parse('{"label":"Habla Computing","permalink":"/blog/tags/habla-computing","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
