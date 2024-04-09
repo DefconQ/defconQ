@@ -44,17 +44,6 @@ const config: Config = {
           showReadingTime: true,
 	  blogSidebarTitle: 'All posts',
           blogSidebarCount: 'ALL',
-	  feedOptions: {
-	    type: 'all',
-	    copyright: `Copyright © ${new Date().getFullYear()} DefconQ Ltd`,
-	    createFeedItems: async (params) => {
-		const {blogPosts, defaultCreateFeedItems} = params;
-		return defaultCreateFeedItems({
-		  // keep only the 10 most recent blog posts in the feed
-		  blogPosts: blogPosts.filter((item, index) => index < 100),
-		});
-	    },
-	  },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
@@ -120,7 +109,6 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
 	{to: '/about/about', label: 'About', position: 'left'},
 	{to: '/cv/cv', label: 'CV', position: 'left'},
-	{href: 'https://defconq.tech/blog/rss.xml', label: 'RSS', position: 'right'},
         {
           href: 'https://github.com/DefconQ',
           label: 'GitHub',
@@ -160,9 +148,6 @@ const config: Config = {
               label: 'Blog',
               to: '/blog',
             },
-	    { label: 'RSS Feed',
-	      href: 'https://defconq.tech/blog/rss.xml',
-	    },
 	    { label: 'YouTube Channel',
 	      href: 'https://www.youtube.com/@DefconQ',
             },
