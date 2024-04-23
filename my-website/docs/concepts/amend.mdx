@@ -1,0 +1,435 @@
+---
+sidebar_position: 4
+---
+
+# Amend, Amend At: The Swiss Army knife among KDB/Q operators
+
+Whenever I encounter the [`@ or .`](https://code.kx.com/q/ref/amend/) amend or amend at operators, I'm inevitably reminded of a Swiss Army pocketknife. Just like this versatile multi-tolled knife, the `@ or .` operators in KDB/Q are multi-functional, capable of solvign various tasks. When combined with the expertise of a skilled KDB/Q developer, akin to the resourcefulness of a highly trained soldier or agent like MacGyver, the possibilities are limitless – you can conquer any challenge with ease.
+
+![Swiss army pockerknife](./img/knife.jpg)
+
+In this article, I aim to demonstrate the versatility of the `@ and .` operators, highlighting how they enable you to sidestep dataset iteration, which typically requires loops in traditional programming languages such as Java, C++ or Python. Mastering this powerful operator will not only enhances code efficiency but also boosts readability once you've become accustomed to the syntax. So without further ado, let's fire up a terminal and look at some code.
+
+## Index, Apply, Trap
+
+As pretty much all operators in KDB/Q, the `@ and .` operators come with multiple overloads. Before looking at their amend functionality, I'd like to take a step back and explore three simpler use cases: [index, apply and trap](https://code.kx.com/q/ref/apply/).
+
+A fundamental aspect of KDB/Q to keep in mind is its nature as a vector/array programming language. In KDB/Q, every data type, except atoms, essentially function as lists. A simple list contains atoms, while mixed or general lists can include atoms or lists as their elements, resulting in nested lists. Dictionaries, fundamentally, represent a list of key-value mappings, while tables are essentially lists of column column dictionaries that conform to a consistent structure. 
+
+### Index
+
+Both operators, `@ and .` can be used to index into a list. While the `@` operator is used for indexing into simple lists, the `.` operator can be used to index into nested lists. Let's have a look at some examples:
+
+### Simple Lists
+
+We can use the `@` operator to index into a simple list. Given a list `L` and an index `i`, `L@i` will return all elements at index `i`, where `i` can be any positive integer in the domain of `L`, either an atom or a list itself. 
+
+```
+q)1 2 3@0
+1
+q)1 2 3 4@0 1
+1 2
+```
+:::tip
+Remember: Indexing starts at index 0 in KDB/Q
+:::
+
+Indexing out of bound, will return the `null` value for the type of the simple list
+```
+q)1 2 3@4
+0N
+q)1 2 3@-1
+0N
+```
+
+:::danger
+Using a negative integer as index will NOT throw an error but return the `null` value for the type of the simple list
+:::
+
+Using anything else but an integer will throw a type error
+```
+q)1 2 3@`b
+'type
+  [0]  1 2 3@`b
+            ^
+q)1 2 3@1.5
+'type
+  [0]  1 2 3@1.5
+            ^
+```
+
+Using the [`Identity ::`](https://code.kx.com/q/ref/identity/) will return the whole list
+```
+q)1 2 3@enlist (::)
+1 2 3
+```
+
+### Nested lists
+
+Given a nested list `L`, and a list `i` of indexes, `L . i` will successively index into `L`, basically returning `( (L@i[0]) @ i[1]) @ i[2] ...`
+
+```
+q)show L:((1 2 3;4 5 6 7) ;(8 9;10;11 12) ;(13 14;15 16 17 18;19 20))
+(1 2 3;4 5 6 7)
+(8 9;10;11 12)
+(13 14;15 16 17 18;19 20)
+q)L . enlist 1		// returning element 1 of the list, i.e. L@1
+8 9
+10
+11 12
+q)L . 1 2		// returning element 2 of element 1, i.e (L@1) @2
+11 12
+q)L . 1 2 0		// returning element 0 of element 2 of elment 1, i.e ((L@1) @2) @0
+11
+```
+
+:::note
+`i` needs to be a list in order to index into a nested list. See first example above
+:::
+
+Again, using the [`Identity ::`](https://code.kx.com/q/ref/identity/) as right argument will return the entire nested list.
+```
+q)L . enlist[::]
+(1 2 3;4 5 6 7)
+(8 9;10;11 12)
+(13 14;15 16 17 18;19 20)
+```
+
+### Index At
+
+You can achieve the same behavior explained above by combining `Index At` with the [`Over /`](https://code.kx.com/q/ref/accumulators/) iterator as follows
+
+```
+q)show L:((1 2 3;4 5 6 7) ;(8 9;10;11 12) ;(13 14;15 16 17 18;19 20))
+(1 2 3;4 5 6 7)
+(8 9;10;11 12)
+(13 14;15 16 17 18;19 20)
+q)L . enlist 1
+// Can be rewritten as
+q)L@/enlist 1
+8 9
+10
+q)L . 1 2
+11 12
+// Can be rewritten as
+q)L@/1 2
+11 12
+q)L . 1 2 0
+11
+// Can be rewritten as
+q)L@/1 2 0
+11
+```
+For illustration purposed, we can use the [`Scan \`](https://code.kx.com/q/ref/accumulators/) to display the intermediate steps
+
+```
+q)L@\1 2 0
+(8 9;10;11 12)
+11 12
+11
+```
+
+### Cross-Sections
+
+When the elements of our index are lists, i.e when the index is a list of list, KDB/Q will create a cross-section. The following example should illustrate this concept
+
+```
+q)show L:((1 2 3;4 5 6 7) ;(8 9;10;11 12) ;(13 14;15 16 17 18;19 20))
+(1 2 3;4 5 6 7)
+(8 9;10;11 12)
+(13 14;15 16 17 18;19 20)
+q)L . (2 0;0 1)			
+13 14 15 16 17 18
+1 2 3 4 5 6 7
+// This is the same as applying the following cross-section
+q)q)0N!2 0,/:\:0 1
+((2 0;2 1);(0 0;0 1))
+2 0 2 1
+0 0 0 1
+q)L ./:/:2 0,/:\:0 1
+13 14 15 16 17 18
+1 2 3 4 5 6 7
+```
+
+`L . (2 0;0 1)` will first evaluate `L . 2 0`, then `L . 2 1`, followed by `L . 0 0` and finally `L . 0 1`.
+
+```
+q)L . (2 0;0 1)
+13 14 15 16 17 18
+1 2 3 4 5 6 7
+q)L . 2 0
+13 14
+q)L . 2 1
+15 16 17 18
+q)L . 0 0
+1 2 3
+q)L . 0 1
+4 5 6 7
+```
+
+### Nulls in index i
+
+If you would like to select all elements at a specific level of a nested list, you can simply use the [`null`](https://code.kx.com/q/ref/identity/#null) operator. This basically means you "select all" elements at the selected level. Let's have a look at this behaviour.
+
+
+If we would like to select element 0 and element 1 of all levels, we can simply use the following syntax:
+```
+q)L . (::;0 1)
+1 2 3 4 5 6 7
+8 9   10
+13 14 15 16 17 18
+```
+
+We can extend this behaviour to one more level
+```
+// First we select all elements of element 2 and elment 0
+q)L . (2 0;::)
+(13 14;15 16 17 18;19 20)
+(1 2 3;4 5 6 7)
+// We can now select elment 0 and elment 1 of all the elements selected in above statement by extending to
+q)L . (2 0;::;0 1)
+(13 14;15 16;19 20)
+(1 2;4 5)
+```
+
+If you would like to explorer indexing further, please review the official documentation [here](https://code.kx.com/q/ref/apply/)
+
+### Apply
+
+When it comes to (function) application, the `@ and .` are basically syntactic sugar and can be used instead of bracket notation. Given an unary function `f` and a one-element list `ux`, the code `f@ux` is equivalent to `f[ux]`. Let's look at an example. Mutivalent functions on the other hand, can be used in combination with the `.` operator. Given a multivalent function `f` and a list of arguments vx, the code `f[vx[0];vx[1];...;vx[n-1]]` is equivalent to `f . vx`.
+
+### Unary functions
+
+Unary functions are functions that take only one argument.
+
+```
+q)f:{2*x}
+q)f@3
+6
+q)f[3]
+6
+q)f[3]~f@3
+1b
+// You can use @ in pre-fix notation
+q)@[f;3]
+6
+```
+
+:::note
+In the case of `f[3]` the brackets around the argument are also syntactic sugar.
+:::
+
+### Multivalent functions
+
+Multivalent functions are functions that take two or more arguments. The application of a list of arguments to a multivalent function can be achieved as follows
+
+```
+q)f:{x+y}
+q)f . 1 2
+3
+q)f[1;2]
+3
+q)f[1;2]~f . 1 2
+1b
+q)f:{x+y+z}
+q)f . 1 2 3
+6
+q)f[1;2;3]
+6
+q)f[1;2;3]~f . 1 2 3
+1b
+// You can use . in pre-fix notation
+q).[f;(1;2;3)]
+6
+``` 
+
+### Trap
+In software development, it's crucial to implement practices that ensure your application remains robust even when errors occur. In conventional programming languages like Java, a common approach is to encapsulate critical sections of code within a `try-catch` block. This will prevent your application from crashing in case you encounter an error, handling errors gracefully, redirecting control flow to the "catch" section in case you encounter an error. In KDB/Q, a similar concept exists called [`trap`](https://code.kx.com/q/ref/apply/#trap)
+
+The ternary form of `@ or .` function as trap, providing similar functionality as the "try-catch" block of other programming languages. Let's have a closer look at some examples
+
+```
+q)neg `a
+'type
+  [0]  neg `a
+       ^
+q)@[neg;`a;`error]
+`error
+```
+As you can see from above example, if we try to apply the [`neg`](https://code.kx.com/q/ref/neg/) operator to a symbol, we will obtain a `type` error. However, if we use the ternary form of `@`, we can trap the unary function `neg`, throw an error message and continute the execution of our application without interruption.
+
+For multivalent functions, we can use the ternary form of `.` 
+
+```
+q).[+;"ab";`ouch]
+`ouch
+```
+
+The general form of `Trap` is
+
+``` @[f;fx;e] is equivalent to .[f;enlist fx;e] ``` 
+
+where `e` the "error" block of trap can be any expression. 
+
+:::tip
+If the "error" block `e` is a function, it will be evaluated only if `f` fails. However, it will be parsed before and any of the expressions withing the error function `e` are evalualted. It is up to you to make sure there are no errors in the function.
+```
+q)@[2+;"42";{)}]
+')
+  [0]  @[2+;"42";{)}]
+                  ^
+```
+
+If `e` is any expression other than a function, it will **always** be evaluated. Because KDB/Q is left-of-right (right-to-left), it is also the first expression to be evaluated.
+```
+q)@[string;42;a:100] / expression not a function
+"42"
+q)a // but a was assigned anyway
+100
+q)@[string;42;{b::99}] / expression is a function
+"42"
+q)b // not evaluated
+'b
+  [0]  b
+       ^
+```
+Ideally, you want `e` to be a function as this will allow you to handle errors best.
+
+```
+q).[+;"ab";{"Wrong ",x}]
+"Wrong type"
+```
+:::
+
+### Summary
+
+| rank  | syntax                  | function semantics                         | list semantics                            |
+|-------|-------------------------|--------------------------------------------|-------------------------------------------|
+|   2   | `v . vx` or  `.[v;vx]`  | **Apply**: Apply v to list vx of arguments | **Index**: Get item/s vx at depth from v  |
+|   2   | `u @ ux` or `@[u;ux]`   | **Apply At**: Apply unary u to argument ux | **Index At**: Get items ux from u         |
+|   3   | `.[g;gx;e]`             | **Trap**: Try g . gx; catch with e         |                                           |
+|   3   | `@[f;fx;e]`             | **Trap At**: Try f@fx; catch with e        |                                           |
+
+Where
+
+- `e` is an expression, typically a function
+- `f` is a unary function and `fx` in its domain
+- `g` is a function of rank  and `gx` an atom or list of count  with items in the domains of `g`
+- `v` is a value of rank  (or a handle to one) and `vx` a list of count  with items in the domains of `v`
+- `u` is a unary value (or a handle to one) and `ux` in its domain
+
+## Amend
+
+Now that we have explored the fundamental capabilities of `@ and .` we can finally transition to the primary focus of this article: The **power** operator [Amend](https://code.kx.com/q/ref/amend/)
+
+Let's consider a scenario where we have a ollection of values or any dataset containing multiple items. Our objective is to modify or update particular elements within our data at specific indices. In traditional programming languages like Java, this task requires iterating through our data, validating whether the index or element aligns with the one we intend to modify, and subsequently making the desired modification. The inefficiency of this process is pretty obvious and it becomes even more obvious if we want to update or modify nested lists - it would require nested loops, far from an optimal solution.
+
+
+In KDB/Q, accomplishing all of this requires just a single line of code. That's right, you heard correctly. Allow me to demonstrate this.
+
+Let's assume we have a list containing numbers from 0 to 10, inclusive, and our objective is to transform all even numbers into their respective negatives. This task can easily be achieved by the following code:
+
+```
+// First we create our list
+q)l:til 11
+q)l
+0 1 2 3 4 5 6 7 8 9 10
+// Then we create out index
+q)show i:2*til 6
+0 2 4 6 8 10
+// Modify the elements
+q)@[l;i;neg]
+0 1 -2 3 -4 5 -6 7 -8 9 -10
+// We can also modify the elements in place by using symbolic reference
+q)@[`l;i;neg]
+`l
+q)l
+0 1 -2 3 -4 5 -6 7 -8 9 -10
+```
+
+The same is true for nested lists. If you have a nested list, you can use the `.` operator to modify elements at indexes at depth. Let's assume you have a nested list of numbers and you would like to amend values to these nested lists. We can use cross-sections to achieve the desired result.
+
+```
+q)show L:((1 2 3;4 5 6 7);(1 2 3;4 5 6 7);(13 14;15 16 17 18;19 20))
+(1 2 3;4 5 6 7)
+(1 2 3;4 5 6 7)
+(13 14;15 16 17 18;19 20)
+q).[L;(2 0;0 1 0); , ;(100 200 300; 400 500 600)]
+(1 2 3 400 600;4 5 6 7 500)
+(1 2 3;4 5 6 7)
+(13 14 100 300;15 16 17 18 200;19 20)
+```
+
+:::danger
+If you use the assign operator [`:`](https://code.kx.com/q/ref/assign/) rather than the join operator [`,`](https://code.kx.com/q/ref/join/), the last assignment prevails.
+```
+q)show L:((1 2 3;4 5 6 7);(1 2 3;4 5 6 7);(13 14;15 16 17 18;19 20))
+(1 2 3;4 5 6 7)
+(1 2 3;4 5 6 7)
+(13 14;15 16 17 18;19 20)
+q).[L;(2 0;0 1 0); : ;(100 200 300; 400 500 600)]
+600 500
+(1 2 3;4 5 6 7)
+(300;200;19 20)
+```
+:::
+
+The complete reference for Amend has been summarized by KX [here](https://code.kx.com/q/ref/amend/) but I have copied it below for simmplicity:
+
+| **Amend**        | **Amend At**     | **`values (d .i)` or `(d @ i)`** |
+|------------------|------------------|----------------------------------|
+| `.[d; i; u]`     | `@[d; i; u]`     | `u[d . i]` or `u'[d @ i]`        |
+| `.[d; i; v; vy]` | `@[d; i; v; vy]` | `v[d . i;vy]` or `v'[d @ i;vy]`  | 
+
+Where
+
+- `d` is an atom, list, or a dictionary (value); or a handle to a list, dictionary or datafile
+- `i` indexes where `d` is to be amended:
+	- it must be a list for .
+	- if empty (for `.`) or the general null `::` (for `@`), or if d is a non-handle atom, the selection `S` is `d` (Amend Entire)
+	- otherwise `S` is `.[d;i]` or `@[d;i]`
+- `u` is a unary
+- `v` is a binary, and `vy` is
+	- in the right domain of `v`
+	- unless `S` is d, conformable to `S` and of the same type
+the items in `d` of the selection `S`  are replaced
+
+- in the ternary, by `u[S]` for `.` and by `u'[S]` for `@`
+- in the quaternary, by `v[S;vy]` for `.` and by `v'[S;vy]` for `@`
+and if `d` is a
+
+- **value**, returns a copy of it with the item/s at `i` modified
+- **handle**, modifies the item/s of its reference at `i`, and returns the handle
+
+If `v` is Assign `(:)` each item in the selection is replaced by the corresponding item in `vy`. 
+`u` and `v` can be replaced with values of higher rank using projection or by enlisting their arguments and using [Apply](https://code.kx.com/q/ref/apply/).
+
+### Bonus Tip
+
+When going through the examples of Amend on the official reference page [here](https://code.kx.com/q/ref/amend/#amend-entire) I encountered below code snippet, and it took me a little while to fully understand what was going on. So let me explain what's happening in case you are acing the same struggle
+
+```
+q).[1 2; (); 3 4 5]
+4 5
+```
+In above example, it took me a while to understand why the result was `4 5`. Upon reflection, I realised, that the the ternary form of Amend `.[d; i; u]` accepts a unary value `u`. And a [unary](https://code.kx.com/q/basics/glossary/#unary-function) can be "A value of rank 1, i.e. a function with 1 argument, or a list of depth ≥1."
+
+With `3 4 5` being a list, this will basically be the same as
+```
+q)3 4 5@1 2
+4 5
+```
+
+### Extra Exercise
+Another excellent application of Amend can be demonstrated through the following example. Suppose we have a list of lists, specifically a list of strings, and our objective is to capitalize the first character of every string. Once more, in a conventional programming language, achieving this would require nested loops. However, in KDB/Q, it can be accomplished with a straightforward one-liner.
+
+```
+q)s:(("hello";"world");enlist "defconQ";("kdb/q";"is";"fun"))
+q).[s;(::;::;0);upper]
+("Hello";"World")
+,"DefconQ"
+("Kdb/q";"Is";"Fun")
+```
+
+That's all Folks. I hope you enjoyed this article as much as I did. Don't forget to follow [me](https://www.linkedin.com/in/alexanderunterrainer/) and [DefconQ](https://www.linkedin.com/company/defconq/) on Linkedin.
+
