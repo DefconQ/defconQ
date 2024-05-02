@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Amend, Amend At: The Swiss Army knife among KDB/Q operators
 
-Whenever I encounter the [`@ or .`](https://code.kx.com/q/ref/amend/) amend or amend at operators, I'm inevitably reminded of a Swiss Army pocketknife. Just like this versatile multi-tolled knife, the `@ or .` operators in KDB/Q are multi-functional, capable of solvign various tasks. When combined with the expertise of a skilled KDB/Q developer, akin to the resourcefulness of a highly trained soldier or agent like MacGyver, the possibilities are limitless – you can conquer any challenge with ease.
+Whenever I encounter the [`@ or .`](https://code.kx.com/q/ref/amend/) amend or amend at operators, I'm inevitably reminded of a Swiss Army pocketknife. Just like this versatile multi-tolled knife, the `@ or .` operators in KDB/Q are multi-functional, capable of solving various tasks. When combined with the expertise of a skilled KDB/Q developer, akin to the resourcefulness of a highly trained soldier or agent like MacGyver, the possibilities are limitless – you can conquer any challenge with ease.
 
 ![Swiss army pockerknife](./img/knife.jpg)
 
@@ -196,7 +196,7 @@ If you would like to explorer indexing further, please review the official docum
 
 ### Apply
 
-When it comes to (function) application, the `@ and .` are basically syntactic sugar and can be used instead of bracket notation. Given an unary function `f` and a one-element list `ux`, the code `f@ux` is equivalent to `f[ux]`. Let's look at an example. Mutivalent functions on the other hand, can be used in combination with the `.` operator. Given a multivalent function `f` and a list of arguments vx, the code `f[vx[0];vx[1];...;vx[n-1]]` is equivalent to `f . vx`.
+When it comes to (function) application, the `@ and .` are basically syntactic sugar and can be used instead of bracket notation. Given an unary function `f` and a one-element list `ux`, the code `f@ux` is equivalent to `f[ux]`. Let's look at an example. Multivalent functions on the other hand, can be used in combination with the `.` operator. Given a multivalent function `f` and a list of arguments vx, the code `f[vx[0];vx[1];...;vx[n-1]]` is equivalent to `f . vx`.
 
 ### Unary functions
 
@@ -322,7 +322,7 @@ Where
 
 Now that we have explored the fundamental capabilities of `@ and .` we can finally transition to the primary focus of this article: The **power** operator [Amend](https://code.kx.com/q/ref/amend/)
 
-Let's consider a scenario where we have a ollection of values or any dataset containing multiple items. Our objective is to modify or update particular elements within our data at specific indices. In traditional programming languages like Java, this task requires iterating through our data, validating whether the index or element aligns with the one we intend to modify, and subsequently making the desired modification. The inefficiency of this process is pretty obvious and it becomes even more obvious if we want to update or modify nested lists - it would require nested loops, far from an optimal solution.
+Let's consider a scenario where we have a collection of values or any dataset containing multiple items. Our objective is to modify or update particular elements within our data at specific indices. In traditional programming languages like Java, this task requires iterating through our data, validating whether the index or element aligns with the one we intend to modify, and subsequently making the desired modification. The inefficiency of this process is pretty obvious and it becomes even more obvious if we want to update or modify nested lists - it would require nested loops, far from an optimal solution.
 
 
 In KDB/Q, accomplishing all of this requires just a single line of code. That's right, you heard correctly. Allow me to demonstrate this.
@@ -346,6 +346,10 @@ q)@[`l;i;neg]
 q)l
 0 1 -2 3 -4 5 -6 7 -8 9 -10
 ```
+:::note
+Modification via symbolic reference as shown above only works for global variables. If you would like to modify a local variable you have to reassign it.
+:::
+
 
 The same is true for nested lists. If you have a nested list, you can use the `.` operator to modify elements at indexes at depth. Let's assume you have a nested list of numbers and you would like to amend values to these nested lists. We can use cross-sections to achieve the desired result.
 
@@ -374,7 +378,7 @@ q).[L;(2 0;0 1 0); : ;(100 200 300; 400 500 600)]
 ```
 :::
 
-The complete reference for Amend has been summarized by KX [here](https://code.kx.com/q/ref/amend/) but I have copied it below for simmplicity:
+The complete reference for Amend has been summarized by KX [here](https://code.kx.com/q/ref/amend/) but I have copied it below for simplicity:
 
 | **Amend**        | **Amend At**     | **`values (d .i)` or `(d @ i)`** |
 |------------------|------------------|----------------------------------|
