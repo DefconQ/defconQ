@@ -1,0 +1,239 @@
+---
+slug: Code Organistation - Your own KDB/Q library
+title: Code Organistation - Your own KDB/Q Library
+authors: [alexander]
+hide_table_of_contents: true
+tags: [kdb/q, good practice, software development, programming, code organisation, libraries]
+---
+
+When I first started working as a software developer in an investment bank, I was initially placed in a C# team. After completing all the onboarding, installing Microsoft Visual Studio and gaining access to my team's codebase, I was finally able to have a look at the project I was going to work on. Little did I know, what nightmare I was about to face. Upon opening the project, I discovered that the average length of each class exceeded 15 thousand lines. Yes, you read that correctly; it's not a typo, but the shocking reality I was faced with. Navigating the code base was hard enough, but making a change without breaking anything seemed to be impossible. Luckily, I eventually transitioned to a team that embraced the concept of code organization.
+
+<!-- truncate -->
+
+As your codebase expands and evolves, incorporating increasingly sophisticated functionality, it naturally becomes more complex and therefore more challenging to navigate, comprehend, and maintain. Hence, it's crucial to adopt a systematic approach to code organization. Doing so not only ensures extensibility and scalability but also simplifies development in the long run. Modularizing your code, as well as other various strategies exist for organizing code. In traditional object-oriented programming languages like Java or C#, organization typically revolves around classes, packages, or, on a broader scale, projects. However, there's no reason why a similar concept can't be applied in KDB/Q. In this blog post, I'll introduce a simple yet effective method of organizing your code. Additionally, I'll share some valuable tips and tricks gleaned from years of experience.
+
+## KDB/Q Code organisation: an example
+
+One easy way to organise your code involves splitting the code into a **library file** containing all Application Programming Interfaces (APIs) and an **execute file** containing initialization logic along with global variable definitions, loaded by a KDB/Q process upon start-up. You can then package your code into various modules or packages based on dataset, asset class, or any other classification of your preference, applying the library and execute file pattern consistently across them. 
+
+### Power Packed Libraries: Bundled Functionality
+
+To enhance the extensibility and scalability of your application, it's recommended to make your code as modular as possible. This can be accomplished by exposing the business logic of your code through an API and consolidating functions related to specific functionalities or features into individual packages. Let's consider the scenario where we aim to construct a library containing fundamental mathematical functions. The following code snippet demonstrates the contents of our library file:
+
+:::note
+Below code is a very basic, simplified example for illustrative purposes
+:::
+
+```
+// math.library.q
+// This is a library to compute basic mathematical operations
+
+// add: 	Function to perform addition
+// @param: 	x - first parameter
+// @param: 	y - second parameter
+// @return: 	sum of x and y
+add:{[x;y]
+        :x+y;
+        };
+
+// sub: 	Function to perform subtraction
+// @param:	x - first parameter
+// @param:	y - second parameter
+// @return:	subtracts y from x
+sub:{[x;y]
+        :x-y;
+        };
+
+// mult:	Function to perform multiplication
+// @param:	x - first parameter
+// @param:	y - second parameter
+// @result:	product of x and y
+mult:{[x;y]
+        :x*y;
+        };
+```
+
+Now, we've developed our very own, simple math library featuring essential functions that can be reused as required. We can effortlessly load this library into any process to leverage its functionality without having to duplicate any code. In the following section, we'll demonstrate how to utilize this library.
+
+### Seamless Integration: The Execute File Solution
+
+While you can load your library into nearly any KDB/Q process allows for reusing the exposed APIs, another approach involves creating a file to be passed to a KDB/Q process during startup. Within this file, you can initialize global variables utilized within the process and establish an initialization function to be called upon the process's start. But examples speak louder than words, so let's check one out.
+
+```
+// math.exe.q
+// This is our execution file, the file we load when we start our KDB/Q process
+// Loading the math library we created, exposing all the functions in it
+system "l math.library.q";
+
+// Setting global variables
+num1:4;
+num3:8;
+
+// init:	Initialisation function
+init:{[]
+	// Within our initialisation function we define another number
+	num2:5;
+	// We can now use the APIs defined in our libray
+	-1 "Adding number ",string[num1], " to number ", string[num2], " --> result: ",string add[num1;num2];
+        -1 "Subtracting number ",string[a], " from number ", string[b], " --> result: ",string add[b:9;a:3];
+        -1 "Multiplying number ",string[num2], " with number ", string[num3], " --> result: ",string add[num2;num3];
+	};
+
+// At then end of our execute file we call the init function
+init[];
+```
+
+Now, we can initiate a KDB/Q process and load our execute file upon startup. This action handles the loading of our library, initializes any global variables, and then executes the init function to complete the remaining initialization tasks.
+
+```
+Alexander@Alexanders-MacBook-Pro:~/repos/testCode|
+⇒  qq math.exe.q
+KDB+ 4.0 2023.01.20 Copyright (C) 1993-2023 Kx Systems
+m64/ 4(24)core 8192MB Alexander alexanders-macbook-pro.local 127.0.0.1 EXPIRE 2025.02.21 XXXX@gmail.com KDB PLUS TRIAL #5018719
+
+Adding number 4 to number 5 --> result: 9
+Subtracting number 3 from number 9 --> result: 12
+Multiplying number 5 with number 8 --> result: 13
+q)
+```
+Above pattern is a powerful yet simple  technique for structuring your code and enhancing its modularity. By grouping similar functionalities into a library, you can conveniently reuse them as required, thereby eliminating redundant code duplication. Additionally, the execution file provides an easy method to configure your KDB/Q process and import all necessary libraries.
+
+## Leveraging Namespaces
+
+In the upcoming section, I'll share two additional tips and tricks that I've found to be especially useful when organizing your code. These strategies not only contribute to cleaner code but also enhance its comprehensibility and ease of navigation.
+
+### Same Yet Different
+
+At times, we find ourselves repeatedly implementing similar or identical functionalities, with only minor variations, such as asset class, instrument, or data source. This practice not only complicates the code and reduces readability but it can also be very confusing for users. They may wonder which function to use, what parameters to pass, and how the result appears. In the following section, I'll demonstrate how namespaces can simplify everyone's workflow.
+
+Let's have a look at some code. First, we create a helper function, to verify whether a certain function exists or not. We can do so by using the [`key`](https://code.kx.com/q/ref/key/) operator. While the `key` operator is commonly used for retrieving the keys of a dictionary or table, it can also be used to verify whether a folder or file exists, or in our case, if a name is defined or not.
+
+```
+q)exists:{not ()~key x}
+q)exists `a
+0b
+q)a:1
+q)exists `a
+1b
+```
+Next, we'll develop a set of functions that exhibit similar behavior but with slight variations. Specifically, in our scenario, he behaviour of the function differ based on the data source we want to retrieve. Additionally, we include a default function for cases where the user specifies a data source for which we haven't implemented a function yet. In such instances, we'll return the result using a default data source.
+
+```
+q).equities.bloomberg.getData:{: ([] sym:`AAPL`MSFT`GOOG; source:3#`BBG;price:3?10)}
+q).equities.refinitive.getData:{: ([] sym:`AAPL`MSFT`GOOG; source:3#`REF;price:3?10)}
+q).equities.default.getData:{: ([] sym:`AAPL`MSFT`GOOG; source:3#`INHOUSE;price:3?10)}
+```
+
+Finally, all we have to do, is to create a function that we are going to expose to our users. The user will specify the data source they desire, and the function will handle the appropriate call to the corresponding function. Should the specified data source be unavailable, we'll return data obtained from a default source.
+
+```
+.equities.getData:{[datasource] 
+	// Create the namespace for the datasource and verify if it exists
+	// If it exists, invoke the function and return result
+	// If it doesn't, invoke default function and return result
+	if[exists f:` sv (`.equities;datasource;`getData);:f[]]; :.equities.default.getData[] 
+	};
+```
+
+Below code should illustrate this behaviour
+
+```
+// Verify if function exists. Note: typo
+q)exists `.equities.bloomber.getData
+0b
+// Existing function
+q)exists `.equities.bloomberg.getData
+1b
+// Creating the namespace
+q)` sv `.equities`bloomberg`getData
+`.equities.bloomberg.getData
+// Combining above
+q)exists ` sv `.equities`bloomberg`getData
+1b
+// individual functions
+q).equities.refinitive.getData[]
+sym  source price
+-----------------
+AAPL REF    8
+MSFT REF    1
+GOOG REF    9
+q).equities.bloomberg.getData[]
+sym  source price
+-----------------
+AAPL BBG    5
+MSFT BBG    4
+GOOG BBG    6
+// the .equities namespace
+q).equities
+          | ::
+bloomberg | ``getData!(::;{: ([] sym:`AAPL`MSFT`GOOG; source:3#`BBG;price:3?1..
+refinitive| ``getData!(::;{: ([] sym:`AAPL`MSFT`GOOG; source:3#`REF;price:3?1..
+default   | ``getData!(::;{: ([] sym:`AAPL`MSFT`GOOG; source:3#`INHOUSE;price..
+getData   | {[datasource] if[exists f:` sv (`.equities;datasource;`getData);:..
+// Function exposed to and used by clients
+q).equities.getData[`bloomberg]
+sym  source price
+-----------------
+AAPL BBG    5
+MSFT BBG    4
+GOOG BBG    9
+q).equities.getData[`refinitive]
+sym  source price
+-----------------
+AAPL REF    2
+MSFT REF    7
+GOOG REF    0
+// Function call with data source that doesn't exists
+// Defaults to INHOUSE data
+q).equities.getData[`ICE]
+sym  source  price
+------------------
+AAPL INHOUSE 1
+MSFT INHOUSE 9
+GOOG INHOUSE 2
+```
+
+As you can see, we've developed a feature that exposes just one simple API to our clients, ensuring ease and simplicity in their usage. Furthermore, we're now capable of effortlessly expanding our function's behavior and incorporating more functionalities for new data sources, requiring minimal code refactoring.
+
+### Namespaces Revealed: Your Handy Dictionary
+
+In KDB/Q, namespaces essentially function as dictionaries. This feature allows us to create diverse behaviors without resorting to complex and confusing `if-else` statements. You can read more about namespaces [here](https://code.kx.com/q4m3/12_Workspace_Organization/#121-namespaces). Let's have a look at a simple example:
+
+First we create the `.upd` namespace and define functions for (a table) trade and order
+```
+q).upd.trade:{[x] `trade set x}
+q).upd.order:{[x] `order set x}
+// We can inspect the .upd namespace
+q).upd
+     | ::
+trade| {[x] `trade set x}
+order| {[x] `order set x}
+```
+
+Since a namespace operates like a dictionary, we can leverage indexing to access the appropriate function for various tables. By providing the table name as the first parameter, we effectively index into our namespace, triggering the function and utilizing the second parameter as its input.
+
+```
+q).upd[`trade;([] time:enlist .z.p; sym:`AAP; side:`buy; price:10; qty: 100)]
+`trade
+q)trade
+time                          sym side price qty
+------------------------------------------------
+2024.05.15D07:40:13.902355000 AAP buy  10    100
+q).upd[`order;([] time:enlist .z.p; sym:`AAP; side:`buy; qty: 100)]
+`order
+q)order
+time                          sym side qty
+------------------------------------------
+2024.05.15D07:40:31.927281000 AAP buy  100
+```
+
+## Gotchas
+
+While an in-depth discussion of API design best practices exceeds the scope of this blog post, I'd like to offer two crucial suggestions for creating your APIs. Firstly, simplicity is key. An API should focus on accomplishing one single task, and one single task only. You should avoid the temptation to create a "solve every problem in the world API". Secondly, if your API extends beyond 10 lines of code (and indeed, in KDB/Q, 10 lines is quite substantial), consider refactoring and breaking it into smaller, more manageable functions. Additionally, it's advisable to avoid reliance on global variables within your functions. From my experience, this often leads to bugs or, worse, production outages. Instead, if a function requires a variable, pass it as a parameter. Depending on a globally defined variable not only introduces the risk of it being undefined but also renders your API less versatile, as it cannot be reused without redefining the global variable in another process.
+
+**That's all folks. Happy Coding**
+
+
+
+
+
