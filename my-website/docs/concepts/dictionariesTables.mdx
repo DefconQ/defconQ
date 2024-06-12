@@ -1,0 +1,478 @@
+---
+sidebar_position: 5
+---
+
+# Dictionaries and Tables
+
+In this blog post, we explore two key data types native to KDB/Q: **Dictionaries and Tables**. Unlike mainstream programming languages like Java, which lack native support for these data types and require alternative structures (e.g., Java HashMap for dictionaries or Java ArrayList for lists of rows to represent tables), KDB/Q inherently supports both Dictionaries and Tables. Understanding these data structures is crucial for leveraging the speed and performance of KDB/Q to build efficient big data applications. In the following sections, we will examine the most important concepts of both data types, a in detail explanation of dictionaries and tables is beyond the scope of this blog post and can be found in [Chapter 5 - Dictionaries](https://code.kx.com/q4m3/5_Dictionaries/#50-overview) and [Chapter 8 - Tables](https://code.kx.com/q4m3/8_Tables/) of [Q for Mortals](https://code.kx.com/q4m3/).
+
+:::note
+As noted on the [reference page](https://code.kx.com/q/ref/#datatypes) at [code.kx.com](https://code.kx.com/home/), dictionaries are of type 99h, while tables are of type 98h.
+:::
+
+## Dictionaries
+
+In its simplest form, a dictionary is simply a mapping of a list of keys to a list of values, and it can be created using the [bang operator `!`](https://code.kx.com/q/ref/dict/). Let's look at an example:
+
+### Creating Dictionaries
+
+```
+// Create a list of keys
+q)k:`a`b`c
+// Create a list of values
+q)v:1 2 3
+// Create the mapping between keys and values
+q)k!v
+a| 1
+b| 2
+c| 3
+// Create a dictionary directly
+q)`a`b`c!1 2 3
+a| 1
+b| 2
+c| 3
+```
+
+:::tip
+The keywords [`key`](https://code.kx.com/q/ref/key/)  and [`value`](https://code.kx.com/q/ref/value/) can be used to extract the keys and values from a dictionary, respectively.
+```
+q)d:`a`b`c!1 2 3
+q)key d
+`a`b`c
+q)value d
+1 2 3
+```
+:::
+
+Dictionaries are highly flexible data structures. The main constraint when creating a dictionary is that the length of the keys list must match the length of the values list. If they don't match, a [`length error`](https://code.kx.com/q/basics/errors/) will occur.
+
+```
+q)`a`b`c!1 2 3 4
+'length
+  [0]  `a`b`c!1 2 3 4
+             ^
+```
+
+To demonstrate the flexibility of dictionaries, note that the type of the list of keys or values doesn’t have to be homogeneous. However, once you create a homogeneous list of keys or values, any new key or value added must match the existing types. This might sound complex, but it's easier to understand with some examples. Let's take a look.
+
+```
+// Create a dictionary with a list of non-homogenous keys
+q)show d:(`a;10;"C")!1 2 3
+`a | 1
+10 | 2
+"C"| 3
+// Add a new key of type integer
+q)d[2]:4
+q)d
+`a | 1
+10 | 2
+"C"| 3
+2  | 4
+// Add another key of type symbol
+q)d[`b]:9
+q)d
+`a | 1
+10 | 2
+"C"| 3
+2  | 4
+`b | 9
+```
+
+As shown in the example above, the keys of our dictionary can be of different types, allowing us to add new keys of any type. However, the values of the dictionary are all [`long 7h`](https://code.kx.com/q/ref/#datatypes). Attempting to add a record where the value type doesn't match the current value types will result in a type error.
+
+```
+// Verify the data type of the keys of our dictionary
+q)type value d
+7h
+// Trying to add a new record with a symbol as value
+q)d["z"]:`hello
+'type
+  [0]  d["z"]:`hello
+             ^
+```
+
+With the release of KDB/Q [version 4.1](https://code.kx.com/q//releases/ChangesIn4.1/), [KX](https://kx.com) introduced a new dictionary syntax that enhances both the readability and flexibility of the language. In KDB/Q 4.1, you can now define dictionaries as follows:
+
+```
+q)([a:1;b:2;c:3])
+a| 1
+b| 2
+c| 3
+```
+
+This is especially useful for creating empty or singleton dictionaries, which was quite verbose and cumbersome before version 4.1. See for yourself:
+
+```
+// Creating an empty, untyped dictionary
+q)d:()!()
+q)0N!d
+()!()
+// Creating an empty dictionary with keys of type integer and values of type symbol
+q)d:(`int$())!`symbol$()
+q)0N!d
+(`int$())!`symbol$()
+// Creating a singleton dictionary
+q)enlist[`a]!enlist 3
+a| 3
+```
+In contrast, with KDB/Q version 4.1 above dictionary definitions became much easier and more readable
+
+```
+// Creating an empty dictionary
+q)d:([])
+q)0N!d
+(`symbol$())!()
+// Creating a singleton dictionary
+q)d:([a:3])
+q)d
+a| 3
+```
+
+### Indexing into a dictionary
+
+When you index into a dictionary, you are essentially performing a dictionary lookup, accessing a dictionary `d` to retrieve the value `v` at the specified key `k`. You can index into a dictionary using both, brackets and postfix notation
+
+```
+q)d:`a`b`c!1 2 3
+// Indexing into a dictionary using bracket notation
+q)d[`a]
+1
+// Indexing into a dictionary using postfix notation
+q)d`a
+1
+// Ensuring both notations return the same result
+q)d[`a]~d`a
+```
+
+You can also retrieve multiple elements using a list of keys as index
+
+```
+q)d:`a`b`c!1 2 3
+q)d[`a`b]
+1 2
+q)d`a`b
+1 2
+```
+However, due to the flexibility of dictionaries, their keys don't have to be unique, allowing the same key to be used multiple times. This can lead to unexpected results when retrieving elements stored at a key that's used more than once.
+
+```
+q)d:`a`b`c`a`b`c`d!til 7
+q)d
+a| 0
+b| 1
+c| 2
+a| 3
+b| 4
+c| 5
+d| 6
+q)d`a
+0
+q)d`b
+1
+q)d?3
+`a
+```
+
+### Reverse Lookup: Finding values
+
+Indexing into a dictionary is straightforward and a common operation. However, there are times when we need to perform the reverse operation: finding the key associated with a specific value. This is called a reverse lookup and we can accomplish this using the [`find ?`](https://code.kx.com/q/ref/find/) operator as follows
+
+```
+q)d:`a`b`c!1 2 3
+q)d
+a| 1
+b| 2
+c| 3
+q)d?3
+`c
+```
+
+One drawback of the `find ?` operator is that, for a list with non-unique elements, it will only return the index of the first occurrence of an element that appears multiple times. When applied to a dictionary, if the value being searched for occurs multiple times, only the first key associated with that value will be returned.
+
+```
+q)d:`a`b`c`d`e`f!1 2 3 1 2 3
+q)d
+a| 1
+b| 2
+c| 3
+d| 1
+e| 2
+f| 3
+q)d?1
+`a
+```
+
+But don't worry. Fortunately, we can use the [`equals =`](https://code.kx.com/q/basics/comparison/#six-comparison-operators) operator along with the [`where`](https://code.kx.com/q/ref/where/) keyword to find all keys for the value we're searching for. The following method will return exactly what you need.
+
+```
+q)d:`a`b`c`d`e`f!1 2 3 1 2 3
+// When comparing a dictionary to a value, the comparison is applied to every value of the dictionary
+// resulting in a boolean mask, indicating 1 where the comparison is true, and 0 where it is false
+q)d=1
+a| 1
+b| 0
+c| 0
+d| 1
+e| 0
+f| 0
+// We can now leverage where to obtain the keys where the boolean mask is 1b
+q)where d=1
+`a`d
+```
+:::tip
+The code snippet above highlights a crucial concept about dictionaries. Fully understanding this will enhance your skills as a KDB/Q developer: the key-value mapping of a dictionary is analogous to the index-value mapping of a list. To clarify, if you have a list of numbers from 0 to 10, each number is implicitly mapped to its index—0 is mapped to index 0 (since KDB/Q uses zero-based indexing), 1 to index 1, 2 to index 2, and so forth. In a dictionary, this same index-value mapping occurs, but with keys serving as the index instead of numerical values. Moreover, there's nothing stopping you from creating a dictionary with numerical keys mapped to numerical values. Remembering that operations on dictionaries affect their values while leaving keys unchanged provides a powerful tool for your development. Let me illustrate what I just explained
+:::
+
+```
+// Creating a dictionary mapping the numbers 0 to 5 to the corresponding value
+q)0 1 2 3 4!0 1 2 3 4
+0| 0
+1| 1
+2| 2
+3| 3
+4| 4
+// same operation but in q-style
+q)x!x:til 5
+0| 0
+1| 1
+2| 2
+3| 3
+4| 4
+q)d:x!x:til 5
+// indexing into the dictionary at index 0
+q)d 0
+0
+// Creating a list of values from 0 to 5
+q)l:til 5
+// indexing into the list at index 0
+q)l 0
+0
+// Showing that both operations return the same result
+q)d[0]~l 0
+1b
+```
+
+### Operations on a single Dictionary
+
+One of the great features of KDB/Q dictionaries is that applying a function to a dictionary effectively applies it to the dictionary's value list. Let me show you some examples:
+
+```
+// First we create a dictionary
+q)d:`a`b`c!1 2 3
+// We can convert all values to their corresponding negative value by using the keyword neg 
+q)neg d
+a| -1
+b| -2
+c| -3
+// Find the minimum value in the dictinary
+q)min d
+1
+// Multiply all values by 2
+q)2*d
+a| 2
+b| 4
+c| 6
+// Compare the values of the dictionary to the value 2
+q)d=2
+a| 0
+b| 1
+c| 0
+// count returns the length of the dictionary
+q)count d
+3
+// Return the first value of the dictionary d
+q)first d
+1
+// Return the last value of the dictionary d
+q)last d
+3
+```
+
+There are many other useful operations you can perform on dictionaries. For a detailed explanation, please refer to [Chapter 5: Dictionaries](https://code.kx.com/q4m3/5_Dictionaries/) in Q for Mortals.
+
+### Operations involving multiple Dictionaries
+
+We've already seen how to apply functions to a single dictionary. In this section, we'll explore how to use two or more dictionaries together with the KDB/Q operators we've covered so far. When applying functions such as addition, subtraction, multiplication or division to two dictionaries, the operation will match all common keys and apply the function to the value(s) of the matching key(s). Let's illustrate this with an example
+
+```
+q)d1:`a`b`c!1 2 3
+q)d2:`a`b`c!4 5 6
+q)d1+d2
+a| 5
+b| 7
+c| 9
+q)d1-d2
+a| -3
+b| -3
+c| -3
+q)d1*d2
+a| 4
+b| 10
+c| 18
+q)d1%d2
+a| 0.25
+b| 0.4
+c| 0.5
+```
+
+But what happens if any of the two dictionaries contains non matching keys? 
+
+```
+q)d1+`a`b`d!6 7 8
+a| 7
+b| 9
+c| 3
+d| 8
+```
+
+As demonstrated above, the result is the union of the records in both dictionaries. The function is applied to all records where the keys match, and records without matching keys are amended using the [identity element](https://code.kx.com/q4m3/5_Dictionaries/#527-arithmetic-and-relational-operations) (0 for addition and subtraction and 1 for multiplication and division) of the operation as the second parameter.
+
+### Joining Dictionaries
+
+One of the great features of dictionaries is their behavior when joined. Since a dictionary is just a key-value mapping, joining two dictionaries will update the values of all matching keys in the first dictionary with the corresponding values from the second dictionary. Let's demonstrate this:
+
+```
+q)d1:`a`b`c!1 2 3
+q)d1
+a| 1
+b| 2
+c| 3
+q)d2:`a`b`c!10 20 30
+q)d2
+a| 10
+b| 20
+c| 30
+q)d1,d2
+a| 10
+b| 20
+c| 30
+```
+
+This feature is especially useful when designing your Application Programming Interfaces (APIs). You can pass a dictionary containing all the parameters for your API and within your function, you can then define a dictionary with the default parameters needed for your API's functionality. By joining the user-provided dictionary with the default parameters dictionary, you obtain all the necessary parameters. Let's look at some code to illustrate this concept.
+
+```
+function:{[param]
+	default:`a`b`c!1 2 3;
+	res:defalut,param;
+	:res
+	};
+
+q)function[`a`b!10 20]
+a| 10
+b| 20
+c| 3
+```
+
+### Column Dictionaries
+
+Now that we've covered the basics of dictionaries, we can move on to a crucial concept for understanding our next topic: tables. This concept is column dictionaries, which form the foundation of tables. A column dictionary is a dictionary where each key is of type symbol, and each value is a list of values with the same length as all the other values. The formal definition is
+
+```
+`c1...`cN!(v1;...;vN)
+where 
+ - each c1 is a column name as symbol
+ and
+ - each v1 is a list of values
+```
+Let's look at a more practical example
+
+```
+q)team:`name`age!(`Bob`Joe`Frank;25 35 40)
+q)team
+name| Bob Joe Frank
+age | 25  35  40
+```
+
+As you can see, this dictionary contains two keys, `name` and `age`, which map to the corresponding names and ages of our team members. To retrieve all the names, you can index into the dictionary using the key `name` like this ```team[`name]```.  Similarly, to get the ages of our team, you would use ```team[`age]```.
+
+```
+// Retrieve the names of the team
+q)team[`name]
+`Bob`Joe`Frank
+// Retrieve the age of the team
+q)team[`age]
+25 35 40
+```
+
+Since each value in a column dictionary is actually a list, we can index into these lists as follows:
+
+```
+// Indexing into a list of values for the name key
+q)team[`name] 1
+`Joe
+// Using nested indexing to achieve the same
+q)team[`name;1]
+`Joe
+```
+
+Now, if you recall, creating a singleton dictionary was somewhat cumbersome, and the same applies to a singleton column dictionary. Since a dictionary is a list of keys mapped to a list of values (or, in the case of a column dictionary, a list of lists), we need to use `enlist` to create a singleton column dictionary.
+
+```
+q)enlist[`name]!enlist `Bob`Joe`Frank
+name| Bob Joe Frank
+```
+
+Luckily for us, this is much simpler with KDB/Q version 4.1
+
+```
+q)([name:`Bob`Joe`Frank])
+name| Bob Joe Frank
+```
+
+We’ve covered a lot about dictionaries so far, and now it's time to discuss the most important concept regarding column dictionaries. A *flipped column dictionary* is simply a *table*. Yes, that's right. If you flip a column dictionary, you get a table. Let's see this in practice.
+
+```
+// Column Dictionary team, mapping name and age keys to a list of names and their corresponding ages
+q)team
+name| Bob Joe Frank
+age | 25  35  40
+// Creating a table by flipping a column dictionary
+q)show t:flip team
+name  age
+---------
+Bob   25
+Joe   35
+Frank 40
+```
+
+Additionally, it's worth noting that a table can be seen as a list of dictionaries that all conform, meaning the dictionaries share the same keys. In fact, KDB/Q will always aggregate a list of conforming dictionaries into a table.
+
+```
+// Create a list of dictionaries that are all conform
+q)((`name`age!(`Bob;25));(`name`age!(`Joe;35));(`name`age!(`Frank;40)))
+name  age
+---------
+Bob   25
+Joe   35
+Frank 40
+```
+
+This understanding clarifies that we can access records in a table in the same way we index into a list, using position indexes. For instance, to retrieve the second record of our table, we simply use the index 1.
+
+```
+// Indexing into a table
+q)t 1
+name| `Joe
+age | 35
+// Indexing into a list of conform dictionaries
+q)((`name`age!(`Bob;25));(`name`age!(`Joe;35));(`name`age!(`Frank;40))) 1
+name| `Joe
+age | 35
+// Verify that above results are in fact the same
+q)t[1]~((`name`age!(`Bob;25));(`name`age!(`Joe;35));(`name`age!(`Frank;40))) 1
+1b
+```
+
+Last but not least, I'll explain why table operations are so performant and fast in KDB/Q. Tables are essentially column dictionaries, where each value is a list. Since KDB/Q is a vector/array programming language, operations on lists or vectors are highly efficient. Therefore, tables are represented as flipped column dictionaries in the background, rather than as a list of rows (simple dictionaries). This structure enables super-fast operations on columns, making KDB/Q much faster than conventional programming languages. 
+
+
+We'll pause here for now, giving you time to absorb all the information covered in this blog. I'll update the blog later with a more detailed explanation of tables. If you have any questions, feel free to reach out.
+
+**Happy Coding!**
+
+
+
+
+
+
+
