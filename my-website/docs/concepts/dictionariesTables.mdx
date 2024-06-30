@@ -327,6 +327,47 @@ d| 8
 
 As demonstrated above, the result is the union of the records in both dictionaries. The function is applied to all records where the keys match, and records without matching keys are amended using the [identity element](https://code.kx.com/q4m3/5_Dictionaries/#527-arithmetic-and-relational-operations) (0 for addition and subtraction and 1 for multiplication and division) of the operation as the second parameter.
 
+### Appending and Amending dictionaries
+
+Now that we've explored how operators work on dictionaries, let's see how to insert new records into a dictionary. Adding a new record is straightforward: simply introduce a new key and assign it the value you want to insert.
+
+```
+q)show d:`a`b`c!1 2 3
+a| 1
+b| 2
+c| 3
+q)d[`d]:4
+q)d
+a| 1
+b| 2
+c| 3
+d| 4
+```
+
+Updating existing records is just as simple as inserting new ones. Just index into the dictionary using the existing key and assign the new value to it.
+
+```
+q)d[`d]:5
+q)d
+a| 1
+b| 2
+c| 3
+d| 5
+```
+
+The only restriction for both operations is that the type of the new value you are inserting matches the type of the existing values of your dictionary.
+
+```
+q)d[`d]:`test
+'type
+  [0]  d[`d]:`test
+            ^
+q)d[`e]:`test
+'type
+  [0]  d[`e]:`test
+            ^
+```
+
 ### Joining Dictionaries
 
 One of the great features of dictionaries is their behavior when joined. Since a dictionary is just a key-value mapping, joining two dictionaries will update the values of all matching keys in the first dictionary with the corresponding values from the second dictionary. Let's demonstrate this:
@@ -470,9 +511,1243 @@ We'll pause here for now, giving you time to absorb all the information covered 
 
 **Happy Coding!**
 
+Now, let's continue. Last time, we discussed dictionaries, exploring their features, behaviors, and operations. We also covered column dictionaries and highlighted their key attribute: a flipped column dictionary becomes a table. Now, we will shift our focus to tables. Ensure you have a solid understanding of dictionaries, and if you need a refresher, feel free to revisit the previous section.
+
+## Tables
+
+As previously mentioned, dictionaries and tables are native data types in KDB/Q, meaning they are first-class citizens and reside in memory just like lists. If you consider a table as a flipped column dictionary, you can think of it as a collection of named columns. This column-oriented structure, as opposed to a row-oriented one, is one of the reasons why KDB/Q excels at processing big data compared to relational databases. Furthermore, since lists are allocated in contiguous memory, so are columns, making data retrieval, manipulation, and storage highly efficient.
+
+### Creating Tables
+
+#### Flipped column dictionary
+
+The first method for creating a table is to start with a column dictionary. Since a flipped column dictionary is a table, let's begin with this approach.
+
+```
+// flipped column dictionary
+q)show t:flip `names`age!(`Alexander`Stephan`Christoph;37 27 34)
+names     age
+-------------
+Alexander 37
+Stephan   27
+Christoph 34
+q)0N!t
++`names`age!(`Alexander`Stephan`Christoph;37 27 34)
+names     age
+-------------
+Alexander 37
+Stephan   27
+Christoph 34
+```
+As you can see from the above code, our flipped column dictionary is now represented as a table. However, upon closer inspection, we can observe that KDB/Q hasn't actually transposed the column dictionary in the background. Instead, it has only annotated that the data should be treated as a table. Keeping our table stored as a collection of named columns (i.e., lists) minimizes memory usage and enhances performance by enabling vectorized mathematical operations.
+
+:::tip
+You can use `0N!` for debugging and to see what's happening behind the scenes. As shown, the table is represented as ```+`names`age!(`Alexander`Stephan`Christoph;37 27 34)```, which is a flipped column dictionary. The `+` operator is k-code for flipped.
+```
+q)flip
++:
+```
+You can find some documentation about exposed infrastructure [here](https://code.kx.com/q/basics/exposed-infrastructure/)
+:::
+
+:::danger
+Creating a table by flipping a dictionary only works for column dictionaries. Remember, a column dictionary has symbols as keys, and each list must be of equal length, or be an atom that will automatically expand to match the length of the other lists.
+```
+q)flip 1 2!(1 2 3;4 5 6)
+'nyi
+  [0]  flip 1 2!(1 2 3;4 5 6)
+       ^
+q)flip `a`b!(1 2;4 5 6)
+'length
+  [0]  flip `a`b!(1 2;4 5 6)
+       ^
+q)flip `a`b!(1;4 5 6)
+a b
+---
+1 4
+1 5
+1 6
+```
+:::
 
 
+#### List of conform dictionaries
+
+Another way of looking at tables is to see them as a list of conforming dictionaries. In fact, whenever you have a list of conforming dictionaries, KDB/Q will automatically convert it into a table. Let's take a look at this in practice.
+
+```
+q)count (`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
+3
+q)first(`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
+name| `Alexander
+age | 37
+q)last(`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
+name| `Christoph
+age | 34
+q)(`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
+name      age
+-------------
+Alexander 37
+Stephan   27
+Christoph 34
+```
+
+We first created a list of three conforming dictionaries and demonstrated that it is indeed a list by using the `count`,`first` and `last` operators to obtain the length of our list and the first and last elements, respectively. Then, we returned the list of conforming dictionaries and observed that KDB/Q automatically converts it into a table. Let's use `0N!` to see what's happening behind the scenes.
+
+```
+q)0N!(`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
++`name`age!(`Alexander`Stephan`Christoph;37 27 34)
+name      age
+-------------
+Alexander 37
+Stephan   27
+Christoph 34
+```
+
+In fact, our list of conforming dictionaries has been transformed into a table. This transformation makes memory allocation more efficient and operations on columns more performant due to the ability to use vectorized operations. But what about the operations we just applied to our list of conforming dictionaries? Will they still be valid for a table? Let's find out.
+
+```
+q)show t:(`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
+name      age
+-------------
+Alexander 37
+Stephan   27
+Christoph 34
+q)count t
+3
+q)first t
+name| `Alexander
+age | 37
+q)last t
+name| `Christoph
+age | 34
+```
+
+As you can see, the operations we applied to the list of conforming dictionaries can also be applied to our table. To verify whether a list of conforming dictionaries is truly a table, we can inspect its type using the `type` operator
+
+```
+q)type (`name`age!(`Alexander;37);`name`age!(`Stephan;27);`name`age!(`Christoph;34))
+98h
+```
+If you recall, type 98h indicates a table. Feel free to verify this information [here](https://code.kx.com/q/ref/#datatypes) if you have any doubts.
+
+#### Formal Table defintion
+
+Finally, let's explore the formal method of creating a table by leveraging the concept of a table being a collection or list of named columns. This approach is particularly useful when creating empty tables and defining the schema of the data we aim to capture.
+
+A table can be formaly defined like
+
+```
+([] c1:L1; c2:L2; ... ; cn:Ln)
+
+where ci is a column name and Li is the corresponding list of column values
+```
+
+Let's have a look at a practical example:
+
+```
+q)show t:([] name:`Alex`Stephan`Christop; age:36 27 34)
+name     age
+------------
+Alex     36
+Stephan  27
+Christop 34
+```
+
+Creating a table from data is straightforward, and defining an empty table schema, enforcing the column types is just as simple. Here's the code to do so:
+
+```
+q)show t:([] name:`symbol$(); age:`int$())
+name age
+--------
+```
+
+:::tip
+The keyword [`meta`](https://code.kx.com/q/ref/meta/) allows you to inspect the schema of a table. You can read more about it [here](https://code.kx.com/q/ref/meta/)
+:::
+
+The schema of our table is now defined, and KDB/Q ensures that all types of the records we insert match the column types specified in the schema. Even if just one element of the record we're trying to insert doesn't match the type of the corresponding column, a `type` error will be thrown.
+
+```
+q)`t insert (`Alexander;36i)
+,0
+q)`t insert (`Alex;`WrongType)
+'type
+  [0]  `t insert (`Alex;`WrongType)
+          ^
+q)t
+name      age
+-------------
+Alexander 36
+q)meta t
+c   | t f a
+----| -----
+name| s
+age | i
+```
+
+We'll provide additional examples of how to insert records into a table later in the post.
+
+### Keyed Tables vs Tables
+
+Another great feature of tables is that you can add a key to them, creating a keyed table. A key is basically a unique identifier, similar to a primary key in a traditional SQL database. Adding a key to a table is essential for performing joins between tables, which are powerful tools for merging datasets. This capability is one of the reasons why KDB/Q is so performant. We will cover joins in a dedicated blog post.
+
+#### Creating a keyed table
+
+Adding a key to an existing table is straightforward using the [`xkey`](https://code.kx.com/q/ref/keys/#xkey) keyword. All you have to do, is to specify the column you would like to use as key and execute following code:
+
+```
+q)show t:([] name:`Alexander`Stephan`Christoph; age:36 26 34)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+q)show kt:`name xkey t
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+```
+
+Comparing the console output of the first table with the output of the second table illustrates that we have successfully added a key to our table, creating a keyed table `kt`, making the `name` column the unique identifier. Attempting to insert records with an existing key in the keyed table will result in an error, whereas new records with unique keys can still be inserted.
+
+```
+q)`kt insert (`Alexander;34)
+'insert
+  [0]  `kt insert (`Alexander;34)
+           ^
+q)`kt insert (`Alex;34)
+,3
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+```
+
+A keyed table can have multiple columns as keys; you are not limited to just one. Let's add another column to our keyed table and demonstrate how to create a keyed table with two columns as keys.
+
+```
+// We first add a date column to our table and then key on date and name
+q)`date`name xkey update date:.z.d from kt
+date       name     | age
+--------------------| ---
+2024.06.28 Alexander| 36
+2024.06.28 Stephan  | 26
+2024.06.28 Christoph| 34
+2024.06.28 Alex     | 34
+```
+
+Another easy way to create a keyed table from an existing table is by using the [`bang !`](https://code.kx.com/q/ref/enkey/) operator. Just specify the number of keys you want to apply using the pattern `n!table`, and the first `n` columns will be used as keys. To unkey a table, or convert a keyed table back into a simple table, use `0!keyedTable`. Alternatively, you can also use `xkey` with an empty list `()` to unkey a keyed table. 
+
+```
+q)1!t
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+q)xkey[`name;t]~1!t
+1b
+q)2!update date:.z.d from t
+name      age| date
+-------------| ----------
+Alexander 36 | 2024.06.28
+Stephan   26 | 2024.06.28
+Christoph 34 | 2024.06.28
+q)0!kt
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+q)() xkey kt
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+```
+
+One key difference between the `bang !` operator and trhe `xkey` operator is that with the bang operator, you cannot specify the order of the columns used as keys. The bang operator will simply use the first `n` columns as keys. However, with `xkey`, you can specify the order of the keys by listing the column names in the desired order. Below example should highlight this
 
 
+```
+q)`date`name xkey update date:.z.d from kt
+date       name     | age
+--------------------| ---
+2024.06.28 Alexander| 36
+2024.06.28 Stephan  | 26
+2024.06.28 Christoph| 34
+2024.06.28 Alex     | 34
+q)2!update date:.z.d from t
+name      age| date
+-------------| ----------
+Alexander 36 | 2024.06.28
+Stephan   26 | 2024.06.28
+Christoph 34 | 2024.06.28
+```
 
 
+Last but not least, I would like to show you the formal definition of a keyed table, similar to what we have seen before with simple tables. If you review the formal definition of a simple table and wonder what the empty square brackets are for, here's the revelation: the square brackets are used to define the key(s) of a table. Let's take a closer look.
+
+```
+([k1:K1;k2:K2;...;kN:KN] c1:L1; c2:L2; ... ; cn:Ln)
+
+where 
+ - ci is a column name and Li is the corresponding list of column values
+ - ki is the name of the key column and Ki are the corresponding keys
+
+```
+
+In practice
+
+```
+q)([name:`Alexander`Stephan`Christoph`Alex] age:36 26 34 34)
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+q)([date:4#.z.d; name:`Alexander`Stephan`Christoph`Alex] age:36 26 34 34)
+date       name     | age
+--------------------| ---
+2024.06.28 Alexander| 36
+2024.06.28 Stephan  | 26
+2024.06.28 Christoph| 34
+2024.06.28 Alex     | 34
+q)([date:.z.d; name:`Alexander`Stephan`Christoph`Alex] age:36 26 34 34)
+date       name     | age
+--------------------| ---
+2024.06.28 Alexander| 36
+2024.06.28 Stephan  | 26
+2024.06.28 Christoph| 34
+2024.06.28 Alex     | 34
+```
+
+:::tip
+You can verify whether a table is keyed or not by using the [`type`](https://code.kx.com/q/ref/type/) keyword. Tables are of type 98h while keyed tables are of type 99h
+:::
+
+
+### Keyed Tables: Dictionary of Dictionaries
+
+But wait a moment—if you've been carefully reading this blog post and review the tip I just shared, you'll notice something interesting. If a keyed table is of type 99h and dictionaries are also of type 99h, does that mean that a keyed table is a dictionary? Yes, exactly. That's precisely what it means. A keyed table is essentially a dictionary of tables.
+
+
+Let's explore this in more detail. Using one of my favorite tools to debug KDB/Q code and understand what's happening - the [`0N!`](https://code.kx.com/q/basics/internal/#0nx-show) operator - we can see that a keyed table is indeed a dictionary of two tables.
+
+```
+q)0N!kt
+(+(,`name)!,`Alexander`Stephan`Christoph`Alex)!+(,`age)!,36 26 34 34
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+```
+
+For further illustration and clarification, let's create a keyed table by manually creating a dictionary of two tables:
+
+First, we create the table to store the keys of our keyed table. Since we are keying only one column, we need to create a singleton dictionary using the `enlist` operator. If you're not familiar with singleton dictionaries, refer to the previous section on dictionaries [here](#dictionaries).
+
+```
+// Create a singleton dictionary storing our keys
+q)show k:enlist[`name]!enlist `Alexander`Stephan`Christoph`Alex
+name| Alexander Stephan Christoph Alex
+// We can do the same using the new q4.1 syntax
+q)show k1:([name:`Alexander`Stephan`Christoph`Alex])
+name| Alexander Stephan Christoph Alex
+// Verify that both methods obtain the same result
+q)k~k1
+1b
+```
+
+Next, we need to create the table containing the values of our keyed table. This table will hold all the details corresponding to the keys. In our previous table, which stored names and ages of our users, we keyed on names, leaving only age as a column. Thus, we need to create another singleton dictionary for the values.
+
+```
+// Create a singleton dictionary storing the values
+q)show v:enlist[`age]!enlist 36 26 34 34
+age| 36 26 34 34
+// We can do the same using the new q4.1 syntax
+q)show v1:([age:36 26 34 34])
+age| 36 26 34 34
+// Verify that both methods obtain the same result
+q)v~v1
+1b
+```
+
+Finally, we can construct our keyed table by creating a dictionary of two tables, flipping the two column dictionaries we just created: the key dictionary and the value dictionary.
+
+:::note
+Remember, a table is nothing but a flipped column dictionary
+:::
+
+```
+// Create a keyed table by creating a dictionary of two tables
+q)show kt1:flip[k]!flip[v]
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+// Show our initial keyed table
+q)show kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+// Verify that both results match
+q)kt~kt1
+1b
+```
+
+This conclusion should come as no surprise, given our initial investigation using `0N!`. By examining the previous output, we can clearly see this concept. It's important to understand that the underlying k code for `enlist` is `,` and for `flip` is `+`. This has been illustrated in the exposed infrastructure section on code.kx.com [here](https://code.kx.com/q/basics/exposed-infrastructure/)
+
+:::danger
+A note from KX: The use of k expressions in kdb+ applications is unsupported and strongly discouraged.
+:::
+
+```
+// Inspecting the output of 0N!
+q)0N!kt
+(+(,`name)!,`Alexander`Stephan`Christoph`Alex)!+(,`age)!,36 26 34 34
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+// Create a name singleton dictionary
+q)((,)`name)!((,)`Alexander`Stephan`Christoph`Alex)
+name| Alexander Stephan Christoph Alex
+// Flip it to create a table
+q)(+)((,)`name)!((,)`Alexander`Stephan`Christoph`Alex)
+name
+---------
+Alexander
+Stephan
+Christoph
+Alex
+// Create an age singleton dictionary
+q)((,)`age)!((,)36 26 34 34)
+age| 36 26 34 34
+// Flip it to create a table 
+q)(+)((,)`age)!((,)36 26 34 34)
+age
+---
+36
+26
+34
+34
+// Create a keyed table by creating a dictionary from two tables
+q)show kt2:((+)((,)`name)!((,)`Alexander`Stephan`Christoph`Alex))!(+)((,)`age)!((,)36 26 34 34)
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+// Verify that this actually matches our initial keyed table
+q)kt~kt2
+1b
+```
+
+### Indexing into tables
+
+While this blog post focuses on the concepts of dictionaries and tables in KDB/Q, rather than providing a detailed guide on how to operate on them,  I would still like to give you a brief overview of operations on tables. This includes how to index into tables, insert or update records, and perform other basic operations. For a more comprehensive overview of table operations, please refer to Chapter 8 of [Q for Mortals](https://code.kx.com/q4m3/8_Tables/). In a future blog post, I will cover Q-SQL, detailing how to query KDB/Q tables, as well as joins — a powerful tool in KDB/Q for merging datasets.
+
+First, let's explore how to index into a table. Indexing into a table is straightforward, similar to indexing into any other data structure. The only caveat is to be aware of whether we are dealing with a simple table or a keyed table. Let's examine both scenarios. Remember that a table can be viewed as a list of conforming dictionaries, and just as we can index into a list using a numerical index, we can do the same with a simple table.
+
+```
+q)show t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+// Using a single index returns a dictionary
+q)t 0
+name| `Alexander
+age | 36
+q)t 1
+name| `Stephan
+age | 26
+q)t 2
+name| `Christoph
+age | 34
+```
+
+Note that the returned output is a dictionary, which makes perfect sense since each individual record in a table is a dictionary. However, if we use multiple indices to select two or more records, the result will still be a table. This is also makes sense, considering that a list of conforming dictionaries constitutes a table.
+
+```
+// Using two or more indices returns a table
+q)t 0 1
+name      age
+-------------
+Alexander 36
+Stephan   26
+// Nothing stops you from using the same index several times
+q)t 0 1 0
+name      age
+-------------
+Alexander 36
+Stephan   26
+Alexander 36
+```
+
+Additionally, we can use the first and last operator to retrieve the first and last record respectively.
+
+```
+q)first t
+name| `Alexander
+age | 36
+q)last t
+name| `Christoph
+age | 34
+```
+
+Moreover, we can also use the [`take`](https://code.kx.com/q/ref/take/) to retrieve a number of rows from a table `n#table`. 
+
+```
+q)1#t
+name      age
+-------------
+Alexander 36
+q)2#t
+name      age
+-------------
+Alexander 36
+Stephan   26
+q)3#t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+```
+
+:::danger
+Using the take operator requires careful attention. If you attempt to retrieve `n` records where `n` exceeds the total number of records in your table (you can check that using `count t`), take will fill the missing records by cycling through the beginning of the table until all `n` records are obtained. To ensure you take an exact number of records without repetition, it's better to use the [`sublist`](https://code.kx.com/q/ref/sublist/) operator.
+```
+q)5#t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alexander 36
+Stephan   26
+q)6#t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alexander 36
+Stephan   26
+Christoph 34
+q)8#t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alexander 36
+Stephan   26
+Christoph 34
+Alexander 36
+Stephan   26
+q)5 sublist t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+q)2 sublist t
+name      age
+-------------
+Alexander 36
+Stephan   26
+```
+:::
+
+Another great feature of KDB/Q tables is the ability to retrieve entire columns at once by simply using the corresponding column name. This is one of the key reasons for KDB/Q's exceptional speed. As a column-oriented database, KDB/Q stores each column of a table as a vector in contiguous memory.
+
+```
+// Retrieving the name column of our table
+q)t[`name]
+`Alexander`Stephan`Christoph
+// Retrieving the name and age column of our table
+q)t[`name`age]
+Alexander Stephan Christoph
+36        26      34
+// You can repeat column names
+q)t[`name`age`name]
+Alexander Stephan Christoph
+36        26      34
+Alexander Stephan Christoph
+```
+
+As you can observe from above, each column is returned as a list. 
+
+We can now combine indexing into a table using an index, with indexing into a table using a table column to retrieve one specific element of our table
+
+```
+// We retrieve a specific element by using the index 2 and then the column name
+q)t[2;`name]
+`Christoph
+```
+
+Next, let's look at how to index into a keyed table. Recall that a keyed table is essentially a dictionary of two tables. From the section on [Indexing into dictionaries](#indexing-into-a-dictionary), we know that you use a key to index into a dictionary. Since a keyed table is a dictionary, the same principle applies. 
+
+```
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+q)kt[`Alexander]
+age| 36
+```
+
+Note that just like a dictionary returns only the value associated with the key you used to index into it, a keyed table behaves similarly. From the above code snippet, we can see that when we index into a keyed table using a key, only the value part of the keyed table (i.e., the columns that are not part of the key) is returned.
+
+But can we index into a keyed table using a numerical index? Like we did with a simple table?
+
+```
+q)kt[0]
+'type
+  [0]  kt[0]
+       ^
+```
+
+No, we can't. As you can see from the example above, using a numerical index on a keyed table will throw a `type` error. This behavior occurs because our table is keyed on a column of type symbol. Using any type other than a symbol to index into the keyed table will result in a `type` error. However, if we use a numerical type for our key column, we can use a numerical index to index into this keyed table. Let's look at an example.
+
+```
+// First, let's create a keyed table using a numerical key
+q)show kt3:([index:0 1 2 3] name:`Alexander`Stephan`Christoph`Alex)
+index| name
+-----| ---------
+0    | Alexander
+1    | Stephan
+2    | Christoph
+3    | Alex
+// Indexing into our new keyed table using the numerical index 2
+q)kt3 2
+name| Christoph
+```
+
+But what about the other methods of retrieving data that we used on simple tables, such as [`first`](https://code.kx.com/q/ref/first/#first), [`last`](https://code.kx.com/q/ref/first/#first), [`take`](https://code.kx.com/q/ref/take/), and [`sublist`](https://code.kx.com/q/ref/sublist/)? Do these methods also work on our keyed tables, and do they produce the same or similar results? Let's find out.
+
+```
+q)first kt
+age| 36
+q)last kt
+age| 34
+q)1#kt
+name     | age
+---------| ---
+Alexander| 36
+q)5#kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+Alexander| 36
+q)5 sublist kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+```
+
+With the exception of `first` and `last`, all other operators work the same way on keyed tables as they do on simple tables. The `take` operator will return `n`  records, cycling through the table until `n` records are retrieved if `n` is larger than the `count` of our table. The `sublist` operator behaves as expected, selecting `n` records from the table. However, the `first` and `last` operators produce different results for keyed tables compared to simple tables. When considering keyed tables as a dictionary of two tables, the results make sense: `first` and `last` return the first and last value parts of the first and last records, respectively. Similar to what the `first` and `last` operator would return when applied to a dictionary. Because the value part of the keyed table is a table itself, and both operators, `first` and `last` only return one record of this table, the result will be a dictionary. 
+
+
+One cool feature of the `take` operator when used with keyed tables is its ability to retrieve specific records using the keys of the table. Let me demonstrate:
+
+```
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+q)([] name:`Alexander`Christoph`Stephan`Alex)#kt
+name     | age
+---------| ---
+Alexander| 36
+Christoph| 34
+Stephan  | 26
+```
+
+This is particularly useful if you want to retrieve records for specific keys, or in a specific order.
+
+### Appending records to tables
+
+In the final section of this blog post, we will explore the basic methods for inserting data into a table. This process slightly varies between simple tables and keyed tables. A comprehensive discussion on how to insert data into tables is beyond the scope of this post. For a detailed explanation, please refer to the first section of [Chapter 9: Queries and Q-Sql](https://code.kx.com/q4m3/9_Queries_q-sql/) in [Q for Mortals](https://code.kx.com/q4m3/)
+
+Let's start by appending some data to our tables:
+
+```
+// Review what was in our table
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+// Append a new record by joining a dictionary
+q)t,`name`age!(`Alex;40)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      40
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+// Use assign in place to persist the changes
+q)t,:`name`age!(`Alex;40)
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      40
+```
+
+You can append records to a table by joining a dictionary to it. Since a table can be viewed as a list of conforming dictionaries, you can join a dictionary that matches the schema of your table. To persist the changes, you can use in-place assignment. 
+
+A great feature of appending records via a dictionary is that the order of the dictionary's keys does not need to match the order of the table's columns. As long as the data types of the keys match the data types of the columns, the order of the keys is irrelevant. However, the keys in the dictionary must correspond to the column names in the table. Let's look at an example.
+
+```
+q)show t,: `age`name!(45;`Joe)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      34
+Joe       45
+```
+
+But that's not all—it's not just the order of the keys that can differ. We can also insert a dictionary with fewer keys than the table has columns. The missing columns are automatically filled with a null value of the appropriate column type.
+
+```
+q)show t,:(enlist `name)!(enlist `Ted)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      34
+Joe       45
+Ted
+q)0N!t
++`name`age!(`Alexander`Stephan`Christoph`Alex`Joe`Ted;36 26 34 34 45 0N)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      34
+Joe       45
+Ted
+```
+
+However, attempting to insert a dictionary with more keys than the table has columns will result in a mismatch error.
+
+```
+q)t,:`name`age`iq!(`Bob;45;127)
+'mismatch
+  [0]  t,:`name`age`iq!(`Bob;45;127)
+        ^
+```
+
+Appending records via a dictionary is indeed a powerful method, but it can involve quite a bit of typing. Luckily for us, this can be simplified and we actually don't have to type the full dictionary
+
+```
+q)show t,:(`Natalia;21)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      40
+Natalia   21
+```
+
+But what happens if we are trying to insert a record where one of the column types does not match the schema of our existing table? As you would expect, an error will be thrown
+
+```
+q)meta t
+c   | t f a
+----| -----
+name| s
+age | j
+q)t,:(`Tommy;35.5)
+'type
+  [0]  t,:(`Tommy;35.5)
+        ^
+q)t,:("Tommy";35)
+'length
+  [0]  t,:("Tommy";35)
+        ^
+q)t,:(45;35)
+'type
+  [0]  t,:(45;35)
+        ^
+```
+
+In our first attempt, we try to append a record where the age is a float. However, as you can see from the meta of our table, the age column is of type long. The obvious error thrown is a `type` error. Our second append throws a `length` error. This might come as a surprise initially, but let's reflect about it for a moment. We are trying to append a record with a string representation of the name. As we know, strings technically don't exist in KDB/Q but are represented as a list of char characters. Hence, what we are actually trying to do is append a list of char characters as the name. Since the name column is of type symbol, meaning each entry should be a symbol [atom](https://code.kx.com/q4m3/2_Basic_Data_Types_Atoms/), we get a `length` error when trying to insert a list. Our last attempt fails for obvious reasons: we are trying to insert a numerical value for our name column, resulting in a `type` error.
+
+
+The above examples highlight the importance of defining the schema of your tables at creation. Creating an empty table without specifying column types is bad practice, as the types will be inferred from the first record you add. This can lead to insert or append failures and potentially serious production outages.
+
+Imagine you create a table to store items and their corresponding prices, including the ID for each item and their price. However, when creating the table schema, you do not define the types for the columns. As shown by the meta data, the columns have no defined type after the table is created. You then proceed to insert the first record, but mistakenly enter the price of the first item (10£) as an integer instead of a floating point number. When you attempt to insert the second item, which has a price of 3.8£, a `type` error is thrown.
+
+```
+q)t1:([] id:(); price:())
+q)meta t1
+c    | t f a
+-----| -----
+id   |
+price|
+q)t1,:(0;10)
+q)t1
+id price
+--------
+0  10
+q)meta t1
+c    | t f a
+-----| -----
+id   | j
+price| j
+q)t1,:(2;3.8)
+'type
+  [0]  t1,:(2;3.8)
+         ^
+```
+A much better approach is to specify the types of your columns when creating the table.
+
+```
+q)t1:([] id:`int$(); price:`float$())
+q)meta t1
+c    | t f a
+-----| -----
+id   | i
+price| f
+q)t1,:(0;10)
+'type
+  [0]  t1,:(0;10)
+         ^
+q)t1,:(0;10.0)
+q)t1
+id price
+--------
+0  10
+q)t1,:(1;3.8)
+q)t1
+id price
+--------
+0  10
+1  3.8
+```
+
+You will still receive an error if you try to insert an integer price value rather than a floating point value, however, now the error is perfectly justified and you simply can avoid it by inserting a floating point price value. 
+
+Next, let's look at how we can append a record to a keyed table. Remember, a keyed table is a dictionary of two tables. 
+
+```
+q)kt,:(enlist (enlist `name)!enlist `Alex)!enlist (enlist `age)!enlist 34
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+```
+
+That looks more complicated than it's supposed to be. Let's break it down into simople steps.
+
+```
+// From right to left
+// First, let's remember how to create a singleton dictionary
+q)(enlist `age)!enlist 34
+age| 34
+// Next, a table can be viewed as a list of dictionary, using enlist to create a list of dictionaries
+q)enlist (enlist `age)!enlist 34
+age
+---
+34
+// Next we create the key dictionary of our keyed table
+q)(enlist (enlist `name)!enlist `Alex)
+name
+----
+Alex
+// Finally, putting everything together, we obtain a record we can append to our keyed table
+q)(enlist (enlist `name)!enlist `Alex)!enlist (enlist `age)!enlist 34
+name| age
+----| ---
+Alex| 34
+```
+
+That wasn't that complicated after all. However, still a lot of typing. Wouldn't it be great if this would be easier? Don't worry, luckily there is an easier syntax for above
+
+```
+q)kt,:(`Alex;34)
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+```
+
+It's that easy, as long as the the fields you provide match exactly with both key and column values, you can use a list.
+
+### Inserting into tables
+
+#### Simple tables
+
+Similar to appending records to an existing table, there are various ways to insert records into a table. While the keyword for this operation is always the same, namely [`insert`](https://code.kx.com/q4m3/9_Queries_q-sql/#911-basic-insert), the format of the records can vary. I'll cover the basics and leave the detailed exploration to you. 
+
+As with appending a record to a table, we can also insert a dictionary into a table. This should be obvious by now, considering that a table can be seen as a list of conforming dictionaries.
+
+```
+q)`t insert `name`age!(`Alex;34)
+,3
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      34
+```
+
+The only caveat to be aware of is that the `insert` operator uses pass-by-name, so you must reference the table by its symbol value. As a result, `insert` only works with global variables.
+
+Just as with appending a dictionary to a table, we can also shorten the syntax when inserting a new record into a table. We can insert a list of values, provided that each value matches the type of its corresponding column, essentially omitting the column names. Let's look at an example.
+
+```
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+q)`t insert (`Alex;40)
+,3
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      40
+```
+
+That worked like a charm. But what about inserting multiple records? This should follow a similar pattern, right?
+
+```
+q)`t insert ((`Natalia;21);(`Joe;22);(`Ted;39))
+'length
+  [0]  `t insert ((`Natalia;21);(`Joe;22);(`Ted;39))
+          ^
+```
+
+Surprisingly, it doesn't work that way. But don't worry, we have the solution you're looking for. When inserting multiple records simultaneously, you need to pass the records as a list of lists, where each sublist corresponds to the values for each column.
+
+```
+q)`t insert (`Natalia`Joe`Ted;21 22 39)
+4 5 6
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      40
+Natalia   21
+Joe       22
+Ted       39
+```
+
+Even though this might not be the most intuitive way to insert multiple records into a table, it's precisely the pattern used to publish data from the Feedhandler to the Tickerplant. While inserting multiple records as a list of dictionaries is more intuitive, it requires significantly more typing.
+
+```
+q)`t insert ((`name`age!(`Alex;34));(`name`age!(`Natalia;21));(`name`age!(`Bob;45)))
+3 4 5
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Alex      34
+Natalia   21
+Bob       45
+```
+
+But hold on a moment, how many times have we heard that a table is actually a list of dictionaries? It seems we can't stress this enough, as repetition helps it stick. If a list of dictionaries is a table, we should be able to insert multiple records by simply inserting a table of new records to the existing table. Let's demonstrate this next.
+
+```
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+q)`t insert ([] name:`Natalia`Alex`Bob; age:21 23 45)
+3 4 5
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+```
+
+That was pretty neat. This concludes the basics of inserting records into a simple table. Next, let's explore how we can insert records into a keyed table.
+
+#### Keyed tables
+
+Keyed tables behave quite similarly to simple tables when it comes to inserting new records, with one key difference (pun intended): since the keys of a keyed table are supposed to be unique, you cannot insert a new record with a key that already exists. 
+
+As you can see below, inserting a new record into a keyed table when the key doesn't exist just works as expected.
+
+```
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+q)`kt insert (enlist ((enlist `name)!enlist `Natalia))!(enlist (enlist `age)!enlist 21)
+,4
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+Natalia  | 21
+```
+
+However, if we try the same operation again, an error will be thrown
+
+```
+q)`kt insert (enlist ((enlist `name)!enlist `Natalia))!(enlist (enlist `age)!enlist 21)
+'insert
+  [0]  `kt insert (enlist ((enlist `name)!enlist `Natalia))!(enlist (enlist `age)!enlist 21)
+           ^
+```
+
+This makes perfect sense, as keys are meant to be unique after all.
+
+The above syntax is quite verbose and not particularly easy to read. Let's see if we can simplify this operation.
+
+```
+q)`kt insert (`Chris;33)
+,5
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Alex     | 34
+Natalia  | 21
+Chris    | 33
+```
+
+As with simple tables, you can insert into a keyed table by simply providing a list of values, ensuring that each value matches the types of the columns in your keyed table. 
+
+Furthermore, as previously discussed, you can insert records that contain fewer columns than the table you are inserting into. In such cases, the missing columns will be populated with null values corresponding to their column types.
+
+```
+q)kt2
+name     | age id
+---------| ------
+Alexander| 36  0
+Stephan  | 26  1
+Christoph| 34  2
+Alex     | 34  3
+q)`kt2 insert (enlist ((enlist `name)!enlist `Natalia))!(enlist (enlist `age)!enlist 21)
+,4
+q)kt2
+name     | age id
+---------| ------
+Alexander| 36  0
+Stephan  | 26  1
+Christoph| 34  2
+Alex     | 34  3
+Natalia  | 21
+```
+
+It should not come as a surprise that you can insert one keyed table into another keyed table. However, for completeness, let's demonstrate this example as well.
+
+```
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+q)`kt insert ([name:enlist `Natalia] age:enlist 21)
+,3
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Natalia  | 21
+```
+
+### Upsert: Fusion between insert and update
+
+If you're an anime enthusiast like me, who's watched [Dragon Ball Z](https://en.wikipedia.org/wiki/Dragon_Ball_Z) you're likely familiar with the concept of fusions. It's when two characters merge to become a more powerful fighter, blending the strengths of both individuals. For those who haven't seen Dragon Ball Z and aren't familiar with the concept of fusion, the image below illustrates the fusion between Goku and Vegeta, two of the main characters of Dragon Ball Z.
+
+![Fusion](./img/fusion.jpg)
+
+You might wonder why I'm suddenly mentioning anime. Have I lost my mind? Perhaps too much KDB/Q code has driven me crazy? Not at all. The reason for bringing up fusions is because [`upsert`](https://code.kx.com/q4m3/9_Queries_q-sql/#92-upsert) can be seen exactly as that - a fusion between insert and update. It creates a new, more powerful operator that combines the strengths of both individual operations.
+
+Let's explore how this powerful operator works. For simple tables, upsert works much like insert, with the key distinction that upsert also functions on local variables. It supports both, pass-by-name and pass-by-value approaches.
+
+```
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+q)t upsert (`Joe;29)
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+Joe       29
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+q)`t upsert (`Joe;29)
+`t
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+Joe       29
+```
+
+Since a simple table can contain duplicate records, where no key column exists to enforce uniqueness, upsert will indeed insert duplicate records just like insert would.
+
+```
+q)`t insert (`Joe;29)
+,7
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+Joe       29
+Joe       29
+q)`t upsert (`Joe;29)
+`t
+q)t
+name      age
+-------------
+Alexander 36
+Stephan   26
+Christoph 34
+Natalia   21
+Alex      23
+Bob       45
+Joe       29
+Joe       29
+Joe       29
+```
+
+On a keyed table, upsert behaves differently: if the key of the record you are trying to upsert already exists, it updates the values of the corresponding record with the new values from the upserted record. If the key does not exist yet, it simply inserts the new record into the keyed table.
+
+
+```
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Natalia  | 21
+q)`kt upsert (`Natalia;25)
+q)kt
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Natalia  | 25
+q)kt upsert (`Joe;29)
+name     | age
+---------| ---
+Alexander| 36
+Stephan  | 26
+Christoph| 34
+Natalia  | 25
+Joe      | 29
+```
+
+Great! We've covered a lot in this blog post. I hope it has enhanced your understanding of dictionaries and tables. Now, take some time to review and ensure you internalise  the concepts well. If you have any questions, don't hesitate to ask. Until then, happy coding!
