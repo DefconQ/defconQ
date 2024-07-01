@@ -2,11 +2,35 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2024-05-22T00:00:00.000Z</updated>
+    <updated>2024-07-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[DefconQ meets Fancy Quant - Alexander Unterrainer and Dimitri Bianco discuss KDB/Q]]></title>
+        <id>https://DefconQ.github.io/blog/DefconQ meets Fancy Quant - Alexander Unterrainer and Dimitri Bianco discuss KDB/Q</id>
+        <link href="https://DefconQ.github.io/blog/DefconQ meets Fancy Quant - Alexander Unterrainer and Dimitri Bianco discuss KDB/Q"/>
+        <updated>2024-07-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[In this blog post, I have a special treat for you. I sat down with Dimitri Bianco a seasoned quant who runs his own podcast and YouTube channel  dedicated to all things quant finance.]]></summary>
+        <content type="html"><![CDATA[<p>In this blog post, I have a special treat for you. I sat down with <a href="https://www.linkedin.com/in/dimitri-bianco/" target="_blank" rel="noopener noreferrer">Dimitri Bianco</a> a seasoned quant who runs his own podcast and <a href="https://www.youtube.com/@DimitriBianco" target="_blank" rel="noopener noreferrer">YouTube channel</a>  dedicated to all things quant finance.
+I have been following Dimitri for a while and always found his podcasts incredibly informative and helpful. During my bachelor’s degree, I often felt lost and overwhelmed by the many career choices and paths available. Dimitri’s engagement provides graduates and students at the start of their careers with valuable insights to help them choose the right path. While I had to figure most things out on my own, Dimitri's podcast offers a valuable industry perspective into the field of quantitative finance.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="dimitri-bianco"><a href="https://www.linkedin.com/in/dimitri-bianco/" target="_blank" rel="noopener noreferrer">Dimitri Bianco</a><a href="https://defconq.github.io/blog/DefconQ%20meets%20Fancy%20Quant%20-%20Alexander%20Unterrainer%20and%20Dimitri%20Bianco%20discuss%20KDB/Q#dimitri-bianco" class="hash-link" aria-label="Direct link to dimitri-bianco" title="Direct link to dimitri-bianco">​</a></h2>
+<iframe width="1120" height="630" src="https://www.youtube.com/embed/cQmKQaJFZFg?si=3veMWaEx21Np_-xi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="kdb/q community" term="kdb/q community"/>
+        <category label="podcast" term="podcast"/>
+        <category label="blogger" term="blogger"/>
+        <category label="quant" term="quant"/>
+        <category label="quantitative finance" term="quantitative finance"/>
+        <category label="career" term="career"/>
+        <category label="Dimitri Bianco" term="Dimitri Bianco"/>
+        <category label="Alexander Unterrainer" term="Alexander Unterrainer"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Advanced KDB/Q Learning Material]]></title>
         <id>https://DefconQ.github.io/blog/Advanced KDB/Q Learning Material</id>
