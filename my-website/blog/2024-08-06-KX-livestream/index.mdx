@@ -1,0 +1,90 @@
+---
+slug: DefconQ meets KX - Mastering KDB+ Architecture - A Panel Discussion
+title:  DefconQ meets KX - Mastering KDB+ Architecture - A Panel Discussion
+authors: [alexander]
+hide_table_of_contents: true
+tags: [kdb/q, kdb/q architecture, panel discussion, livestream]
+---
+
+Recently, I had the pleasure of being invited by [Michaela Woods](https://www.linkedin.com/in/michaela-woods-50502b60/) to join her and [Cynthia Faus Viadé ](https://www.linkedin.com/in/cynthiafaus/) on the [KX LiveStream](https://www.linkedin.com/events/masteringkdb-architecture-apane7213951079875510272/comments/) to discuss best practices in designing your KDB/Q Tick Architecture. We began by exploring the new [KDB/Q Architecture course](https://learninghub.kx.com/courses/kdb-architecture/) launched recently by KX, starting with a plain vanilla tick setup and gradually progressing to more advanced configurations. Our discussion covered a range of topics including Derived Analytics, Load Balancing and Gateways, Disaster Recovery, Slow Consumers and Chained Tickerplants, as well as Intraday Writedowns and Database Best Practices. Below is a summary of our discussion, or you can watch the recording of the livestream on YouTube.
+
+<!-- truncate -->
+
+<iframe width="1120" height="630" src="https://www.youtube.com/embed/7hpvQ7q_Rus?si=vN6pjc4byFn83DUG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Summary
+
+### [KX KDB+ Architecture course](https://learninghub.kx.com/courses/kdb-architecture/)
+
+The [KDB+ Architecture course](https://learninghub.kx.com/courses/kdb-architecture/) by KX covers the basic setup of a plain vanilla KDB+ real time application and helps you to build a solid foundation to design more complex KDB Architectures and Systems. You will learn how to 
+
+- Customize architecture by adding data feeds and feedhandlers
+- Implement custom streaming analytics for real time analysis
+- Use logging to prevent data loss in the event of system failures
+- Understand and develop custom end of day behavior
+- Build advanced data retrieval and setting up query gateways
+
+The course is designed for both, KDB/Q developers and non KDB/Q developers, even though experience with KDB/Q will benefit you and additional learning resources are made available to you throughout the course to deepen your knowledge. The course leverages a dedicated sandbox provided by KX and you don't even need to install KDB/Q locally but you can run everything within the [KX Learning Hub](https://learninghub.kx.com/academy/)
+
+### The Plain Vanilla setup
+
+As part of the live stream, we also briefly discussed the plain vanilla tick setup. For those unfamiliar with this architecture, a KDB/Q tick setup, in its simplest form, includes a Data Feed, a Feed Handler (FH), the Tickerplant (TP), a real-time subscriber, the Real-Time Database (RDB), and a Historical Database (HDB). If you're interested in learning more about this setup, I have written a detailed blog post here:
+- [The Plain Vanilla Tick Setup](https://www.defconq.tech/docs/architecture/plain).
+
+### Derived Analytics
+
+Derived Analytics can take the form of Complex Event Processing (CEP) or Real-Time Engines (RTE) and are tailored processes designed to perform real-time analytics to support business needs. These processes are highly customized and vary depending on the specific use case. Examples include, but are not limited to, Surveillance Analytics, Trade Cost Analysis (TCA), Price Impact Analysis, Data Quality checks, Hit Ratio calculations, Volume-Weighted Average Price (VWAP), and Time-Weighted Average Price (TWAP). CEPs are well-defined processes that determine what data to subscribe to, what analytics to perform, whether to persist the data to disk, and whether to publish the data to other Real-Time Subscribers (RTS). Developing a CEP requires a shift in mindset, as the challenges faced are often more complex than those encountered in other processes.
+
+### Load Balancing & Gateways
+
+Introducing a Gateway (GW) and/or Load Balancer (LB) to your plain vanilla tick setup is a significant enhancement. A Gateway serves as the main entry point for end users, who typically don't know where your data resides or is stored on disk. Since users are generally unaware of whether the RDB or HDB stores the data and are only interested in querying by time range and instrument(s), a Gateway or Load Balancer can significantly increase the system's efficiency. A well-designed Gateway can handle query routing, load balancing, authentication, and permission handling, as well as aggregate data before returning it to the user. Additionally, introducing a Gateway API that standardizes data access, manages bad queries, and returns a consistent table schema enhances the application's flexibility, scalability, security, and resilience.
+
+The following whitepapers by KX provide more details about Gateways and Load Balancers:
+- [Common design principles for kdb+ gateways](https://code.kx.com/q/wp/gateway-design/)
+- [Query Routing: A kdb+ framework for a scalable, load balanced system](https://code.kx.com/q/wp/query-routing/)
+
+### Disaster Recovery
+
+In an ideal world, your system is resilient, and a robust business continuity plan prevents major outages. However, we don't live in an ideal world. If your system goes down and you need to recover data ingested since the start of the day, the Tickerplant Log file is crucial for Disaster Recovery. The Tickerplant logs every incoming message, allowing you to replay the file and recreate the system's state before the outage. For less severe cases, such as the failure and recovery of a single Real-Time Subscriber (RTS), you can recover from the Real-Time Database (RDB). This approach works only if the crashed process was an RTS, not the Tickerplant (TP) itself. Additionally, if multiple processes fail simultaneously, recovering from the RDB may put excessive pressure on it, affecting other processes or users relying on real-time data. As systems grow larger, they become more complex, requiring planning and design of your disaster recovery strategy on a case-by-case basis.
+
+You can read about Disaster Recovery here
+- [Disaster-recovery planning for kdb+ tick systems](https://code.kx.com/q/wp/disaster-recovery/)
+- [Data recovery for kdb+tick](https://code.kx.com/q/wp/data-recovery/)
+
+### Chained Tickerplants: Remedy against Slow Subscribers
+
+A slow subscriber is a KDB/Q process consuming real-time data from the Tickerplant at a slower pace than the Tickerplant publishes. This can happen for various reasons, such as the Real-Time Subscriber running time-intensive analytics or encountering unexpected slowdowns. This mismatch in pace can lead to the Tickerplant's output queue building up, causing a spike in memory usage, and potentially resulting in the Tickerplant crashing or the server running out of memory. To prevent such scenarios, you can enhance your KDB/Q Tick architecture by introducing a Chained Tickerplant (CTP). A Chained Tickerplant is essentially another Tickerplant positioned after the main Tickerplant, which publishes data in batches based on either the number of messages or a specific time interval. This batching reduces the publishing frequency, allowing slow subscribers to consume messages at a manageable pace. Additionally, if the Chained Tickerplant crashes due to increased load from a slow subscriber, the main Tickerplant remains unaffected and continues to function normally.
+
+You can find some additional information about Chained Tickerplants [here](https://code.kx.com/q/kb/kdb-tick/)
+
+### Intraday Writediwn
+
+Introducing an Intraday Writedown Database (WDB) adds another tier to your database architecture. In the typical plain vanilla tick setup, you have a Real-Time Database (RDB) for intraday data and a Historical Database (HDB) for historical data. However, as data volume grows, it may exceed your server's available memory. To manage this, you can implement an Intraday Writedown Database (WDB), which saves data to disk throughout the day while the RDB holds only the most recent data. This saving process can be triggered by a timer or after a certain number of records. The WDB setup involves two processes: one for saving intraday data to disk and another for querying this saved data from a temporary location. It's crucial to note that the WDB is distinct from the HDB; at the end of the day, the intraday data is merged into the HDB and moved from the temporary location. Additionally, you'll need to adjust the Gateway logic to ensure the data is accessible to end users. For more details on intraday write downs, refer to this whitepaper:
+
+- [Intraday writedown solutions](https://code.kx.com/q/wp/intraday-writedown/)
+
+### Database Best Practices
+
+Next, we discussed best practices for setting up your database, including various methods for saving data to disk and the application of attributes in your system. In KDB/Q, there are four different attributes: sorted, unique, grouped, and parted, each with distinct behaviors and advantages. For a detailed explanation of these attributes, you can read my blog post [here](https://www.defconq.tech/docs/concepts/attributes).
+When it comes to persisting data to disk, the options include:
+
+- Flat file
+- Splayed table
+- Partitioned database
+- Segmented database
+
+The most common setup I've encountered in my career is a partitioned database. For a comprehensive understanding of these different setups, refer to [Chapter 14 of Q for Mortals](https://code.kx.com/q4m3/14_Introduction_to_Kdb%2B/)
+
+### Q&A
+
+At the end of the livestream, we also gave attendees the opportunity to ask questions. Here are some of the key takeaways:
+1. **Do you apply attributes on the Intraday Database?**
+
+	Yes, the attributes you apply to the Historical Database (HDB) should also be applied to the Intraday Database.
+
+2. **Is the RDB responsible for both EOI & EOD write-down/merging or is some service specific for this not shown?**
+
+	In the plain vanilla setup, the RDB handles both saving data to disk at the end of the day and storing intraday data in memory. However, as data volume grows, the save-down process can take a significant amount of time, during which the RDB would not be available for user queries. To avoid this issue, you could introduce an independent process responsible for saving data to disk. This process would first read data from the Tickerplant Log file into memory and then save it to disk. The drawback is that you need to replay the data from the Tickerplant log first, which takes time and increases the memory load on your server. Generally, you should evaluate the design of your system on a case-by-case basis to determine the most suitable approach.
+
+Once again, I would like to thank everyone who attended the livestream. Your enthusiastic participation motivates us to host more livestreams in the future. Stay tuned and happy coding!
+

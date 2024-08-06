@@ -140,7 +140,7 @@ Since the Historical Database (HDB) is designed to be a lightweight process focu
 
 #### Memory profile of a Historical Database
 
-Since the Historical Database (HDB) is designed to be a lightweight process focused solely on serving user queries with historical data, its CPU usage is minimal, if not zero, when not actively processing queries. This concept is illustrated in the diagram below.
+Since the Historical Database (HDB) is designed to be a lightweight process focused solely on serving user queries with historical data, its memory usage is minimal, if not zero, when not actively processing queries. This concept is illustrated in the diagram below. Only when a query is send to the HDB, the corresponding data, i.e. the columns selected by the query, are mapped into memory, returned to the user and kept in memory. Once the data is no longer required, it is purged and the memory is released.
 
 :::tip
 Since the HDB maps only specific columns into memory based on your qsql statement, it is crucial to accurately identify and query only the columns you require, rather than loading the entire table for a given date range.
