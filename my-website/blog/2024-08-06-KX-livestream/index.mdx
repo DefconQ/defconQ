@@ -57,7 +57,7 @@ A slow subscriber is a KDB/Q process consuming real-time data from the Tickerpla
 
 You can find some additional information about Chained Tickerplants [here](https://code.kx.com/q/kb/kdb-tick/)
 
-### Intraday Writediwn
+### Intraday Writedown
 
 Introducing an Intraday Writedown Database (WDB) adds another tier to your database architecture. In the typical plain vanilla tick setup, you have a Real-Time Database (RDB) for intraday data and a Historical Database (HDB) for historical data. However, as data volume grows, it may exceed your server's available memory. To manage this, you can implement an Intraday Writedown Database (WDB), which saves data to disk throughout the day while the RDB holds only the most recent data. This saving process can be triggered by a timer or after a certain number of records. The WDB setup involves two processes: one for saving intraday data to disk and another for querying this saved data from a temporary location. It's crucial to note that the WDB is distinct from the HDB; at the end of the day, the intraday data is merged into the HDB and moved from the temporary location. Additionally, you'll need to adjust the Gateway logic to ensure the data is accessible to end users. For more details on intraday write downs, refer to this whitepaper:
 
