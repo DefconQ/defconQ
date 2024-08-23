@@ -4,7 +4,7 @@ hide_table_of_contents: true
 
 # Alexander Unterrainer
 
-As a KDB/Q developer, I possess an in-depth comprehension of KDB-tick architecture, adequately managing market data storage, processing, and delivering cutting-edge APIs for advanced data analytics, transformation, and visualization. My educational background in Economics and Computational Finance equips me with a profound understanding of financial products and the complexities involved. Coupled with strong teamwork and communication skills, I seamlessly collaborate with colleagues and business stakeholders
+Alexander is a senior KDB/Q developer, blogger, and the founder of DefconQ (www.defconq.tech), a KDB/Q tech blog. With a wealth of experience, Alexander has contributed his expertise to several large international Investment Banks, showcasing his proficiency in the KDB/Q technology stack. Currently serving as a consultant for Data Intellect, he continues to be at the forefront of cutting-edge developments in the field. As a KDB/Q developer, he possesses an in-depth comprehension of KDB-tick architecture, adequately managing market data storage, processing, and delivering cutting-edge APIs for advanced data analytics, transformation, and visualization. Alexander's educational background in Economics and Computational Finance equips him with a profound understanding of financial products and the complexities involved. Coupled with strong teamwork and communication skills, Alexander seamlessly collaborates with colleagues and business stakeholders
 
 ---
 
@@ -67,6 +67,13 @@ implementation.
 
 ###### Technical Skills: C#, HTML, CSS, Angular, SSIS, SSRS, SQL
 ###### Asset Class: Goverment Bonds, Municipal Bonds, Residential Bonds, Asset Backet Securities, Fixed Income
+
+## Qualifications
+
+### KXperts
+
+Alexander has been the **first** developer to be awarded the highest level of "Black Tier" of the [KXpert](https://kx.com/kxperts/) Developer Advocacy Program by KX, for his outstanding work creating blogs, answering questions, speaking at events, and helping the KX Community of over 6000+ developers! If you want to read more about the KXpert Developer Advocacy Program, you can read his blog post [here](https://www.defconq.tech/blog/KXperts%20-%20A%20Developer%20Advocacy%20Program%20by%20KX)
+
 
 ## Education
 
