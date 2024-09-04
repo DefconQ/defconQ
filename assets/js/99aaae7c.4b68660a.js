@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6555],{4269:e=>{e.exports=JSON.parse('{"label":"1 Year","permalink":"/blog/tags/1-year","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
