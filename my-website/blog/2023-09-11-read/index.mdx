@@ -6,11 +6,11 @@ hide_table_of_contents: true
 tags: [kdb/q, Learning, Beginner, Qbie]
 ---
 
-In my previous blog post, I shared my favourite [Go-To KDB/Q Learning Resources](https://defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources) to help you to get started. However, as you dive deeper into the KDB/Q programming language and you begin to read and review other's code you might experience a slight sense of overwhelm. Two main characteristics of KDB/Q, namely its tersness and and its [left-of-right](https://code.kx.com/q4m3/4_Operators/#412-left-of-right-evaluation) evaluation order (KDB/Q expressions are evaluated left-**of**-right which equates to expressions are evaluated right-**to**-left), can pose initial challenges for new KDB/Q developers. It's important to overcome these hurdles and become familiar with these features as you progress. 
+In my previous blog post, I shared my favourite [Go-To KDB/Q Learning Resources](https://defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources) to help you to get started. However, as you dive deeper into the KDB/Q programming language and you begin to read and review other's code you might experience a slight sense of overwhelm. Two main characteristics of KDB/Q, namely its terseness and and its [left-of-right](https://code.kx.com/q4m3/4_Operators/#412-left-of-right-evaluation) evaluation order (KDB/Q expressions are evaluated left-**of**-right which equates to expressions are evaluated right-**to**-left), can pose initial challenges for new KDB/Q developers. It's important to overcome these hurdles and become familiar with these features as you progress. 
 
 <!--truncate-->
 
-When you start looking at other's KDB/Q code for the first time, it can be akin to a five-year-old attempting to independently assemnle the gigantic Lego Millenium Falcon immediately after learning how to connect just two Lego pieces. The experience can be overwhelming, leaving you unsure where to start. THe image below serves as an illustration of the described sensation.
+When you start looking at other's KDB/Q code for the first time, it can be akin to a five-year-old attempting to independently assemnle the gigantic Lego Millenium Falcon immediately after learning how to connect just two Lego pieces. The experience can be overwhelming, leaving you unsure where to start. The image below serves as an illustration of the described sensation.
 
 ![Lego Millenium Falcon](./lego_millenium_falcon.webp)
 
@@ -46,10 +46,10 @@ q){x{y _ x}/1 -1*(1 reverse\" "<>x)?'1b}"   Trim the spaces.  "
     </p>
 </details>
 
-It's quite surprising how much can be achieved with such little code,isn't it? Now, let's break it down methodically, taking each component into careful consideration.
+It's quite surprising how much can be achieved with such little code, isn't it? Now, let's break it down methodically, taking each component into careful consideration.
 
 :::caution
-Remeber, KDB/Q is evaluated left-**of**-right, meaning we have to read our code right-**to**-left. 
+Remember, KDB/Q is evaluated left-**of**-right, meaning we have to read our code right-**to**-left. 
 :::
 
 The first code section we examine is the following.
@@ -117,7 +117,7 @@ q)count@'list
 5 5 5 5
 ```
 
-When examining the entire code snippet together, we can see that `(expression)?'1b` will search (and find) the index of the first occurence of 1b in **each** element of the list denoted by expression. Sounds complicated? Allow me to provide a demonstration for better clarity:
+When examining the entire code snippet together, we can see that `(expression)?'1b` will search (and find) the index of the first occurrence of 1b in **each** element of the list denoted by expression. Sounds complicated? Allow me to provide a demonstration for better clarity:
 
 ```
 q)(000101010111b;0101010101b)?'1b
