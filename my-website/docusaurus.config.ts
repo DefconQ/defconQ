@@ -110,6 +110,11 @@ const config: Config = {
 	{to: '/about/about', label: 'About', position: 'left'},
 	{to: '/cv/cv', label: 'CV', position: 'left'},
         {
+          href: 'https://defconq.substack.com',
+          label: 'Newsletter',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/DefconQ',
           label: 'GitHub',
           position: 'right',
@@ -150,6 +155,10 @@ const config: Config = {
             },
 	    { label: 'YouTube Channel',
 	      href: 'https://www.youtube.com/@DefconQ',
+            },
+            {
+              label: 'Newsletter',
+              href: 'https://defconq.substack.com',
             },
             {
               label: 'GitHub',
