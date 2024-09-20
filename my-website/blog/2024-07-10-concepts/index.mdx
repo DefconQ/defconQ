@@ -144,7 +144,7 @@ Functions can be passed as arguments, returned from other functions, and compose
 Applying a function to each element of a list can be done with `f each list`, where `f` is a user-defined function.
 ```
 q)f:count
-q)count each ("Hello";1 2 3;(2 3;4 5))
+q)f each ("Hello";1 2 3;(2 3;4 5))
 5 3 2
 ```
 
