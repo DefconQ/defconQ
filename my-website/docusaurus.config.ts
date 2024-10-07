@@ -90,6 +90,10 @@ const config: Config = {
       isCloseable: true,
       content: 'If you would like to connect, please reach out on <a href="https://www.linkedin.com/in/alexanderunterrainer/">Linkedin</a>',
     },
+    tableOfContents: {
+      // minHeadingLevel: 2,
+      maxHeadingLevel: 5,
+    },
     navbar: {
       title: '',
       logo: {
