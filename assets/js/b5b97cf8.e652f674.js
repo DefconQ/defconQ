@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[1379],{8765:s=>{s.exports=JSON.parse('{"label":"QuantStrats","permalink":"/blog/tags/quant-strats","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

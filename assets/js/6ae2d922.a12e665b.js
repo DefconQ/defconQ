@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[8860],{2075:e=>{e.exports=JSON.parse('{"label":"quantitative finance","permalink":"/blog/tags/quantitative-finance","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
