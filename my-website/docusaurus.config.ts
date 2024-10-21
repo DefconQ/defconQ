@@ -112,6 +112,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
 	{to: '/about/about', label: 'About', position: 'left'},
+	{to: '/testimonials/testimonials', label: 'Testimonials', position: 'left'},
 	{to: '/cv/cv', label: 'CV', position: 'left'},
         {
           href: 'https://defconq.substack.com',
