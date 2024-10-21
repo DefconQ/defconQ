@@ -14,8 +14,8 @@ In this blog post, I'll be sharing my favourite KDB/Q learning resources. These 
 
 If there's one thing that you need to read about KDB/Q then it's the below books:
 
- - [Q For Mortals](https://www.amazon.com/Mortals-Version-Introduction-Programming/dp/0692573674/) by Jeffry A. Borror. [Free online version](https://code.kx.com/q4m3/)
- - [Q Tips](https://www.amazon.com/Tips-Fast-Scalable-Maintainable-Kdb/dp/9881389909/ref=sr_1_1?crid=1P89C7FDDCLIM&keywords=q+tips+nick+psaris&qid=1693248061&s=books&sprefix=qtips+nick+psari%2Cstripbooks-intl-ship%2C141&sr=1-1) by Nick Psaris 
+ - [Q For Mortals](https://amzn.to/3BVir4I) by Jeffry A. Borror. [Free online version](https://code.kx.com/q4m3/)
+ - [Q Tips](https://amzn.to/3UjkAgZ) by Nick Psaris 
 
 
 ## The detailed version
