@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[100],{8868:e=>{e.exports=JSON.parse('{"label":"NYSE","permalink":"/blog/tags/nyse","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
