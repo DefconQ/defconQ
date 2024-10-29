@@ -4,7 +4,77 @@ sidebar_position: 4
 
 # Non-KDB/Q Developers: Transitioning to the Power of KDB/Q
 
-![KDB/Q Study Plan ComingSoon](./img/comingSoon.png)
+## Before we start
 
-[SUBSCRIBE HERE](https://defconq.substack.com)
+Just like learning to walk before running, mastering KDB/Q starts with getting the basics right. Before diving into advanced topics, ensure you’ve covered the essentials. If you haven’t yet, check out the **Pre-School study plan** [**here**](https://www.defconq.tech/docs/studyPlan/babySteps). I encourage you to work through it and make sure you’re comfortable with the foundational concepts.
+
+Institutions using KDB/Q often incorporate other technology stacks, as KDB/Q is specialized for big data and time-series analysis rather than general-purpose programming. If you're a mainstream software developer at one of these institutions, you’re likely to encounter KDB/Q in some capacity. Your role may involve streaming data into KDB/Q, subscribing to a KDB/Q framework for real-time data, connecting to KDB/Q real-time or historical databases for data retrieval, or a mix of these tasks. Or maybe you are a front-end developer working on a User Interface (UI) that interacts with KDB/Q. A foundational understanding of KDB/Q is essential, and the study plan below is designed to provide this knowledge.
+
+## KDB/Q Tick Architecture Demystified
+
+As a non-KDB/Q developer, your primary responsibilities revolve around supporting KDB/Q tasks, with only occasional or minimal need to write KDB/Q code directly. Therefore, it’s more crucial for you to have a solid understanding of a typical KDB/Q Tick Platform than to dive deeply into the programming language itself. The links below provide resources to build this essential knowledge.
+
+- [DefconQ - The Plain Vanilla Tick Setup](https://www.defconq.tech/docs/architecture/plain)
+- [KX Academy - KDB+ Architecture](https://learninghub.kx.com/courses/kdb-architecture/)
+
+**Learning objectives:** Have a solid understanding of a typical KDB/Q Tick setup, understand the individual KDB/Q processes such as **Tickerplant** (TP), **Real-Time Database** (RDB) and **Historical Database** (HDB).
+
+## Core KDB/Q Knowledge for non-KDB/Q Developers
+
+:::tip
+Since KDB/Q syntax can be quite different from anything else you may have encountered, beginners often find it challenging to read and interpret others' code. To help you overcome this initial hurdle, I’ve written a blog post on How to Read, Understand, and Learn KDB/Q Code. You can find it [here](https://www.defconq.tech/blog/How%20to%20Read,%20Understand%20and%20Learn%20KDB/Q%20code)
+:::
+
+Even though your interaction with KDB/Q is minimal, having a foundational understanding of the KDB/Q programming language is important. Beyond the topics covered in the [Pre-School study plan](https://www.defconq.tech/docs/studyPlan/babySteps), you should also become familiar with the following concepts.
+
+### Q for Mortals
+
+- [Chapter 6: Functions](https://code.kx.com/q4m3/6_Functions/)
+- [Chapter 7: Transforming Data](https://code.kx.com/q4m3/7_Transforming_Data/)
+- [Chapter 8: Tables](https://code.kx.com/q4m3/8_Tables/)
+- [Chatper 9: Queries: q-sql](https://code.kx.com/q4m3/9_Queries_q-sql/)
+
+### [DefconQ - Q made easy](www.defconq.tech)
+
+DefconQ is the KDB/Q tech blog I launched in September 2023, just over a year ago. As a mostly self-taught KDB/Q enthusiast, I’ve experienced the steep learning curve firsthand. Driven by my passion for teaching, I created DefconQ to simplify and break down complex KDB/Q concepts. The blog posts below are designed to complement Q for Mortals.
+
+- [Dictionaries and Tables](https://www.defconq.tech/docs/concepts/dictionariesTables)
+- [Attributes](https://www.defconq.tech/docs/concepts/attributes)
+- [QSQL - Querying Your Data](https://www.defconq.tech/docs/concepts/qsql)
+- **[OPTIONAL]** [Mastering the Art of Filtering: An In-Depth Look at fby in KDB/Q](https://www.defconq.tech/docs/concepts/fby)
+
+### [KX Academy](https://learninghub.kx.com/academy/)
+
+Everyone has unique learning preferences; some of us are more visual learners and thrive with a classroom-style approach. If you prefer video tutorials over reading materials, the [KX Academy](https://learninghub.kx.com/academy/) offers an ideal platform. The following courses cover similar content to ***Q for Mortals*** and can be used as an alternative or as a complementary resource to enhance your learning experience.
+
+- [KDB+/Q Developer, Level 1](https://learninghub.kx.com/courses/kdb-developer-level-1/)
+- [KDB+/Q Developer, Level 2](https://learninghub.kx.com/courses/kdb-developer-level-2/)
+- [SQL for KDB+/Q](https://learninghub.kx.com/courses/sql-for-kdb/)
+
+### [KX Whitepapers](https://code.kx.com/q/wp/) and Advanced Material on [code.kx.com](https://code.kx.com/home/)
+
+[KX Whitepapers](https://code.kx.com/q/wp/) are concise technical papers that delve into core concepts of the KDB/Q programming language, architectural design, or practical applications. The following whitepapers specifically focus on the language aspects of KDB/Q, and I highly recommend exploring them once you’re comfortable with the basics.
+
+- [Iterators](https://code.kx.com/q/wp/iterators/)
+
+Additionally, [code.kx.com](https://code.kx.com/home/) offers sections with more advanced material, which are well worth exploring.
+
+- [Iteration](https://code.kx.com/q/basics/iteration/)
+- [Parse trees](https://code.kx.com/q/basics/parsetrees/)
+- [Q-SQL Queries](https://code.kx.com/q/basics/qsql/)
+- [Functional Q-SQL](https://code.kx.com/q/basics/funsql/)
+
+### Interprocess Communication and Programming Language Interfaces
+
+As a mainstream, non-KDB/Q developer, your primary role involves interacting with KDB/Q Tick platforms. For this, it’s essential to understand Interprocess Communication (IPC) in KDB/Q, including how it operates and how to interface with other programming languages. The materials below explain how IPC functions within KDB/Q and provide guidance on cross-language integration.
+
+- [Interprocess communication](https://code.kx.com/q/basics/ipc/)
+- [C/C++ quick guide](https://code.kx.com/q/interfaces/c-client-for-q/)
+- [C# client for kdb+](https://code.kx.com/q/interfaces/csharp/)
+- [Java client for kdb+](https://code.kx.com/q/interfaces/java/)
+- [Using R with kdb+](https://code.kx.com/q/interfaces/r/)
+- [Scala client for kdb+](https://code.kx.com/q/interfaces/scala-client-for-q/)
+
+This wraps up your quick dive into the world of KDB/Q. I hope the study plan above has helped you to understand some of the core fundamentals and maybe even sparked your interest to fully convert and join the exciting and rewarding path of becoming a KDB/Q developer. If you're looking for more KBD/Q knowledge, checkout the [Aspiring KDB/Q Developers: Your Path to Mastery](http://localhost:3000/docs/studyPlan/kdbDevs) study plan.
+
 

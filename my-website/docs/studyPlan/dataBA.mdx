@@ -4,9 +4,86 @@ sidebar_position: 6
 
 # Data & Business Analysts: Efficient Querying with KDB/Q 
 
-![KDB/Q Study Plan ComingSoon](./img/comingSoon.png)
+As a Data and/or Business Analyst, you often bridge the gap between business and tech, collaborating closely with Quants and KDB/Q developers to interpret, visualize, and analyze data. The extent of your interaction with KDB/Q can vary, but having foundational KDB/Q knowledge is always a valuable asset. Even if you don’t need it in your current role, it could come in handy in the future, and you’ll be glad to have the basics under your belt. The study plan below is designed to give you just that—a fundamental understanding of KDB/Q, so you're ready to dive in when needed.
 
-[SUBSCRIBE HERE](https://defconq.substack.com)
+## Before we start
 
+Just like learning to walk before running, mastering KDB/Q starts with getting the basics right. Before diving into advanced topics, ensure you’ve covered the essentials. If you haven’t yet, check out the **Pre-School study plan** [**here**](https://www.defconq.tech/docs/studyPlan/babySteps). I encourage you to work through it and make sure you’re comfortable with the foundational concepts.
 
+## KDB/Q Tick Architecture Demystified
+
+As a Quant or Quant Dev, your focus is typically on business logic, so a deep knowledge of your KDB/Q Tick Platform’s architecture and design isn’t essential. However, understanding the basics can be invaluable for knowing which processes to query to access the right data. In more advanced KDB/Q setups, you may encounter gateways, load balancers, discovery services, and APIs that streamline data access without needing to know the exact data locations. However, in smaller setups, these features may not be available. A foundational understanding of the KDB/Q Tick architecture can therefore simplify and enhance your workflow. The links below provide all the essential information you need to understand a KDB/Q Tick platform.
+
+- [DefconQ - The Plain Vanilla Tick Setup](https://www.defconq.tech/docs/architecture/plain)
+- [KX Academy - KDB+ Architecture](https://learninghub.kx.com/courses/kdb-architecture/)
+
+**Learning objectives:** Have a solid understanding of a typical KDB/Q Tick setup, understand the individual KDB/Q processes such as Tickerplant (TP), Real-Time Database (RDB) and Historical Database (HDB).
+
+## Core KDB/Q Language Knowledge for Data and Business Analysts
+
+:::tip
+Since KDB/Q syntax can be quite different from anything else you may have encountered, beginners often find it challenging to read and interpret others' code. To help you overcome this initial hurdle, I’ve written a blog post on How to Read, Understand, and Learn KDB/Q Code. You can find it [here](https://www.defconq.tech/blog/How%20to%20Read,%20Understand%20and%20Learn%20KDB/Q%20code)
+:::
+
+### Q for Mortals
+
+- [Chapter 6: Functions](https://code.kx.com/q4m3/6_Functions/)
+- [Chapter 8: Tables](https://code.kx.com/q4m3/8_Tables/)
+- [Chapter 9: Queries: q-sql](https://code.kx.com/q4m3/9_Queries_q-sql/)
+- [Chapter 10: Execution Control](https://code.kx.com/q4m3/10_Execution_Control/)
+
+### [DefconQ - Q made easy](www.defconq.tech)
+
+DefconQ is the KDB/Q tech blog I launched in September 2023, just over a year ago. As a mostly self-taught KDB/Q enthusiast, I’ve experienced the steep learning curve firsthand. Driven by my passion for teaching, I created DefconQ to simplify and break down complex KDB/Q concepts. The blog posts below are designed to complement Q for Mortals.
+
+- [Dictionaries and Tables](https://www.defconq.tech/docs/concepts/dictionariesTables)
+- [Amend, Amend At: The Swiss Army knife among KDB/Q operators](https://www.defconq.tech/docs/concepts/amend)
+- [Attributes](https://www.defconq.tech/docs/concepts/attributes)
+- [QSQL - Querying Your Data](https://www.defconq.tech/docs/concepts/qsql)
+- [Mastering the Art of Filtering: An In-Depth Look at fby in KDB/Q](https://www.defconq.tech/docs/concepts/fby)
+
+### [KX Academy](https://learninghub.kx.com/academy/)
+
+Everyone has unique learning preferences; some of us are more visual learners and thrive with a classroom-style approach. If you prefer video tutorials over reading materials, the [KX Academy](https://learninghub.kx.com/academy/) offers an ideal platform. The following courses cover similar content to ***Q for Mortals*** and can be used as an alternative or as a complementary resource to enhance your learning experience.
+
+- [KDB+/Q Developer, Level 1](https://learninghub.kx.com/courses/kdb-developer-level-1/)
+- [KDB+/Q Developer, Level 2](https://learninghub.kx.com/courses/kdb-developer-level-2/)
+- [SQL for KDB+/Q](https://learninghub.kx.com/courses/sql-for-kdb/)
+
+### [KX Whitepapers](https://code.kx.com/q/wp/) and Advanced Material on [code.kx.com](https://code.kx.com/home/)
+
+[KX Whitepapers](https://code.kx.com/q/wp/) are concise technical papers that delve into core concepts of the KDB/Q programming language, architectural design, or practical applications. The following whitepapers specifically focus on the language aspects of KDB/Q, and I highly recommend exploring them once you’re comfortable with the basics.
+
+- [Iterators](https://code.kx.com/q/wp/iterators/)
+
+Additionally, [code.kx.com](https://code.kx.com/home/) offers sections with more advanced material, which are well worth exploring.
+
+- [Iteration](https://code.kx.com/q/basics/iteration/)
+- [Parse trees](https://code.kx.com/q/basics/parsetrees/)
+- [Q-SQL Queries](https://code.kx.com/q/basics/qsql/)
+- [Functional Q-SQL](https://code.kx.com/q/basics/funsql/)
+- [Interprocess Communication](https://code.kx.com/q/basics/ipc/)
+
+## Data Visualisation
+
+When working with big data, it’s often helpful to start with a visual overview of your data, or at least a subset of it (since visualizing all data in one graph is rarely practical). Especially as a Data Analyst you want to have a first glimpse at your data before doing any further analysis. Having data visualization tools in your toolkit can be invaluable. Below are two options: KX’s native tool, [KX Dashboard](https://code.kx.com/dashboards/), and an alternative visualization tool, [Pulse](https://www.timestored.com/pulse/), by [Timestored](https://www.timestored.com), which is versatile and compatible with multiple databases, including KDB/Q.
+
+- [KX Dashboards](https://code.kx.com/dashboards/)
+- [KX Dashboards Academy Course](https://learninghub.kx.com/courses/introduction-to-kx-dashboards/)
+- [Pulse](https://www.timestored.com/pulse/) by [Timestored](https://www.timestored.com)
+- [Pulse Tutorials](https://www.timestored.com/pulse/tutorial/)
+- [DefconQ Pulse Blog Post](https://www.defconq.tech/docs/productivity/pulse)
+
+## PyKX
+
+PyKX is a Python first interface to KDB/Q, developed by KX to simplify integration for Python developers working with KDB/Q. PyKX combines Python’s data science ecosystem with the power of KDB+’s vector and time-series analytics, making these capabilities accessible in both KDB/Q and Python environments. It allows you to run KDB/Q code within a Python environment or embed Python analytics within a KDB/Q session. For Data Analysts often comming from a Python background, PyKX is an invaluable tool to have in your toolkit.
+
+- [PyKX Documentation](https://code.kx.com/pykx/2.5/)
+- [KX Academy: Introduction to PyKX](https://learninghub.kx.com/courses/introduction-to-pykx/)
+
+:::note
+PyKX comes with the kdb Insights Enterprise licence and is not free of charge
+:::
+
+This concludes our study plan - now it’s up to you to follow it as thoroughly as you wish!
 

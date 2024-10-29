@@ -4,7 +4,123 @@ sidebar_position: 5
 
 # Quants and Quant Devs: Unlocking the Full Potential of KDB/Q
 
-![KDB/Q Study Plan ComingSoon](./img/comingSoon.png)
+As a Quant or Quant Dev in a front-office role, you're often focused on business-critical tasks like pricing models, trade cost analysis, price impact analysis, and more. While Python is often the go-to for initial research or prototyping, and Java or C++ for production code, KDB/Q provides a much more powerful alternative to these mainstream languages. Its array-based structure and terse syntax offer a competitive edge for those who master it. The study plan below will guide you through a structured path to gain proficiency in KDB/Q.
 
-[SUBSCRIBE HERE](https://defconq.substack.com)
+## Before we start
+
+Just like learning to walk before running, mastering KDB/Q starts with getting the basics right. Before diving into advanced topics, ensure you’ve covered the essentials. If you haven’t yet, check out the **Pre-School study plan** [**here**](https://www.defconq.tech/docs/studyPlan/babySteps). I encourage you to work through it and make sure you’re comfortable with the foundational concepts.
+
+## KDB/Q Tick Architecture Demystified
+
+As a Quant or Quant Dev, your focus is typically on business logic, so a deep knowledge of your KDB/Q Tick Platform’s architecture and design isn’t essential. However, understanding the basics can be invaluable for knowing which processes to query to access the right data. In more advanced KDB/Q setups, you may encounter gateways, load balancers, discovery services, and APIs that streamline data access without needing to know the exact data locations. However, in smaller setups, these features may not be available. A foundational understanding of the KDB/Q Tick architecture can therefore simplify and enhance your workflow. The links below provide all the essential information you need to understand a KDB/Q Tick platform.
+
+- [DefconQ - The Plain Vanilla Tick Setup](https://www.defconq.tech/docs/architecture/plain)
+- [KX Academy - KDB+ Architecture](https://learninghub.kx.com/courses/kdb-architecture/)
+
+**Learning objectives:** Have a solid understanding of a typical KDB/Q Tick setup, understand the individual KDB/Q processes such as **Tickerplant** (TP), **Real-Time Database** (RDB) and **Historical Database** (HDB).
+
+## Core KDB/Q Language Knowledge for Quants and Quant Devs
+
+:::tip
+Since KDB/Q syntax can be quite different from anything else you may have encountered, beginners often find it challenging to read and interpret others' code. To help you overcome this initial hurdle, I’ve written a blog post on How to Read, Understand, and Learn KDB/Q Code. You can find it [here](https://www.defconq.tech/blog/How%20to%20Read,%20Understand%20and%20Learn%20KDB/Q%20code)
+:::
+
+### Q for Mortals
+
+- [Chapter 6: Functions](https://code.kx.com/q4m3/6_Functions/)
+- [Chapter 7: Transforming Data](https://code.kx.com/q4m3/7_Transforming_Data/)
+- [Chapter 8: Tables](https://code.kx.com/q4m3/8_Tables/)
+- [Chapter 9: Queries: q-sql](https://code.kx.com/q4m3/9_Queries_q-sql/)
+- [Chapter 10: Execution Control](https://code.kx.com/q4m3/10_Execution_Control/)
+
+### [DefconQ - Q made easy](www.defconq.tech)
+
+DefconQ is the KDB/Q tech blog I launched in September 2023, just over a year ago. As a mostly self-taught KDB/Q enthusiast, I’ve experienced the steep learning curve firsthand. Driven by my passion for teaching, I created DefconQ to simplify and break down complex KDB/Q concepts. The blog posts below are designed to complement Q for Mortals.
+
+- [Dictionaries and Tables](https://www.defconq.tech/docs/concepts/dictionariesTables)
+- [Amend, Amend At: The Swiss Army knife among KDB/Q operators](https://www.defconq.tech/docs/concepts/amend)
+- [Attributes](https://www.defconq.tech/docs/concepts/attributes)
+- [QSQL - Querying Your Data](https://www.defconq.tech/docs/concepts/qsql)
+- [Mastering the Art of Filtering: An In-Depth Look at fby in KDB/Q](https://www.defconq.tech/docs/concepts/fby)
+
+### [KX Academy](https://learninghub.kx.com/academy/)
+
+Everyone has unique learning preferences; some of us are more visual learners and thrive with a classroom-style approach. If you prefer video tutorials over reading materials, the [KX Academy](https://learninghub.kx.com/academy/) offers an ideal platform. The following courses cover similar content to ***Q for Mortals*** and can be used as an alternative or as a complementary resource to enhance your learning experience.
+
+- [KDB+/Q Developer, Level 1](https://learninghub.kx.com/courses/kdb-developer-level-1/)
+- [KDB+/Q Developer, Level 2](https://learninghub.kx.com/courses/kdb-developer-level-2/)
+- [SQL for KDB+/Q](https://learninghub.kx.com/courses/sql-for-kdb/)
+
+### KDB/Q Books for Quants and Quant Devs
+
+- [Q Tips: Fast, Scalable and Maintainable Kdb+](https://amzn.to/3UjkAgZ) by Nick Psaris
+	- **Accompanying GitHub**: [Q-Tips](https://github.com/psaris/qtips)
+- [Fun Q - A Functional Introduction to Machine Learning in Q by Nick Psaris](https://amzn.to/4hgkZKY)
+	- **Accompanying GitHub**: [Fun Q](https://github.com/psaris/funq)
+- [Machine Learning and Big Data with KDB+/Q by Jan Novotny, Paul A. Bilokon, Aris Galiotos, Federic Deleze](https://amzn.to/4hbKixF)
+	- **Accompanying Github**: [Machine Learning and Big Data with KDB+/Q](https://github.com/hanssmail/quantQ)
+- [Handbook of Price Impact Modeling by Kevin T. Webster](https://amzn.to/3Yhf7rR)
+
+### [KX Whitepapers](https://code.kx.com/q/wp/) and Advanced Material on [code.kx.com](https://code.kx.com/home/)
+
+[KX Whitepapers](https://code.kx.com/q/wp/) are concise technical papers that delve into core concepts of the KDB/Q programming language, architectural design, or practical applications. The following whitepapers specifically focus on the language aspects of KDB/Q and quantitative applications using KDB/Q and I highly recommend exploring them once you’re comfortable with the basics:
+
+- [Iterators](https://code.kx.com/q/wp/iterators/)
+- [kdb+ query scaling](https://code.kx.com/q/wp/query-scaling/)
+- [Implementing trend indicators in kdb+](https://code.kx.com/q/wp/trend-indicators/)
+- [Comparing option-pricing methods in q](https://code.kx.com/q/wp/option-pricing/)
+- [Signal processing and q](https://code.kx.com/q/wp/signal-processing/)
+- [Streaming analytics: detecting card counters in Blackjack](https://code.kx.com/q/wp/card-counters/)
+- [Surveillance techniques to effectively monitor algo and high-frequency trading](https://code.kx.com/q/wp/surveillance/)
+- [Sample aggregation engine for market depth](https://code.kx.com/q/wp/market-depth/)
+- [Market Fragmentation: a kdb+ framework for multiple liquidity sources](https://code.kx.com/q/wp/market-fragmentation/)
+- [Transaction-cost analysis using kdb+](https://code.kx.com/q/wp/transaction-cost/)
+- [An introduction to neural networks with kdb+](https://code.kx.com/q/wp/neural-networks/)
+- [Using embedPy to apply LASSO regression](https://code.kx.com/q/wp/embedpy-lasso/)
+- [K-Nearest Neighbor classification and pattern recognition with q](https://code.kx.com/q/wp/machine-learning/) 
+
+Additionally, [code.kx.com](https://code.kx.com/home/) offers sections with more advanced material, which are well worth exploring.
+
+- [Iteration](https://code.kx.com/q/basics/iteration/)
+- [Parse trees](https://code.kx.com/q/basics/parsetrees/)
+- [Q-SQL Queries](https://code.kx.com/q/basics/qsql/)
+- [Functional Q-SQL](https://code.kx.com/q/basics/funsql/)
+
+Moreover, there are open-source libraries available to assist in developing quantitative applications. One of the most notable is **qml**, a library for statistics, linear algebra, and optimization in q. It provides an interface between the q programming language and numerical libraries like LAPACK, developed by [Andrey Zholos](https://www.linkedin.com/in/andreyzholos/)
+
+- [qml](https://github.com/zholos/qml)
+
+### Interprocess Communication and Programming Language Interfaces
+
+Since much of the business logic is implemented in languages other than KDB/Q, it's valuable to know how to interface with KDB/Q from these different languages. Below is a detailed, though not exhaustive, list of resources for connecting to KDB/Q. Additionally, I’ve included information on Interprocess Communication in KDB/Q, as it’s essential for querying data efficiently.
+
+- [Interprocess communication](https://code.kx.com/q/basics/ipc/)
+- [C/C++ quick guide](https://code.kx.com/q/interfaces/c-client-for-q/)
+- [C# client for kdb+](https://code.kx.com/q/interfaces/csharp/)
+- [Java client for kdb+](https://code.kx.com/q/interfaces/java/)
+- [Using R with kdb+](https://code.kx.com/q/interfaces/r/)
+- [Scala client for kdb+](https://code.kx.com/q/interfaces/scala-client-for-q/)
+
+## Data Visualisation
+
+When working with big data, it’s often helpful to start with a visual overview of your data, or at least a subset of it (since visualizing all data in one graph is rarely practical). Especially as a Quant you want to have a first glimpse at your data before doing any further analysis. Having data visualization tools in your toolkit can be invaluable. Below are two options: KX’s native tool, [KX Dashboard](https://code.kx.com/dashboards/), and an alternative visualization tool, [Pulse](https://www.timestored.com/pulse/), by [Timestored](https://www.timestored.com), which is versatile and compatible with multiple databases, including KDB/Q.
+
+- [KX Dashboards](https://code.kx.com/dashboards/)
+- [KX Dashboards Academy Course](https://learninghub.kx.com/courses/introduction-to-kx-dashboards/)
+- [Pulse](https://www.timestored.com/pulse/) by [Timestored](https://www.timestored.com)
+- [Pulse Tutorials](https://www.timestored.com/pulse/tutorial/)
+- [DefconQ Pulse Blog Post](https://www.defconq.tech/docs/productivity/pulse)
+
+## PyKX 
+
+PyKX is a Python first interface to KDB/Q, developed by KX to simplify integration for Python developers working with KDB/Q. PyKX combines Python’s data science ecosystem with the power of KDB+’s vector and time-series analytics, making these capabilities accessible in both KDB/Q and Python environments. It allows you to run KDB/Q code within a Python environment or embed Python analytics within a KDB/Q session. For Quants or Quant Devs, PyKX is an invaluable tool to have in your toolkit.
+
+- [PyKX Documentation](https://code.kx.com/pykx/2.5/)
+- [KX Academy: Introduction to PyKX](https://learninghub.kx.com/courses/introduction-to-pykx/)
+
+:::note
+PyKX comes with the kdb Insights Enterprise licence and is not free of charge
+:::
+
+This concludes our study plan - now it’s up to you to follow it as thoroughly as you wish!
 

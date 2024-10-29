@@ -4,7 +4,151 @@ sidebar_position: 3
 
 # Aspiring KDB/Q Developers: Your Path to Mastery
 
-![KDB/Q Study Plan ComingSoon](./img/comingSoon.png)
+## Before we start
 
-[SUBSCRIBE HERE](https://defconq.substack.com)
+Just like learning to walk before running, mastering KDB/Q starts with getting the basics right. Before diving into advanced topics, ensure you’ve covered the essentials. If you haven’t yet, check out the **Pre-School study plan** [**here**](https://www.defconq.tech/docs/studyPlan/babySteps). I encourage you to work through it and make sure you’re comfortable with the foundational concepts.
+
+Becoming a senior developer or Subject Matter Expert (SME) in any field requires years, if not decades, of experience, and KDB/Q is no exception. While you can learn and understand the language fairly quickly, true expertise only comes with time. The following study plan is designed to deepen your understanding of the KDB/Q programming language, a typical KDB/Q Tick platform, and common coding practices. Although it’s extensive, it’s by no means exhaustive—learning never really ends. There will always be new techniques, tips, and hidden functionalities to discover, whether through hands-on practice, reading everything KDB/Q-related, or studying other people's code. Enjoy the journey and make the most of it!
+
+## Core KDB/Q Knowledge
+
+### [Q for Mortals](https://amzn.to/4fkou1a)
+
+In my experience, the best way to start learning KDB/Q is still by diving into ***Q for Mortals***. I recommend breaking the book down into three main sections, working through each one fully before moving to the next. Here’s how I’d structure it:
+
+:::tip
+After completing each section, take time to solidify the concepts covered. Review any areas where you feel less confident and work through the examples in the book to reinforce your understanding.
+:::
+
+- **Section 1: The Basics**
+	- [0. Overview](https://code.kx.com/q4m3/0_Overview/)
+	- [1. Q Shock and Awe](https://code.kx.com/q4m3/1_Q_Shock_and_Awe/)
+	- [2. Basic Data Types: Atoms](https://code.kx.com/q4m3/2_Basic_Data_Types_Atoms/)
+	- [3. Lists](https://code.kx.com/q4m3/3_Lists/)
+	- [4. Operators](https://code.kx.com/q4m3/4_Operators/)
+	- [5. Dictionaries](https://code.kx.com/q4m3/5_Dictionaries/)
+- **Section 2: Functions, Advanced Data Structures and Querying your Data**
+	- [6. Functions](https://code.kx.com/q4m3/6_Functions/)
+	- [7. Transforming Data](https://code.kx.com/q4m3/7_Transforming_Data/)
+	- [8. Tables](https://code.kx.com/q4m3/8_Tables/)
+	- [9. Queries: q-sql](https://code.kx.com/q4m3/9_Queries_q-sql/)
+- **Section 3: Execution Control, basic Interprocess Communication and Database Structures**
+	- [10. Execution Control](https://code.kx.com/q4m3/10_Execution_Control/)
+	- [11. I/O](https://code.kx.com/q4m3/11_IO/)
+	- [12. Workspace Organization](https://code.kx.com/q4m3/12_Workspace_Organization/)
+	- [13. Commands and System Variables](https://code.kx.com/q4m3/13_Commands_and_System_Variables/)
+	- [14. Introduction to Kdb+](https://code.kx.com/q4m3/14_Introduction_to_Kdb%2B/)
+
+Once you've covered everything above, you're ready to progress to the next section.
+
+### [DefconQ - Q made easy](www.defconq.tech)
+
+DefconQ is the KDB/Q tech blog I launched in September 2023, just over a year ago. As a mostly self-taught KDB/Q enthusiast, I’ve experienced the steep learning curve firsthand. Driven by my passion for teaching, I created DefconQ to simplify and break down complex KDB/Q concepts. The blog posts below are designed to complement Q for Mortals.
+
+:::tip
+Just a reminder: this blog post is here to support you on your KDB/Q learning journey. [**How to Read, Understand and Learn KDB/Q code**](https://www.defconq.tech/blog/How%20to%20Read,%20Understand%20and%20Learn%20KDB/Q%20code)
+:::
+
+- [Amend, Amend At: The Swiss Army knife among KDB/Q operators](https://www.defconq.tech/docs/concepts/amend)
+- [Dictionaries and Tables](https://www.defconq.tech/docs/concepts/dictionariesTables)
+- [Attributes](https://www.defconq.tech/docs/concepts/attributes)
+- [QSQL - Querying Your Data](https://www.defconq.tech/docs/concepts/qsql)
+- [Mastering the Art of Filtering: An In-Depth Look at fby in KDB/Q](https://www.defconq.tech/docs/concepts/fby)
+- [Memory Management](https://www.defconq.tech/docs/concepts/memoryManagement)
+- [Garbage Collection](https://www.defconq.tech/docs/concepts/garbageCollection)
+
+The material above should deepen your understanding of key KDB/Q concepts and support your development as a more proficient KDB/Q developer.
+
+### [Q Tips: Fast, Scalable and Maintainable Kdb+](https://amzn.to/3YIaisb)
+
+My second favorite KDB/Q book is [***Q-Tips: Fast, Scalable, and Maintainable KDB+***](https://amzn.to/3YIaisb) by [Nick Psaris](https://www.linkedin.com/in/nickpsaris/). I strongly believe it's a must-read for every KDB/Q developer, offering invaluable insights and skills. However, it’s not ideal for complete beginners; I recommend working through the foundational content above before diving into this book.
+
+You can get a hardcopy of the book here:  [***Q-Tips: Fast, Scalable, and Maintainable KDB+***](https://amzn.to/3YIaisb)  
+
+### [KX Academy](https://learninghub.kx.com/academy/)
+
+Everyone has unique learning preferences; some of us are more visual learners and thrive with a classroom-style approach. If you prefer video tutorials over reading materials, the [KX Academy](https://learninghub.kx.com/academy/) offers an ideal platform. The following courses cover similar content to ***Q for Mortals*** and can be used as an alternative or as a complementary resource to enhance your learning experience.
+
+- [KDB+/Q Developer, Level 1](https://learninghub.kx.com/courses/kdb-developer-level-1/)
+- [KDB+/Q Developer, Level 2](https://learninghub.kx.com/courses/kdb-developer-level-2/)
+- [KDB+/Q Developer, Level 3](https://learninghub.kx.com/courses/kdb-developer-level-3/)
+- [SQL for KDB+/Q](https://learninghub.kx.com/courses/sql-for-kdb/)
+
+### [KX Whitepapers](https://code.kx.com/q/wp/) and Advanced Material on [code.kx.com](https://code.kx.com/home/)
+
+[KX Whitepapers](https://code.kx.com/q/wp/) are concise technical papers that delve into core concepts of the KDB/Q programming language, architectural design, or practical applications. The following whitepapers specifically focus on the language aspects of KDB/Q, and I highly recommend exploring them once you’re comfortable with the basics.
+
+- [Iterators](https://code.kx.com/q/wp/iterators/)
+- [The application of foreign keys and linked columns in kdb+](https://code.kx.com/q/wp/foreign-keys/)
+- [kdb+ query scaling](https://code.kx.com/q/wp/query-scaling/)
+- [Columnar database and query optimization](https://code.kx.com/q/wp/columnar-database/)
+
+Additionally, [code.kx.com](https://code.kx.com/home/) offers sections with more advanced material, which are well worth exploring.
+
+- [Iteration](https://code.kx.com/q/basics/iteration/)
+- [Application](https://code.kx.com/q/basics/application/)
+- [Amend](https://code.kx.com/q/ref/amend/)
+- [Apply, Index, Trap](https://code.kx.com/q/ref/apply/)
+- [Interprocess communication](https://code.kx.com/q/basics/ipc/)
+- [Parse trees](https://code.kx.com/q/basics/parsetrees/)
+- [Q-SQL Queries](https://code.kx.com/q/basics/qsql/)
+- [Functional Q-SQL](https://code.kx.com/q/basics/funsql/)
+
+## KDB/Q Tick Architecture, Design and Big Data Platforms
+
+Mastering the KDB/Q programming language is just one part of becoming a skilled KDB/Q developer. As you gain experience and transition into a more senior role, it’s essential to start engaging in architectural and design decisions, contributing to the broader structure of a typical KDB/Q Tick Application. The following section offers learning resources to build the knowledge you’ll need to excel in these areas.
+
+- [DefconQ - The Plain Vanilla Tick Setup](https://www.defconq.tech/docs/architecture/plain)
+- [DefconQ - KDB Tick Explained: A Walkthrough](https://www.defconq.tech/docs/tutorials/tick)
+- [DefconQ - Code Organistation - Your own KDB/Q Library](https://www.defconq.tech/blog/Code%20Organistation%20-%20Your%20own%20KDB/Q%20library)
+- [KX Academy - KDB+ Architecture](https://learninghub.kx.com/courses/kdb-architecture/)
+- [Common design principles for kdb+ gateways](https://code.kx.com/q/wp/gateway-design/)
+- [Query Routing: A kdb+ framework for a scalable, load balanced system](https://code.kx.com/q/wp/query-routing/)
+- [Compression in kdb+](https://code.kx.com/q/wp/compress/)
+- [Intraday writedown solutions](https://code.kx.com/q/wp/intraday-writedown/)
+- [Permissions with kdb+](https://code.kx.com/q/wp/permissions/)
+- [Multi-threading in kdb+: performance optimizations and use cases](https://code.kx.com/q/wp/multi-thread/)
+- [Disaster-recovery planning for kdb+ tick systems](https://code.kx.com/q/wp/disaster-recovery/)
+- [Order Book: a kdb+ intraday storage and access methodology](https://code.kx.com/q/wp/order-book/)
+- [Data Intellect: Level 2 Order Book Storage Formats](https://dataintellect.com/blog/level-2-storage-formats/)
+
+## Database Maintenance 
+
+A core responsibility of a KDB/Q developer is maintaining the Historical Database (HDB), including updating table schemas as needed. While this may sound complex, the process is simplified with KX's **dbmaint.q** database maintenance script. Below, you'll find resources on **dbmaint.q** and guidance on managing bloated sym files—a common challenge for KDB/Q developers. 
+
+- [dbmaint.q](https://github.com/KxSystems/kdb/blob/master/utils/dbmaint.md)
+- [Working with sym files](https://code.kx.com/q/wp/symfiles/) 
+
+## [Data Intellect's](https://dataintellect.com) [TorQ Framework](https://dataintellecttech.github.io/TorQ/)
+
+[Data Intellect](https://dataintellect.com) is a technology consultancy with over a decade of experience in KDB/Q development, home to some of the industry’s brightest KDB/Q developers. They offer a free, production-ready KDB/Q Tick framework called [TorQ](https://dataintellecttech.github.io/TorQ/). The TorQ documentation provides invaluable insights into designing, building, and implementing advanced KDB/Q applications, and its rich codebase exemplifies strong KDB/Q practices. Reviewing this framework can be a highly effective way to learn from real-world, well-structured code. Access the TorQ documentation and source code through the links provided below.
+
+- [TorQ Codebase](https://github.com/DataIntellectTech/TorQ)
+- [TorQ Documentation](https://dataintellecttech.github.io/TorQ/)
+
+## Data Visualisation
+
+When working with big data, it’s often helpful to start with a visual overview of your data, or at least a subset of it (since visualizing all data in one graph is rarely practical). Having data visualization tools in your toolkit can be invaluable. Below are two options: KX’s native tool, [KX Dashboard](https://code.kx.com/dashboards/), and an alternative visualization tool, [Pulse](https://www.timestored.com/pulse/), by [Timestored](https://www.timestored.com), which is versatile and compatible with multiple databases, including KDB/Q.
+
+- [KX Dashboards](https://code.kx.com/dashboards/)
+- [KX Dashboards Academy Course](https://learninghub.kx.com/courses/introduction-to-kx-dashboards/)
+- [Pulse](https://www.timestored.com/pulse/) by [Timestored](https://www.timestored.com)
+- [Pulse Tutorials](https://www.timestored.com/pulse/tutorial/)
+- [DefconQ Pulse Blog Post](https://www.defconq.tech/docs/productivity/pulse)
+
+## KX Products, Tools and others
+
+As a KDB/Q developer, you’re likely to work with the full suite of products KX offers. Additionally, with many clients adopting cloud-based data strategies, it’s advantageous to become familiar with the cloud solutions available. The following section includes resources to help you explore these topics further. ***Note: Some KX tools require a commercial license.***
+
+- [PyKX Documentation](https://code.kx.com/pykx/2.5/)
+- [PyKX Academy Course](https://learninghub.kx.com/courses/introduction-to-pykx/)
+- [kdb Insights Enterprise](https://code.kx.com/insights/1.11/enterprise/)
+- [kdb Insights Enterprise Academy Course](https://learninghub.kx.com/courses/kdb-insights-enterprise/)
+- [KX and the cloud](https://code.kx.com/q/cloud/)
+- [KDB.AI](https://code.kx.com/kdbai/latest/)
+- [KDB.AI Academy Course](https://learninghub.kx.com/courses/kdb-ai-vector-database/)
+
+## Data Intellect Blog: KDB/Q and beyond
+
+If you’ve worked through all the material above, you’ve already covered some of the best KDB/Q resources available. One last recommendation is to follow the [blog by Data Intellect](https://dataintellect.com/thoughts/?_sft_category=blog). It offers not only valuable insights into KDB/Q but also covers surrounding technologies—alternative databases, integration tools, and general KDB/Q knowledge. Data Intellect’s blog is definitely worth keeping on your radar.
 
