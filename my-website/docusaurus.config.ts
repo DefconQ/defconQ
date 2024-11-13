@@ -88,7 +88,8 @@ const config: Config = {
       id: 'announcementBar',
       backgroundColor: '#74e8a3',
       isCloseable: true,
-      content: 'If you would like to connect, please reach out on <a href="https://www.linkedin.com/in/alexanderunterrainer/">Linkedin</a>',
+      //content: 'If you would like to connect, please reach out on <a href="https://www.linkedin.com/in/alexanderunterrainer/">Linkedin</a>',
+      content: 'Stay up to date with the latest blogs posts - subscribe to my free Substack newsletter now <a href="https://defconq.substack.com">Free Substack Newsletter</a>',
     },
     tableOfContents: {
       // minHeadingLevel: 2,
