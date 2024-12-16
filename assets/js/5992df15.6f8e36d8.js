@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[7908],{2068:e=>{e.exports=JSON.parse('{"label":"Challenges","permalink":"/blog/tags/challenges","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

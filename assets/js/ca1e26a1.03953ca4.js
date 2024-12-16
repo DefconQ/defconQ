@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9799],{22347:e=>{e.exports=JSON.parse('{"label":"Portfolio Management","permalink":"/blog/tags/portfolio-management","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

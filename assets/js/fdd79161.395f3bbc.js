@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9715],{7452:e=>{e.exports=JSON.parse('{"label":"kxperts","permalink":"/blog/tags/kxperts","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

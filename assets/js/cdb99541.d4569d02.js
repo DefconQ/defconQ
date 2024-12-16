@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9270],{36159:e=>{e.exports=JSON.parse('{"label":"code organisation","permalink":"/blog/tags/code-organisation","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

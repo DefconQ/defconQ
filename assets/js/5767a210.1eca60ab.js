@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9352],{88736:e=>{e.exports=JSON.parse('{"label":"Dimitri Bianco","permalink":"/blog/tags/dimitri-bianco","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

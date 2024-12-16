@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9624],{6827:e=>{e.exports=JSON.parse('{"label":"Data Intellect","permalink":"/blog/tags/data-intellect","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);
