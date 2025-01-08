@@ -121,6 +121,11 @@ const config: Config = {
           position: 'left',
         },
         {
+          href: 'https://defconq.myspreadshop.co.uk',
+          label: 'Swag',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/DefconQ',
           label: 'GitHub',
           position: 'right',
@@ -149,6 +154,10 @@ const config: Config = {
             {
               label: 'Alexander Unterrainer Linkedin',
               href: 'https://www.linkedin.com/in/alexanderunterrainer/',
+            },
+            {
+              label: 'DefconQ Swag',
+              href: 'https://defconq.myspreadshop.co.uk',
             },
           ],
         },
