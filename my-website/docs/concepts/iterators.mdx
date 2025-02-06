@@ -1031,6 +1031,65 @@ q)(,//)(1; (1 2;(1 2 3;4 5);(10 12;13 14));(((3 4;5 6);(10 20 30;40 50));(1 2;3 
 ```
 :::
 
+But why stop here? You can take it a step further and create a modified version of `raze` hat allows you to control how many levels of nesting you want to flatten. Shortly after I published the initial version of this blog post, none other than [Charles Skelton](https://www.linkedin.com/in/charlesskelton/), former CTO and now Chief Scientist at KX, suggested this addition. The elegant snippet `n,//x` lets you flatten a nested list `n` times. And that’s exactly what I aim for with DefconQ, to foster a collaborative space where KDB/Q developers can learn and grow together!
+
+```
+q)3,//(1; (1 2;(1 2 3;4 5);(10 12;13 14));(((3 4;5 6);(10 20 30;40 50));(1 2;3 4)))
+1
+1
+2
+1
+2
+3
+4
+5
+10
+12
+13
+14
+3 4
+5 6
+10 20 30
+40 50
+1
+2
+3
+4
+q)2,//(1; (1 2;(1 2 3;4 5);(10 12;13 14));(((3 4;5 6);(10 20 30;40 50));(1 2;3 4)))
+1
+1
+2
+1 2 3
+4 5
+10 12
+13 14
+(3 4;5 6)
+(10 20 30;40 50)
+1 2
+3 4
+q)1,//(1; (1 2;(1 2 3;4 5);(10 12;13 14));(((3 4;5 6);(10 20 30;40 50));(1 2;3 4)))
+1
+1 2
+(1 2 3;4 5)
+(10 12;13 14)
+((3 4;5 6);(10 20 30;40 50))
+(1 2;3 4)
+q)4,//(1; (1 2;(1 2 3;4 5);(10 12;13 14));(((3 4;5 6);(10 20 30;40 50));(1 2;3 4)))
+1 1 2 1 2 3 4 5 10 12 13 14 3 4 5 6 10 20 30 40 50 1 2 3 4
+q),//[2;(1; (1 2;(1 2 3;4 5);(10 12;13 14));(((3 4;5 6);(10 20 30;40 50));(1 2;3 4)))]
+1
+1
+2
+1 2 3
+4 5
+10 12
+13 14
+(3 4;5 6)
+(10 20 30;40 50)
+1 2
+3 4
+```
+
 ## Tips and Tricks
 
 We've now covered all the Iterators, their syntax, overloads, behaviors, and functionality. Most of the content in this blog post is not new and has been documented on [code.kx.com](https://code.kx.com/home/). However, in this section, I'd like to share a few tips and tricks.
