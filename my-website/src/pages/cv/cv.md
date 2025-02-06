@@ -12,7 +12,9 @@ Alexander is a senior KDB/Q developer, blogger, and the founder of DefconQ (www.
 
 ### Data Intellect (formerly AquaQ), Consultant [April 2023 - present] 
 
-I am currently an independent KDB/Q consultant engaged with a client of Data Intellect. As a senior developer my main responsabilities are developing and maintaining the internal KDB/Q stack (TorQ framework), capturing new data, creating APIs to access data, crafting dashboards to visualize data in Panopticon, and fostering close collaboration with fellow developers, quantitative developers, traders and quants. 
+I currently work as a senior KDB/Q developer at a top-tier hedge fund, where I’m part of a global team spanning three regions. We develop high-throughput, low-latency real-time and historical P&L and risk calculation engines, collaborating closely with the business and other stakeholders while managing the full development lifecycle.
+
+Before this role, I was a senior consultant at a global investment bank, where I played a key role in developing and maintaining the internal KDB/Q stack (TorQ framework). My responsibilities included capturing new data, building APIs for data access, designing dashboards for visualization in Panopticon, and working closely with developers, quantitative analysts, traders, and quants.
 
 ### HSBC - GFX KDB/Q Developer, Vice President [Feb 2020 - April 2023]
 
@@ -72,7 +74,7 @@ implementation.
 
 ### KXperts
 
-Alexander has been the **first** developer to be awarded the highest level of "Black Tier" of the [KXpert](https://kx.com/kxperts/) Developer Advocacy Program by KX, for his outstanding work creating blogs, answering questions, speaking at events, and helping the KX Community of over 6000+ developers! If you want to read more about the KXpert Developer Advocacy Program, you can read his blog post [here](https://www.defconq.tech/blog/KXperts%20-%20A%20Developer%20Advocacy%20Program%20by%20KX)
+Alexander has been the **first** developer to be awarded the highest level of **Black Tier** of the [KXpert](https://kx.com/kxperts/) Developer Advocacy Program by KX, for his outstanding work creating blogs, answering questions, speaking at events, and helping the KX Community of over 6000+ developers! If you want to read more about the KXpert Developer Advocacy Program, you can read his blog post [here](https://www.defconq.tech/blog/KXperts%20-%20A%20Developer%20Advocacy%20Program%20by%20KX)
 
 
 ## Education
@@ -90,7 +92,7 @@ Regulation, Professional Practice
 
 #### Compulsory modules 
 
- Agent-Based Modelling in Finance and Economics, High Frequency Finance and Empirical Market Microstructure,
+Agent-Based Modelling in Finance and Economics, High Frequency Finance and Empirical Market Microstructure,
 Programming Java, Quantitative Methods in Finance and Trading, Big Data for Computational Finance, Trading Global Financial
 Markets, Financial Market Analysis, Professional Practice and Research Methodology
 
@@ -116,10 +118,10 @@ competitive setting. Effective and efficient time management to allow working ex
 
 |Area			|Beginner	|Intermediate							|Advanced			|
 |-----------------------|---------------|--------------------------------------------------------------	|-------------------------------|
-|Languages		|K,Shakti	|Python,Java,Bash, Matlab, VBA					|KDB/Q				|
-|Architecture		|		|								|KDB Tick			|
-|Business Knowledge	|Time Series	|FX, Quantitative Finance, Options				|Equities, Tick data		|
-|Other			|		|Confluence, git, JIRA, Bloomberg, Thomson Reuters, Panopticon	|				|
+|**Languages**		|K,Shakti	|Python,Java,Bash, Matlab, VBA					|KDB/Q				|
+|**Architecture**	|		|								|KDB Tick			|
+|**Business Knowledge**	|Time Series	|FX, Quantitative Finance, Options				|Equities, Tick data		|
+|**Other**		|		|Confluence, Git, JIRA, Bloomberg, Thomson Reuters, Panopticon	|				|
 
 
 ## Personal Details
