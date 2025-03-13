@@ -2,11 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2024-11-22T00:00:00.000Z</updated>
+    <updated>2025-03-13T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds & Salary Secrets!]]></title>
+        <id>https://DefconQ.github.io/blog/The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds &amp; Salary Secrets!</id>
+        <link href="https://DefconQ.github.io/blog/The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds &amp; Salary Secrets!"/>
+        <updated>2025-03-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The finance & tech job market EXPOSED! A couple of weeks ago, I had the pleasure of sitting down with Craig Whiting, Managing Director at RLS Search and host of the Top 10% Podcast, for an unfiltered conversation about some key topics in our industry:]]></summary>
+        <content type="html"><![CDATA[<p>The finance &amp; tech job market EXPOSED! A couple of weeks ago, I had the pleasure of sitting down with <a href="https://www.linkedin.com/in/craig-whiting-b75a8ba/" target="_blank" rel="noopener noreferrer">Craig Whiting</a>, Managing Director at RLS Search and host of the Top 10% Podcast, for an unfiltered conversation about some key topics in our industry:</p>
+<ul>
+<li>Banking grad schemes – Are they worth it?</li>
+<li>Nepotism in investment banks – How much does it matter?</li>
+<li>Hedge Funds vs. Banks – Where should you work?</li>
+<li>The truth about promotions &amp; counteroffers</li>
+<li>The best way to negotiate your salary</li>
+<li>Does your university degree really matter?</li>
+<li>How to find a good recruiter (yes, they exist!)</li>
+</ul>
+<p>If you're exploring job opportunities or simply want to understand the industry landscape, key considerations when searching for a new role, and more, join this insightful conversation between two seasoned professionals in the field.</p>
+<iframe width="1120" height="630" src="https://www.youtube.com/embed/Wn7T_aLl9Nw?si=-HA-bnioM715aZ8D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-pic    ture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="Job Market" term="Job Market"/>
+        <category label="Recruitment" term="Recruitment"/>
+        <category label="Buy Side" term="Buy Side"/>
+        <category label="Sell Side" term="Sell Side"/>
+        <category label="Hedge Funds" term="Hedge Funds"/>
+        <category label="Investment Banking" term="Investment Banking"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[DefconQ goes KX Capital Markets Summit - Survival of the Fastest]]></title>
         <id>https://DefconQ.github.io/blog/KX Capital Markets Summit</id>

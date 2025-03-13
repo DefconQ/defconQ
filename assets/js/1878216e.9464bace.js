@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[3429],{2360:e=>{e.exports=JSON.parse('{"label":"Sell Side","permalink":"/blog/tags/sell-side","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

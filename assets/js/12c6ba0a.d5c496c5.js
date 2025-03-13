@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[103],{81534:e=>{e.exports=JSON.parse('{"label":"Hedge Funds","permalink":"/blog/tags/hedge-funds","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

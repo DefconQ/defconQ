@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[8036],{32324:e=>{e.exports=JSON.parse('{"label":"Investment Banking","permalink":"/blog/tags/investment-banking","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
