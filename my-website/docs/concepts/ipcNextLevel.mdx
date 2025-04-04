@@ -709,6 +709,93 @@ The final step in our example is to launch all the processes, start a client, an
 
 ![Deferred Response Example](./img/deferredResponseExample.gif)
 
+## Bonus Material
+
+After sharing my last article about **Next-level Interprocess Communication** on LinkedIn, I received valuable feedback from two experienced developers. This is exactly what DefconQ is all about: fostering a community where KDB/Q knowledge is shared, and experienced developers help qbies and fellow KDB/Q developers grow.
+
+The first suggestion by [Conor Mahony](https://www.linkedin.com/in/conor-mahony-5430801b/), was to include the `.z.pc` message handler callback function in the article. The second was a more practical request from [James Neill](https://www.linkedin.com/in/james-neill-aa127955/), asking for an explanation of the default behavior of `.z.pg`. Let's dive into both.
+
+### [`.z.pc`](https://code.kx.com/q/ref/dotz/#zpc-close) connection handler
+
+The `.z.pc` message handler is a unary function triggered when a connection is closed, regardless of the reason. It allows for any necessary cleanup actions and ensures a graceful disconnection. Since the connection is already closed when `.z.pc` is called, no remote values can be assigned to `.z.a`, `.z.u`, or `.z.w`, and only local values are returned. The function receives a single parameter, `x` which represents the handle of the process whose connection was terminated.
+
+You might be wondering why it's important to *worry* about processes that close or drop their connection to your process. Let me explain. When developing fully asynchronous applications, you always want to implement `.z.pc` such that it clears dropped clients. Otherwise, a new client that unexpectedly inherit a previous client handle, which is quite likely, might receive a result that wasn't addressed to them. That’s why it's highly recommend incorporating `.z.pc` from the start when working with asynchronous messaging, even if you're using deferred response.
+
+### `value` - The Default Behavior of `.z.pg` and `.z.ps`
+
+Neill’s request was essentially about what happens when we execute the following code 
+
+```
+q) h([]a:1 2 3;b:4 5 6)
+q) h`a`b`c!(1 2;3 4;5 6)
+``` 
+
+So, let’s run it and analyze the results. We start by launching two KDB/Q processes, a server and a client, then establish a connection from the client to the server. When we execute our code, the first line runs without issues, while the second command results in a type error.
+
+```
+q)h `a`b`c!(1 2;3 4;5 6)
+1 2
+3 4
+5 6
+q)h ([] a:1 2 3;b:4 5 6)
+'type
+  [0]  h ([] a:1 2 3;b:4 5 6)
+       ^
+```
+
+At first, this might be confusing for qbies, but the explanation is fairly simple. The key insight here is that the default implementation of `.z.pg` and `.z.ps` is the `value` operator. But why is that?
+
+Since queries are typically sent as a **parse three** (which is the preferred format) or as a **string literal**, KDB/Q executes these by applying `value` to them. This explains why `value` is the default implementation of `.z.pg` and `.z.ps.`
+
+
+```
+q)value "2+2"
+4
+q)value (+;2;2)
+4
+q)h "2+2"
+4
+q)h (+;2;2)
+4
+```
+
+Now, let’s examine the data types involved in our two queries:
+
+- In the first query, we sent a dictionary, a structure mapping keys to values. Applying `value` to a dictionary returns its value part. The response from the server confirms this expected behavior.
+```
+q)value  `a`b`c!(1 2;3 4;5 6)
+1 2
+3 4
+5 6
+q)h `a`b`c!(1 2;3 4;5 6)
+1 2
+3 4
+5 6
+```
+- In the second query, we sent a table. Since a table is essentially a **flipped column dictionary** (or a list of dictionaries), applying `value` to it results in a `type` error, as a table does not have a direct **"value"** component. 
+
+```
+q)value ([] a:1 2 3;b:4 5 6)
+'type
+  [0]  value ([] a:1 2 3;b:4 5 6)
+       ^
+q)h ([] a:1 2 3;b:4 5 6)
+'type
+  [0]  h ([] a:1 2 3;b:4 5 6)
+       ^
+```
+
+To avoid this error, you could flip the table before sending it, since a flipped table is a dictionary, making it compatible with `value`.
+
+```
+q)value flip ([] a:1 2 3;b:4 5 6)
+1 2 3
+4 5 6
+q)h flip ([] a:1 2 3;b:4 5 6)
+1 2 3
+4 5 6
+```
+
 And that wraps up our advanced IPC training! You're now a master of interprocess communication, at least when it comes to KDB/Q.
 
 **Happy coding!**
