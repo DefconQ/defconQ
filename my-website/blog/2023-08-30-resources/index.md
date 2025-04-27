@@ -3,7 +3,7 @@ slug: Go-To KDB/Q Learning Resources
 title: Go-To KDB/Q Learning Resources
 authors: [alexander]
 hide_table_of_contents: true
-tags: [kdb/q, QForMortals, QTips, KX, Data Intellect, Learning, Beginner]
+tags: [kdb/q, QForMortals, QTips, KX, Data Intellect, KDB Learning, KDB Beginner, Qbie]
 ---
 
 In this blog post, I'll be sharing my favourite KDB/Q learning resources. These are the go-to references that most experienced KDB/Q developers will have encountered, offering an excellent starting point for anyone looking to dive into the world of KDB/Q.
