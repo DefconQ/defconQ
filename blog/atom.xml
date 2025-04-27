@@ -2,11 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2025-03-13T00:00:00.000Z</updated>
+    <updated>2025-04-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Brews and Qs - KX and DefconQ Happy Hour!]]></title>
+        <id>https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!</id>
+        <link href="https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!"/>
+        <updated>2025-04-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[As part of our shared mission to grow the KDB/Q community in London, KX and DefconQ have teamed up and we are excited to announce the first-ever London KDB/Q Community Happy Hour, with many more to come! This event is open to all KDB/Q developers and enthusiasts who would like to connect, share ideas, or simply enjoy some good company over drinks.]]></summary>
+        <content type="html"><![CDATA[<p>As part of our shared mission to grow the KDB/Q community in London, KX and DefconQ have teamed up and we are excited to announce the first-ever <strong>London KDB/Q Community Happy Hour</strong>, with many more to come! This event is open to all KDB/Q developers and enthusiasts who would like to connect, share ideas, or simply enjoy some good company over drinks.</p>
+<p><strong>When: Thursday, 22nd May, from 17:30</strong></p>
+<p><strong>Where: Flight Club, Shoreditch</strong></p>
+<p><strong>Signup here</strong>: <a href="https://go.marketing.kx.com/kx-happy-hour-london?_gl=1*1k23ea*_gcl_au*MTk4NjUzMTI5OS4xNzQ1NzQ3Mzg4*_ga*OTcyNzM3MTIwLjE3Mjk4NTgxNjQ.*_ga_96WX6WQP6Y*MTc0NTc0NzM4OS4xNTguMS4xNzQ1NzQ4MzMzLjYwLjAuMTE1ODM1Njg5NQ.." target="_blank" rel="noopener noreferrer">Brews &amp; Qs Happy Hour</a></p>
+<p>I’ll be your host for the evening, and thanks to the generous support of KX, the event is fully sponsored.</p>
+<p>Whether you're a seasoned KDB/Q developer or just starting your KDB/Q journey, come join us for a fun evening with the community. Looking forward to seeing many of you there!</p>
+<p><img decoding="async" loading="lazy" alt="NYSE extends trading hours" src="https://defconq.github.io/assets/images/happyHour-12f363d4b0302545a6b5e7f39a9bcdb6.png" width="1024" height="1536" class="img_ev3q"></p>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="Community" term="Community"/>
+        <category label="DefconQ" term="DefconQ"/>
+        <category label="After Hours" term="After Hours"/>
+        <category label="Happy Hour" term="Happy Hour"/>
+        <category label="Meetup" term="Meetup"/>
+        <category label="KX" term="KX"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds & Salary Secrets!]]></title>
         <id>https://DefconQ.github.io/blog/The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds &amp; Salary Secrets!</id>
@@ -887,6 +912,8 @@ When it comes to persisting data to disk, the options include:</p>
         <category label="StackOverFlow" term="StackOverFlow"/>
         <category label="KX Community" term="KX Community"/>
         <category label="Mentorship" term="Mentorship"/>
+        <category label="KDB Beginner" term="KDB Beginner"/>
+        <category label="KDB Learning" term="KDB Learning"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[How to Read, Understand and Learn KDB/Q code]]></title>
@@ -1016,8 +1043,8 @@ When it comes to persisting data to disk, the options include:</p>
             <uri>https://github.com/AUnterrainer</uri>
         </author>
         <category label="kdb/q" term="kdb/q"/>
-        <category label="Learning" term="Learning"/>
-        <category label="Beginner" term="Beginner"/>
+        <category label="KDB Learning" term="KDB Learning"/>
+        <category label="KDB Beginner" term="KDB Beginner"/>
         <category label="Qbie" term="Qbie"/>
     </entry>
     <entry>
@@ -1089,8 +1116,9 @@ When it comes to persisting data to disk, the options include:</p>
         <category label="QTips" term="QTips"/>
         <category label="KX" term="KX"/>
         <category label="Data Intellect" term="Data Intellect"/>
-        <category label="Learning" term="Learning"/>
-        <category label="Beginner" term="Beginner"/>
+        <category label="KDB Learning" term="KDB Learning"/>
+        <category label="KDB Beginner" term="KDB Beginner"/>
+        <category label="Qbie" term="Qbie"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>

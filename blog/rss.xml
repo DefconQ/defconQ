@@ -4,10 +4,31 @@
         <title>DefconQ Blog</title>
         <link>https://DefconQ.github.io/blog</link>
         <description>DefconQ Blog</description>
-        <lastBuildDate>Thu, 13 Mar 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 28 Apr 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Brews and Qs - KX and DefconQ Happy Hour!]]></title>
+            <link>https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!</link>
+            <guid>https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!</guid>
+            <pubDate>Mon, 28 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[As part of our shared mission to grow the KDB/Q community in London, KX and DefconQ have teamed up and we are excited to announce the first-ever London KDB/Q Community Happy Hour, with many more to come! This event is open to all KDB/Q developers and enthusiasts who would like to connect, share ideas, or simply enjoy some good company over drinks.]]></description>
+            <content:encoded><![CDATA[<p>As part of our shared mission to grow the KDB/Q community in London, KX and DefconQ have teamed up and we are excited to announce the first-ever <strong>London KDB/Q Community Happy Hour</strong>, with many more to come! This event is open to all KDB/Q developers and enthusiasts who would like to connect, share ideas, or simply enjoy some good company over drinks.</p>
+<p><strong>When: Thursday, 22nd May, from 17:30</strong></p>
+<p><strong>Where: Flight Club, Shoreditch</strong></p>
+<p><strong>Signup here</strong>: <a href="https://go.marketing.kx.com/kx-happy-hour-london?_gl=1*1k23ea*_gcl_au*MTk4NjUzMTI5OS4xNzQ1NzQ3Mzg4*_ga*OTcyNzM3MTIwLjE3Mjk4NTgxNjQ.*_ga_96WX6WQP6Y*MTc0NTc0NzM4OS4xNTguMS4xNzQ1NzQ4MzMzLjYwLjAuMTE1ODM1Njg5NQ.." target="_blank" rel="noopener noreferrer">Brews &amp; Qs Happy Hour</a></p>
+<p>I’ll be your host for the evening, and thanks to the generous support of KX, the event is fully sponsored.</p>
+<p>Whether you're a seasoned KDB/Q developer or just starting your KDB/Q journey, come join us for a fun evening with the community. Looking forward to seeing many of you there!</p>
+<p><img decoding="async" loading="lazy" alt="NYSE extends trading hours" src="https://defconq.github.io/assets/images/happyHour-12f363d4b0302545a6b5e7f39a9bcdb6.png" width="1024" height="1536" class="img_ev3q"></p>]]></content:encoded>
+            <category>kdb/q</category>
+            <category>Community</category>
+            <category>DefconQ</category>
+            <category>After Hours</category>
+            <category>Happy Hour</category>
+            <category>Meetup</category>
+            <category>KX</category>
+        </item>
         <item>
             <title><![CDATA[The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds & Salary Secrets!]]></title>
             <link>https://DefconQ.github.io/blog/The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds &amp; Salary Secrets!</link>
@@ -824,6 +845,8 @@ When it comes to persisting data to disk, the options include:</p>
             <category>StackOverFlow</category>
             <category>KX Community</category>
             <category>Mentorship</category>
+            <category>KDB Beginner</category>
+            <category>KDB Learning</category>
         </item>
         <item>
             <title><![CDATA[How to Read, Understand and Learn KDB/Q code]]></title>
@@ -949,8 +972,8 @@ When it comes to persisting data to disk, the options include:</p>
 <p>As an exercise, you can delve into the second code example from the original <a href="https://community.kx.com/t5/Community-Blogs/Meet-the-Zen-monks/ba-p/11604" target="_blank" rel="noopener noreferrer">post</a> by Stephen Taylor and attempt to decipher it independently. If you encounter any queries or uncertainties along the way, don't hesitate to reach out for assistance.</p>
 <p>Happy coding!</p>]]></content:encoded>
             <category>kdb/q</category>
-            <category>Learning</category>
-            <category>Beginner</category>
+            <category>KDB Learning</category>
+            <category>KDB Beginner</category>
             <category>Qbie</category>
         </item>
         <item>
@@ -1018,8 +1041,9 @@ When it comes to persisting data to disk, the options include:</p>
             <category>QTips</category>
             <category>KX</category>
             <category>Data Intellect</category>
-            <category>Learning</category>
-            <category>Beginner</category>
+            <category>KDB Learning</category>
+            <category>KDB Beginner</category>
+            <category>Qbie</category>
         </item>
         <item>
             <title><![CDATA[Welcome]]></title>

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[3645],{76333:e=>{e.exports=JSON.parse('{"label":"KDB Beginner","permalink":"/blog/tags/kdb-beginner","allTagsPath":"/blog/tags","count":3,"unlisted":false}')}}]);
