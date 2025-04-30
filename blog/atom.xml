@@ -2,11 +2,44 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2025-04-28T00:00:00.000Z</updated>
+    <updated>2025-05-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[KX Axademic Program Relaunch]]></title>
+        <id>https://DefconQ.github.io/blog/KX Academic Program Relaunch</id>
+        <link href="https://DefconQ.github.io/blog/KX Academic Program Relaunch"/>
+        <updated>2025-05-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Are you a student eager to launch your career in finance, quantitative development, or financial data engineering?]]></summary>
+        <content type="html"><![CDATA[<p>Are you a student eager to launch your career in finance, quantitative development, or financial data engineering?</p>
+<p>In today’s highly competitive job market, setting yourself apart is more important than ever. One of the best ways to do that? Learn a technology that’s been powering the financial industry since the late '80s, <strong>KDB/Q.</strong></p>
+<p>Big news for all university students passionate about finance and tech:
+<strong>KX is relaunching its Academic Program in June 2025!</strong></p>
+<p>What does this mean for you?</p>
+<ul>
+<li>Expanded free-tier licenses for students and faculty</li>
+<li>Educational resources and community support</li>
+<li>Hands-on workshops and more</li>
+</ul>
+<p>KX is currently partnering with universities globally. If you’re interested, speak to a professor, pitch a project idea, and get in touch with <strong>KX</strong> at <a href="mailto:devrel@kx.com" target="_blank" rel="noopener noreferrer">devrel@kx.com</a></p>
+<p>And if you’re wondering where to begin your KDB/Q journey, start with my blog: <a href="https://www.defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources" target="_blank" rel="noopener noreferrer">Go-To KDB/Q Learning Resources</a></p>
+<p>You can find the full <strong>KX Academic Program Description</strong> <a href="https://github.com/DefconQ/defconQ/tree/master/my-website/blog/2025-05-01-kx-academia/academicProgram.pdf" target="_blank" rel="noopener noreferrer">here</a></p>
+<p><img decoding="async" loading="lazy" alt="KX Academic Program" src="https://defconq.github.io/assets/images/academicProgram-6c88d3fd17764714b3c0563e7c78af05.pdf" class="img_ev3q"></p>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="Community" term="Community"/>
+        <category label="DefconQ" term="DefconQ"/>
+        <category label="Academia" term="Academia"/>
+        <category label="Students" term="Students"/>
+        <category label="Learning" term="Learning"/>
+        <category label="KDB Beginner" term="KDB Beginner"/>
+        <category label="KX" term="KX"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Brews and Qs - KX and DefconQ Happy Hour!]]></title>
         <id>https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!</id>
@@ -1119,31 +1152,5 @@ When it comes to persisting data to disk, the options include:</p>
         <category label="KDB Learning" term="KDB Learning"/>
         <category label="KDB Beginner" term="KDB Beginner"/>
         <category label="Qbie" term="Qbie"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Welcome]]></title>
-        <id>https://DefconQ.github.io/blog/welcome</id>
-        <link href="https://DefconQ.github.io/blog/welcome"/>
-        <updated>2023-08-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Welcome to DefconQ - Your Beginner's Guide to Navigating the KDB/Q Universe!]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="welcome-to-defconq---your-beginners-guide-to-navigating-the-kdbq-universe">Welcome to DefconQ - Your Beginner's Guide to Navigating the KDB/Q Universe!<a href="https://defconq.github.io/blog/welcome#welcome-to-defconq---your-beginners-guide-to-navigating-the-kdbq-universe" class="hash-link" aria-label="Direct link to Welcome to DefconQ - Your Beginner's Guide to Navigating the KDB/Q Universe!" title="Direct link to Welcome to DefconQ - Your Beginner's Guide to Navigating the KDB/Q Universe!">​</a></h2>
-<p>Hey there, tech enthusiasts and aspiring KDB/Q developers! Are you ready to embark on an exciting journey into the world of q programming, tice architecture, and design? Look no further, because you've just stumbled upon your ultimate resource for demystifying the KDB/Q landscape.</p>
-<p>We get it - starting out in the tech world can be a bit overwhelming. The jargon, the paradigms, the concepts - they can feel like a maze that's hard to navigate. But fear not! Our mission is to guide you through this maze, one step at a time, and make these seemingly complex topics as easy to grasp as building blocks.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="why-are-we-here">Why Are We Here?<a href="https://defconq.github.io/blog/welcome#why-are-we-here" class="hash-link" aria-label="Direct link to Why Are We Here?" title="Direct link to Why Are We Here?">​</a></h3>
-<p>Being a self-starter myself - our blog is born out of the desire to make KDB/Q accessible to everyone, especially beginners. We've been in your shoes, and we understand the struggles of wrapping your head around the q programming language, tick architecture, and design principles. That's why we're here to break down those barriers, sprinkle in some practical tips, and empower you to dive into the KDB/Q world with confidence.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="what-can-you-expect">What Can You Expect?<a href="https://defconq.github.io/blog/welcome#what-can-you-expect" class="hash-link" aria-label="Direct link to What Can You Expect?" title="Direct link to What Can You Expect?">​</a></h4>
-<p>Whether you're a complete novice or someone looking to brush up on their skills, our blog has something for you. We'll start with the basics, explaining q programming paradigms in a way that won't make your head spin. We'll delve into the intricacies of tick architecture and design, so you can build solid foundations for your projects.</p>
-<p>But that's not all! We're curating a collection of helpful resources that'll serve as your tech toolbox. From must-read articles to insightful videos, we're cherry-picking the best content to aid your learning journey. And yes, we're rolling up our sleeves to create step-by-step tutorials that walk you through real-world scenarios, so you can see these concepts in action.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="join-us-on-this-adventure">Join Us On This Adventure<a href="https://defconq.github.io/blog/welcome#join-us-on-this-adventure" class="hash-link" aria-label="Direct link to Join Us On This Adventure" title="Direct link to Join Us On This Adventure">​</a></h3>
-<p>Buckle up, because this is a journey you won't want to miss. Whether you're aspiring to be a programmer, an architect, or just someone intrigued by the tech magic happening behind the scenes, we're here to welcome you with open arms. Let's turn the overwhelming into the understandable, the complex into the clear, and the daunting into the doable.</p>
-<p>So, stick around, bookmark us, and get ready to embark on a tech adventure that'll leave you with newfound knowledge, skills, and an unquenchable thirst for all things tech. Welcome to DefconQ - where we're turning tech novices into tech savvy superheroes, one blog post at a time!</p>
-<p><img decoding="async" loading="lazy" alt="Hello World" src="https://defconq.github.io/assets/images/HelloWorld-7a27dc6d1865c697ecd52b33398d80e0.png" width="1380" height="784" class="img_ev3q"></p>]]></content>
-        <author>
-            <name>Alexander Unterrainer</name>
-            <uri>https://github.com/AUnterrainer</uri>
-        </author>
-        <category label="kdb/q" term="kdb/q"/>
-        <category label="welcome" term="welcome"/>
-        <category label="Hello World" term="Hello World"/>
     </entry>
 </feed>
