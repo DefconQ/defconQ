@@ -1,6 +1,6 @@
 ---
 slug: KX Academic Program Relaunch
-title: KX Axademic Program Relaunch
+title: KX Academic Program Relaunch
 authors: [alexander]
 hide_table_of_contents: true
 tags: [kdb/q, Community, DefconQ, Academia, Students, Learning, KDB Beginner, KX]
@@ -27,6 +27,8 @@ And if you’re wondering where to begin your KDB/Q journey, start with my blog:
 
 
 You can find the full **KX Academic Program Description** [here](https://github.com/DefconQ/defconQ/tree/master/my-website/blog/2025-05-01-kx-academia/academicProgram.pdf)
+
+And if you're based in London, why not join the vibrant KDB/Q community for our very first **Happy Hour**, hosted by me and ponsored by KX. You can find all the details [here](https://www.defconq.tech/blog/Brews%20and%20Qs%20-%20KX%20and%20DefconQ%20Happy%20Hour!)
 
 ![KX Academic Program](./academicProgram.pdf)
 
