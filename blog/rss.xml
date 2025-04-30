@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[KX Axademic Program Relaunch]]></title>
+            <title><![CDATA[KX Academic Program Relaunch]]></title>
             <link>https://DefconQ.github.io/blog/KX Academic Program Relaunch</link>
             <guid>https://DefconQ.github.io/blog/KX Academic Program Relaunch</guid>
             <pubDate>Thu, 01 May 2025 00:00:00 GMT</pubDate>
@@ -27,6 +27,7 @@
 <p>KX is currently partnering with universities globally. If you’re interested, speak to a professor, pitch a project idea, and get in touch with <strong>KX</strong> at <a href="mailto:devrel@kx.com" target="_blank" rel="noopener noreferrer">devrel@kx.com</a></p>
 <p>And if you’re wondering where to begin your KDB/Q journey, start with my blog: <a href="https://www.defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources" target="_blank" rel="noopener noreferrer">Go-To KDB/Q Learning Resources</a></p>
 <p>You can find the full <strong>KX Academic Program Description</strong> <a href="https://github.com/DefconQ/defconQ/tree/master/my-website/blog/2025-05-01-kx-academia/academicProgram.pdf" target="_blank" rel="noopener noreferrer">here</a></p>
+<p>And if you're based in London, why not join the vibrant KDB/Q community for our very first <strong>Happy Hour</strong>, hosted by me and ponsored by KX. You can find all the details <a href="https://www.defconq.tech/blog/Brews%20and%20Qs%20-%20KX%20and%20DefconQ%20Happy%20Hour!" target="_blank" rel="noopener noreferrer">here</a></p>
 <p><img decoding="async" loading="lazy" alt="KX Academic Program" src="https://defconq.github.io/assets/images/academicProgram-6c88d3fd17764714b3c0563e7c78af05.pdf" class="img_ev3q"></p>]]></content:encoded>
             <category>kdb/q</category>
             <category>Community</category>
