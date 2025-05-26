@@ -1,0 +1,16 @@
+# Symbol list for stock data download
+# One symbol per line, comments start with #
+AAPL
+MSFT
+GOOG
+AMZN
+META
+TSLA
+# International stocks
+9988.HK
+VOW3.DE
+7203.T
+# ETFs
+SPY
+QQQ
+VTI
