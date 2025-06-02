@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[1102],{75332:e=>{e.exports=JSON.parse('{"label":"Giveaway","permalink":"/blog/tags/giveaway","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

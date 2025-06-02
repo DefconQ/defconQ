@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[4473],{2875:s=>{s.exports=JSON.parse('{"label":"Quant Strats 2025","permalink":"/blog/tags/quant-strats-2025","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
