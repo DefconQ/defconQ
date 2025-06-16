@@ -26,7 +26,7 @@ system"l tick_databento/",(src:first .z.x,enlist"sym_databento"),".q"
 
 if[not system"p";system"p 5010"]
 
-\l tick/u.q
+\l tick_databento/u.q
 \d .u
 ld:{if[not type key L::`$(-10_string L),string x;.[L;();:;()]];i::j::-11!(-2;L);if[0<=type i;-2 (string L)," is a corrupt log. Truncate to length ",(string last i)," and restart";exit 1];hopen L};
 // tick:{init[];if[not min(`time`sym~2#key flip value@)each t;'`timesym];@[;`sym;`g#]each t;d::.z.D;if[l::count y;L::`$":",y,"/",x,10#".";l::ld d]};
