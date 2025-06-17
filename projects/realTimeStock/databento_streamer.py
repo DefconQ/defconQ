@@ -6,6 +6,16 @@ Historical Databento data streamer to KDB+
 - Downloads historical stock data from Databento
 - Streams data to a KDB+ ticker plant using kola
 - Uses Polars DataFrames for efficient data processing
+Run CMD:
+python databento_streamer.py \
+  --databento-key YOUR_API_KEY \
+  --dataset XNAS.ITCH \
+  --schema trades \
+  --symbols AAPL TSLA MSFT \
+  --start-date 2024-01-01 \
+  --end-date 2024-01-02 \
+  --interval 60
+
 """
 
 import os
