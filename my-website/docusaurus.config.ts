@@ -89,7 +89,7 @@ const config: Config = {
       backgroundColor: '#74e8a3',
       isCloseable: true,
       //content: 'If you would like to connect, please reach out on <a href="https://www.linkedin.com/in/alexanderunterrainer/">Linkedin</a>',
-      content: 'Stay up to date with the latest blogs posts - subscribe to my free Substack newsletter now <a href="https://defconq.substack.com">Free Substack Newsletter</a>',
+      content: 'Stay up to date with the latest blogs posts - subscribe to my free Substack newsletter now <a href="https://defconq.substack.com">Free Substack Newsletter</a> or follow me on <a href="https://medium.com/@defconq">Medium</a>',
     },
     tableOfContents: {
       // minHeadingLevel: 2,
@@ -118,7 +118,12 @@ const config: Config = {
 	{to: '/cv/cv', label: 'CV', position: 'left'},
         {
           href: 'https://defconq.substack.com',
-          label: 'Newsletter',
+          label: 'Substack Newsletter',
+          position: 'left',
+        },
+        {
+          href: 'https://medium.com/@defconq',
+          label: 'Medium',
           position: 'left',
         },
         {
@@ -173,8 +178,12 @@ const config: Config = {
 	      href: 'https://www.youtube.com/@DefconQ',
             },
             {
-              label: 'Newsletter',
+              label: 'Substack Newsletter',
               href: 'https://defconq.substack.com',
+            },
+            {
+              label: 'Medium',
+              href: 'https://medium.com/@defconq',
             },
             {
               label: 'GitHub',
