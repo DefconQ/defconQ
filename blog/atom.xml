@@ -2,11 +2,49 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2025-06-20T00:00:00.000Z</updated>
+    <updated>2025-07-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[From Elite to Everyone - KX Community Edition Breaks Loose]]></title>
+        <id>https://DefconQ.github.io/blog/From Elite to Everyone - KX Community Edition Breaks Loose</id>
+        <link href="https://DefconQ.github.io/blog/From Elite to Everyone - KX Community Edition Breaks Loose"/>
+        <updated>2025-07-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This is it ladies and gentleman! The moment we’ve all been waiting for! KX just dropped the long-promised Community Edition, and IT'S FREE. Yes!!, you read that right: it's free. Not for a week. Not for personal use only. Free to use, even commercially. Holy cow, this honestly feels like Christmas came early this year. If you're wondering what all the hype is about and why I'm so excited about this breaking news, keep reading, you don't want to miss this.]]></summary>
+        <content type="html"><![CDATA[<p>This is it ladies and gentleman! The moment we’ve all been waiting for! KX just dropped the long-promised <strong>Community Edition</strong>, and <strong>IT'S FREE</strong>. Yes!!, you read that right: <strong>it's free</strong>. Not for a week. Not for personal use only. <strong>Free to use, even commercially</strong>. Holy cow, this honestly feels like Christmas came early this year. If you're wondering what all the hype is about and why I'm so excited about this breaking news, keep reading, you don't want to miss this.</p>
+<p><img decoding="async" loading="lazy" alt="The cat is out of the bag - KX Community edition" src="https://defconq.github.io/assets/images/cat-681d8f636fa5131ec315fbe35d314e18.png" width="1024" height="1024" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kdb-x-the-next-evolution-of-time-series-databases">KDB-X: The Next Evolution of Time-Series Databases<a href="https://defconq.github.io/blog/From%20Elite%20to%20Everyone%20-%20KX%20Community%20Edition%20Breaks%20Loose#kdb-x-the-next-evolution-of-time-series-databases" class="hash-link" aria-label="Direct link to KDB-X: The Next Evolution of Time-Series Databases" title="Direct link to KDB-X: The Next Evolution of Time-Series Databases">​</a></h2>
+<p>First thing first, let's start with the biggest reveal: the name. The new KDB/Q release isn’t called 4.2 or 5.0… it’s now officially <strong>KDB-X</strong>. Whether this means we’re teaming up with Professor X, Wolverine, and the rest of the X-Men is still unconfirmed, but let’s just say I’m hopeful. Now, what exactly does this new edition bring? This is a public beta release, and KX has promised more features to come. But even in its current form, the offering is pretty generous. So, what’s actually included? A quick look at the product licensing page reveals that KDB-X gives you up to <strong>16GB of RAM</strong>, <strong>4 secondary threads per process</strong>, and <strong>8 IPC connections</strong>. Best of all, you can run it both on-premises and in the cloud, for personal and commercial use. Oh, and did I mention? PyKX is included too.</p>
+<p>After KX made the big announcement, I couldn’t resist giving KDB-X a spin myself. I headed over to the public preview page and just a few clicks later, I was up and running with the new release. Installation? By far the smoothest KDB/Q setup I’ve experienced to date. One simple command in the terminal kicks things off, and a short guided setup later, you’re good to go.</p>
+<p>What really stood out: transitioning from the previous version was completely seamless. No refactoring, no tweaks, no surprises. Everything just <em><strong>worked</strong></em> right out of the box.</p>
+<p><img decoding="async" loading="lazy" alt="KDB-X - KX Community edition" src="https://defconq.github.io/assets/images/kdb-x-5c5dd9fa6e8629370dd0cda09260f7a1.png" width="2320" height="1138" class="img_ev3q"></p>
+<p>One frustrating <strong>"feature"</strong> that’s finally been removed?!? Remember trying to use the Personal Edition offline, like during travel, on a plane, or anytime you had spotty or no internet, only to be blocked because it needed to validate your license? That’s now a thing of the past. KDB-X runs completely offline with no connection required. Finally, I can actually get some work done mid-flight and take my mind off my totally irrational fear of flying (yes, I know it’s silly, but hey, we’ve all got our quirks).</p>
+<p>Another pleasant surprise is that KX has made the Community Edition available not just for on-premise hardware, but also for cloud environments. Great news for all the cloud enthusiasts out there! Whether you're using GCP, Azure, or AWS, spinning up a virtual machine and running your KDB tick stack is now simpler than ever. Or, as LMC and U2 put it best: “Take me to the clouds above."</p>
+<p>If you recall the promises made during the last KX meetup about a community edition, the first look at KDB-X suggests that KX is staying true to their word. While there may not be a flood of groundbreaking changes just yet, this release is a strong signal that KX is listening to its community and taking steps in the right direction. It feels like the momentum is shifting, and I’m optimistic there are plenty more updates and features on the horizon.</p>
+<p>The fact that KDB-X Community Edition is free for commercial use is a game-changer. Within the limits of the community license, you can build, deploy, and even run production systems without spending a single penny. This opens up huge opportunities, especially for startups or smaller companies that want to prototype, test market fit, or build real-time analytics platforms without the upfront licensing costs. You get the power of KDB-X, Wall Street’s fastest time-series engine, with zero financial barrier to entry. It’s the perfect bridge to go from idea to production, and only scale up commercially when you’re ready.</p>
+<p>Ultimately, this is fantastic news for the entire KDB community. By lowering the entry barrier, it will attract more developers, spark greater interest, and, fingers crossed, lead to more job opportunities and roles across the industry.</p>
+<p>So, what’s next for <em><strong>YOU</strong></em>? If you’re as excited as I am about this shift and curious to explore how you can use and benefit from KDB-X, whether it’s building, testing, experimenting, or just geeking out over all things KDB, don’t hesitate to reach out. I’d love to connect and chat. In the meantime, here are some excellent resources to help you get started.</p>
+<p><strong>Resources</strong></p>
+<ul>
+<li><a href="https://kx.com/products/introducing-kdb-x-public-preview/" target="_blank" rel="noopener noreferrer">Introducing KDB-X Public Preview</a></li>
+<li><a href="https://docs.kx.com/product/licensing/usage-restrictions.htm#kdb-x-personal-trial-download" target="_blank" rel="noopener noreferrer">Product Usage Restrictions</a></li>
+<li><a href="https://www.defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources" target="_blank" rel="noopener noreferrer">Go-To KDB/Q Learning Resources</a></li>
+<li><a href="https://www.defconq.tech/blog/How%20to%20Read,%20Understand%20and%20Learn%20KDB/Q%20code" target="_blank" rel="noopener noreferrer">How to Read, Understand and Learn KDB/Q code</a></li>
+<li><a href="https://www.defconq.tech/docs/architecture/plain" target="_blank" rel="noopener noreferrer">The Plain Vanilla Tick Setup</a></li>
+<li><a href="https://www.defconq.tech/docs/category/kdbq-study-roadmap" target="_blank" rel="noopener noreferrer">KDB/Q Study Roadmap</a></li>
+<li><a href="https://www.defconq.tech/docs/category/tutorials" target="_blank" rel="noopener noreferrer">KDB/Q Tutorials</a></li>
+</ul>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="DefconQ" term="DefconQ"/>
+        <category label="KX" term="KX"/>
+        <category label="Community Edition" term="Community Edition"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[The Array Cast - Where Code Meets Curiosity]]></title>
         <id>https://DefconQ.github.io/blog/The Array Cast - Where Code Meets Curiosity</id>
@@ -1017,46 +1055,5 @@ When it comes to persisting data to disk, the options include:</p>
         <category label="AOC" term="AOC"/>
         <category label="Challenges" term="Challenges"/>
         <category label="Practice" term="Practice"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Where to find help]]></title>
-        <id>https://DefconQ.github.io/blog/Where to find help</id>
-        <link href="https://DefconQ.github.io/blog/Where to find help"/>
-        <updated>2023-09-18T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[So, you've delved into 'Q for Mortals' and a few other fundamental references I shared with you in my previous post, immersed yourself in code, tutorials, and successfully tackled your initial tasks. However, as you progress, you inevitably encounter that frustrating error. You try the different approaches you normally attempt when running into an error but you've exhausted every strategy, set breakpoints, meticulously stepped through the code, and yet, you can't figure out what's wrong with your code. Maybe you've encountered a challenge you are unsure how to tackle or perhaps you simply want to ensure your solution is optimal, whether in terms of execution time or memory usage. In any of these scenarios, the need for assistance arises, and in this blog post, we'll look at the different options for help with your KDB/Q challenges.]]></summary>
-        <content type="html"><![CDATA[<p>So, you've delved into 'Q for Mortals' and a few other fundamental references I shared with you in my previous <a href="https://defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources" target="_blank" rel="noopener noreferrer">post</a>, immersed yourself in code, tutorials, and successfully tackled your initial tasks. However, as you progress, you inevitably encounter that frustrating error. You try the different approaches you normally attempt when running into an error but you've exhausted every strategy, set breakpoints, meticulously stepped through the code, and yet, you can't figure out what's wrong with your code. Maybe you've encountered a challenge you are unsure how to tackle or perhaps you simply want to ensure your solution is optimal, whether in terms of execution time or memory usage. In any of these scenarios, the need for assistance arises, and in this blog post, we'll look at the different options for help with your KDB/Q challenges.</p>
-<p>In the early days of KDB/Q (technically it was K back then but lets keep the history of KDB/Q for another blog post), comprehensive documentation and online resources were scarce. For those utilizing KDB/Q in a professional capacity, one option was to register with your work email address on a listbox/topicbox email distribution list. Here, you could post your questions or inquiries, relying on the hope that experienced and knowledgeable developers within the community would offer responses. Nevertheless, if you weren't using KDB/Q in a professional context or attempted to learn it independently, there were limited documentation and resources at your disposal.</p>
-<p>Over time, the KDB/Q community expanded, leading to more comprehensive documentation and increased resources for seeking assistance. While KDB/Q doesn't enjoy the same level of all-pervasive online information as Python, where a simple Google search for 'How to do XYZ in Python' yields countless results, you can still depend on the two sources mentioned below to access support.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kx-community">KX Community<a href="https://defconq.github.io/blog/Where%20to%20find%20help#kx-community" class="hash-link" aria-label="Direct link to KX Community" title="Direct link to KX Community">​</a></h2>
-<p>In September 2021, KX launched the KX Community, an online forum designed to serve as a centralized hub for all your KDB/Q inquiries. Within this forum, queries and issues are categorized into various discussion topics, including KDB/Q, KX Solutions or Products, KX Academy (which I previously discussed <a href="https://defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources#kx-academy" target="_blank" rel="noopener noreferrer">here</a>), KX Insight, or their latest offering, KDB.AI.</p>
-<p>The forum is open to anyone seeking answers related to KDB/Q, offering a user-friendly interface. It enjoys active participation from KDB/Q developers within the industry, and, notably, it is closely monitored by seasoned developers from KX. These KX experts serve as forum administrators and actively engage by responding to inquiries and questions.</p>
-<p>In my opinion, the KX Community serves as an excellent resource for assistance when you encounter challenges. Additionally, it provides a valuable platform for acquiring knowledge about prevalent issues and their corresponding resolutions. Whether you're striving to comprehend the intricacies of KDB/Q, grappling with an architectural design query, or seeking insights into any of the KX products, this forum proves highly beneficial.</p>
-<p>If you haven't signed up yet, go and register yourself <a href="https://community.kx.com/" target="_blank" rel="noopener noreferrer">here</a></p>
-<p><img decoding="async" loading="lazy" alt="KX Community" src="https://defconq.github.io/assets/images/KXCommunity1-6568cec424c81a7b71bdec9196332c30.png" width="1412" height="990" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="KX Community" src="https://defconq.github.io/assets/images/KXCommunity2-be3e7a89de0514ad917d76eac5ec4837.png" width="1371" height="1081" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kx-slack-workspace">KX Slack workspace<a href="https://defconq.github.io/blog/Where%20to%20find%20help#kx-slack-workspace" class="hash-link" aria-label="Direct link to KX Slack workspace" title="Direct link to KX Slack workspace">​</a></h2>
-<p><strong>KX</strong> has recently launched a <strong>public Slack workspace</strong> for the KDB/Q community, a great place to ask questions, connect with fellow KDB/Q enthusiasts, discover job opportunities in the <code>#careers</code> channel, and stay up to date about the latest developments across the ecosystem.
-If you're working with KDB/Q or just curious to learn more, make sure to join the conversation <a href="https://kx-community.slack.com/join/shared_invite/zt-2xdd6ln75-1MyNtCPm3t6ZmCpD5Fnbkw#/shared-invite/email" target="_blank" rel="noopener noreferrer">here</a>!</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="stackoverflow">Stackoverflow<a href="https://defconq.github.io/blog/Where%20to%20find%20help#stackoverflow" class="hash-link" aria-label="Direct link to Stackoverflow" title="Direct link to Stackoverflow">​</a></h2>
-<p>If you're a developer, you're likely familiar with StackOverflow. However, for those who may not have encountered StackOverflow before, here's an analogy: StackOverflow is to programmers what Google is to non-programmers - an essential website for finding answers to all your questions.</p>
-<p>As of the time of this writing, StackOverflow boasts a vast repository of 23,908,328 questions spanning the realms of programming, software development, and similar domains. Out of these 23 Million questions, a mere 2,269 questions are related to KDB/Q. Yes, you read that right, meaning that only <strong>0.0095%</strong> of all questions on Stackoverflow are related to KDB/Q. That's pretty low if you ask me. To provide a comparison, consider Python, one of the widely-used mainstream programming languages, which boasts a staggering 2.1 million questions, equivalent to approximately 9%.</p>
-<p>The relatively limited number of KDB/Q questions on StackOverflow is combined with a lack of a robust categorization. While I consider StackOverflow a valuable platform for posting questions, I must also acknowledge that it may not offer the same level of structured organization as the KX Community.  However, it's worth mentioning that there is an active participation from experienced developers who consistently respond to KDB/Q queries, and I've personally come across valuable solutions and code snippets within the StackOverflow KDB/Q section as well.</p>
-<p>I consider Stack Overflow to be a valuable supplement to your repertoire of resources for addressing KDB/Q-related queries.</p>
-<p><img decoding="async" loading="lazy" alt="Stackoverflow" src="https://defconq.github.io/assets/images/Stackoverflow-ea88f4c118588bdb814af2c0b911414d.png" width="1446" height="1065" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="mentorship">Mentorship<a href="https://defconq.github.io/blog/Where%20to%20find%20help#mentorship" class="hash-link" aria-label="Direct link to Mentorship" title="Direct link to Mentorship">​</a></h2>
-<p>Another approach to seek solutions for your KDB/Q queries is to explore the possibility of finding a mentor. Whether you discover a mentor within your current team or organization, or seek one externally, I recommend initiating a mentor-mentee connection with an experienced KDB/Q developer. While some highly skilled KDB/Q developers may appear intimidating at first, you may be pleasantly surprised by the willingness of most of them to offer assistance and guidance.</p>
-<p>To summarize, the combination of KX Community and StackOverflow, along with the option of connecting with a mentor or a knowledgeable colleague, provides a comprehensive support system to address any KDB/Q-related challenges you may encounter.</p>
-<p>Happy Coding!</p>]]></content>
-        <author>
-            <name>Alexander Unterrainer</name>
-            <uri>https://github.com/AUnterrainer</uri>
-        </author>
-        <category label="kdb/q" term="kdb/q"/>
-        <category label="Help" term="Help"/>
-        <category label="StackOverFlow" term="StackOverFlow"/>
-        <category label="KX Community" term="KX Community"/>
-        <category label="Mentorship" term="Mentorship"/>
-        <category label="KDB Beginner" term="KDB Beginner"/>
-        <category label="KDB Learning" term="KDB Learning"/>
     </entry>
 </feed>
