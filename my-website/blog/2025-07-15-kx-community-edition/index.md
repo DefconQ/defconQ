@@ -6,7 +6,7 @@ hide_table_of_contents: true
 tags: [kdb/q, DefconQ, KX, Community Edition]
 ---
 
-This is it ladies and gentleman! The moment we’ve all been waiting for! KX just dropped the long-promised **Community Edition**, and **IT'S FREE**. Yes!!, you read that right: **it's free**. Not for a week. Not for personal use only. **Free to use, even commercially**. Holy cow, this honestly feels like Christmas came early this year. If you're wondering what all the hype is about and why I'm so excited about this breaking news, keep reading, you don't want to miss this.
+This is it ladies and gentlemen! The moment we’ve all been waiting for! KX just dropped the long-promised **Community Edition**, and **IT'S FREE**. Yes!!, you read that right: **it's free**. Not for a week. Not for personal use only. **Free to use, even commercially**. Holy cow, this honestly feels like Christmas came early this year. If you're wondering what all the hype is about and why I'm so excited about this breaking news, keep reading, you don't want to miss this.
 
 ![The cat is out of the bag - KX Community edition](./cat.png)
 
