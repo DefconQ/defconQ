@@ -1,0 +1,8 @@
+{
+  "label": "Design Patterns for KDB/Q Systems",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "In this section we will explore proven architectural and design patterns for building scalable, maintainable, and high-performance KDB/Q systems. From real-time analytics pipelines to data access layers, this section breaks down best practices, common pitfalls, and elegant solutions used across the industry."
+  }
+}
