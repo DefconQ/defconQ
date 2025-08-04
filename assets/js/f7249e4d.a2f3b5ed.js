@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2210],{56277:e=>{e.exports=JSON.parse('{"label":"good practice","permalink":"/blog/tags/good-practice","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
