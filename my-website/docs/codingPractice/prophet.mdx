@@ -23,7 +23,7 @@ Before we can demonstrate the concept in action, we need to set the stage. We'll
 
 ```
 q)n:1000000
-q)equities:([] date:n?.z.D+til 4;sym:n?`AAPL`GOOG`MSFT`IBM;price:n?100.0)
+q)equities:([] date:n?.z.D+til 4;sym:`g#n?`AAPL`GOOG`MSFT`IBM;price:n?100.0)
 q)select count i by sym from equities
 sym | x
 ----| ------
@@ -44,7 +44,7 @@ q)1e-6*-22!equities
 16.74991
 ```
 
-As shown in the code snippet above, we’ve now created an `equities` table with one million records, about 250,000 rows for each symbol and each date. Before jumping into our analytics, let’s take a look at the table’s size. Using the [`-22!`](https://code.kx.com/q/basics/internal/#-22x-uncompressed-length) operator, which returns the size of an object in bytes. A quick conversion reveals our table occupies 16MB. Now, let’s move on to the analytics: we’ll calculate the open, high, low, and close prices for every date-symbol combination. This is nothing complex, just a simple one-liner in KDB/Q. Timing the computation shows it completes in just 16 milliseconds, and the resulting summary table is tiny: only 756 bytes. 
+As shown in the code snippet above, we’ve now created an `equities` table with one million records, about 250,000 rows for each symbol and each date. Before jumping into our analytics, let’s take a look at the table’s size. Using the [`-22!`](https://code.kx.com/q/basics/internal/#-22x-uncompressed-length) operator, which returns the uncompressed transmission size of an object in bytes. A quick conversion reveals our table would use 16MB. Now, let’s move on to the analytics: we’ll calculate the open, high, low, and close prices for every date-symbol combination. This is nothing complex, just a simple one-liner in KDB/Q. Timing the computation shows it completes in just 16 milliseconds, and the resulting summary table is tiny: only 756 bytes. 
 
 ```
 q)exec `open`high`low`close!(first;max;min;last)@\:price by date,sym from equities
@@ -74,9 +74,9 @@ q)-22!exec `open`high`low`close!(first;max;min;last)@\:price by date,sym from eq
 
 ## The Old-School Data Detour: Dragging Data the Long Way Around
 
-Next, let’s mimic the typical approach most mainstream developers follow, hink Python or Java. The standard workflow involves connecting to a database, pulling over the raw data, and then performing analytics locally within the application. It’s a slow and resource-heavy method, especially unsuited for latency-sensitive environments. To simulate this in KDB/Q, we start by assigning port `7777` to the process that holds our equities data, then connect to it from a separate client process, just as an external app would.
+Next, let’s mimic the typical approach most mainstream developers follow, think Python or Java. The standard workflow involves connecting to a database, pulling over the raw data, and then performing analytics locally within the application. It’s a slow and resource-heavy method, especially unsuited for latency-sensitive environments. To simulate this in KDB/Q, we start by assigning port `7777` to the process that holds our equities data, then connect to it from a separate client process, just as an external app would.
 
-We start by connecting to the data process using [`hopen`](https://code.kx.com/q/ref/hopen/), which sets up a communication channel between the client and server processes. Then, we use a lambda, an anonymous function, to fetch the entire `equities` table and perform the analytics locally on the client side. For clarity, we also output the size of the data both before and after the analytics step. As expected, the full dataset is transferred across the network, 16MB of it. While that may not seem like much in this example, in real-world production systems, this kind of data movement can become a major performance bottleneck. When we measure the runtime, this client-side approach takes 56 milliseconds, about 3.5 times longer than executing the same calculation directly on the server.
+We start by connecting to the data process using [`hopen`](https://code.kx.com/q/ref/hopen/), which sets up a communication channel between the client and server processes. Then, we use a lambda, an anonymous function, to fetch the entire `equities` table and perform the analytics locally on the client side. For clarity, we also output the transmission size of the data both before and after the analytics step. As expected, the full dataset is transferred across the network, 16MB of it. While that may not seem like much in this example, in real-world production systems, this kind of data movement can become a major performance bottleneck. When we measure the runtime, this client-side approach takes 56 milliseconds, about 3.5 times longer than executing the same calculation directly on the server.
 
 ```
 q)h:hopen 7777
