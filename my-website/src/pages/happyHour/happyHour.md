@@ -9,7 +9,7 @@ Find out more and sign up [**here**](https://www.defconq.tech/blog/New%20York,%2
 
 ## 2025.09.10 Brews and Qs Belfast Edition - KX and DefconQ Happy Hour!
 
-DefconQ is coming to Belfast! I’m excited to announce the very **first Belfast KDB/Q Community Happy Hour**, hosted by **DefconQ** and proudly sponsored by [**KX**](https://kx.com). Find all the details here. 
+DefconQ is coming to Belfast! I’m excited to announce the very **first Belfast KDB/Q Community Happy Hour**, hosted by **DefconQ** and proudly sponsored by [**KX**](https://kx.com). Find all the details [here](https://www.defconq.tech/blog/Brews%20and%20Qs%20Belfast%20Edition%20-%20KX%20and%20DefconQ%20Happy%20Hour!). 
 
 ## 2025.05.22 Brews and Qs - KX and DefconQ Happy Hour!
 
