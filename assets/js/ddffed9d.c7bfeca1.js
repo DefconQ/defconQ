@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6187],{46802:e=>{e.exports=JSON.parse('{"label":"Happy Hour","permalink":"/blog/tags/happy-hour","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

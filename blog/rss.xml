@@ -4,10 +4,38 @@
         <title>DefconQ Blog</title>
         <link>https://DefconQ.github.io/blog</link>
         <description>DefconQ Blog</description>
-        <lastBuildDate>Wed, 06 Aug 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 14 Aug 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Brews and Qs Belfast Edition - KX and DefconQ Happy Hour!]]></title>
+            <link>https://DefconQ.github.io/blog/Brews and Qs Belfast Edition - KX and DefconQ Happy Hour!</link>
+            <guid>https://DefconQ.github.io/blog/Brews and Qs Belfast Edition - KX and DefconQ Happy Hour!</guid>
+            <pubDate>Thu, 14 Aug 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[September is going to be a busy one. Just in time for DefconQ’s 2nd birthday,  we’re hosting not one, but two Happy Hours, on two different continents! I’m thrilled to announce the Brews & Qs: Belfast Edition 🍻, hosted by DefconQ and kindly sponsored by KX.]]></description>
+            <content:encoded><![CDATA[<p>September is going to be a busy one. Just in time for <strong>DefconQ’s 2nd birthday</strong>,  we’re hosting <strong>not one, but two Happy Hours</strong>, on two different continents! I’m thrilled to announce the <strong>Brews &amp; Qs: Belfast Edition 🍻</strong>, hosted by <strong>DefconQ</strong> and kindly sponsored by <a href="https://kx.com/" target="_blank" rel="noopener noreferrer"><strong>KX</strong></a>.</p>
+<p>Join us for a relaxed evening of conversation, community, and cocktails at the KX Happy Hour, a casual meetup for <strong>KDB/Q developers</strong> to network, swap stories, and share ideas. Whether you’re a seasoned veteran or just starting out, this is a great opportunity to connect with others who speak your language (literally).</p>
+<p>This session’s conversation starter: the <a href="https://kdb-x.kx.com/sign-in" target="_blank" rel="noopener noreferrer"><strong>public preview of KDB-X Community Edition</strong></a>. We’ll chat about what’s new, how it might fit into your projects, and hear perspectives from fellow developers, all in an open, informal setting.</p>
+<p>No slides, no agenda, just great conversations, good company, and a chance to strengthen your KDB-X/Q network.</p>
+<p><img decoding="async" loading="lazy" alt="Brews and Qs Belfast Edition - KX and DefconQ Happy Hour" src="https://defconq.github.io/assets/images/DefconQ-Belfast-a887e167d091926564c6738d1cacb2c7.png" width="637" height="676" class="img_ev3q"></p>
+<p>📍 You’ll find the event details and sign-up link below.
+💬 If you can’t make the Happy Hour but still want to connect, drop me a message and I’ll do my best to arrange something.</p>
+<p><strong>When</strong>: Wednesday, 10th September, from 17:00</p>
+<p><strong>Where</strong>: <a href="https://maps.app.goo.gl/dMm8gVPAjcHpiDRW9" target="_blank" rel="noopener noreferrer">Tetto Garden at the Bullitt Hotel, Belfast, Northern Ireland</a></p>
+<p><strong>Signup here</strong>: <a href="https://events.kx.com/brewsandqsbelfast" target="_blank" rel="noopener noreferrer">Event Signup</a></p>
+<p><strong>Linkedin Event Page:</strong> <a href="https://www.linkedin.com/events/7361852603938275328/" target="_blank" rel="noopener noreferrer">here</a></p>
+<p>Looking forward to seeing many of you there!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="about-kx">About <a href="https://kx.com/" target="_blank" rel="noopener noreferrer">KX</a><a href="https://defconq.github.io/blog/Brews%20and%20Qs%20Belfast%20Edition%20-%20KX%20and%20DefconQ%20Happy%20Hour!#about-kx" class="hash-link" aria-label="Direct link to about-kx" title="Direct link to about-kx">​</a></h2>
+<p>Their mission is to accelerate data and AI-driven innovation with high performance analytics solutions, enabling their customers to transform into AI-first enterprises. <a href="https://kx.com/" target="_blank" rel="noopener noreferrer">KX</a> is trusted by the world's top investment banks &amp; hedge funds, aerospace and defense, life and health sciences, semiconductor, telecommunications, and advanced manufacturing companies. KX technology enables the discovery of richer, actionable insights for faster, better informed decision making which drives competitive advantage and transformative growth for our customers. KX operates across North America, Europe, and Asia Pacific.</p>]]></content:encoded>
+            <category>kdb/q</category>
+            <category>DefconQ</category>
+            <category>Belfast</category>
+            <category>KX</category>
+            <category>Community Meetup</category>
+            <category>Happy Hour</category>
+            <category>KDB-X</category>
+        </item>
         <item>
             <title><![CDATA[New York, New York - DefconQ Goes International]]></title>
             <link>https://DefconQ.github.io/blog/New York, New York - DefconQ Goes International</link>
@@ -957,24 +985,6 @@ When it comes to persisting data to disk, the options include:</p>
             <category>good practice</category>
             <category>software development</category>
             <category>programming</category>
-        </item>
-        <item>
-            <title><![CDATA[Advent of Code -  Daily Coding Practice]]></title>
-            <link>https://DefconQ.github.io/blog/Advent of Code -  Daily Coding Practice</link>
-            <guid>https://DefconQ.github.io/blog/Advent of Code -  Daily Coding Practice</guid>
-            <pubDate>Thu, 30 Nov 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[It's this time of the year again: it's getting cold and dark outside, the days are getting shorter, Chris Rea is driving home, Santa is coming to town and all Mariah Carey wants for Christmas is you. As business requests hopefully slow down, and we enter code freeze, it's a good time to reflect on the past year and spend some time on sharpening our brains and KDB/Q coding skills. And what could possibly be better for that than tackling the daily coding challenges presented by Advent of Code?]]></description>
-            <content:encoded><![CDATA[<p>It's this time of the year again: it's getting cold and dark outside, the days are getting shorter, Chris Rea is driving home, Santa is coming to town and all Mariah Carey wants for Christmas is you. As business requests hopefully slow down, and we enter code freeze, it's a good time to reflect on the past year and spend some time on sharpening our brains and KDB/Q coding skills. And what could possibly be better for that than tackling the daily coding challenges presented by <a href="https://adventofcode.com/" target="_blank" rel="noopener noreferrer">Advent of Code</a>?</p>
-<p>Advent of Code is a daily coding challenge presented in the form of an advent calendar, running from December 1st to Christmas Day, December 25th. Initially created in 2015 by <a href="https://twitter.com/ericwastl" target="_blank" rel="noopener noreferrer">Eric Wastl</a>, it has become widely popular among programmers across various programming languages.</p>
-<p>The challenges are in form of small programming puzzles designed for diverse skill sets and levels that can be solved in any programming language you like. Participants use these puzzles for interview preparation, company training, university coursework, practice problems, engaging in speed contests, or challenging one another. You also don't need a computer science background in order to participate; a basic understanding of programming and some problem-solving skills are sufficient to make progress. Moreover, a high-end computer is not a requirement; each problem is designed to have a solution that runs within 15 seconds on ten-year-old hardware.</p>
-<p>Each day at midnight EST, a new problem is revealed, comprising two small problems that increase in difficulty as you advance through December. Solving each part of the problem correctly earns you one star. For those of you who love a competition, there are leaderboards, where earning the first star is worth 100 points, the second is 99, and so forth, down to 1 point for 100th place.</p>
-<p>While KDB/Q may not always be the optimal programming language for solving all puzzles, it serves as an excellent platform to sharpen your KDB/Q skills and cultivate creative problem-solving abilities. It provides an opportunity to tackle challenges that might not be encountered in your daily work routine. If you ever get stuck in one of the problems or don't feel experienced enough, don't lose hope. There are plenty of developers who share their solutions on LinkedIn or <a href="https://community.kx.com/" target="_blank" rel="noopener noreferrer">KX Community</a> and you can learn a lot by looking at their solutions.</p>
-<p>Get your keyboards ready, Advent of Code starts tomorrow! Join the fun <a href="https://adventofcode.com/" target="_blank" rel="noopener noreferrer">here</a></p>
-<p>Happy Coding!</p>]]></content:encoded>
-            <category>kdb/q</category>
-            <category>AOC</category>
-            <category>Challenges</category>
-            <category>Practice</category>
         </item>
     </channel>
 </rss>
