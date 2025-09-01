@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[8764],{25273:e=>{e.exports=JSON.parse('{"label":"UIUA","permalink":"/blog/tags/uiua","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

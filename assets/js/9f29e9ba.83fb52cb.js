@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6612],{17814:e=>{e.exports=JSON.parse('{"label":"Kenneth Iverson","permalink":"/blog/tags/kenneth-iverson","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

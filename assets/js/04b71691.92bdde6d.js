@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[1693],{45892:e=>{e.exports=JSON.parse('{"label":"Iverson College","permalink":"/blog/tags/iverson-college","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

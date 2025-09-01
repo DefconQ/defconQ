@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[7865],{71758:s=>{s.exports=JSON.parse('{"label":"KamilaLisp","permalink":"/blog/tags/kamila-lisp","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
