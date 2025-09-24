@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6422],{57573:e=>{e.exports=JSON.parse('{"label":"New York","permalink":"/blog/tags/new-york","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
