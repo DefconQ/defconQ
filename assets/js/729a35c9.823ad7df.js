@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[258],{90147:e=>{e.exports=JSON.parse('{"label":"Finance","permalink":"/blog/tags/finance","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

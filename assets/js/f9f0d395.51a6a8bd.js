@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2431],{60469:e=>{e.exports=JSON.parse('{"label":"Quant Finance","permalink":"/blog/tags/quant-finance","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
