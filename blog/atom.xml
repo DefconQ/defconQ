@@ -8,11 +8,24 @@
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[DefconQ Reddit Ask Me Anything (AMA)]]></title>
-        <id>https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything (AMA)</id>
-        <link href="https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything (AMA)"/>
+        <title type="html"><![CDATA[DefconQ Reddit Ask Me Anything AMA]]></title>
+        <id>https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything AMA</id>
+        <link href="https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything AMA"/>
         <updated>2025-10-27T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[As promised, I’m hosting a Reddit AMA (Ask Me Anything) on November 13th, 2025, where I will be answering all your questions about KDB/Q, the world’s most powerful time-series database and array programming language.]]></summary>
+        <content type="html"><![CDATA[<p>As promised, I’m hosting a <strong>Reddit AMA (Ask Me Anything)</strong> on <strong>November 13th, 2025</strong>, where I will be answering <em><strong>all</strong></em> your questions about <strong>KDB/Q</strong>, the world’s most powerful time-series database and array programming language.</p>
+<p>Over the years, I’ve received countless messages about:</p>
+<ul>
+<li>💡 How to start learning KDB/Q</li>
+<li>🚀 Career paths and progression in the KDB/Q ecosystem</li>
+<li>📚 Best learning resources and study plans</li>
+<li>⚙️  Real-world applications and architecture insights</li>
+</ul>
+<p>So instead of replying to everyone one by one, let’s bring it all together. The AMA will run for <strong>24 hours</strong>, and you will be able to ask your questions <strong>completely anonymously</strong>.</p>
+<p>Looking forward to hearing from you all!</p>
+<p><strong>DefconQ</strong></p>
+<p>You can find the link here: <a href="https://www.reddit.com/r/apljk/comments/1odwsa9/join_defconq_kdbq_ama_on_reddit_november_13th_2025/" target="_blank" rel="noopener noreferrer">Reddit DefconQ AMA</a></p>
+<p><img decoding="async" loading="lazy" alt="Alexander Unterrainer of DefconQ Reddit AMA" src="https://defconq.github.io/assets/images/AMA-8f9f93fe412b4b88a69d319b52bb8955.jpg" width="3072" height="4080" class="img_ev3q"></p>]]></content>
         <author>
             <name>Alexander Unterrainer</name>
             <uri>https://github.com/AUnterrainer</uri>
