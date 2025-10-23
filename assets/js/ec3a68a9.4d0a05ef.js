@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[3103],{13666:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/kdb-q","page":1,"postsPerPage":10,"totalPages":4,"totalCount":31,"nextPage":"/blog/tags/kdb-q/page/2","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

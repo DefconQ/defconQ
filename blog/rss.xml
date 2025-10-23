@@ -4,10 +4,21 @@
         <title>DefconQ Blog</title>
         <link>https://DefconQ.github.io/blog</link>
         <description>DefconQ Blog</description>
-        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 27 Oct 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[DefconQ Reddit Ask Me Anything (AMA)]]></title>
+            <link>https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything (AMA)</link>
+            <guid>https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything (AMA)</guid>
+            <pubDate>Mon, 27 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[As promised, I’m hosting a Reddit AMA (Ask Me Anything) on November 13th, 2025, where I will be answering all your questions about KDB/Q, the world’s most powerful time-series database and array programming language.]]></description>
+            <category>kdb/q</category>
+            <category>DefconQ</category>
+            <category>Reddit</category>
+            <category>AMA</category>
+        </item>
         <item>
             <title><![CDATA[Quant Strats Europe 2025 - Event Recap & Highlights]]></title>
             <link>https://DefconQ.github.io/blog/Quant Strats Europe 2025 - Event Recap &amp; Highlights</link>
@@ -911,82 +922,6 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
             <category>kxperts</category>
             <category>community</category>
             <category>KX</category>
-        </item>
-        <item>
-            <title><![CDATA[DefconQ meets KX - Mastering KDB+ Architecture - A Panel Discussion]]></title>
-            <link>https://DefconQ.github.io/blog/DefconQ meets KX - Mastering KDB+ Architecture - A Panel Discussion</link>
-            <guid>https://DefconQ.github.io/blog/DefconQ meets KX - Mastering KDB+ Architecture - A Panel Discussion</guid>
-            <pubDate>Tue, 06 Aug 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Recently, I had the pleasure of being invited by Michaela Woods to join her and Cynthia Faus Viadé  on the KX LiveStream to discuss best practices in designing your KDB/Q Tick Architecture. We began by exploring the new KDB/Q Architecture course launched recently by KX, starting with a plain vanilla tick setup and gradually progressing to more advanced configurations. Our discussion covered a range of topics including Derived Analytics, Load Balancing and Gateways, Disaster Recovery, Slow Consumers and Chained Tickerplants, as well as Intraday Writedowns and Database Best Practices. Below is a summary of our discussion, or you can watch the recording of the livestream on YouTube.]]></description>
-            <content:encoded><![CDATA[<p>Recently, I had the pleasure of being invited by <a href="https://www.linkedin.com/in/michaela-woods-50502b60/" target="_blank" rel="noopener noreferrer">Michaela Woods</a> to join her and <a href="https://www.linkedin.com/in/cynthiafaus/" target="_blank" rel="noopener noreferrer">Cynthia Faus Viadé </a> on the <a href="https://www.linkedin.com/events/masteringkdb-architecture-apane7213951079875510272/comments/" target="_blank" rel="noopener noreferrer">KX LiveStream</a> to discuss best practices in designing your KDB/Q Tick Architecture. We began by exploring the new <a href="https://learninghub.kx.com/courses/kdb-architecture/" target="_blank" rel="noopener noreferrer">KDB/Q Architecture course</a> launched recently by KX, starting with a plain vanilla tick setup and gradually progressing to more advanced configurations. Our discussion covered a range of topics including Derived Analytics, Load Balancing and Gateways, Disaster Recovery, Slow Consumers and Chained Tickerplants, as well as Intraday Writedowns and Database Best Practices. Below is a summary of our discussion, or you can watch the recording of the livestream on YouTube.</p>
-<iframe width="1120" height="630" src="https://www.youtube.com/embed/7hpvQ7q_Rus?si=vN6pjc4byFn83DUG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary">Summary<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="kx-kdb-architecture-course"><a href="https://learninghub.kx.com/courses/kdb-architecture/" target="_blank" rel="noopener noreferrer">KX KDB+ Architecture course</a><a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#kx-kdb-architecture-course" class="hash-link" aria-label="Direct link to kx-kdb-architecture-course" title="Direct link to kx-kdb-architecture-course">​</a></h3>
-<p>The <a href="https://learninghub.kx.com/courses/kdb-architecture/" target="_blank" rel="noopener noreferrer">KDB+ Architecture course</a> by KX covers the basic setup of a plain vanilla KDB+ real time application and helps you to build a solid foundation to design more complex KDB Architectures and Systems. You will learn how to</p>
-<ul>
-<li>Customize architecture by adding data feeds and feedhandlers</li>
-<li>Implement custom streaming analytics for real time analysis</li>
-<li>Use logging to prevent data loss in the event of system failures</li>
-<li>Understand and develop custom end of day behavior</li>
-<li>Build advanced data retrieval and setting up query gateways</li>
-</ul>
-<p>The course is designed for both, KDB/Q developers and non KDB/Q developers, even though experience with KDB/Q will benefit you and additional learning resources are made available to you throughout the course to deepen your knowledge. The course leverages a dedicated sandbox provided by KX and you don't even need to install KDB/Q locally but you can run everything within the <a href="https://learninghub.kx.com/academy/" target="_blank" rel="noopener noreferrer">KX Learning Hub</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-plain-vanilla-setup">The Plain Vanilla setup<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#the-plain-vanilla-setup" class="hash-link" aria-label="Direct link to The Plain Vanilla setup" title="Direct link to The Plain Vanilla setup">​</a></h3>
-<p>As part of the live stream, we also briefly discussed the plain vanilla tick setup. For those unfamiliar with this architecture, a KDB/Q tick setup, in its simplest form, includes a Data Feed, a Feed Handler (FH), the Tickerplant (TP), a real-time subscriber, the Real-Time Database (RDB), and a Historical Database (HDB). If you're interested in learning more about this setup, I have written a detailed blog post here:</p>
-<ul>
-<li><a href="https://www.defconq.tech/docs/architecture/plain" target="_blank" rel="noopener noreferrer">The Plain Vanilla Tick Setup</a>.</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="derived-analytics">Derived Analytics<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#derived-analytics" class="hash-link" aria-label="Direct link to Derived Analytics" title="Direct link to Derived Analytics">​</a></h3>
-<p>Derived Analytics can take the form of Complex Event Processing (CEP) or Real-Time Engines (RTE) and are tailored processes designed to perform real-time analytics to support business needs. These processes are highly customized and vary depending on the specific use case. Examples include, but are not limited to, Surveillance Analytics, Trade Cost Analysis (TCA), Price Impact Analysis, Data Quality checks, Hit Ratio calculations, Volume-Weighted Average Price (VWAP), and Time-Weighted Average Price (TWAP). CEPs are well-defined processes that determine what data to subscribe to, what analytics to perform, whether to persist the data to disk, and whether to publish the data to other Real-Time Subscribers (RTS). Developing a CEP requires a shift in mindset, as the challenges faced are often more complex than those encountered in other processes.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="load-balancing--gateways">Load Balancing &amp; Gateways<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#load-balancing--gateways" class="hash-link" aria-label="Direct link to Load Balancing &amp; Gateways" title="Direct link to Load Balancing &amp; Gateways">​</a></h3>
-<p>Introducing a Gateway (GW) and/or Load Balancer (LB) to your plain vanilla tick setup is a significant enhancement. A Gateway serves as the main entry point for end users, who typically don't know where your data resides or is stored on disk. Since users are generally unaware of whether the RDB or HDB stores the data and are only interested in querying by time range and instrument(s), a Gateway or Load Balancer can significantly increase the system's efficiency. A well-designed Gateway can handle query routing, load balancing, authentication, and permission handling, as well as aggregate data before returning it to the user. Additionally, introducing a Gateway API that standardizes data access, manages bad queries, and returns a consistent table schema enhances the application's flexibility, scalability, security, and resilience.</p>
-<p>The following whitepapers by KX provide more details about Gateways and Load Balancers:</p>
-<ul>
-<li><a href="https://code.kx.com/q/wp/gateway-design/" target="_blank" rel="noopener noreferrer">Common design principles for kdb+ gateways</a></li>
-<li><a href="https://code.kx.com/q/wp/query-routing/" target="_blank" rel="noopener noreferrer">Query Routing: A kdb+ framework for a scalable, load balanced system</a></li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="disaster-recovery">Disaster Recovery<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#disaster-recovery" class="hash-link" aria-label="Direct link to Disaster Recovery" title="Direct link to Disaster Recovery">​</a></h3>
-<p>In an ideal world, your system is resilient, and a robust business continuity plan prevents major outages. However, we don't live in an ideal world. If your system goes down and you need to recover data ingested since the start of the day, the Tickerplant Log file is crucial for Disaster Recovery. The Tickerplant logs every incoming message, allowing you to replay the file and recreate the system's state before the outage. For less severe cases, such as the failure and recovery of a single Real-Time Subscriber (RTS), you can recover from the Real-Time Database (RDB). This approach works only if the crashed process was an RTS, not the Tickerplant (TP) itself. Additionally, if multiple processes fail simultaneously, recovering from the RDB may put excessive pressure on it, affecting other processes or users relying on real-time data. As systems grow larger, they become more complex, requiring planning and design of your disaster recovery strategy on a case-by-case basis.</p>
-<p>You can read about Disaster Recovery here</p>
-<ul>
-<li><a href="https://code.kx.com/q/wp/disaster-recovery/" target="_blank" rel="noopener noreferrer">Disaster-recovery planning for kdb+ tick systems</a></li>
-<li><a href="https://code.kx.com/q/wp/data-recovery/" target="_blank" rel="noopener noreferrer">Data recovery for kdb+tick</a></li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="chained-tickerplants-remedy-against-slow-subscribers">Chained Tickerplants: Remedy against Slow Subscribers<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#chained-tickerplants-remedy-against-slow-subscribers" class="hash-link" aria-label="Direct link to Chained Tickerplants: Remedy against Slow Subscribers" title="Direct link to Chained Tickerplants: Remedy against Slow Subscribers">​</a></h3>
-<p>A slow subscriber is a KDB/Q process consuming real-time data from the Tickerplant at a slower pace than the Tickerplant publishes. This can happen for various reasons, such as the Real-Time Subscriber running time-intensive analytics or encountering unexpected slowdowns. This mismatch in pace can lead to the Tickerplant's output queue building up, causing a spike in memory usage, and potentially resulting in the Tickerplant crashing or the server running out of memory. To prevent such scenarios, you can enhance your KDB/Q Tick architecture by introducing a Chained Tickerplant (CTP). A Chained Tickerplant is essentially another Tickerplant positioned after the main Tickerplant, which publishes data in batches based on either the number of messages or a specific time interval. This batching reduces the publishing frequency, allowing slow subscribers to consume messages at a manageable pace. Additionally, if the Chained Tickerplant crashes due to increased load from a slow subscriber, the main Tickerplant remains unaffected and continues to function normally.</p>
-<p>You can find some additional information about Chained Tickerplants <a href="https://code.kx.com/q/kb/kdb-tick/" target="_blank" rel="noopener noreferrer">here</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="intraday-writedown">Intraday Writedown<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#intraday-writedown" class="hash-link" aria-label="Direct link to Intraday Writedown" title="Direct link to Intraday Writedown">​</a></h3>
-<p>Introducing an Intraday Writedown Database (WDB) adds another tier to your database architecture. In the typical plain vanilla tick setup, you have a Real-Time Database (RDB) for intraday data and a Historical Database (HDB) for historical data. However, as data volume grows, it may exceed your server's available memory. To manage this, you can implement an Intraday Writedown Database (WDB), which saves data to disk throughout the day while the RDB holds only the most recent data. This saving process can be triggered by a timer or after a certain number of records. The WDB setup involves two processes: one for saving intraday data to disk and another for querying this saved data from a temporary location. It's crucial to note that the WDB is distinct from the HDB; at the end of the day, the intraday data is merged into the HDB and moved from the temporary location. Additionally, you'll need to adjust the Gateway logic to ensure the data is accessible to end users. For more details on intraday write downs, refer to this whitepaper:</p>
-<ul>
-<li><a href="https://code.kx.com/q/wp/intraday-writedown/" target="_blank" rel="noopener noreferrer">Intraday writedown solutions</a></li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="database-best-practices">Database Best Practices<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#database-best-practices" class="hash-link" aria-label="Direct link to Database Best Practices" title="Direct link to Database Best Practices">​</a></h3>
-<p>Next, we discussed best practices for setting up your database, including various methods for saving data to disk and the application of attributes in your system. In KDB/Q, there are four different attributes: sorted, unique, grouped, and parted, each with distinct behaviors and advantages. For a detailed explanation of these attributes, you can read my blog post <a href="https://www.defconq.tech/docs/concepts/attributes" target="_blank" rel="noopener noreferrer">here</a>.
-When it comes to persisting data to disk, the options include:</p>
-<ul>
-<li>Flat file</li>
-<li>Splayed table</li>
-<li>Partitioned database</li>
-<li>Segmented database</li>
-</ul>
-<p>The most common setup I've encountered in my career is a partitioned database. For a comprehensive understanding of these different setups, refer to <a href="https://code.kx.com/q4m3/14_Introduction_to_Kdb%2B/" target="_blank" rel="noopener noreferrer">Chapter 14 of Q for Mortals</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="qa">Q&amp;A<a href="https://defconq.github.io/blog/DefconQ%20meets%20KX%20-%20Mastering%20KDB+%20Architecture%20-%20A%20Panel%20Discussion#qa" class="hash-link" aria-label="Direct link to Q&amp;A" title="Direct link to Q&amp;A">​</a></h3>
-<p>At the end of the livestream, we also gave attendees the opportunity to ask questions. Here are some of the key takeaways:</p>
-<ol>
-<li>
-<p><strong>Do you apply attributes on the Intraday Database?</strong></p>
-<p>Yes, the attributes you apply to the Historical Database (HDB) should also be applied to the Intraday Database.</p>
-</li>
-<li>
-<p><strong>Is the RDB responsible for both EOI &amp; EOD write-down/merging or is some service specific for this not shown?</strong></p>
-<p>In the plain vanilla setup, the RDB handles both saving data to disk at the end of the day and storing intraday data in memory. However, as data volume grows, the save-down process can take a significant amount of time, during which the RDB would not be available for user queries. To avoid this issue, you could introduce an independent process responsible for saving data to disk. This process would first read data from the Tickerplant Log file into memory and then save it to disk. The drawback is that you need to replay the data from the Tickerplant log first, which takes time and increases the memory load on your server. Generally, you should evaluate the design of your system on a case-by-case basis to determine the most suitable approach.</p>
-</li>
-</ol>
-<p>Once again, I would like to thank everyone who attended the livestream. Your enthusiastic participation motivates us to host more livestreams in the future. Stay tuned and happy coding!</p>]]></content:encoded>
-            <category>kdb/q</category>
-            <category>kdb/q architecture</category>
-            <category>panel discussion</category>
-            <category>livestream</category>
         </item>
     </channel>
 </rss>
