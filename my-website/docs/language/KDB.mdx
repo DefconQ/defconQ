@@ -1,0 +1,116 @@
+---
+sidebar_position: 1
+---
+
+# More Than a Database: The KDB/Q Mindset
+
+Two years into the **DefconQ** journey, I realised I’ve never actually taken the time to explain what KDB/Q really is. For those of us who work with it daily, it may seem obvious, but for newcomers, the name ***KDB***  often leads to a common misconception: that it’s **“just”** a database. In reality, that couldn’t be further from the truth. KDB/Q is so much more, it's an **array programming language** with an in memory and on disk, column-based database functionality. KDB/Q lets you build entire frameworks, from real-time data streaming and in-memory or on-disk databases to powerful analytical and reporting engines, and just about anything else you can imagine. But beyond the technology itself, its real magic lies in how it transforms the way you think, it fundamentally reshapes your approach to solving problems. In this short blog post, I’ll explain what KDB/Q truly is, and why I find it such an elegant and powerful piece of technology.
+
+## Q: Array Programming, Supercharged
+
+![Pontiac Supercharger](./supercharger.jpg)
+
+If you’re into sports cars like I am, think of Q as the American muscle car of programming, supercharged, powerful, and leaving everything else in the dust on the quarter mile. But before we get Too Fast and Too Furious, let’s hit the brakes and talk code. Q (or KDB/Q) isn’t just another database, it is first and foremost ***an array programming language***. To put it precisely, as [Nick Psaris](https://www.linkedin.com/in/nickpsaris/), author of [***Q Tips: Fast, Scalable, and Maintainable KDB***](https://amzn.to/4qVvXKx), defines it:
+
+>“Q is an interpreted, dynamic, event-driven, functional array programming language.”
+
+So what does that actually mean? Let’s take a closer look. We start with the most important point: **Q** is an ***array programming language.*** In simple terms, it’s designed to seamlessly extend operations on single values (scalars, or Atoms, how we call them in Q) to entire vectors, matrices, and higher-dimensional arrays. Other examples of array programming languages include APL, K, J, Fortran, MATLAB, Analytica, Octave, R, and of course, our all-time favorite **Q**.
+
+```
+// Addition of Atoms
+q)2+2
+4
+// Addition of two vectors
+q)1 2 3+4 5 6
+5 7 9
+// Addition of two matrices
+q)(1 2 3;4 5 6;7 8 9)+(10 20 30;40 50 60;70 80 90)
+11 22 33
+44 55 66
+77 88 99
+```
+
+:::info
+If you’re curious about how K, KDB, and Q differ, check out my blog post on the history of KDB/Q [here](https://www.defconq.tech/docs/language/history)
+:::
+
+## When Functions Behave… Mostly
+
+The next defining feature of Q is that it’s a ***(semi-)functional*** programming language. In practice, this means functions are treated as first-class citizens, you can pass them as arguments, return them as results, assign them to variables, and even store them inside data structures.
+
+```
+// Passing a function as a variable
+q)f:{x+y}
+q)g:{[f;x;y] f[x;y] }
+q)g[f;5;6]
+11
+// storing functions in a dictionary
+q)show dict:`add`sub`mult!({x+y};{x-y};{x*y})
+add | {x+y}
+sub | {x-y}
+mult| {x*y}
+q)dict[`add;3;4]
+7
+q)dict[`sub;10;4]
+6
+q)dict[`mult;10;4]
+40
+```
+Q is considered **semi-functional** because its functions can produce side effects, they’re able to modify the state of the system. In contrast, pure functional programming languages do not allow any side effects, ensuring that functions are entirely self-contained and deterministic. 
+
+```
+q)changeTheWorld:{[param] `varA set param}
+q)changeTheWorld "New World Order"
+`varA
+q)varA
+"New World Order"
+```
+
+## Ain’t Nobody Got Time for Compilation
+
+Q is an **interpreted language**, which means there’s no separate compilation step, everything is compiled into bytecode at runtime. Function definitions are compiled when the process starts and resolved lazily. The only catch: they must be syntactically valid at startup, but their order doesn’t matter.
+
+```
+alexanderunterrainer@Mac:~|⇒  cat def.q
+g:{f[x;y]};
+f:{x+y};
+
+g[3;4]
+
+alexanderunterrainer@Mac:~|⇒  qx def.q
+KDB-X 0.1.1 2025.09.29 Copyright (C) 1993-2025 Kx Systems
+m64/ 8()core 24576MB alexanderunterrainer mac 192.168.1.177 EXPIRE 2025.12.31 COMMUNITY #5029523
+7
+```
+
+## Dynamic by Design
+
+Q is **dynamic** in every sense, both functions and variable types can change at runtime. This gives you tremendous flexibility, but it also means things can go sideways if those definitions shift unexpectedly. As Uncle Ben wisely put it: ***with great power comes great responsibility.***
+
+```
+q)f:{x+y}
+q)a:3
+q)b:5
+q)f[a;b]
+8
+q)f:{show x}
+q)a:"With great power comes great responsibility"
+q)f a
+"With great power comes great responsibility"
+```
+
+## Turning Events into Action, the Q-Style
+
+The ease of interprocess communication in Q makes it an ideal fit for **event-driven architectures**, so much so that it’s often the default and recommended approach. With built-in support for both synchronous and asynchronous messaging, IPC in Q is refreshingly simple. That said, if you prefer timer-based designs, Q won’t stand in your way either.
+
+
+# The Toolkit Behind the Fastest Systems You Know: What You Can Build with KDB/Q
+
+Now that we’ve covered what KDB/Q actually *is*, the next question is: what can you build with it? In short, almost anything. Well, anything on the backend, to be precise. Born on Wall Street, KDB/Q has long been the weapon of choice for financial systems, powering some of the largest and longest-running platforms since the late ’80s.
+
+But its strengths go far beyond finance. Any domain that generates massive volumes of data and requires rapid processing is a perfect match for KDB/Q. Think smart devices: your Fitbit, Apple Watch, Garmin, whatever you use is capturing millions of data points every single day. What better technology to stream, store, analyse, and make sense of that data than KDB/Q?
+So the next time you’re faced with a challenge involving mountains of data that need to be processed at lightning speed, give KDB/Q a serious try. And if you need a place to start learning, check out my study plan [here](https://www.defconq.tech/docs/category/kdbq-study-roadmap).
+
+To wrap things up, I want to leave you with a quote from Alan Perlis. With that, happy coding.
+
+![Alan Perlis Quote](./AlanPerlis.jpg)
