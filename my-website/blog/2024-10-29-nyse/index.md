@@ -41,7 +41,7 @@ The next steps in response to this increase in trading volume and the correspond
  
 ## Next Steps
 
-So, what are your next steps? It's clear that learning KDB/Q can provide you with a significant competitive advantage, especially if you’re starting from scratch. Luckily, I’ve just released the most comprehensive KDB/Q study plan ever created. This unprecedented study plan caters to a wide range of needs—whether you're an aspiring KDB/Q developer, a mainstream developer who needs to work with KDB/Q, a quant or quant developer focused on building efficient business logic in KDB/Q, a data or business analyst trying to make sense and looking to interpret data, or a manager overseeing a team of developers wanting to grasp the KDB/Q stack. There’s something here for everyone. So don’t hesitate—check it out here!
+So, what are your next steps? It's clear that learning KDB/Q can provide you with a significant competitive advantage, especially if you’re starting from scratch. Luckily, I’ve just released the most comprehensive KDB/Q study plan ever created. This unprecedented study plan caters to a wide range of needs—whether you're an aspiring KDB/Q developer, a mainstream developer who needs to work with KDB/Q, a quant or quant developer focused on building efficient business logic in KDB/Q, a data or business analyst trying to make sense and looking to interpret data, or a manager overseeing a team of developers wanting to grasp the KDB/Q stack. There’s something here for everyone. So don’t hesitate, check it out here!
  
 Find my unprecedented KDB/Q study plan [here](https://www.defconq.tech/docs/studyPlan/intro)
 
