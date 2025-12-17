@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2658],{2774:e=>{e.exports=JSON.parse('{"label":"Market Volume","permalink":"/blog/tags/market-volume","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

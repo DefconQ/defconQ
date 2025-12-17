@@ -2,11 +2,170 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2025-10-27T00:00:00.000Z</updated>
+    <updated>2025-12-17T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Nasdaq Extends Trading Hours - What It Really Means for Market Data Systems]]></title>
+        <id>https://DefconQ.github.io/blog/Nasdaq Extends Trading Hours - What It Really Means for Market Data Systems</id>
+        <link href="https://DefconQ.github.io/blog/Nasdaq Extends Trading Hours - What It Really Means for Market Data Systems"/>
+        <updated>2025-12-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Yesterday (2025.12.16) Nasdaq announced an extension of its trading hours, a move that once again reshapes how modern markets operate. While headlines focus on increased accessibility and global participation, the real impact is felt much deeper in the technology stacks that power trading, analytics, and risk systems.]]></summary>
+        <content type="html"><![CDATA[<p>Yesterday (2025.12.16) <a href="https://www.reuters.com/business/finance/nasdaq-seeks-extend-trading-hours-wall-street-gears-up-247-move-2025-12-15/" target="_blank" rel="noopener noreferrer"><strong>Nasdaq announced an extension of its trading hours</strong></a>, a move that once again reshapes how modern markets operate. While headlines focus on increased accessibility and global participation, the real impact is felt much deeper in the technology stacks that power trading, analytics, and risk systems.
+Extending trading hours is <em><strong>not</strong></em> just a business or regulatory change. It’s a <strong>data engineering problem.</strong> And a non-trivial one.
+In this post, I want to unpack what extended trading hours actually mean from a <strong>technical perspective</strong>, why many traditional data architectures will struggle, and why systems built with <strong>KDB/Q</strong> (or KDB-X) are particularly well suited to absorb this change without breaking a sweat.</p>
+<p><img decoding="async" loading="lazy" alt="Nasdaq extends trading hours" src="https://defconq.github.io/assets/images/nasdaq-e18f8c5568530d1ffda1d9defb416190.jpg" width="720" height="480" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-changed-more-time-more-data-same-expectations">What Changed: More Time, More Data, Same Expectations<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#what-changed-more-time-more-data-same-expectations" class="hash-link" aria-label="Direct link to What Changed: More Time, More Data, Same Expectations" title="Direct link to What Changed: More Time, More Data, Same Expectations">​</a></h2>
+<p>Historically, markets had well-defined trading sessions. Systems were designed around them:</p>
+<ul>
+<li>A clear <strong>start of day</strong></li>
+<li>A clear <strong>end of day</strong></li>
+<li>Overnight batch processes</li>
+<li>Predictable data volumes</li>
+<li>Fixed intraday windows for analytics</li>
+</ul>
+<p>Extended trading hours fundamentally challenge these assumptions. From a systems perspective, this means:</p>
+<ul>
+<li><strong>Longer continuous data streams</strong></li>
+<li><strong>Higher total daily data volume</strong></li>
+<li><strong>More intraday state to manage</strong></li>
+<li><strong>Fewer clean reset points</strong></li>
+<li><strong>Increased overlap across regions and venues</strong></li>
+</ul>
+<p>And crucially:
+<strong>Latency, throughput, and availability expectations do not relax just because the day is longer.</strong></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-hidden-cost-volume-isnt-linear">The Hidden Cost: Volume Isn’t Linear<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#the-hidden-cost-volume-isnt-linear" class="hash-link" aria-label="Direct link to The Hidden Cost: Volume Isn’t Linear" title="Direct link to The Hidden Cost: Volume Isn’t Linear">​</a></h2>
+<p>A common mistake is to assume that extending trading hours simply increases volume <em><strong>linearly</strong></em>. In practice, it often doesn’t. Extended hours introduce:</p>
+<ul>
+<li>Higher <strong>market fragmentation</strong></li>
+<li>More <strong>algorithmic and automated participation</strong></li>
+<li>Increased <strong>event-driven bursts</strong> (news, macro, cross-venue reactions)</li>
+<li>Longer periods where <strong>real-time analytics</strong> must stay hot</li>
+</ul>
+<p>That means <strong>more ticks, more state, more joins, more aggregations, and more pressure on memory and compute</strong>.</p>
+<p>Systems that were “just about fast enough” during regular hours may suddenly fall over.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-many-databases-will-struggle">Why Many Databases Will Struggle<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#why-many-databases-will-struggle" class="hash-link" aria-label="Direct link to Why Many Databases Will Struggle" title="Direct link to Why Many Databases Will Struggle">​</a></h2>
+<p>Most modern data stacks weren’t designed for <em><strong>continuous, high-frequency, time-series workloads.</strong></em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-row-based-storage">1. Row Based Storage<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#1-row-based-storage" class="hash-link" aria-label="Direct link to 1. Row Based Storage" title="Direct link to 1. Row Based Storage">​</a></h3>
+<p>Row-oriented systems are <strong>inefficient</strong> when queries scan time ranges <strong>across a small number of columns</strong>, which is exactly what market data workloads do.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-disk-first-architectures">2. Disk-First Architectures<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#2-disk-first-architectures" class="hash-link" aria-label="Direct link to 2. Disk-First Architectures" title="Direct link to 2. Disk-First Architectures">​</a></h3>
+<p>Systems that rely heavily on disk I/O, even with caching, struggle when <strong>real-time queries and ingestion</strong> happen simultaneously over extended periods.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-complex-streaming-pipelines">3. Complex Streaming Pipelines<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#3-complex-streaming-pipelines" class="hash-link" aria-label="Direct link to 3. Complex Streaming Pipelines" title="Direct link to 3. Complex Streaming Pipelines">​</a></h3>
+<p>Many stacks glue together:</p>
+<ul>
+<li>A streaming layer</li>
+<li>A storage layer</li>
+<li>A compute layer</li>
+<li>A query layer</li>
+</ul>
+<p>Each boundary adds latency, failure modes, and operational complexity.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-overnight-assumptions">4. Overnight Assumptions<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#4-overnight-assumptions" class="hash-link" aria-label="Direct link to 4. Overnight Assumptions" title="Direct link to 4. Overnight Assumptions">​</a></h3>
+<p>Batch jobs, rollovers, save-downs, and re-indexing jobs often assume a quiet overnight window. Extended trading hours shrink, or eliminate, that window entirely.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-kdb-handles-this-naturally">Why KDB Handles This Naturally<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#why-kdb-handles-this-naturally" class="hash-link" aria-label="Direct link to Why KDB Handles This Naturally" title="Direct link to Why KDB Handles This Naturally">​</a></h2>
+<p>This is where <strong>KDB/Q stands apart</strong>, not because it’s <em><strong>“fast”</strong></em>, but because of how it’s designed.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-built-for-continuous-time-series">1. Built for Continuous Time-Series<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#1-built-for-continuous-time-series" class="hash-link" aria-label="Direct link to 1. Built for Continuous Time-Series" title="Direct link to 1. Built for Continuous Time-Series">​</a></h3>
+<p>KDB/Q is not a database that supports time-series. It is a time-series system by design.</p>
+<ul>
+<li>Data is stored in vectors/arrays</li>
+<li>Time is a first-class concept</li>
+<li>Vector operations are second nature</li>
+<li>Queries scale with time ranges, not table size</li>
+</ul>
+<p>Longer trading hours <em>simply mean more rows</em>. The access pattern doesn’t change.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-in-memory-first-disk-as-an-optimization">2. In-Memory First, Disk as an Optimization<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#2-in-memory-first-disk-as-an-optimization" class="hash-link" aria-label="Direct link to 2. In-Memory First, Disk as an Optimization" title="Direct link to 2. In-Memory First, Disk as an Optimization">​</a></h3>
+<p>KDB/Q’s architecture cleanly separates:</p>
+<ul>
+<li>Real-time data (RDB), in memory</li>
+<li>Historical data (HDB), memory-mapped on disk</li>
+</ul>
+<p>Extended trading hours don’t require redesigning the system. They just change <strong>how long the RDB stays hot and how often data is persisted.</strong></p>
+<p>Memory-mapped storage ensures:</p>
+<ul>
+<li>No deserialization overhead</li>
+<li>No ORM layers</li>
+<li>No impedance mismatch between memory and disk</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-streaming-is-native-not-bolted-on">3. Streaming Is Native, Not Bolted On<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#3-streaming-is-native-not-bolted-on" class="hash-link" aria-label="Direct link to 3. Streaming Is Native, Not Bolted On" title="Direct link to 3. Streaming Is Native, Not Bolted On">​</a></h3>
+<p>In KDB/Q, streaming isn’t an add-on, it’s the default.</p>
+<ul>
+<li>IPC is lightweight and event-driven</li>
+<li>Subscribers process updates as they arrive</li>
+<li>Backpressure patterns (e.g. chained tickerplants) are well understood</li>
+</ul>
+<p>Whether the market trades for 6 hours or 20 hours is largely irrelevant. The system is already designed to run (almost) continuously.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-analytics-live-where-the-data-lives">4. Analytics Live Where the Data Lives<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#4-analytics-live-where-the-data-lives" class="hash-link" aria-label="Direct link to 4. Analytics Live Where the Data Lives" title="Direct link to 4. Analytics Live Where the Data Lives">​</a></h3>
+<p>This becomes even <em>more important</em> with longer trading days. Instead of:</p>
+<blockquote>
+<p>“Pull all the data out, then analyze it somewhere else”</p>
+</blockquote>
+<p>KDB/Q allows:</p>
+<blockquote>
+<p>“Run the analytics where the data already is”</p>
+</blockquote>
+<p>That means:</p>
+<ul>
+<li>Smaller result sets over the network</li>
+<li>Lower bandwidth pressure</li>
+<li>Faster response times</li>
+<li>More predictable performance</li>
+</ul>
+<p>Extended trading hours amplify the cost of moving data. KDB avoids that cost entirely.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="operational-reality-fewer-moving-parts-win">Operational Reality: Fewer Moving Parts Win<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#operational-reality-fewer-moving-parts-win" class="hash-link" aria-label="Direct link to Operational Reality: Fewer Moving Parts Win" title="Direct link to Operational Reality: Fewer Moving Parts Win">​</a></h2>
+<p>When markets run longer, <strong>operational simplicity matters more than ever.</strong> KDB/Q based systems typically replace:</p>
+<ul>
+<li>Streaming frameworks</li>
+<li>Online Analytical Processing (OLAP) engines</li>
+<li>Time-series databases</li>
+<li>Analytics runtimes</li>
+</ul>
+<p>... with <strong>ONE COHERENT SYSTEM</strong></p>
+<p>That matters when:</p>
+<ul>
+<li>Monitoring windows are longer</li>
+<li>Failure recovery must be faster</li>
+<li>Engineers are on-call for extended periods</li>
+<li>Systems must degrade gracefully, not catastrophically</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="this-is-a-trend-not-a-one-off">This Is a Trend, Not a One-Off<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#this-is-a-trend-not-a-one-off" class="hash-link" aria-label="Direct link to This Is a Trend, Not a One-Off" title="Direct link to This Is a Trend, Not a One-Off">​</a></h2>
+<p>Nasdaq extending trading hours isn’t an isolated event. Already towards the end of last year, we saw the New York Stock Exchange extend its trading hours (Read my blog post <a href="https://www.defconq.tech/blog/NYSE%20extends%20trading%20hours" target="_blank" rel="noopener noreferrer">here</a>). Most cryptocurrency exchanges already operate 24/7, and it’s clear that more traditional exchanges will follow this trend. We’re seeing:</p>
+<ul>
+<li>More global overlap</li>
+<li>More electronic liquidity</li>
+<li>More automation</li>
+<li>More demand for always-on systems</li>
+</ul>
+<p>Markets are moving closer to continuous operation. Architectures that depend on:</p>
+<ul>
+<li>Quiet periods</li>
+<li>Batch windows</li>
+<li>Heavy ETL</li>
+<li>Complex pipelines
+... will increasingly struggle to keep up.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="final-thoughts">Final Thoughts<a href="https://defconq.github.io/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems#final-thoughts" class="hash-link" aria-label="Direct link to Final Thoughts" title="Direct link to Final Thoughts">​</a></h2>
+<p>Extended trading hours are a <strong>stress test</strong> for market data architectures. They expose:</p>
+<ul>
+<li>Hidden assumptions</li>
+<li>Scalability limits</li>
+<li>Operational fragility</li>
+</ul>
+<p>Systems built with <strong>KDB/Q</strong> (KDB-X) don’t need to be reinvented for this shift. They were already designed for it. If anything, changes like this highlight <em><strong>why</strong></em> KDB/Q has remained dominant in high-performance market data systems for decades, not because it’s fashionable, but because it solves the right problems at the right level of abstraction. And as markets keep pushing toward longer, faster, and more continuous trading, those design choices matter more than ever.</p>
+<p>If you need help designing or architecting your KDB/Q system, feel free to reach out! Happy to chat. Until then, happy coding.</p>
+<p><strong>Reference</strong>:
+<a href="https://www.reuters.com/business/finance/nasdaq-seeks-extend-trading-hours-wall-street-gears-up-247-move-2025-12-15/" target="_blank" rel="noopener noreferrer">Reuters: Nasdaq seeks to extend trading hours, as Wall Street gears up for 24/7 move</a></p>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="Nasdaq" term="Nasdaq"/>
+        <category label="Exchange" term="Exchange"/>
+        <category label="Trading Hours" term="Trading Hours"/>
+        <category label="Big Data" term="Big Data"/>
+        <category label="Market Volume" term="Market Volume"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[DefconQ Reddit Ask Me Anything AMA]]></title>
         <id>https://DefconQ.github.io/blog/DefconQ Reddit Ask Me Anything AMA</id>
@@ -743,7 +902,7 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="kdbq-the-definitive-solution-for-data-driven-finance">KDB/Q: The Definitive Solution for Data-Driven Finance<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#kdbq-the-definitive-solution-for-data-driven-finance" class="hash-link" aria-label="Direct link to KDB/Q: The Definitive Solution for Data-Driven Finance" title="Direct link to KDB/Q: The Definitive Solution for Data-Driven Finance">​</a></h2>
 <p>The next steps in response to this increase in trading volume and the corresponding rise in trading data and information are in your hands. You need to pivot toward technologies designed for big data that can manage substantial amounts of information for both real-time processing and historical data storage. Additionally, rapid computation and calculation are crucial for processing and analyzing the vast amounts of data you’re capturing. What better technology for this than KDB/Q? KDB/Q is the established go-to solution for handling, storing, processing, and analyzing big data and time series data.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<p>So, what are your next steps? It's clear that learning KDB/Q can provide you with a significant competitive advantage, especially if you’re starting from scratch. Luckily, I’ve just released the most comprehensive KDB/Q study plan ever created. This unprecedented study plan caters to a wide range of needs—whether you're an aspiring KDB/Q developer, a mainstream developer who needs to work with KDB/Q, a quant or quant developer focused on building efficient business logic in KDB/Q, a data or business analyst trying to make sense and looking to interpret data, or a manager overseeing a team of developers wanting to grasp the KDB/Q stack. There’s something here for everyone. So don’t hesitate—check it out here!</p>
+<p>So, what are your next steps? It's clear that learning KDB/Q can provide you with a significant competitive advantage, especially if you’re starting from scratch. Luckily, I’ve just released the most comprehensive KDB/Q study plan ever created. This unprecedented study plan caters to a wide range of needs—whether you're an aspiring KDB/Q developer, a mainstream developer who needs to work with KDB/Q, a quant or quant developer focused on building efficient business logic in KDB/Q, a data or business analyst trying to make sense and looking to interpret data, or a manager overseeing a team of developers wanting to grasp the KDB/Q stack. There’s something here for everyone. So don’t hesitate, check it out here!</p>
 <p>Find my unprecedented KDB/Q study plan <a href="https://www.defconq.tech/docs/studyPlan/intro" target="_blank" rel="noopener noreferrer">here</a></p>
 <p><strong>Happy Learning!</strong></p>
 <p><strong>Source:</strong></p>
@@ -985,34 +1144,5 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
         <category label="Year in Review" term="Year in Review"/>
         <category label="Community" term="Community"/>
         <category label="Future" term="Future"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[KXperts - A Developer Advocacy Program by KX]]></title>
-        <id>https://DefconQ.github.io/blog/KXperts - A Developer Advocacy Program by KX</id>
-        <link href="https://DefconQ.github.io/blog/KXperts - A Developer Advocacy Program by KX"/>
-        <updated>2024-08-14T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A little over a year ago, KX introduced the KXperts a team of KX developers with deep passion and expertise in KDB/Q and vector databases. Their main goal is to help developers become more proficient with KX technologies, such as KDB/Q, KDB.AI, KDB Insights, PyKX and more. The team currently consists of Michaela Woods, Michael Ryaboy, Ryan Siegler, Laura Kerr, and Megan McParland, and I've had the pleasure of meeting and collaborating with most of them. The KXperts have produced a series of videos, technical blogs, tutorials, and online courses for the KX Academy, and they host live streams and meetups, all aimed at building a robust KX community.]]></summary>
-        <content type="html"><![CDATA[<p>A little over a year ago, <a href="https://www.kx.com/" target="_blank" rel="noopener noreferrer">KX</a> introduced the <a href="https://www.kx.com/kxperts/" target="_blank" rel="noopener noreferrer">KXperts</a> a team of KX developers with deep passion and expertise in KDB/Q and vector databases. Their main goal is to help developers become more proficient with KX technologies, such as <a href="https://code.kx.com/q/" target="_blank" rel="noopener noreferrer">KDB/Q</a>, <a href="https://kdb.ai/" target="_blank" rel="noopener noreferrer">KDB.AI</a>, <a href="https://code.kx.com/insights/1.10/microservices/index.html" target="_blank" rel="noopener noreferrer">KDB Insights</a>, <a href="https://code.kx.com/pykx/2.5/" target="_blank" rel="noopener noreferrer">PyKX</a> and more. The team currently consists of <a href="https://www.linkedin.com/in/michaela-woods-50502b60/" target="_blank" rel="noopener noreferrer">Michaela Woods</a>, <a href="https://www.linkedin.com/in/michael-ryaboy-software-engineer/" target="_blank" rel="noopener noreferrer">Michael Ryaboy</a>, <a href="https://www.linkedin.com/in/ryan-siegler-816207102/" target="_blank" rel="noopener noreferrer">Ryan Siegler</a>, <a href="https://www.linkedin.com/in/laura-kerr-59046069/" target="_blank" rel="noopener noreferrer">Laura Kerr</a>, and <a href="https://www.linkedin.com/in/megan-mcparland-4605b9180/" target="_blank" rel="noopener noreferrer">Megan McParland</a>, and I've had the pleasure of meeting and collaborating with most of them. The KXperts have produced a series of videos, technical blogs, tutorials, and online courses for the <a href="https://learninghub.kx.com/" target="_blank" rel="noopener noreferrer">KX Academy</a>, and they host live streams and meetups, all aimed at building a robust KX community.</p>
-<p>At the KX London Meetup in May 2024, KX introduced the KXperts Developer Advocacy Program, opening the KXperts team to external developers who share a passion for KDB/Q and vector databases. The main goal of this program is to encourage, support, and collaborate with developers who are enthusiastic about the KX technology suite. Due to my contributions to the KX community through <a href="https://www.defconq.tech/" target="_blank" rel="noopener noreferrer">DefconQ</a> as well as my engagement on <a href="https://stackoverflow.com/" target="_blank" rel="noopener noreferrer">Stackoverflow</a> and the <a href="https://learninghub.kx.com/forums/" target="_blank" rel="noopener noreferrer">KX Discussion Forum</a>, I have been awarded the black tier of the KXpert Developer Advocacy Program. This recognition is a significant achievement for me, and I am incredibly honored to be the first developer admitted to the program. For those interested in joining but unsure of the process, benefits, or requirements, I have prepared the following summary with all the information you need.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="kxpert-tiers">KXpert Tiers<a href="https://defconq.github.io/blog/KXperts%20-%20A%20Developer%20Advocacy%20Program%20by%20KX#kxpert-tiers" class="hash-link" aria-label="Direct link to KXpert Tiers" title="Direct link to KXpert Tiers">​</a></h3>
-<p>The KXperts Developer Advocacy Program consists of three different tiers, silver, gold and black, with black being the highest tier among them. Each tier has specific entry requirements and offers different benefits. Below, I have outlined how each tier is defined, the entry requirements and benefits for each tier.</p>
-<table><thead><tr><th style="text-align:center">Silver Tier</th><th style="text-align:center">Gold Tier</th><th style="text-align:center">Black Tier</th></tr></thead><tbody><tr><td style="text-align:center"><img decoding="async" loading="lazy" alt="KXperts Silver Tier" src="https://defconq.github.io/assets/images/silverBadge-7a80286471f82099005ca35a176b8983.png" width="542" height="525" class="img_ev3q"></td><td style="text-align:center"><img decoding="async" loading="lazy" alt="KXperts Gold Tier" src="https://defconq.github.io/assets/images/goldBadge-6850fe327b84fcc3d36d704a8fc64242.png" width="524" height="517" class="img_ev3q"></td><td style="text-align:center"><img decoding="async" loading="lazy" alt="KXperts Gold Tier" src="https://defconq.github.io/assets/images/blackBadge-dc600ce667a069e075105bb3b49d25fe.png" width="746" height="722" class="img_ev3q"></td></tr></tbody></table>
-<p><img decoding="async" loading="lazy" alt="KXperts Developer Advocacy Program Tiers" src="https://defconq.github.io/assets/images/tiers-be19b8e9e46029eb04ac40092e98d42b.png" width="2794" height="1378" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="Entry requirement for KXperts tiers" src="https://defconq.github.io/assets/images/requirements-054565a3af75aa793203e76969f868c0.png" width="2788" height="1326" class="img_ev3q">
-<img decoding="async" loading="lazy" alt="Perks of KXperts" src="https://defconq.github.io/assets/images/perks-08ab78398a56062457f4bf4f6ef28f32.png" width="2782" height="1348" class="img_ev3q"></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-apply">How to apply<a href="https://defconq.github.io/blog/KXperts%20-%20A%20Developer%20Advocacy%20Program%20by%20KX#how-to-apply" class="hash-link" aria-label="Direct link to How to apply" title="Direct link to How to apply">​</a></h3>
-<p>Applying to the KXperts Developer Advocacy Program is straightforward and simple. Just fill out the form <a href="https://forms.office.com/pages/responsepage.aspx?id=MmAAi833TkCPb0cZ8EFBe5SmUGAYdqNBgRUb7Zmk5fZURUhNMUpQTUEzWlZGV04zRTlMQUpHU1FKMSQlQCN0PWcu" target="_blank" rel="noopener noreferrer">here</a>. You'll need to answer a few questions, such as <strong>"Tell us about your KDB journey so far",</strong> <strong>"What do you believe makes you a good candidate for this program?"</strong> and <strong>"Tell us about any contributions you have made to the broader KX Community."</strong> You can provide evidence of your contributions, such as blogs, videos, talks, or answers on Stack Overflow and the KX Community. Check it out for yourself!</p>
-<p><a href="https://forms.office.com/pages/responsepage.aspx?id=MmAAi833TkCPb0cZ8EFBe5SmUGAYdqNBgRUb7Zmk5fZURUhNMUpQTUEzWlZGV04zRTlMQUpHU1FKMSQlQCN0PWcu" target="_blank" rel="noopener noreferrer">KXPerts Application Form</a></p>
-<p><img decoding="async" loading="lazy" alt="KXperts Application Form" src="https://defconq.github.io/assets/images/form-82fa543a4e3073e55d6840a8b7e01b40.png" width="853" height="1040" class="img_ev3q"></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://defconq.github.io/blog/KXperts%20-%20A%20Developer%20Advocacy%20Program%20by%20KX#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h3>
-<p>The KXperts Developer Advocacy Program is a fantastic initiative to be part of the KX Community. It provides an excellent platform to showcase your contributions, expertise, and knowledge as a KDB/Q developer. The different tiers—silver, gold, and black—offer various levels of recognition and reward, making it accessible for everyone to participate and be acknowledged at their own pace. You shouldn't feel pressured to achieve the black tier, as it requires significant commitment and might not suit everyone's preferences. Ultimately, receiving the KXpert accreditation is a great honor and sets you apart in the field, highlighting your dedication and skill in working with KDB/Q and the broader KX technology suite.</p>]]></content>
-        <author>
-            <name>Alexander Unterrainer</name>
-            <uri>https://github.com/AUnterrainer</uri>
-        </author>
-        <category label="kdb/q" term="kdb/q"/>
-        <category label="kxperts" term="kxperts"/>
-        <category label="community" term="community"/>
-        <category label="KX" term="KX"/>
     </entry>
 </feed>

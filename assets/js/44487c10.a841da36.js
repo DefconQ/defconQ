@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9126],{31661:s=>{s.exports=JSON.parse('{"label":"Nasdaq","permalink":"/blog/tags/nasdaq","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
