@@ -113,6 +113,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
 	{to: '/about/about', label: 'About', position: 'left'},
+	{to: '/defconqPro/defconqPro', label: 'DefconQ Pro', position: 'left'},
 	{to: '/testimonials/testimonials', label: 'Testimonials', position: 'left'},
 	{to: '/happyHour/happyHour', label: 'Happy Hour', position: 'left'},
 	{to: '/cv/cv', label: 'CV', position: 'left'},
