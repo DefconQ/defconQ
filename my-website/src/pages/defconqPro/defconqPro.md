@@ -89,3 +89,6 @@ DefconQ Pro is not a passive, “attend-only” or click-through program with gu
 
 If you’re ready to commit to this journey and are interested in any of the DefconQ Pro offerings, feel free to get in touch via email defconqpro@gmail.com or LinkedIn message [here](https://www.linkedin.com/in/alexanderunterrainer/). As availability is limited, applications are carefully reviewed to ensure a strong fit on both sides. To keep the process efficient, please include your LinkedIn profile or CV when reaching out.
 
+## Client Testimonial
+
+![DefconQ Technical Mentorship Testimonial ny Jonathon Emerick](./testimonialJonathonEmerick.png)
