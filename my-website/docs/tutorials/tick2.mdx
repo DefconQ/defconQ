@@ -773,7 +773,8 @@ Although this setup serves as an excellent foundation for capturing real-time da
 
 ### Tickerplant doesn't deal with corrupt Tickerplant Log files
 
-** The Problem:**
+**The Problem:**
+
 One of the primary drawbacks of our basic Tickerplant is its inability to address corrupted Tickerplant Log files. Upon reviewing the `.u.ld` function, you'll notice that encountering a corrupted Tickerplant Log file leads to the termination of the Tickerplant with an error message. While a corrupt Log file is indeed a critical issue requiring manual attention, there are alternative approaches to handle this situation. If your Tickerplant is inactive, it implies potential data loss. 
 
 **Possible solution:**
@@ -782,19 +783,21 @@ One possible solution is to utilize the `-2` option of `-11!` to identify the co
 
 ### Process location: One host only
 
-** The Problem:**
+**The Problem:**
+
 The architecture of this KDB/Q Tick system mandates the Real-time Database or any other real-time subscriber to replay the Tickerplant Log on startup for recreating the current state of the world and retrieving all messages received by the Tickerplant up to that moment. However, this requires the Tickerplant Log file to be present on the same host or server as the process attempting to replay the log file. As we pass the path of the Tickerplant Log file as a parameter to `-11!`, the function used for replaying the log file, this requirement not only dictates that all real-time subscribers must be on the same host, impacting our hardware needs, but it also makes our system less flexible and limits its extensibility.
 
-** Possible Solution:**
+**Possible Solution:**
 
 A potential solution to this challenge could involve creating an independent process dedicated to replaying the Tickerplant Log file whenever necessary and forwarding the messages to the real-time subscriber that triggered the replay. Another alternative could be the introduction of a Chained Tickerplant (CTP) residing on a secondary host. The CTP would subscribe to the main Tickerplant on the primary host and maintain a local Tickerplant Log file accessible to all real-time subscribers on that specific host. Both solutions require additional design and implementation, and a detailed explanation goes beyond the scope of this post. Nevertheless, they serve as potential ideas for consideration.
 
 ###  Unnecessary serialisation of messages
 
-** The problem:**
+**The problem:**
+
 The existing implementation of `.u.pub` disseminates all messages received by the Tickerplant to each real-time subscriber separately. In other words, the messages are serialized and dispatched to each subscriber individually. This could potentially increase the latency of our system.
 
-** Possible Solution:**
+**Possible Solution:**
 
 This problem only has a partial solution, depending on the KDB/Q version your system is running on. In [version 3.4](https://code.kx.com/q/releases/ChangesIn3.4/)  KX introduced asynchronous broadcast [`-25!`](https://code.kx.com/q/basics/internal/#-25x-async-broadcast), which serialises outgoing messages only once. If your system is running on version 3.4 or above, you can take advantage of this functionality and reduce CPU and memory load as well as latency.
 
