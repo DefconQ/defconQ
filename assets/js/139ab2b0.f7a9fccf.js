@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[3991],{69774:e=>{e.exports=JSON.parse('{"label":"Squarepoint","permalink":"/blog/tags/squarepoint","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
