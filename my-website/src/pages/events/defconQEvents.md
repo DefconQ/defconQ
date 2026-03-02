@@ -2,6 +2,10 @@
 hide_table_of_contents: false
 ---
 
+## 2026.03.18 DefconQ x Squarepoint - Networking Event
+
+I am excited to share that **DefconQ x [Squarepoint](https://www.squarepoint-capital.com/)** are joining forces to invite all KDB/Q developers, engineers, and enthusiasts to a community get together and networking event in the heart of London. Read more about it and sign up for it [**here**](https://www.defconq.tech)
+
 ## 2025.09.17 New York, New York - DefconQ Goes International! Sponsored by [Data Intellect](https://dataintellect.com)
 
 The first **New York KDB/Q Community Happy Hour hosted by DefconQ** is happening on **September 17th** at [Stout Bryant Park NYC](https://www.stoutnyc.com/location/stout-nyc-bryant-park/)!

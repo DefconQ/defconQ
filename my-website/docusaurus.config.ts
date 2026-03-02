@@ -115,7 +115,7 @@ const config: Config = {
 	{to: '/about/about', label: 'About', position: 'left'},
 	{to: '/defconqPro/defconqPro', label: 'DefconQ Pro', position: 'left'},
 	{to: '/testimonials/testimonials', label: 'Testimonials', position: 'left'},
-	{to: '/happyHour/happyHour', label: 'Happy Hour', position: 'left'},
+	{to: '/events/defconQEvents', label: 'DefconQ Events', position: 'left'},
 	{to: '/cv/cv', label: 'CV', position: 'left'},
         {
           href: 'https://defconq.substack.com',
