@@ -4,7 +4,7 @@ hide_table_of_contents: false
 
 ## 2026.03.18 DefconQ x Squarepoint - Networking Event
 
-I am excited to share that **DefconQ x [Squarepoint](https://www.squarepoint-capital.com/)** are joining forces to invite all KDB/Q developers, engineers, and enthusiasts to a community get together and networking event in the heart of London. Read more about it and sign up for it [**here**](https://www.defconq.tech)
+I am excited to share that **DefconQ x [Squarepoint](https://www.squarepoint-capital.com/)** are joining forces to invite all KDB/Q developers, engineers, and enthusiasts to a community get together and networking event in the heart of London. Read more about it and sign up for it [**here**](https://www.defconq.tech/blog/DefconQ%20x%20Squarepoint%20-%20Networking%20Event)
 
 ## 2025.09.17 New York, New York - DefconQ Goes International! Sponsored by [Data Intellect](https://dataintellect.com)
 
