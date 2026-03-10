@@ -498,7 +498,7 @@ Using `parse` for more complex Q-SQL queries may seem a bit challenging at first
 - The `where clause` includes an extra commma at the beginning
 - Symbols must be enlisted to be recognised as variables
 
-Let's look at ta more complex example
+Let's look at a more complex example
 
 ```
 q)select sym,price from trade where price=(max;price) fby sym
@@ -553,7 +553,7 @@ k){$[(#x 1)=#y;@[(#y)#x[0]0#x 1;g;:;x[0]'x[1]g:.=y];'`length]}
 This aligns with some of the "gibberish" we saw when parsing the `where clause` independently. Now we can simply convert the `k` code into `q` code to make it more readable.
 
 ```
-(=;`price;(fby;(enlist;max;`price)
+(=;`price;(fby;(enlist;max;`price);`sym))
 ```
 
 Combining everything above we obtain the following functional form for our complex Q-SQL query
