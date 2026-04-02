@@ -1,0 +1,267 @@
+---
+sidebar_position: 14
+---
+
+# KDB-X Modules: The Building Blocks to KDB/Q Excellence
+
+If you’ve spent any time building KDB/Q systems, or if you're just starting out, chances are the codebase you're working on didn’t start as a “system.” It started as a script. Then another script. Then a helper function. Then a quick fix. And before you know it, you’re sitting on a tangled web of logic where everything works, but no one is entirely sure why.
+
+**KDB-X modules** are designed to change that.
+
+## What are KDB-X modules
+
+At a high level, modules introduce a structured way of packaging logic into **self-contained, reusable components**. Instead of throwing functions into a shared global namespace and hoping nothing collides, each module lives in its own isolated space. It decides what to expose, what to keep private, and how it should be consumed. This might sound like a small shift, but in practice, it’s a fundamental upgrade in how you design and reason about your systems.
+
+What makes this particularly powerful is the consistency the module framework brings. There is now a standardised way to define, load, and interact with components. You no longer have to guess where something is defined or how it should be used, the structure enforces clarity. Over time, this reduces cognitive load, improves maintainability, and makes collaboration far less painful.
+
+The real value, however, shows up when your codebase starts to grow.
+
+## Why you should be using KDB-X modules
+
+Modularity is not just a **"nice to have"**, it’s what separates scripts from systems. When code is modular, it becomes easier to isolate functionality, reason about behaviour, and make changes without unintended side effects. You’re no longer editing a monolithic block of logic; you’re working with well-defined building blocks that can evolve independently.
+
+This naturally leads to reusability. Instead of rewriting the same utilities across projects, *logging, data ingestion, query handling, connectivity*, you encapsulate them once as modules and reuse them wherever needed. The same component can be loaded into multiple processes, shared across teams, or even reused across entirely different systems. Over time, this compounds into a significant productivity gain. You spend less time rewriting and more time building.
+
+And then comes scalability, not just in terms of performance, but in terms of architecture.
+
+As systems grow, complexity doesn’t increase linearly. It explodes. Without structure, even small changes can have unpredictable consequences. Modules provide a way to contain that complexity. New functionality can be introduced as new modules, existing ones can be extended or replaced, and the overall system remains stable because the interfaces between components are clearly defined. You’re effectively building a system that is designed to evolve.
+
+A useful way to think about this is through a slightly nostalgic analogy.
+
+Remember building Lego sets as a kid. At first, you followed the instructions. Step by step, piece by piece, until you had exactly what was on the box. It was satisfying, but also a bit limiting. The real fun began when you stopped following the instructions. When you took pieces from different sets, combined them, and started building something entirely your own.
+
+**KDB-X modules** are those Lego pieces.
+
+![KDB-X modules are like Lego pieces](./img/KDBXmodulesLego.png)
+
+Each module represents a building block, a piece of functionality that does one thing well. On their own, they’re useful. But the real power comes from how you combine them. You can stack them, extend them, swap them out, or integrate them into larger systems. You’re no longer constrained by a predefined structure; you’re designing your own.
+
+And that’s the key shift.
+
+You move from asking, ***"How do I write this function?"*** to ***"How do I design this component?"*** From ***"Where do I put this code?"*** to ***"How does this fit into the system?"***. It’s a transition from writing code that works today to building architecture that will still make sense tomorrow.
+
+KDB-X modules don’t just give you a cleaner way to organise your code. They push you toward better engineering practices. They encourage you to think in terms of boundaries, interfaces, and responsibilities. They make reuse the default rather than an afterthought. And most importantly, they give you the tools to scale, not just your systems, but the way you build them.
+
+Because in the end, the difference between a fragile codebase and a robust system isn’t how clever the code is. It’s how well it’s put together.
+
+## How to create a module
+
+Now that we’ve covered the *what* and the *why*, let's look at something more practical, the *how*. **How do you actually create a KDB-X module?** The requirements are refreshingly simple. To define a module, all you need is a variable called `export`. This variable contains a dictionary that represents the public interface of your module, in other words, the functions (or values) you explicitly want to expose to the outside world.
+
+Let's pause for a moment and walk through a concrete example.
+
+```
+// /Users/alexanderunterrainer/.kx/mod/foo/init.q
+export:([f:{x+1};g:{x*2}])
+```
+
+This defines a module with two functions, `f` and `g`. That’s it. No boilerplate, no ceremony, just a clean declaration of what your module provides. 
+
+To make this module usable, you place it on the search path (more details on how to use an appropriate file structure can be found on the official documentation [here](https://code.kx.com/kdb-x/modules/module-framework/quickstart.html#search-path)). Once it’s in place, you can load it using the `use` function:
+
+```
+alexanderunterrainer@Mac:~/.kx/mod/foo|⇒  pwd
+/Users/alexanderunterrainer/.kx/mod/foo
+alexanderunterrainer@Mac:~/.kx/mod/foo|⇒  ls
+init.q
+alexanderunterrainer@Mac:~/.kx/mod/foo|⇒  q
+KDB-X 5.0 2026.01.22 Copyright (C) 1993-2026 Kx Systems
+q)foo:use`foo
+q)foo
+f| {x+1}
+g| {x*2}
+q)foo.f
+{x+1}
+q)foo.g
+{x*2}
+q)foo.f 3
+4
+q)foo.g 5
+10
+```
+
+When you call use, it loads the module and returns its `export` dictionary. This allows you to assign the module to a variable, in this case `foo`, and access its functions in a structured and predictable way. 
+
+Simple as it looks, this pattern is incredibly powerful. You’ve just defined a reusable, self-contained component with a clear interface, a building block that can now be plugged into larger systems, shared across projects, or extended over time.
+
+### The `export` variable
+
+As we have already seen, the `export` variable is essentially a dictionary that defines the public interface of a module, the functions and values you explicitly expose to the user:
+
+```
+export:([f:{x+1};g:{x*2}])
+```
+
+You can keep variables and functions private, meaning they are only accessible within the module itself, simply by **not** including them in the `export` dictionary. Let’s see how this works in practice.
+
+```
+// /Users/alexanderunterrainer/.kx/mod/foo/init.q
+privateVar:100;
+publicVar:`HelloWorld
+privateFunc:{show publicVar}
+publicFunc:{show privateVar}
+
+export:([f:{x+1};g:{x*2};publicVar;publicFunc])
+```
+
+When loading the module, we can observe the following:
+
+```
+q)myNameSpace:use`foo
+q)myNameSpace
+f         | {x+1}
+g         | {x*2}
+publicVar | `HelloWorld
+publicFunc| {show privateVar}
+q)myNameSpace.publicFunc
+{show privateVar}
+q)myNameSpace.publicFunc[]
+100
+```
+However, there is an important nuance when it comes to variables. While you can include variables in the `export` dictionary, they are exposed as **copies**, not references. This means any modification on the user side won’t affect the internal state of the module. To properly expose and control access to internal variables, the recommended approach is to provide **getter and setter functions**.
+
+This becomes evident when you try to modify the private variable `privateVar` by overwriting it. 
+
+```
+q)myNameSpace.privateVar:1000000
+q)myNameSpace
+f         | {x+1}
+g         | {x*2}
+publicVar | `HelloWorld
+publicFunc| {show privateVar}
+privateVar| 1000000
+q)myNameSpace.publicFunc[]
+100
+```
+As shown, this doesn’t actually change the original variable inside the module, instead, it creates a new variable in the user’s namespace. Meanwhile, the original value defined within the module remains intact and continues to be used by the public function `publicFunc`. 
+
+To properly update the value of `privateVar`, we need to expose controlled access. Let’s add a public setter function that allows us to modify the internal state of the module.
+
+```
+// /Users/alexanderunterrainer/.kx/mod/foo/init.q
+privateVar:100;
+publicVar:`HelloWorld
+privateFunc:{show publicVar}
+publicFunc:{show privateVar}
+setPrivateVar:{privateVar:x}
+export:([f:{x+1};g:{x*2};publicVar;publicFunc;setPrivateVar])
+```
+
+We can now restart our KDB/Q process and reload the module.
+
+```
+q)myNameSpace:use`foo
+q)myNameSpace
+f            | {x+1}
+g            | {x*2}
+publicVar    | `HelloWorld
+publicFunc   | {show privateVar}
+setPrivateVar| {privateVar:x}
+q)myNameSpace.setPrivateVar[1000]
+1000
+q)myNameSpace.publicFunc
+{show privateVar}
+q)myNameSpace.publicFunc[]
+100
+```
+
+Somewhat unexpectedly, the private variable wasn’t updated by our setter function when using the assign operator `:`. Let’s try again, this time using the `set` operator and referencing the variable name directly.
+
+```
+// /Users/alexanderunterrainer/.kx/mod/foo/init.q
+privateVar:100;
+publicVar:`HelloWorld
+privateFunc:{show publicVar}
+publicFunc:{show privateVar}
+setPrivateVar:{`privateVar set x}
+export:([f:{x+1};g:{x*2};publicVar;publicFunc;setPrivateVar])
+```
+Once again we restart our KDB/Q process and load the module
+
+```
+q)myNameSpace:use`foo
+q)myNameSpace
+f            | {x+1}
+g            | {x*2}
+publicVar    | `HelloWorld
+publicFunc   | {show privateVar}
+setPrivateVar| {`privateVar set x}
+q)myNameSpace.setPrivateVar[1000]
+`privateVar
+q)myNameSpace.publicFunc[]
+100
+q)privateVar
+1000
+```
+
+To our surprise, the result still isn’t what we expected. Rather than updating the private variable inside the module, the `set` operator ends up creating a new global variable, definitely not the outcome we were aiming for. To understand why, we need to take a closer look at the official [KDB-X module documentation](https://code.kx.com/kdb-x/modules/module-framework/quickstart.html). There, we find an important detail: when assigning to globals from within functions, the standard assignment operator `:` must be replaced with the double-colon `::` operator to ensure the variable is treated as global rather than local.
+
+Once we make that change, the behaviour aligns with our expectations, the private variable inside the module is correctly updated.
+
+```
+// /Users/alexanderunterrainer/.kx/mod/foo/init.q
+privateVar:100;
+publicVar:`HelloWorld
+privateFunc:{show publicVar}
+publicFunc:{show privateVar}
+setPrivateVar:{privateVar::x}
+export:([f:{x+1};g:{x*2};publicVar;publicFunc;setPrivateVar])
+```
+
+After restarting our KDB/Q session and loading the module one final time
+
+```
+q)myNameSpace:use`foo
+q)myNameSpace
+f            | {x+1}
+g            | {x*2}
+publicVar    | `HelloWorld
+publicFunc   | {show privateVar}
+setPrivateVar| {privateVar::x}
+q)myNameSpace.publicFunc[]
+100
+q)myNameSpace.setPrivateVar[1000]
+q)myNameSpace.publicFunc[]
+1000
+```
+That’s it, we made it. You should now have a solid foundation in KDB-X modules and be ready to build and assemble your own KDB/Q Lego pieces... and maybe even your battleship.
+
+## Tips and Tricks
+
+As you’ve probably noticed, we had to restart and reload our KDB/Q process quite frequently while building the final module, not exactly the most enjoyable workflow. Fortunately, [KX](https://kx.com)  anticipated this and introduced a `reuse` function that allows you to reload a module without restarting the entire process.
+
+While this functionality isn’t officially documented yet, you can find it in the `.Q.m` namespace, the dedicated namespace for everything module-related.
+
+```
+q).Q.m
+     | ::
+M    | (+`p`s!(("";"/Users/alexanderunterrainer/.kx/mod/foo");``))!+(,`m)!,``.m.foo
+dp   | k){"/"\:x}
+pd   | k){"/"/:x}
+pe   | k){y,/:x}[(".k";".q";".k_";".q_";".ma64.so")]
+p1   | k){x@*&0<#:'!:'`$":",'x}
+pl   | k){,/{pd'(,y),/:,/((-1_x),/:,:'pe[:/x];x,/:,:'pe["init"])}[$y]'x}
+ld   | k){S:(,`)!,(::);g:{.[`/:x,y;();:;z]}d:."\\d";$[|/x like/:-1 0_\:"*.?_";[."\\l ",x;$[99h=@e:$[`export in !d;d`export;'"no export: ",x];$[@. e;g[`export]e:S,e;e];g[`export]S,e y]]
+ [x:`$|(1+x?".")_x:|x;g[`export]S,r:(@[x 2:;(`kexport;..
+ef   | k){e0:."\\e";r:@[{."\\e 1";(0b;x y)}x;y;{(1b;x)}];@[{."\\e ",$x};e0;::];r}
+ch   | k){[m;p;s;z;a];d0:."\\d";m0:-200!0;p0:-201!0;-200!m1:`$1_$m;-201!p;."\\d .",$m1;M[(p;s)]:([m:`:]);r:ef[z;a];M::([],p;,s)_ M;."\\d ",$d0;-200!m0;-201!p0;r}
+dl   | k){$[(:/d:dp x)like"init.*";pd (-1_d);x]}
+up   | k){[m;x;a]([p;s:`]):M?([m]);if[~^u:M[(p;x)]`m;$[u~`:;'`cycle;:u]];r:ch[m;p;x;m[`provide] .;(x;a)];:[r;(0b;r);[M[(p;x)]:([m:r]);r];(1b;r);'r]}
+mn   | k){a:1_(),x;x:x0:*x;if[1<#b:":"\:$x;:up[mn`$*b;(`$":"/:1_b);a]];n:$[j:+/&\^x:`\:x;[x:j_x;{`/:`,$[0<l:1+x-(#y:`\:y);`m,`$($l);(-x)_y]}[j-1;-200!0]];`.m]
+ if[~#l:p1 ll:pl[$[j;,{$[~#x;,".";x]}pd {y:((,".")~*y)_y;$[0<l:x-#y;l#,"..";(-x)..
+mp   | k){([p]):M?([m:mn x]);p}
+reuse| k){r:ch[m:mn x;p;`;ld[p1 $[(:/dp p:mp x)like"*.*";,p;p,/:pe["/init"]]];1_(),x];:[r;(0b;r);[M[(p;`)]:([m]);m];(1b;r);'r];use x}
+fp   | k){$[$[99h=@y;11h=@!y;0];(`/:'x,/:!y).z.s'y;(100h=t)|((103h<t)&(t<112h))|$[112h=t:@y;"code"~$y;0b];x . ();y]}
+use  | k){. `/:mn[x],`export}
+SP   | ,"/Users/alexanderunterrainer/.kx/mod"
+```
+
+## Final Thoughts
+
+KDB-X modules are more than just a new feature, they’re a powerful shift in how you build, structure, and scale kdb+/q systems. By embracing modularity, you move from writing scattered scripts to designing clean, reusable building blocks that grow with your architecture. The real value comes when you start creating your own modules, combining them, and shaping systems that are truly yours. So don’t just read about it, start building, experiment, and turn your ideas into components you can stack, scale, and evolve.
+
+Happy Coding!
+
+## Resources
+
+[Offical KX Modules Overview](https://code.kx.com/kdb-x/modules/module-index.html)
