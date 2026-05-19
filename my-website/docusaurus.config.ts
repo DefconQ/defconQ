@@ -133,6 +133,11 @@ const config: Config = {
           position: 'left',
         },
         {
+          href: 'https://discord.gg/wKVdH6xrW',
+          label: 'DefconQ Community Discord Server',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/DefconQ',
           label: 'GitHub',
           position: 'right',
@@ -165,6 +170,10 @@ const config: Config = {
             {
               label: 'DefconQ Swag',
               href: 'https://defconq.myspreadshop.co.uk',
+            },
+            {
+              label: 'DefconQ Community Discord Server',
+              href: 'https://discord.gg/wKVdH6xrW',
             },
           ],
         },
