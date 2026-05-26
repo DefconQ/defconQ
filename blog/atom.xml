@@ -2,11 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2026-05-18T00:00:00.000Z</updated>
+    <updated>2026-05-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[The Weekly Q Rumble - Sharpen Your KDB/Q Skills, One Challenge at a Time]]></title>
+        <id>https://DefconQ.github.io/blog/The Weekly Q Rumble - Sharpen Your KDB/Q Skills, One Challenge at a Time</id>
+        <link href="https://DefconQ.github.io/blog/The Weekly Q Rumble - Sharpen Your KDB/Q Skills, One Challenge at a Time"/>
+        <updated>2026-05-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Let’s be honest: learning KDB/Q can sometimes feel like going to the gym. You know it’s good for you. You know you should keep practicing. But after a long day of debugging code, fighting with type errors, and wondering why your function suddenly returned a rank error, the last thing you want is to sit down and read another page of documentation.]]></summary>
+        <content type="html"><![CDATA[<p>Let’s be honest: <strong>learning KDB/Q</strong> can sometimes feel like going to the gym. You know it’s <em>good for you</em>. You know you <em>should keep practicing.</em> But after a long day of <strong>debugging</strong> code, fighting with <code>type</code> errors, and wondering why your function suddenly returned a rank error, the last thing you want is to sit down and read another page of documentation.</p>
+<p>That’s exactly why we’re launching the <strong>DefconQ Weekly KDB/Q Challenge.</strong></p>
+<p>The idea is <strong>simple</strong>: have a bit of fun, keep your Q brain sharp, and <strong>improve your KDB/Q skills</strong> on the side, without it feeling like homework. Every week, a new KDB/Q challenge will be posted on the <a href="https://discord.gg/98BbB9HdV" target="_blank" rel="noopener noreferrer"><strong>DefconQ Community Discord Server</strong></a>, and everyone is invited to participate.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-is-the-weekly-kdbq-challenge">What Is the Weekly KDB/Q Challenge?<a href="https://defconq.github.io/blog/The%20Weekly%20Q%20Rumble%20-%20Sharpen%20Your%20KDB/Q%20Skills,%20One%20Challenge%20at%20a%20Time#what-is-the-weekly-kdbq-challenge" class="hash-link" aria-label="Direct link to What Is the Weekly KDB/Q Challenge?" title="Direct link to What Is the Weekly KDB/Q Challenge?">​</a></h2>
+<p>Think of it as your weekly <code>Q workout</code>. Each week, we will post a brand-new challenge designed to test your KDB/Q skills, your vector thinking, your creativity, and occasionally your patience.</p>
+<p>Some challenges will be quick and fun. Others might make you stare at your screen for an hour questioning your life choices. That’s part of the experience. The difficulty will vary from week to week, meaning there will be something for everyone, from complete <strong>Qbies</strong> taking their first steps in <code>Q</code>, to seasoned <strong>KDB/Q developers</strong> looking for a challenge worthy of their ego.</p>
+<p>And the best part?</p>
+<p>There’s usually more than one way to solve a problem in Q.</p>
+<p>That means the real fun often starts <em><strong>after</strong></em> the challenge, when the community begins comparing solutions, debating elegance versus performance, and collectively admiring (or questioning) the weird genius of some of the answers.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-are-we-doing-this">Why Are We Doing This<a href="https://defconq.github.io/blog/The%20Weekly%20Q%20Rumble%20-%20Sharpen%20Your%20KDB/Q%20Skills,%20One%20Challenge%20at%20a%20Time#why-are-we-doing-this" class="hash-link" aria-label="Direct link to Why Are We Doing This" title="Direct link to Why Are We Doing This">​</a></h2>
+<p><strong>DefconQ</strong> has always been about making KDB/Q easier to learn and more enjoyable to work with. But the truth is, reading tutorials and watching walkthroughs will only take you so far. At some point, you need to get your hands dirty. You need to write code. Break things. Try ideas. Compare solutions. Learn from others. That’s where the <strong>Weekly Challenge</strong> comes in. It creates a fun, low-pressure way to keep practicing regularly while exposing yourself to different types of problems and different styles of thinking.</p>
+<p>Because one of the best ways to improve in Q is to see how someone else solved the same problem in a completely different, and often much more elegant, way. And let’s be honest: Q developers are a competitive bunch. So why not turn learning into a bit of a friendly battle?</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="hosted-on-the-defconq-community-discord-server">Hosted on the DefconQ Community Discord Server<a href="https://defconq.github.io/blog/The%20Weekly%20Q%20Rumble%20-%20Sharpen%20Your%20KDB/Q%20Skills,%20One%20Challenge%20at%20a%20Time#hosted-on-the-defconq-community-discord-server" class="hash-link" aria-label="Direct link to Hosted on the DefconQ Community Discord Server" title="Direct link to Hosted on the DefconQ Community Discord Server">​</a></h2>
+<p>All challenges will be hosted on the <strong>DefconQ Community Discord Server</strong>, where participants can submit solutions, discuss approaches, compare ideas, and occasionally argue over whether one-liners are elegant or just deeply irresponsible. However, this isn't about <em>winning</em> in the traditinal sense. It's about</p>
+<ul>
+<li>Improving your skills, while</li>
+<li>learning from others, while</li>
+<li>seing new techniques</li>
+<li>and having some fun with the community along the way.</li>
+</ul>
+<p>Of course, a little bragging rights never hurt either.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ready-to-rumble">Ready To Rumble?<a href="https://defconq.github.io/blog/The%20Weekly%20Q%20Rumble%20-%20Sharpen%20Your%20KDB/Q%20Skills,%20One%20Challenge%20at%20a%20Time#ready-to-rumble" class="hash-link" aria-label="Direct link to Ready To Rumble?" title="Direct link to Ready To Rumble?">​</a></h2>
+<p>Whether you are a beginner trying to build confidence, an intermediate developer looking to sharpen your skills, or an experienced Q wizard who thinks nobody can out-vector you, the <strong>DefconQ Weekly KDB/Q Challenge</strong> is for you.</p>
+<p>A new challenge. Every week. Different levels of difficulty. Community discussion. Multiple solutions. Plenty of learning.
+And perhaps the occasional reminder that Q can still humble all of us.</p>
+<p>Come join the <strong>DefconQ Community Discord Server</strong>, take on the challenge, and let’s see what you’ve got.</p>
+<p><strong>DefconQ Community Discord Server</strong> invite link <a href="https://discord.gg/98BbB9HdV" target="_blank" rel="noopener noreferrer">here</a></p>
+<p>Happy coding.</p>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="DefconQ" term="DefconQ"/>
+        <category label="Weekly Challenge" term="Weekly Challenge"/>
+        <category label="Coding Skills" term="Coding Skills"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[DefconQ Community Discord Server]]></title>
         <id>https://DefconQ.github.io/blog/DefconQ Community Discord Server</id>
@@ -1002,49 +1045,5 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
         <category label="KX" term="KX"/>
         <category label="Capital Markets Summit" term="Capital Markets Summit"/>
         <category label="AI" term="AI"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[New York Stock Exchange extends trading hours]]></title>
-        <id>https://DefconQ.github.io/blog/NYSE extends trading hours</id>
-        <link href="https://DefconQ.github.io/blog/NYSE extends trading hours"/>
-        <updated>2024-10-29T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Last week, in a groundbreaking move, the New York Stock Exchange (NYSE) revealed plans to extend after-hours trading on its Arca electronic exchange. Pending regulatory approval, this would expand Arca's operating hours from 130 p.m. ET, Monday through Friday, offering 22 hours of trading each weekday. This development follows other major exchange announcements this year, the Texas Stock Exchange (TXSE Group), backed by BlackRock and Citadel Securities. To learn more about how these changes could reshape the electronic trading landscape, keep reading below.]]></summary>
-        <content type="html"><![CDATA[<p>Last week, in a groundbreaking move, the New York Stock Exchange (NYSE) revealed plans to extend after-hours trading on its Arca electronic exchange. Pending regulatory approval, this would expand Arca's operating hours from 1:30 a.m. ET to 11:30 p.m. ET, Monday through Friday, offering 22 hours of trading each weekday. This development follows other major exchange announcements this year, the Texas Stock Exchange (TXSE Group), backed by BlackRock and Citadel Securities. To learn more about how these changes could reshape the electronic trading landscape, keep reading below.</p>
-<p><img decoding="async" loading="lazy" alt="NYSE extends trading hours" src="https://defconq.github.io/assets/images/nyse-cb8854163136ba7515f62e5068318ccd.png" width="730" height="695" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-plan">The Plan<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#the-plan" class="hash-link" aria-label="Direct link to The Plan" title="Direct link to The Plan">​</a></h2>
-<p>First things first, let's examine the New York Stock Exchange’s (NYSE) latest proposal. On Friday, the NYSE announced its plans to extend trading hours on its all-electronic Arca exchange to 22 hours a day.</p>
-<p>This proposal aligns with growing interest in around-the-clock trading in U.S. markets. Robinhood, for example, introduced “24/5 trading” in May 2023, allowing trades from 8 p.m. ET on Sundays to 8 p.m. ET on Fridays. Meanwhile, global cryptocurrency markets already operate 24/7.</p>
-<p>Under the new plan, NYSE Arca’s trading would open at 1:30 a.m. and close at 11:30 p.m. ET on weekdays, pending regulatory approval, according to the NYSE’s parent company, Intercontinental Exchange. Currently, extended trading hours on the NYSE range from 4 a.m. ET to 8 p.m. ET, with regular trading between 9:30 a.m. and 4 p.m. ET.</p>
-<p>NYSE Arca, a leading platform for trading exchange-traded funds (ETFs) and over 8,000 U.S.-listed securities, would allow trading of all U.S.-listed stocks, ETFs, and closed-end funds during these expanded hours.</p>
-<p>The proposal comes in response to rising demand for U.S. securities trading. Kevin Tyrrell, Head of Markets at the New York Stock Exchange, commented, "The NYSE’s initiative to extend U.S. equity trading to 22 hours a day, five days a week highlights the strength of our U.S. capital markets and the increasing global demand for our listed securities. As the steward of U.S. capital markets, the NYSE is proud to lead the way in providing exchange-based trading access to our U.S.-listed companies and funds for investors across global time zones."</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="redefining-the-game-what-nyses-22-hour-trading-means-for-electronic-markets">Redefining the Game: What NYSE's 22-Hour Trading Means for Electronic Markets<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#redefining-the-game-what-nyses-22-hour-trading-means-for-electronic-markets" class="hash-link" aria-label="Direct link to Redefining the Game: What NYSE's 22-Hour Trading Means for Electronic Markets" title="Direct link to Redefining the Game: What NYSE's 22-Hour Trading Means for Electronic Markets">​</a></h2>
-<p>What will these extended trading hours mean for the electronic trading landscape? Opinions are divided. While some market participants believe the impact will be limited and consider the proposal premature. Jim Toes, CEO of the Security Traders Association, noted in a CNBC interview, "The application seems very premature, as the demand for overnight and weekend exchange trading is still speculative." Dmitri Galinov, former head of Credit Suisse’s dark pool, holds a different view. “There is certainly demand from international markets, especially in South Korea, Japan, and parts of Europe,” he stated in a Sunday interview with CNBC.</p>
-<p>He also pointed out a growing interest among U.S. retail traders who wish to trade at night, noting, “Many retail traders work during the day and want the option to trade past the current 8 p.m. cutoff when they get home.”</p>
-<p>While demand from retail traders for extended hours is evident, the key question remains: will institutional traders follow suit? Although institutional investors are unlikely to be early adopters, and trading volumes are expected to be thin initially, competition around extended trading hours is undoubtedly intensifying. Earlier this year, TXSE Group, backed by BlackRock (BLK.N) and Citadel Securities, announced plans to launch the Texas Stock Exchange in Dallas, challenging the dominance of New York-based exchanges in an effort to attract global firms. With Citadel Securities—one of the world’s largest market makers—supporting TXSE, automation and extended trading hours appear increasingly likely, broadening stock market access.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="shifting-the-clock-how-extended-hours-are-transforming-the-trading-tech-landscape">Shifting the Clock: How Extended Hours are Transforming the Trading Tech Landscape<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#shifting-the-clock-how-extended-hours-are-transforming-the-trading-tech-landscape" class="hash-link" aria-label="Direct link to Shifting the Clock: How Extended Hours are Transforming the Trading Tech Landscape" title="Direct link to Shifting the Clock: How Extended Hours are Transforming the Trading Tech Landscape">​</a></h2>
-<p>For software developers and engineers in the financial industry focused on trading implications, the consequences are clear: trading data volumes are poised to grow even larger. Today, we already manage unprecedented amounts of data and information, the highest in human history. While this increase in data and trading volume is a natural outcome of technological evolution, extended trading hours are likely to accelerate this growth. As financial technologists, we must adjust and adapt, prioritizing the availability and stability of our trading applications to meet these expanding demands.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kdbq-the-definitive-solution-for-data-driven-finance">KDB/Q: The Definitive Solution for Data-Driven Finance<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#kdbq-the-definitive-solution-for-data-driven-finance" class="hash-link" aria-label="Direct link to KDB/Q: The Definitive Solution for Data-Driven Finance" title="Direct link to KDB/Q: The Definitive Solution for Data-Driven Finance">​</a></h2>
-<p>The next steps in response to this increase in trading volume and the corresponding rise in trading data and information are in your hands. You need to pivot toward technologies designed for big data that can manage substantial amounts of information for both real-time processing and historical data storage. Additionally, rapid computation and calculation are crucial for processing and analyzing the vast amounts of data you’re capturing. What better technology for this than KDB/Q? KDB/Q is the established go-to solution for handling, storing, processing, and analyzing big data and time series data.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://defconq.github.io/blog/NYSE%20extends%20trading%20hours#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<p>So, what are your next steps? It's clear that learning KDB/Q can provide you with a significant competitive advantage, especially if you’re starting from scratch. Luckily, I’ve just released the most comprehensive KDB/Q study plan ever created. This unprecedented study plan caters to a wide range of needs—whether you're an aspiring KDB/Q developer, a mainstream developer who needs to work with KDB/Q, a quant or quant developer focused on building efficient business logic in KDB/Q, a data or business analyst trying to make sense and looking to interpret data, or a manager overseeing a team of developers wanting to grasp the KDB/Q stack. There’s something here for everyone. So don’t hesitate, check it out here!</p>
-<p>Find my unprecedented KDB/Q study plan <a href="https://www.defconq.tech/docs/studyPlan/intro" target="_blank" rel="noopener noreferrer">here</a></p>
-<p><strong>Happy Learning!</strong></p>
-<p><strong>Source:</strong></p>
-<ul>
-<li><a href="https://ir.theice.com/press/news-details/2024/The-New-York-Stock-Exchange-Plans-to-Extend-Weekday-Trading-on-its-NYSE-Arca-Equities-Exchange-to-22-Hours-a-Day/default.aspx" target="_blank" rel="noopener noreferrer">The New York Stock Exchange Plans to Extend Weekday Trading on its NYSE Arca Equities Exchange to 22 Hours a Day</a></li>
-<li><a href="https://www.cnbc.com/2024/10/25/new-york-stock-exchange-to-extend-after-hours-trading.html" target="_blank" rel="noopener noreferrer">CNBC: New York Stock Exchange to extend after-hours trading</a></li>
-<li><a href="https://www.cnbc.com/2024/10/28/the-pros-and-cons-for-investors-of-nonstop-trading-as-nyse-looks-to-go-22-hours-a-day-.html" target="_blank" rel="noopener noreferrer">CNBC: The pros and cons for investors of nonstop trading as NYSE looks to go 22 hours a day</a></li>
-<li><a href="https://www.reuters.com/markets/us/blackrock-citadel-backed-group-start-new-national-stock-exchange-texas-wsj-2024-06-05/" target="_blank" rel="noopener noreferrer">Reuters: BlackRock, Citadel Securities-backed TXSE Group to launch Texas Stock Exchange</a></li>
-</ul>]]></content>
-        <author>
-            <name>Alexander Unterrainer</name>
-            <uri>https://github.com/AUnterrainer</uri>
-        </author>
-        <category label="kdb/q" term="kdb/q"/>
-        <category label="NYSE" term="NYSE"/>
-        <category label="exchange" term="exchange"/>
-        <category label="trading hours" term="trading hours"/>
-        <category label="bigdata" term="bigdata"/>
-        <category label="volume" term="volume"/>
     </entry>
 </feed>
