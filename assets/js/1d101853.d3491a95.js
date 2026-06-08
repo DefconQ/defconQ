@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[5652],{34259:a=>{a.exports=JSON.parse('{"label":"Market Data","permalink":"/blog/tags/market-data","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

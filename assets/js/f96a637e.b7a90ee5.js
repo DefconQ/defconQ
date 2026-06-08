@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6306],{28642:e=>{e.exports=JSON.parse('{"label":"Databento","permalink":"/blog/tags/databento","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
