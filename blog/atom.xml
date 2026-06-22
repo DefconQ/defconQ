@@ -2,11 +2,68 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2026-06-01T00:00:00.000Z</updated>
+    <updated>2026-06-18T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[When Markets Never Sleep - Extended Hours, Odd Lots, and the Infrastructure Implications of Always-On Markets]]></title>
+        <id>https://DefconQ.github.io/blog/When Markets Never Sleep - Extended Hours, Odd Lots, and the Infrastructure Implications of Always-On Markets</id>
+        <link href="https://DefconQ.github.io/blog/When Markets Never Sleep - Extended Hours, Odd Lots, and the Infrastructure Implications of Always-On Markets"/>
+        <updated>2026-06-18T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A few months ago, I wrote a blog post about Nasdaq's plans to extend trading hours and what that might mean for market data infrastructure. At the time, the discussion was largely theoretical. It was easy to dismiss it as yet another market structure change that would slowly work its way through committees, working groups, and technology roadmaps.]]></summary>
+        <content type="html"><![CDATA[<p>A few months ago, I wrote a blog post about <a href="https://www.defconq.tech/blog/Nasdaq%20Extends%20Trading%20Hours%20-%20What%20It%20Really%20Means%20for%20Market%20Data%20Systems" target="_blank" rel="noopener noreferrer">Nasdaq's plans to extend trading hours</a> and what that might mean for market data infrastructure. At the time, the discussion was largely theoretical. It was easy to dismiss it as yet another market structure change that would slowly work its way through committees, working groups, and technology roadmaps.</p>
+<p>The more I thought about it, however, the more I realised that extended trading hours are not really about trading hours at all.</p>
+<p>They are about a much bigger shift taking place across financial markets.</p>
+<p>Markets are becoming more continuous. More fragmented. More data-intensive. More demanding.</p>
+<p>And most importantly, they are beginning to expose assumptions that have been baked into market data systems for decades.</p>
+<p>That's exactly why I'm excited to be joining <a href="https://kx.com/" target="_blank" rel="noopener noreferrer">KX</a> for an upcoming webinar discussing the infrastructure implications of always-on markets. Together we'll explore what extended trading hours, odd lots, sub-penny pricing, AI-driven workflows, and increasingly continuous markets mean for firms operating in today's landscape.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-end-of-business-hours">The End of "Business Hours"<a href="https://defconq.github.io/blog/When%20Markets%20Never%20Sleep%20-%20Extended%20Hours,%20Odd%20Lots,%20and%20the%20Infrastructure%20Implications%20of%20Always-On%20Markets#the-end-of-business-hours" class="hash-link" aria-label="Direct link to The End of &quot;Business Hours&quot;" title="Direct link to The End of &quot;Business Hours&quot;">​</a></h2>
+<p>For most of modern market history, technology teams have enjoyed a luxury they rarely appreciated: downtime. Markets opened. Markets closed. Systems had time to breathe. The overnight window was often used to recover from failures, perform maintenance, replay data, rebuild databases, execute batch processes, and generally prepare for the next day. If something went wrong at 6 p.m., there was usually time to fix it before the opening bell the next morning.</p>
+<p>Those assumptions are rapidly disappearing.</p>
+<p>Whether it's extended trading sessions, overnight equity markets, crypto's 24/7 trading model, or increasing globalisation of liquidity, markets are steadily moving toward continuous operation. For market participants, this creates new opportunities. For infrastructure teams, it creates new headaches. Because an always-on market eventually requires always-on infrastructure.</p>
+<p>And that changes everything.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-than-just-more-data">More Than Just More Data<a href="https://defconq.github.io/blog/When%20Markets%20Never%20Sleep%20-%20Extended%20Hours,%20Odd%20Lots,%20and%20the%20Infrastructure%20Implications%20of%20Always-On%20Markets#more-than-just-more-data" class="hash-link" aria-label="Direct link to More Than Just More Data" title="Direct link to More Than Just More Data">​</a></h2>
+<p>When people hear "extended trading hours," the first reaction is often: <em>"So we'll have more data?"</em></p>
+<p>Yes. But that's probably the least interesting part of the story. The real challenge comes from the combination of trends happening simultaneously.</p>
+<p>Odd lots are becoming increasingly important. Sub-penny pricing continues to evolve. Market fragmentation continues to increase. AI-driven workflows are creating entirely new categories of data consumers. Real-time analytics are expected everywhere. Historical data is no longer simply stored; it's continuously queried, replayed, modelled, and fed into machine learning systems. Each of these developments adds pressure individually. Together, they fundamentally change how firms need to think about infrastructure.</p>
+<p>What used to be a relatively clean separation between real-time systems, historical databases, research environments, and analytics platforms is becoming increasingly blurred.</p>
+<p>And that's where things start getting interesting for KDB/Q developers.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-recovery-window-is-disappearing">The Recovery Window Is Disappearing<a href="https://defconq.github.io/blog/When%20Markets%20Never%20Sleep%20-%20Extended%20Hours,%20Odd%20Lots,%20and%20the%20Infrastructure%20Implications%20of%20Always-On%20Markets#the-recovery-window-is-disappearing" class="hash-link" aria-label="Direct link to The Recovery Window Is Disappearing" title="Direct link to The Recovery Window Is Disappearing">​</a></h2>
+<p>One of the topics I'm particularly looking forward to discussing during the webinar is the disappearing recovery window. Historically, many systems relied on periods of reduced activity to catch up. Data could be reconciled. Processes could be restarted. Infrastructure could be upgraded. Large batch jobs could run. Many firms still have critical workflows that quietly assume these windows will always exist.</p>
+<p>But what happens when they don't?</p>
+<p>What happens when there is no convenient downtime?</p>
+<p>What happens when trading activity never truly stops?</p>
+<p>The challenge is no longer simply building systems that are fast. The challenge becomes building systems that remain continuously available, continuously observable, and continuously resilient. That is a very different engineering problem.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="when-architectures-start-to-crack">When Architectures Start to Crack<a href="https://defconq.github.io/blog/When%20Markets%20Never%20Sleep%20-%20Extended%20Hours,%20Odd%20Lots,%20and%20the%20Infrastructure%20Implications%20of%20Always-On%20Markets#when-architectures-start-to-crack" class="hash-link" aria-label="Direct link to When Architectures Start to Crack" title="Direct link to When Architectures Start to Crack">​</a></h2>
+<p>Most firms didn't intentionally design fragmented architectures. In fact, many of the decisions that created today's technology stacks were entirely reasonable at the time. One system handled real-time data. Another stored historical information. A separate platform supported research. Analytics ran somewhere else. AI workloads are added nowadays.</p>
+<p>Over time, however, every additional component introduces another handoff. Another integration, another potential point of failure, another place where latency, inconsistency, operational risk, and complexity can accumulate.</p>
+<p>When markets operate within defined sessions, those compromises can often be managed. When markets become continuous however, the cracks become much harder to hide. The cost of moving data between systems increases.The operational burden increases. The complexity increases.</p>
+<p>And eventually firms start asking a difficult question: <em>"Would we build it this way if we were starting today?"</em></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="building-for-the-next-decade">Building for the Next Decade<a href="https://defconq.github.io/blog/When%20Markets%20Never%20Sleep%20-%20Extended%20Hours,%20Odd%20Lots,%20and%20the%20Infrastructure%20Implications%20of%20Always-On%20Markets#building-for-the-next-decade" class="hash-link" aria-label="Direct link to Building for the Next Decade" title="Direct link to Building for the Next Decade">​</a></h2>
+<p>This naturally leads to the final topic we'll discuss during the webinar: what principles should guide the next generation of market infrastructure? If markets are becoming more continuous, more granular, and more data-intensive, then infrastructure needs to evolve alongside them.</p>
+<p>Firms increasingly need platforms that can handle real-time analytics, historical data, research workloads, and AI-driven applications without requiring a maze of disconnected systems. They need interoperability. They need resilience. They need simplicity. And they need technology capable of operating continuously rather than merely surviving until the next maintenance window.</p>
+<p>This is where KDB-X enters the conversation.</p>
+<p>One of the reasons KDB/Q has remained so dominant in capital markets is its ability to unify problems that traditionally required multiple technologies. KDB-X takes that philosophy further, providing a platform designed for modern workloads where real-time, historical, analytics, and AI increasingly coexist.</p>
+<p>We'll explore exactly what that means during the discussion.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="join-us">Join Us<a href="https://defconq.github.io/blog/When%20Markets%20Never%20Sleep%20-%20Extended%20Hours,%20Odd%20Lots,%20and%20the%20Infrastructure%20Implications%20of%20Always-On%20Markets#join-us" class="hash-link" aria-label="Direct link to Join Us" title="Direct link to Join Us">​</a></h2>
+<p>Whether you're a KDB/Q developer, quant engineer, market data architect, researcher, or simply someone interested in where market infrastructure is heading, this webinar should be a fascinating discussion. Because the real question isn't whether markets will continue to evolve.</p>
+<p>They will.</p>
+<p>The real question is whether our infrastructure is evolving with them.</p>
+<p>I hope you'll join us as we explore what happens when markets never sleep.</p>
+<p><a href="https://kx.com/resources/webinars/when-markets-never-sleep-extended-hours-odd-lots-and-the-infrastructure-implications-of-always-on-markets/" target="_blank" rel="noopener noreferrer">SIGNUP HERE</a></p>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="DefconQ" term="DefconQ"/>
+        <category label="KX" term="KX"/>
+        <category label="Market Hours" term="Market Hours"/>
+        <category label="Webinar" term="Webinar"/>
+        <category label="Market Microstructure" term="Market Microstructure"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[DefconQ x Databento Meetup - The Market Data Provider You Wish Always Existed]]></title>
         <id>https://DefconQ.github.io/blog/DefconQ x Databento Meetup - The Market Data Provider You Wish Always Existed</id>
@@ -1028,35 +1085,5 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
         <category label="Happy Hour" term="Happy Hour"/>
         <category label="Meetup" term="Meetup"/>
         <category label="KX" term="KX"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds & Salary Secrets!]]></title>
-        <id>https://DefconQ.github.io/blog/The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds &amp; Salary Secrets!</id>
-        <link href="https://DefconQ.github.io/blog/The Truth About Tech Jobs in Finance - Nepotism, Hedge Funds &amp; Salary Secrets!"/>
-        <updated>2025-03-13T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[The finance & tech job market EXPOSED! A couple of weeks ago, I had the pleasure of sitting down with Craig Whiting, Managing Director at RLS Search and host of the Top 10% Podcast, for an unfiltered conversation about some key topics in our industry:]]></summary>
-        <content type="html"><![CDATA[<p>The finance &amp; tech job market EXPOSED! A couple of weeks ago, I had the pleasure of sitting down with <a href="https://www.linkedin.com/in/craig-whiting-b75a8ba/" target="_blank" rel="noopener noreferrer">Craig Whiting</a>, Managing Director at RLS Search and host of the Top 10% Podcast, for an unfiltered conversation about some key topics in our industry:</p>
-<ul>
-<li>Banking grad schemes – Are they worth it?</li>
-<li>Nepotism in investment banks – How much does it matter?</li>
-<li>Hedge Funds vs. Banks – Where should you work?</li>
-<li>The truth about promotions &amp; counteroffers</li>
-<li>The best way to negotiate your salary</li>
-<li>Does your university degree really matter?</li>
-<li>How to find a good recruiter (yes, they exist!)</li>
-</ul>
-<p>If you're exploring job opportunities or simply want to understand the industry landscape, key considerations when searching for a new role, and more, join this insightful conversation between two seasoned professionals in the field.</p>
-<iframe width="1120" height="630" src="https://www.youtube.com/embed/Wn7T_aLl9Nw?si=-HA-bnioM715aZ8D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-pic    ture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>]]></content>
-        <author>
-            <name>Alexander Unterrainer</name>
-            <uri>https://github.com/AUnterrainer</uri>
-        </author>
-        <category label="kdb/q" term="kdb/q"/>
-        <category label="Job Market" term="Job Market"/>
-        <category label="Recruitment" term="Recruitment"/>
-        <category label="Buy Side" term="Buy Side"/>
-        <category label="Sell Side" term="Sell Side"/>
-        <category label="Hedge Funds" term="Hedge Funds"/>
-        <category label="Investment Banking" term="Investment Banking"/>
     </entry>
 </feed>
