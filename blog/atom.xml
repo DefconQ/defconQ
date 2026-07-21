@@ -2,11 +2,67 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://DefconQ.github.io/blog</id>
     <title>DefconQ Blog</title>
-    <updated>2026-06-18T00:00:00.000Z</updated>
+    <updated>2026-07-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://DefconQ.github.io/blog"/>
     <subtitle>DefconQ Blog</subtitle>
     <icon>https://DefconQ.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[L Has Landed - A New Runtime for k and q Enters the Scene]]></title>
+        <id>https://DefconQ.github.io/blog/L Has Landed - A New Runtime for k and q Enters the Scene</id>
+        <link href="https://DefconQ.github.io/blog/L Has Landed - A New Runtime for k and q Enters the Scene"/>
+        <updated>2026-07-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Not Only the Weather Is Heating Up…]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="not-only-the-weather-is-heating-up">Not Only the Weather Is Heating Up…<a href="https://defconq.github.io/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene#not-only-the-weather-is-heating-up" class="hash-link" aria-label="Direct link to Not Only the Weather Is Heating Up…" title="Direct link to Not Only the Weather Is Heating Up…">​</a></h2>
+<p>Not only have the temperatures been rising this summer, but so has the market for exciting new projects in the k and q ecosystem. While I'm aware of several groups quietly working on some very interesting ideas behind the scenes, L-Labs a new entity founded by K/Q veteran and former HFT engineer <a href="https://www.linkedin.com/in/jacobloveless/" target="_blank" rel="noopener noreferrer"><strong>Jacob Loveless</strong></a>, is the first to bring something new to market.</p>
+<p>Meet <a href="https://lv1.sh/" target="_blank" rel="noopener noreferrer"><strong>L</strong></a>.</p>
+<p>A brand-new runtime for k and q that has just become publicly available, with the ambitious goal of rethinking how k and q applications are executed.</p>
+<p>As someone who spends a large amount of time looking at everything happening around the KDB/Q ecosystem, it's always exciting to see innovation emerge, especially when it comes from someone who has been working with the language for years.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-build-another-runtime">Why Build Another Runtime?<a href="https://defconq.github.io/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene#why-build-another-runtime" class="hash-link" aria-label="Direct link to Why Build Another Runtime?" title="Direct link to Why Build Another Runtime?">​</a></h2>
+<p>It's a fair question.</p>
+<p>After all, q has been around for decades, has powered some of the world's largest financial institutions, and remains one of the fastest technologies available for time-series analytics.
+So why build another runtime?
+Jacob's motivation is refreshingly straightforward.</p>
+<p>As he explains in his <a href="https://lv1.sh/blog/why-l/" target="_blank" rel="noopener noreferrer"><strong>Why L? article</strong></a>, the goal wasn't to replace existing tools for the sake of replacing them. It was to build a modern runtime that explores different implementation choices, removes historical constraints where possible, and provides a fresh foundation for future development. Rather than simply recreating the past, L is an experiment in how a modern k and q runtime could look today.</p>
+<p>Projects like this are healthy for an ecosystem.</p>
+<p>They challenge assumptions.</p>
+<p>They encourage experimentation.</p>
+<p>And they often introduce ideas that eventually influence everyone.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="performance-looks-interesting">Performance Looks… Interesting<a href="https://defconq.github.io/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene#performance-looks-interesting" class="hash-link" aria-label="Direct link to Performance Looks… Interesting" title="Direct link to Performance Looks… Interesting">​</a></h2>
+<p>One of the first things that caught my eye was the benchmark section.
+L has been benchmarked across a variety of workloads and, at least in the published results, performs extremely well, often outperforming many other language runtimes in those tests. It's an impressive showing and certainly suggests there's some serious engineering under the hood.</p>
+<p>Of course, benchmarks always deserve a healthy dose of context.</p>
+<p>Different benchmarks measure different things, and synthetic workloads don't necessarily translate directly into production systems. The workloads you care about might look very different from those used in published comparisons.
+For those of us working with production KDB/Q systems, the natural question is how L behaves on the kinds of real-world problems we care about: large in-memory databases, tickerplants, gateways, IPC-heavy applications, historical queries, and high-throughput market data processing.</p>
+<p>That's still something the community will have to explore over time.
+But regardless of where those comparisons ultimately land, it's encouraging to see a new runtime pushing performance and introducing fresh implementation ideas.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-choice-is-good-for-everyone">More Choice Is Good for Everyone<a href="https://defconq.github.io/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene#more-choice-is-good-for-everyone" class="hash-link" aria-label="Direct link to More Choice Is Good for Everyone" title="Direct link to More Choice Is Good for Everyone">​</a></h2>
+<p>Perhaps the most exciting aspect of L isn't a benchmark chart.</p>
+<p>It's the fact that somebody decided to build something new.</p>
+<p>For a long time, the k and q ecosystem has been relatively quiet when it comes to alternative runtimes and implementations. Seeing fresh ideas emerge lowers the barrier for experimentation and opens up entirely new opportunities for developers, researchers, and companies interested in the language.
+Competition drives innovation.</p>
+<p>New implementations often lead to new tooling. Different implementation strategies expose different strengths. Three decades have seen several implementations of k, none as fast as k4. L has supported commercial systems for a decade. And it claims to be significantly faster than k4. And even if they never become the dominant runtime, they frequently inspire improvements across the wider ecosystem.
+That's good news for everyone who enjoys working with vector programming languages.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-else-is-brewing">What Else Is Brewing?<a href="https://defconq.github.io/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene#what-else-is-brewing" class="hash-link" aria-label="Direct link to What Else Is Brewing?" title="Direct link to What Else Is Brewing?">​</a></h2>
+<p>L certainly isn't the only exciting project currently in the works. Behind the scenes, several teams are quietly building new languages, tools, runtimes, libraries, and ideas that have the potential to shape the future of the k and q ecosystem. Some are still under wraps, others are getting closer to seeing the light of day.
+As always, <strong>DefconQ</strong> aims to stay at the forefront of everything happening in the community. I'll be following these developments closely and sharing them here as soon as they're ready to go public.
+So if you'd like to stay ahead of the curve, make sure to follow DefconQ. The easiest way is to subscribe to the <a href="https://defconq.substack.com/" target="_blank" rel="noopener noreferrer"><strong>free newsletter</strong></a> and have every new article delivered straight to your inbox, or follow me on <a href="https://www.linkedin.com/in/alexanderunterrainer/" target="_blank" rel="noopener noreferrer"><strong>LinkedIn</strong></a> where I regularly share the latest news, tutorials, and developments from across the ecosystem.</p>
+<p>Because if this summer has shown us anything, it's that the k and q world is far from standing still.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ill-be-keeping-a-close-eye-on-this-one">I'll Be Keeping a Close Eye on This One<a href="https://defconq.github.io/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene#ill-be-keeping-a-close-eye-on-this-one" class="hash-link" aria-label="Direct link to I'll Be Keeping a Close Eye on This One" title="Direct link to I'll Be Keeping a Close Eye on This One">​</a></h2>
+<p>It's still very early days, and only time will tell how L evolves and where it ultimately fits within the ecosystem.
+But one thing is certain: it's one of the most interesting developments in the k and q world this year.
+I'll definitely be keeping a close eye on the project, experimenting with it, and following its progress as it matures.
+If you're curious yourself, I'd encourage you to take a look, play around with it, and form your own opinion.
+As always, I'll keep you posted as I learn more.</p>
+<p>Stay tuned.</p>]]></content>
+        <author>
+            <name>Alexander Unterrainer</name>
+            <uri>https://github.com/AUnterrainer</uri>
+        </author>
+        <category label="kdb/q" term="kdb/q"/>
+        <category label="DefconQ" term="DefconQ"/>
+        <category label="L" term="L"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[When Markets Never Sleep - Extended Hours, Odd Lots, and the Infrastructure Implications of Always-On Markets]]></title>
         <id>https://DefconQ.github.io/blog/When Markets Never Sleep - Extended Hours, Odd Lots, and the Infrastructure Implications of Always-On Markets</id>
@@ -1059,31 +1115,6 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
         <category label="Students" term="Students"/>
         <category label="Learning" term="Learning"/>
         <category label="KDB Beginner" term="KDB Beginner"/>
-        <category label="KX" term="KX"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Brews and Qs - KX and DefconQ Happy Hour!]]></title>
-        <id>https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!</id>
-        <link href="https://DefconQ.github.io/blog/Brews and Qs - KX and DefconQ Happy Hour!"/>
-        <updated>2025-04-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[As part of our shared mission to grow the KDB/Q community in London, KX and DefconQ have teamed up and we are excited to announce the first-ever London KDB/Q Community Happy Hour, with many more to come! This event is open to all KDB/Q developers and enthusiasts who would like to connect, share ideas, or simply enjoy some good company over drinks.]]></summary>
-        <content type="html"><![CDATA[<p>As part of our shared mission to grow the KDB/Q community in London, KX and DefconQ have teamed up and we are excited to announce the first-ever <strong>London KDB/Q Community Happy Hour</strong>, with many more to come! This event is open to all KDB/Q developers and enthusiasts who would like to connect, share ideas, or simply enjoy some good company over drinks.</p>
-<p><strong>When: Thursday, 22nd May, from 17:30</strong></p>
-<p><strong>Where: Flight Club, Shoreditch</strong></p>
-<p><strong>Signup here</strong>: <a href="https://go.marketing.kx.com/kx-happy-hour-london?_gl=1*1k23ea*_gcl_au*MTk4NjUzMTI5OS4xNzQ1NzQ3Mzg4*_ga*OTcyNzM3MTIwLjE3Mjk4NTgxNjQ.*_ga_96WX6WQP6Y*MTc0NTc0NzM4OS4xNTguMS4xNzQ1NzQ4MzMzLjYwLjAuMTE1ODM1Njg5NQ.." target="_blank" rel="noopener noreferrer">Brews &amp; Qs Happy Hour</a></p>
-<p>I’ll be your host for the evening, and thanks to the generous support of KX, the event is fully sponsored.</p>
-<p>Whether you're a seasoned KDB/Q developer or just starting your KDB/Q journey, come join us for a fun evening with the community. Looking forward to seeing many of you there!</p>
-<p><img decoding="async" loading="lazy" alt="NYSE extends trading hours" src="https://defconq.github.io/assets/images/happyHour-12f363d4b0302545a6b5e7f39a9bcdb6.png" width="1024" height="1536" class="img_ev3q"></p>]]></content>
-        <author>
-            <name>Alexander Unterrainer</name>
-            <uri>https://github.com/AUnterrainer</uri>
-        </author>
-        <category label="kdb/q" term="kdb/q"/>
-        <category label="Community" term="Community"/>
-        <category label="DefconQ" term="DefconQ"/>
-        <category label="After Hours" term="After Hours"/>
-        <category label="Happy Hour" term="Happy Hour"/>
-        <category label="Meetup" term="Meetup"/>
         <category label="KX" term="KX"/>
     </entry>
 </feed>
