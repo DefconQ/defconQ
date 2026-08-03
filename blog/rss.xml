@@ -4,10 +4,99 @@
         <title>DefconQ Blog</title>
         <link>https://DefconQ.github.io/blog</link>
         <description>DefconQ Blog</description>
-        <lastBuildDate>Tue, 07 Jul 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 03 Aug 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Another Peach Falls Into the Basket - PeachQ]]></title>
+            <link>https://DefconQ.github.io/blog/Another Peach Falls Into the Basket - PeachQ</link>
+            <guid>https://DefconQ.github.io/blog/Another Peach Falls Into the Basket - PeachQ</guid>
+            <pubDate>Mon, 03 Aug 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[The Summer of New Beginnings]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-summer-of-new-beginnings">The Summer of New Beginnings<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#the-summer-of-new-beginnings" class="hash-link" aria-label="Direct link to The Summer of New Beginnings" title="Direct link to The Summer of New Beginnings">​</a></h2>
+<p>It seems the weather isn't the only thing refusing to cool down this summer. Only a few days ago, I wrote about <a href="https://www.defconq.tech/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene" target="_blank" rel="noopener noreferrer">L</a>, <a href="https://www.linkedin.com/in/jacobloveless/" target="_blank" rel="noopener noreferrer">Jacob Loveless'</a> new runtime for k and q, and why I believe it's one of the projects worth watching in the evolving k ecosystem.</p>
+<p>Well... here's another one.</p>
+<p>This time, it's <a href="https://peachq.org/" target="_blank" rel="noopener noreferrer"><strong>PeachQ</strong></a>, an <strong>open-source implementation</strong> of the q language spearheaded by none other than <a href="https://www.linkedin.com/in/justryanhamilton/" target="_blank" rel="noopener noreferrer"><strong>Ryan Hamilton</strong></a>.</p>
+<p>If you're sensing a pattern, you're right. Innovation is happening. And, perhaps more importantly, it's happening in the open.</p>
+<p><img decoding="async" loading="lazy" alt="PeachQ, open source Q" src="https://defconq.github.io/assets/images/peachQ-ef1446fe61651b6439f06152a6653868.png" width="2492" height="1040" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="meet-ryan-hamilton">Meet Ryan Hamilton<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#meet-ryan-hamilton" class="hash-link" aria-label="Direct link to Meet Ryan Hamilton" title="Direct link to Meet Ryan Hamilton">​</a></h2>
+<p>Ryan Hamilton is hardly a new face in the community.</p>
+<p>If you've spent any amount of time working with KDB/Q over the last decade, chances are you've used one of his tools, read one of his articles, or benefitted from one of his countless contributions.</p>
+<p>As the founder of <a href="https://www.timestored.com/" target="_blank" rel="noopener noreferrer"><strong>TimeStored</strong></a>, Ryan has quietly become one of the ecosystem's most prolific builders.</p>
+<p>In many ways, you could say he's the <em><strong>Pulse</strong></em> of the community.</p>
+<p>Yes, that's a deliberate pun.</p>
+<p>Not only because one of his flagship products is called <a href="https://www.timestored.com/pulse/" target="_blank" rel="noopener noreferrer"><strong>Pulse</strong></a>, but because Ryan has consistently kept the community moving forward through new ideas, thoughtful discussions, and practical tooling.
+Over the years he has built:</p>
+<ul>
+<li><a href="https://www.timestored.com/qstudio/" target="_blank" rel="noopener noreferrer"><strong>QStudio</strong></a>: one of the best-known IDEs for KDB/Q development.</li>
+<li><a href="https://www.timestored.com/pulse/" target="_blank" rel="noopener noreferrer"><strong>Pulse</strong></a>: powerful platform for building real-time data applications.</li>
+<li>Numerous open-source tools, integrations and community resources spanning far beyond traditional KDB/Q development.</li>
+</ul>
+<p>I've had the pleasure of working with Ryan on several feature implementations for Pulse, and one thing quickly becomes apparent: if there's a useful feature to build, Ryan usually finds a way to ship it.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="a-long-time-advocate-for-improving-q">A Long-Time Advocate for Improving q<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#a-long-time-advocate-for-improving-q" class="hash-link" aria-label="Direct link to A Long-Time Advocate for Improving q" title="Direct link to A Long-Time Advocate for Improving q">​</a></h2>
+<p>One thing I've always appreciated about Ryan is that he doesn't simply point out problems: he proposes solutions.</p>
+<p>Over the years, his blog has become a collection of thoughtful ideas about where the ecosystem could evolve. He's written about making q more approachable, improving interoperability with modern data tooling, embracing open-source technologies, expanding SQL support, introducing richer language features such as type hints, simplifying deployment, broadening compatibility, and generally making the language easier to adopt beyond its traditional financial audience.</p>
+<p>Some of these articles were deliberately speculative. Others explored "what if?" scenarios.</p>
+<p>With <strong>PeachQ</strong>, many of those ideas are no longer just blog posts.</p>
+<p>Ryan now has the opportunity to implement them himself.</p>
+<p>That might be one of the most exciting aspects of the project.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="so-what-is-peachq">So, What Is PeachQ?!?<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#so-what-is-peachq" class="hash-link" aria-label="Direct link to So, What Is PeachQ?!?" title="Direct link to So, What Is PeachQ?!?">​</a></h2>
+<p>At its core, <a href="https://peachq.org/" target="_blank" rel="noopener noreferrer"><strong>PeachQ</strong></a> is an <strong>MIT-licensed, open-source implementation of the q language.</strong> It aims to preserve the expressive array programming model and familiar qSQL semantics while providing a modern, community-driven implementation that anyone can use, inspect, extend, and improve. Today it runs on the Rayforce in-memory engine, with future plans including DuckDB-backed storage and broader interoperability with modern data ecosystems.</p>
+<p>That last point is particularly important.</p>
+<p>Unlike proprietary runtimes, PeachQ is being developed in <strong>public.</strong></p>
+<p>The project openly tracks compatibility, encourages contributions, and invites developers to help shape everything from language support and tooling to libraries, drivers, IDE integration, and package ecosystems.
+For a language that has traditionally lived behind commercial licensing, that's a significant shift.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="compatibility-is-already-moving-fast">Compatibility Is Already Moving Fast<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#compatibility-is-already-moving-fast" class="hash-link" aria-label="Direct link to Compatibility Is Already Moving Fast" title="Direct link to Compatibility Is Already Moving Fast">​</a></h2>
+<p>At the time of writing, PeachQ reports approximately <strong>66% language compatibility with q.</strong></p>
+<p>Now, depending on how you look at it, that number can either sound encouraging or daunting.</p>
+<p>Personally?</p>
+<p>I think it's incredibly impressive.</p>
+<p>Building a language is hard.</p>
+<p>Building a language with decades of existing behaviour, subtle semantics, and production expectations is even harder.</p>
+<p>Having worked with Ryan before, I'm probably a little less surprised than others. He's someone who iterates quickly, listens carefully to feedback, and ships improvements at an impressive pace.
+If history is anything to go by, I wouldn't expect that compatibility percentage to stand still for very long.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="more-than-just-another-runtime">More Than Just Another Runtime<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#more-than-just-another-runtime" class="hash-link" aria-label="Direct link to More Than Just Another Runtime" title="Direct link to More Than Just Another Runtime">​</a></h2>
+<p>It's tempting to view PeachQ purely as another implementation of q.</p>
+<p>I think that would be underselling it.</p>
+<p>Open implementations change ecosystems.</p>
+<p>They lower barriers to entry.</p>
+<p>They encourage experimentation.</p>
+<p>They enable universities, startups, independent developers and hobbyists to learn, prototype and build without worrying about licensing constraints.</p>
+<p>Perhaps most importantly, they encourage tooling.</p>
+<p>Open languages tend to attract IDEs, language servers, testing frameworks, package managers, notebooks, AI integrations, linters, debuggers and countless community projects that become difficult to justify in closed ecosystems.</p>
+<p>That's how ecosystems grow.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-this-matters">Why This Matters<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#why-this-matters" class="hash-link" aria-label="Direct link to Why This Matters" title="Direct link to Why This Matters">​</a></h2>
+<p>If you've been following <strong>DefconQ</strong> recently, you'll notice a recurring theme.</p>
+<p><strong>First L.</strong></p>
+<p><strong>Now PeachQ.</strong></p>
+<p>And trust me—they're not the only projects currently being worked on.</p>
+<p>For many years, innovation around q largely revolved around applications built on top of the language.</p>
+<p>Now we're beginning to see innovation happening within the language ecosystem itself.</p>
+<p>That's healthy.</p>
+<p>Competition drives innovation.</p>
+<p>Different implementations explore different ideas.</p>
+<p>Developers gain more choice.</p>
+<p>And the entire community benefits.</p>
+<p>Whether you ultimately choose commercial q, L, PeachQ, or something else entirely almost becomes secondary.</p>
+<p>The important part is that people are building.</p>
+<p>People are experimenting.</p>
+<p>People are investing their time into making the ecosystem stronger.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="looking-ahead">Looking Ahead<a href="https://defconq.github.io/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ#looking-ahead" class="hash-link" aria-label="Direct link to Looking Ahead" title="Direct link to Looking Ahead">​</a></h2>
+<p>PeachQ is still in its early days, but it's already one of the most interesting open-source projects in the k and q world.</p>
+<p>Knowing Ryan, I expect it to evolve rapidly. I also wouldn't be surprised to see many of the ideas he's championed over the years gradually finding their way into the language itself.</p>
+<p>One thing is certain: I'll be following the project closely.</p>
+<p>And if this summer has taught us anything, it's that the k and q ecosystem is entering one of its most exciting periods in years.</p>
+<p>I'll be here covering every step of that journey.</p>
+<p><strong>Good Luck Ryan!</strong></p>
+<p>Stay tuned.</p>]]></content:encoded>
+            <category>kdb/q</category>
+            <category>DefconQ</category>
+            <category>PeachQ</category>
+            <category>Ryan Hamilton</category>
+            <category>Open Source</category>
+            <category>Ecosystem</category>
+        </item>
         <item>
             <title><![CDATA[L Has Landed - A New Runtime for k and q Enters the Scene]]></title>
             <link>https://DefconQ.github.io/blog/L Has Landed - A New Runtime for k and q Enters the Scene</link>
@@ -1007,36 +1096,6 @@ I’ll randomly draw the winner, in KDB/Q style, of course, and announce them sh
             <category>Quantitative Finance</category>
             <category>Raffle</category>
             <category>Tickets</category>
-        </item>
-        <item>
-            <title><![CDATA[KX Academic Program Relaunch]]></title>
-            <link>https://DefconQ.github.io/blog/KX Academic Program Relaunch</link>
-            <guid>https://DefconQ.github.io/blog/KX Academic Program Relaunch</guid>
-            <pubDate>Thu, 01 May 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Are you a student eager to launch your career in finance, quantitative development, or financial data engineering?]]></description>
-            <content:encoded><![CDATA[<p>Are you a student eager to launch your career in finance, quantitative development, or financial data engineering?</p>
-<p>In today’s highly competitive job market, setting yourself apart is more important than ever. One of the best ways to do that? Learn a technology that’s been powering the financial industry since the late '80s, <strong>KDB/Q.</strong></p>
-<p>Big news for all university students passionate about finance and tech:
-<strong>KX is relaunching its Academic Program in June 2025!</strong></p>
-<p>What does this mean for you?</p>
-<ul>
-<li>Expanded free-tier licenses for students and faculty</li>
-<li>Educational resources and community support</li>
-<li>Hands-on workshops and more</li>
-</ul>
-<p>KX is currently partnering with universities globally. If you’re interested, speak to a professor, pitch a project idea, and get in touch with <strong>KX</strong> at <a href="mailto:devrel@kx.com" target="_blank" rel="noopener noreferrer">devrel@kx.com</a></p>
-<p>And if you’re wondering where to begin your KDB/Q journey, start with my blog: <a href="https://www.defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources" target="_blank" rel="noopener noreferrer">Go-To KDB/Q Learning Resources</a></p>
-<p>You can find the full <strong>KX Academic Program Description</strong> <a href="https://github.com/DefconQ/defconQ/tree/master/my-website/blog/2025-05-01-kx-academia/academicProgram.pdf" target="_blank" rel="noopener noreferrer">here</a></p>
-<p>And if you're based in London, why not join the vibrant KDB/Q community for our very first <strong>Happy Hour</strong>, hosted by me and ponsored by KX. You can find all the details <a href="https://www.defconq.tech/blog/Brews%20and%20Qs%20-%20KX%20and%20DefconQ%20Happy%20Hour!" target="_blank" rel="noopener noreferrer">here</a></p>
-<p><img decoding="async" loading="lazy" alt="KX Academic Program" src="https://defconq.github.io/assets/images/academicProgram-6c88d3fd17764714b3c0563e7c78af05.pdf" class="img_ev3q"></p>]]></content:encoded>
-            <category>kdb/q</category>
-            <category>Community</category>
-            <category>DefconQ</category>
-            <category>Academia</category>
-            <category>Students</category>
-            <category>Learning</category>
-            <category>KDB Beginner</category>
-            <category>KX</category>
         </item>
     </channel>
 </rss>
