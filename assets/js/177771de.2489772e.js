@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[8568],{67696:e=>{e.exports=JSON.parse('{"label":"First Derivative","permalink":"/blog/tags/first-derivative","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
