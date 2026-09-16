@@ -4,10 +4,64 @@
         <title>DefconQ Blog</title>
         <link>https://DefconQ.github.io/blog</link>
         <description>DefconQ Blog</description>
-        <lastBuildDate>Fri, 04 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 14 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Korze - Another Q Is Being Forged]]></title>
+            <link>https://DefconQ.github.io/blog/Korze - Another Q Is Being Forged</link>
+            <guid>https://DefconQ.github.io/blog/Korze - Another Q Is Being Forged</guid>
+            <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[If you thought the summer of new Q projects was starting to cool down, think again. Unlike the weather in the UK, the Q ecosystem certainly isn’t cooling down. At least, not yet. Following my recent articles on L  and PeachQ, another project has emerged from the Q community. This time, it's Korze, a new company created by John Estrada  and a small team, with a very ambitious goal: building their own implementation of Q to give clients choice.]]></description>
+            <content:encoded><![CDATA[<p>If you thought the summer of new Q projects was starting to cool down, think again. Unlike the weather in the UK, the <strong>Q ecosystem certainly isn’t cooling down. At least, not yet.</strong> Following my recent articles on <a href="https://www.defconq.tech/blog/L%20Has%20Landed%20-%20A%20New%20Runtime%20for%20k%20and%20q%20Enters%20the%20Scene" target="_blank" rel="noopener noreferrer"><strong>L</strong></a>  and <a href="https://www.defconq.tech/blog/Another%20Peach%20Falls%20Into%20the%20Basket%20-%20PeachQ" target="_blank" rel="noopener noreferrer"><strong>PeachQ</strong></a>, another project has emerged from the Q community. This time, it's <a href="https://korze.io/" target="_blank" rel="noopener noreferrer"><strong>Korze</strong></a>, a new company created by <a href="https://www.linkedin.com/in/john-estrada-119998/" target="_blank" rel="noopener noreferrer"><strong>John Estrada</strong></a>  and a small team, with a very ambitious goal: building their own implementation of Q to give clients choice.</p>
+<p>And if the name John Estrada sounds familiar, it should.</p>
+<p>John was the head of FX Trading at two large investement banks but he isn't exactly a newcomer to the Q world.  In fact, previously as a side project, he was one of the first people to document Arthur Whitney's k9 and then Shakti projects, an intriguing attempt to create another implementation of k, the cornerstone to most Q engines. Now, years later, John has decided to take on the challenge of implementation himself. And he's invited the community to have a look.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="meet-korze">Meet Korze<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#meet-korze" class="hash-link" aria-label="Direct link to Meet Korze" title="Direct link to Meet Korze">​</a></h2>
+<p>At first glance, Korze isn't simply positioning itself as "another Q implementation" but one that users and developers can use without changing the way they work. The company has produced a Q engine to run a tick-data system for financial application with full support for the Q language.  Compatibility isn't just syntax though, it's also as performant as required.</p>
+<p>Korze has followed an LLM-development approach, explaining why a company can deliver a Q implementation under a year.  Anyone who has worked with production market data knows that covering the average case is only one piece of the puzzle. The real engineering challenge starts when billions of messages begin arriving, markets open and close, feeds burst, storage needs to keep up, and somebody inevitably asks why yesterday's query that took 200 milliseconds now takes three seconds. Korze is being designed around those problems from the ground up. The project currently highlights custom ingestion and storage layers written in C, zero-allocation message paths, SIMD-accelerated parsing and aggregation, cache-aware layouts, and technologies such as AVX-512, NEON, io_uring, mmap and radix sorting. That is a rather different starting point from simply trying to recreate an interpreter. The question is will LLM-driven development help Korze ship new products faster? The Korze team certainly believes so, but ultimately, only time will tell.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="john-estrada-is-no-stranger-to-q">John Estrada Is No Stranger to Q<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#john-estrada-is-no-stranger-to-q" class="hash-link" aria-label="Direct link to John Estrada Is No Stranger to Q" title="Direct link to John Estrada Is No Stranger to Q">​</a></h2>
+<p>One of the reasons I find Korze particularly interesting is the person behind it and the approach he's taken.</p>
+<p>John has been around the Q ecosystem for a long time and has spent years working in the finance, almost entirely from the trading perspective. More importantly, he has been one of those people documenting what is happening around Q/K rather than simply watching from the sidelines.</p>
+<p>John was among the first to publicly document Shakti, Arthur Whitney's project exploring another implementation of k. That was an interesting moment in the history of the language: seeing one of the original creators of k experimenting with a new implementation naturally attracted attention from developers who had spent years working with the language.</p>
+<p>John was there documenting it. Now the tables have turned. Instead of documenting somebody else's implementation, John is working with a small team to build his own. And that makes Korze particularly worth watching.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="from-observation-to-implementation">From Observation to Implementation<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#from-observation-to-implementation" class="hash-link" aria-label="Direct link to From Observation to Implementation" title="Direct link to From Observation to Implementation">​</a></h2>
+<p>There is something fascinating about watching an experienced practitioner move from analysing an idea to actually building it. Given the recent progress with LLM-driven development this should continue to become a common path where those on the sidelines with ideas are now able to join the development community and bring a new way of getting things done.</p>
+<p>Writing about how something could work is one thing. Building it is another.</p>
+<p>Anyone who has ever attempted to implement a programming language, database or runtime will know that the rabbit hole gets very deep, very quickly.
+Language semantics are only the beginning. You have parsing, evaluation, types, memory management, primitives, IPC, error handling, concurrency, I/O, storage, performance characteristics and all the weird edge cases that users have accumulated over decades of production use.</p>
+<p>And then there is the small matter of making it fast.</p>
+<p>Really fast.</p>
+<p>Korze's approach appears to be very much influenced by the environment it is targeting. The project explicitly focuses on tick-data systems where volume, velocity and cardinality all become problems simultaneously. Korze cites workloads reaching 1 TB per session per venue, 10⁷ messages per second, and millions of symbols with microsecond-level ticks as the kind of environment it is designed to address.</p>
+<p>This is clearly not being built as an academic exercise.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="another-q-in-the-ecosystem">Another Q in the Ecosystem?<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#another-q-in-the-ecosystem" class="hash-link" aria-label="Direct link to Another Q in the Ecosystem?" title="Direct link to Another Q in the Ecosystem?">​</a></h2>
+<p>At this point, you might reasonably ask: <strong>Why do we need another Q?</strong> It's a fair question, I've asked a similar question in my previous articles about L and PeachQ. My answer hasn't changed: <strong>We don't necessarily need another Q. But we absolutely benefit from people trying to build one.</strong></p>
+<p>Alternative implementations create opportunities. They allow developers to experiment with different architectural decisions. They allow ideas that may be difficult to introduce into an established implementation to be explored from scratch. They create opportunities for new tooling, new integrations and new deployment models.</p>
+<p>And perhaps most importantly, they create competition. Not necessarily commercial competition.</p>
+<p><strong>Technical competition.</strong></p>
+<p>Someone builds something differently. Someone else asks why. Someone discovers a better approach. Someone takes that idea somewhere else. And suddenly the entire ecosystem has moved forward. That's how healthy technical communities evolve.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-q-ecosystem-is-getting-interesting">The Q Ecosystem Is Getting Interesting<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#the-q-ecosystem-is-getting-interesting" class="hash-link" aria-label="Direct link to The Q Ecosystem Is Getting Interesting" title="Direct link to The Q Ecosystem Is Getting Interesting">​</a></h2>
+<p>If you've been following DefconQ recently, you may have noticed a bit of a pattern. First came L. Then PeachQ. Now Korze.</p>
+<p>These projects aren't identical, and they don't necessarily have the same objectives. But they all represent something that I find incredibly encouraging: <strong>people are investing their own time and expertise into building new things around Q.</strong></p>
+<p>For a language and ecosystem that has historically been relatively small and specialised, that's significant. It means there are people thinking about what comes next. And perhaps we're only seeing the beginning.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="want-to-see-korze-in-action">Want to See Korze in Action?<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#want-to-see-korze-in-action" class="hash-link" aria-label="Direct link to Want to See Korze in Action?" title="Direct link to Want to See Korze in Action?">​</a></h2>
+<p>The best part is that you don't have to take my word for it. John has kindly agreed to showcase <strong>Korze in a dedicated demo for the DefconQ community.</strong> We'll get a chance to see what the team has been building, understand the thinking behind the project, and, most importantly, ask questions directly to the person building it.</p>
+<p>If you're interested in KDB, Q, market-data infrastructure, databases, runtimes or simply curious about where this growing ecosystem is heading, this is one I'd recommend joining.</p>
+<p><strong>John is opening the door and giving us a look under the hood.</strong></p>
+<p>You can sign up for the DefconQ Korze demo and see the project for yourself. Feel free to reach out.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ill-be-watching">I'll Be Watching<a href="https://defconq.github.io/blog/Korze%20-%20Another%20Q%20Is%20Being%20Forged#ill-be-watching" class="hash-link" aria-label="Direct link to I'll Be Watching" title="Direct link to I'll Be Watching">​</a></h2>
+<p>Korze is still very much a project in development, and that's exactly what makes it interesting. We're watching an experienced Q practitioner take everything he has learned from years in the ecosystem and apply it to building something from the ground up.</p>
+<p>Where it goes remains to be seen.</p>
+<p>But one thing is becoming increasingly difficult to ignore:</p>
+<p><strong>The Q ecosystem is moving.</strong></p>
+<p>And I'm certainly not going to stop watching.</p>
+<p>Stay tuned.</p>]]></content:encoded>
+            <category>kdb/q</category>
+            <category>DefconQ</category>
+            <category>Q</category>
+            <category>Korze</category>
+            <category>Ecosystem</category>
+        </item>
         <item>
             <title><![CDATA[3 Years of DefconQ - And We Are Just Getting Started]]></title>
             <link>https://DefconQ.github.io/blog/3 Years of DefconQ - And We Are Just Getting Started</link>
@@ -1138,40 +1192,6 @@ Just like last year, this blog post will recap the event and share some of the k
             <category>New York</category>
             <category>DataIntellect</category>
             <category>Community Meetup</category>
-        </item>
-        <item>
-            <title><![CDATA[From Elite to Everyone - KX Community Edition Breaks Loose]]></title>
-            <link>https://DefconQ.github.io/blog/From Elite to Everyone - KX Community Edition Breaks Loose</link>
-            <guid>https://DefconQ.github.io/blog/From Elite to Everyone - KX Community Edition Breaks Loose</guid>
-            <pubDate>Tue, 15 Jul 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[This is it ladies and gentlemen! The moment we’ve all been waiting for! KX just dropped the long-promised Community Edition, and IT'S FREE. Yes!!, you read that right: it's free. Not for a week. Not for personal use only. Free to use, even commercially. Holy cow, this honestly feels like Christmas came early this year. If you're wondering what all the hype is about and why I'm so excited about this breaking news, keep reading, you don't want to miss this.]]></description>
-            <content:encoded><![CDATA[<p>This is it ladies and gentlemen! The moment we’ve all been waiting for! KX just dropped the long-promised <strong>Community Edition</strong>, and <strong>IT'S FREE</strong>. Yes!!, you read that right: <strong>it's free</strong>. Not for a week. Not for personal use only. <strong>Free to use, even commercially</strong>. Holy cow, this honestly feels like Christmas came early this year. If you're wondering what all the hype is about and why I'm so excited about this breaking news, keep reading, you don't want to miss this.</p>
-<p><img decoding="async" loading="lazy" alt="The cat is out of the bag - KX Community edition" src="https://defconq.github.io/assets/images/cat-681d8f636fa5131ec315fbe35d314e18.png" width="1024" height="1024" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kdb-x-the-next-evolution-of-time-series-databases">KDB-X: The Next Evolution of Time-Series Databases<a href="https://defconq.github.io/blog/From%20Elite%20to%20Everyone%20-%20KX%20Community%20Edition%20Breaks%20Loose#kdb-x-the-next-evolution-of-time-series-databases" class="hash-link" aria-label="Direct link to KDB-X: The Next Evolution of Time-Series Databases" title="Direct link to KDB-X: The Next Evolution of Time-Series Databases">​</a></h2>
-<p>First thing first, let's start with the biggest reveal: the name. The new KDB/Q release isn’t called 4.2 or 5.0… it’s now officially <strong>KDB-X</strong>. Whether this means we’re teaming up with Professor X, Wolverine, and the rest of the X-Men is still unconfirmed, but let’s just say I’m hopeful. Now, what exactly does this new edition bring? This is a public beta release, and KX has promised more features to come. But even in its current form, the offering is pretty generous. So, what’s actually included? A quick look at the product licensing page reveals that KDB-X gives you up to <strong>16GB of RAM</strong>, <strong>4 secondary threads per process</strong>, and <strong>8 IPC connections</strong>. Best of all, you can run it both on-premises and in the cloud, for personal and commercial use. Oh, and did I mention? PyKX is included too.</p>
-<p>After KX made the big announcement, I couldn’t resist giving KDB-X a spin myself. I headed over to the public preview page and just a few clicks later, I was up and running with the new release. Installation? By far the smoothest KDB/Q setup I’ve experienced to date. One simple command in the terminal kicks things off, and a short guided setup later, you’re good to go.</p>
-<p>What really stood out: transitioning from the previous version was completely seamless. No refactoring, no tweaks, no surprises. Everything just <em><strong>worked</strong></em> right out of the box.</p>
-<p><img decoding="async" loading="lazy" alt="KDB-X - KX Community edition" src="https://defconq.github.io/assets/images/kdb-x-5c5dd9fa6e8629370dd0cda09260f7a1.png" width="2320" height="1138" class="img_ev3q"></p>
-<p>One frustrating <strong>"feature"</strong> that’s finally been removed?!? Remember trying to use the Personal Edition offline, like during travel, on a plane, or anytime you had spotty or no internet, only to be blocked because it needed to validate your license? That’s now a thing of the past. KDB-X runs completely offline with no connection required. Finally, I can actually get some work done mid-flight and take my mind off my totally irrational fear of flying (yes, I know it’s silly, but hey, we’ve all got our quirks).</p>
-<p>Another pleasant surprise is that KX has made the Community Edition available not just for on-premise hardware, but also for cloud environments. Great news for all the cloud enthusiasts out there! Whether you're using GCP, Azure, or AWS, spinning up a virtual machine and running your KDB tick stack is now simpler than ever. Or, as LMC and U2 put it best: “Take me to the clouds above."</p>
-<p>If you recall the promises made during the last KX meetup about a community edition, the first look at KDB-X suggests that KX is staying true to their word. While there may not be a flood of groundbreaking changes just yet, this release is a strong signal that KX is listening to its community and taking steps in the right direction. It feels like the momentum is shifting, and I’m optimistic there are plenty more updates and features on the horizon.</p>
-<p>The fact that KDB-X Community Edition is free for commercial use is a game-changer. Within the limits of the community license, you can build, deploy, and even run production systems without spending a single penny. This opens up huge opportunities, especially for startups or smaller companies that want to prototype, test market fit, or build real-time analytics platforms without the upfront licensing costs. You get the power of KDB-X, Wall Street’s fastest time-series engine, with zero financial barrier to entry. It’s the perfect bridge to go from idea to production, and only scale up commercially when you’re ready.</p>
-<p>Ultimately, this is fantastic news for the entire KDB community. By lowering the entry barrier, it will attract more developers, spark greater interest, and, fingers crossed, lead to more job opportunities and roles across the industry.</p>
-<p>So, what’s next for <em><strong>YOU</strong></em>? If you’re as excited as I am about this shift and curious to explore how you can use and benefit from KDB-X, whether it’s building, testing, experimenting, or just geeking out over all things KDB, don’t hesitate to reach out. I’d love to connect and chat. In the meantime, here are some excellent resources to help you get started.</p>
-<p><strong>Resources</strong></p>
-<ul>
-<li><a href="https://kx.com/products/introducing-kdb-x-public-preview/" target="_blank" rel="noopener noreferrer">Introducing KDB-X Public Preview</a></li>
-<li><a href="https://docs.kx.com/product/licensing/usage-restrictions.htm#kdb-x-personal-trial-download" target="_blank" rel="noopener noreferrer">Product Usage Restrictions</a></li>
-<li><a href="https://www.defconq.tech/blog/Go-To%20KDB/Q%20Learning%20Resources" target="_blank" rel="noopener noreferrer">Go-To KDB/Q Learning Resources</a></li>
-<li><a href="https://www.defconq.tech/blog/How%20to%20Read,%20Understand%20and%20Learn%20KDB/Q%20code" target="_blank" rel="noopener noreferrer">How to Read, Understand and Learn KDB/Q code</a></li>
-<li><a href="https://www.defconq.tech/docs/architecture/plain" target="_blank" rel="noopener noreferrer">The Plain Vanilla Tick Setup</a></li>
-<li><a href="https://www.defconq.tech/docs/category/kdbq-study-roadmap" target="_blank" rel="noopener noreferrer">KDB/Q Study Roadmap</a></li>
-<li><a href="https://www.defconq.tech/docs/category/tutorials" target="_blank" rel="noopener noreferrer">KDB/Q Tutorials</a></li>
-</ul>]]></content:encoded>
-            <category>kdb/q</category>
-            <category>DefconQ</category>
-            <category>KX</category>
-            <category>Community Edition</category>
         </item>
     </channel>
 </rss>

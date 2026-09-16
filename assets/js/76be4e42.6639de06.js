@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[1236],{12607:e=>{e.exports=JSON.parse('{"label":"DefconQ","permalink":"/blog/tags/defcon-q","allTagsPath":"/blog/tags","count":24,"unlisted":false}')}}]);
