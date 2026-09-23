@@ -4,10 +4,33 @@
         <title>DefconQ Blog</title>
         <link>https://DefconQ.github.io/blog</link>
         <description>DefconQ Blog</description>
-        <lastBuildDate>Mon, 14 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 22 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Obituary of Kenneth Iverson - Celebrating His Life and Work]]></title>
+            <link>https://DefconQ.github.io/blog/Obituary of Kenneth Iverson - Celebrating His Life and Work</link>
+            <guid>https://DefconQ.github.io/blog/Obituary of Kenneth Iverson - Celebrating His Life and Work</guid>
+            <pubDate>Tue, 22 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Coming back from this year’s Iverson College, I brought home quite a lot: a mountain of new knowledge, newly made friends, some unforgettable experiences, and the rather harsh reality of having to adjust to life without two private chefs again.]]></description>
+            <content:encoded><![CDATA[<p>Coming back from this year’s <a href="https://www.iversoncollege.com/" target="_blank" rel="noopener noreferrer">Iverson College</a>, I brought home quite a lot: a mountain of new knowledge, newly made friends, some unforgettable experiences, and the rather harsh reality of having to adjust to life <strong>without two private chefs</strong> again.</p>
+<p>But among all of that was something far more valuable: <strong>a rarely seen piece of computing history.</strong></p>
+<p>The obituary of <a href="https://en.wikipedia.org/wiki/Kenneth_E._Iverson" target="_blank" rel="noopener noreferrer"><strong>Kenneth E. Iverson</strong></a>, inventor of APL and one of the most influential figures in the history of array programming.</p>
+<p>For many of us working with k and q today, Iverson’s influence is closer than we sometimes realise. His ideas fundamentally changed how programmers could think about notation, arrays and computation. Those ideas went on to influence generations of language designers and developers, including, of course, <a href="https://en.wikipedia.org/wiki/Arthur_Whitney_(computer_scientist)" target="_blank" rel="noopener noreferrer">Arthur Whitney</a>, whose work ultimately gave us k and, through it, q.</p>
+<p>In that sense, those of us working in the k and q ecosystem today are all, to some degree, <strong>Iversonians.</strong></p>
+<p>The obituary offers a wonderful glimpse into the life and work of the man behind those ideas: not merely a programming-language designer, but someone whose way of thinking about computation continues to influence how many of us write software decades later.</p>
+<p>This little piece of history was kindly shared with me by <a href="https://www.linkedin.com/in/rob-hodgkinson-9370756/" target="_blank" rel="noopener noreferrer">Rob Hodgkinson</a> during Iverson College. Rather than allowing it to disappear back into a drawer or archive, I wanted to help make it available to the wider community.</p>
+<p>So, for anyone interested in <strong>APL, array programming, k, q, or simply the history of the ideas that shaped the languages we use today</strong>, I hope you enjoy watching it as much as I did.</p>
+<p>A small piece of history, preserved and shared with the next generation of Iversonians.</p>
+<p><strong>Celebrating the life and work of Kenneth E. Iverson.</strong></p>
+<p><em><strong>Credit</strong></em>: Thanks to Catherine Lathwell and the Iverson family for the permission to share this video</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tUV0TeHBVF4?si=2yJVQ5pw4M-6rKC4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>]]></content:encoded>
+            <category>Kenneth Iverson</category>
+            <category>APL</category>
+            <category>A Programming Language</category>
+            <category>Array Programming</category>
+        </item>
         <item>
             <title><![CDATA[Korze - Another Q Is Being Forged]]></title>
             <link>https://DefconQ.github.io/blog/Korze - Another Q Is Being Forged</link>
@@ -1143,55 +1166,6 @@ Just like last year, this blog post will recap the event and share some of the k
             <category>Community Meetup</category>
             <category>Happy Hour</category>
             <category>KDB-X</category>
-        </item>
-        <item>
-            <title><![CDATA[New York, New York - DefconQ Goes International]]></title>
-            <link>https://DefconQ.github.io/blog/New York, New York - DefconQ Goes International</link>
-            <guid>https://DefconQ.github.io/blog/New York, New York - DefconQ Goes International</guid>
-            <pubDate>Wed, 06 Aug 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[As someone truly passionate about finance, Wall Street has always felt like the center of the universe, so I was beyond thrilled to receive an invitation to attend the Cornell Financial Engineering Manhattan 2025 Future of Finance & Ai Conference, hosted by Alexander Fleiss, founder of Rebellion Research.]]></description>
-            <content:encoded><![CDATA[<p>As someone truly passionate about finance, Wall Street has always felt like the center of the universe, so I was beyond thrilled to receive an invitation to attend the <a href="https://www.rebellionresearch.com/cornell-financial-engineering-manhattan-2025-future-of-finance-ai-conference" target="_blank" rel="noopener noreferrer"><em><strong>Cornell Financial Engineering Manhattan 2025 Future of Finance &amp; Ai Conference</strong></em></a>, hosted by <a href="https://www.linkedin.com/in/alexander-fleiss-70b49410/" target="_blank" rel="noopener noreferrer">Alexander Fleiss</a>, founder of <a href="https://www.linkedin.com/company/rebellion-research/posts/?feedView=all" target="_blank" rel="noopener noreferrer">Rebellion Research</a>.</p>
-<p>And of course, no trip to New York would be complete without a <strong>DefconQ KDB/Q Community Happy Hour</strong>, this time proudly sponsored by <a href="https://dataintellect.com/" target="_blank" rel="noopener noreferrer"><strong>Data Intellect</strong></a>, the leading consultancy for <strong>all things KDB/Q</strong>.</p>
-<p><img decoding="async" loading="lazy" alt="New York, New York - DefconQ goes International" src="https://defconq.github.io/assets/images/DefconQ-NY-394f2cfd17d95d757e8322247172e049.png" width="442" height="665" class="img_ev3q"></p>
-<p>📍 You’ll find the event details and sign-up link below.
-💬 If you can’t make the Happy Hour but still want to connect, drop me a message and I’ll do my best to arrange something.</p>
-<p><strong>When</strong>: Wednesday, 17th September, from 18:00</p>
-<p><strong>Where</strong>: <a href="https://www.stoutnyc.com/location/stout-nyc-bryant-park/" target="_blank" rel="noopener noreferrer">Stout, Bryant Park, NYC</a></p>
-<p><strong>Signup here</strong>: <a href="https://www.linkedin.com/events/7359879964030124032/" target="_blank" rel="noopener noreferrer">Event Signup</a></p>
-<p>Looking forward to seeing many of you there!</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="about-data-intellect">About Data Intellect<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#about-data-intellect" class="hash-link" aria-label="Direct link to About Data Intellect" title="Direct link to About Data Intellect">​</a></h2>
-<p>At their core, <a href="https://dataintellect.com/" target="_blank" rel="noopener noreferrer"><strong>Data Intellect</strong></a> is a global data and technology consultancy firm. They provide services that advise, design, deliver and manage complete-system solutions for an array of industry applications in demanding environments. Their strategic and collaborative approach aligns to long-term partnerships. Today, their key area of expertise is financial and capital markets technology solutions, however, they’re always open to new challenges. Be it Fintech, Healthcare, Renewables or Telematics, to name a few, they love unearthing ingenious ways to help clients cultivate business outcomes, scale-up market offering and realize customer and investor expectations. The utility of these solutions and their problem-solving capabilities allow them to apply fintech data expertise to other industries, beyond global financial markets.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="open-roles-at-data-intellect">Open Roles at Data Intellect<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#open-roles-at-data-intellect" class="hash-link" aria-label="Direct link to Open Roles at Data Intellect" title="Direct link to Open Roles at Data Intellect">​</a></h2>
-<p>Data Intellect is always on the lookout for talented individuals who thrive in a collaborative environment. They're hiring worldwide across a range of experience levels, check out the current openings below.</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-york">New York<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#new-york" class="hash-link" aria-label="Direct link to New York" title="Direct link to New York">​</a></h3>
-<p><a href="https://smrtr.io/sWfky" target="_blank" rel="noopener noreferrer">kdb+ Contractor</a></p>
-<p><a href="https://smrtr.io/sWfkR" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWfkS" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="london">London<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#london" class="hash-link" aria-label="Direct link to London" title="Direct link to London">​</a></h3>
-<p><a href="https://smrtr.io/sWfkY" target="_blank" rel="noopener noreferrer">kdb+ Contractor</a></p>
-<p><a href="https://smrtr.io/sWfqK" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWfvT" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="belfast">Belfast<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#belfast" class="hash-link" aria-label="Direct link to Belfast" title="Direct link to Belfast">​</a></h3>
-<p><a href="https://smrtr.io/sWfyY" target="_blank" rel="noopener noreferrer">kdb+ Contractor</a></p>
-<p><a href="https://smrtr.io/sWfCQ" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWfFP" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dublin">Dublin<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#dublin" class="hash-link" aria-label="Direct link to Dublin" title="Direct link to Dublin">​</a></h3>
-<p><a href="https://smrtr.io/sWfkb" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWfT8" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="hong-kong">Hong Kong<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#hong-kong" class="hash-link" aria-label="Direct link to Hong Kong" title="Direct link to Hong Kong">​</a></h3>
-<p><a href="https://smrtr.io/sWfY9" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWf_6" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="singapore">Singapore<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#singapore" class="hash-link" aria-label="Direct link to Singapore" title="Direct link to Singapore">​</a></h3>
-<p><a href="https://smrtr.io/sWg3-" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWg8H" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="toronto">Toronto<a href="https://defconq.github.io/blog/New%20York,%20New%20York%20-%20DefconQ%20Goes%20International#toronto" class="hash-link" aria-label="Direct link to Toronto" title="Direct link to Toronto">​</a></h3>
-<p><a href="https://smrtr.io/sWgd7" target="_blank" rel="noopener noreferrer">Senior kdb+ Developer</a></p>
-<p><a href="https://smrtr.io/sWggy" target="_blank" rel="noopener noreferrer">kdb+ Developer</a></p>]]></content:encoded>
-            <category>kdb/q</category>
-            <category>DefconQ</category>
-            <category>New York</category>
-            <category>DataIntellect</category>
-            <category>Community Meetup</category>
         </item>
     </channel>
 </rss>
