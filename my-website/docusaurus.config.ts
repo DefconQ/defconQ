@@ -133,7 +133,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://discord.gg/wKVdH6xrW',
+          href: 'https://discord.gg/62dNjFtKF',
           label: 'DefconQ Community Discord Server',
           position: 'left',
         },
@@ -152,7 +152,7 @@ const config: Config = {
           items: [
             {
               label: 'Learn',
-              to: '/docs/intro',
+              to: '/docs/overview',
             },
           ],
         },
@@ -173,7 +173,7 @@ const config: Config = {
             },
             {
               label: 'DefconQ Community Discord Server',
-              href: 'https://discord.gg/wKVdH6xrW',
+              href: 'https://discord.gg/62dNjFtKF',
             },
           ],
         },
