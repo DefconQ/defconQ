@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6390],{85742:e=>{e.exports=JSON.parse('{"label":"KDB Learning","permalink":"/blog/tags/kdb-learning","allTagsPath":"/blog/tags","count":3,"unlisted":false}')}}]);

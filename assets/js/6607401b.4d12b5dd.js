@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[7541],{87987:e=>{e.exports=JSON.parse('{"label":"2 Years","permalink":"/blog/tags/2-years","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

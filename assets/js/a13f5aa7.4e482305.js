@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9476],{63696:s=>{s.exports=JSON.parse('{"label":"Coding Skills","permalink":"/blog/tags/coding-skills","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

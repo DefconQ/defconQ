@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmy_website||=[]).push([[8947],{56600(e){e.exports=JSON.parse('{"authors":[{"name":"Alexander Unterrainer","title":"DefconQ, KDB/Q Developer, Consultant","url":"https://github.com/AUnterrainer","imageURL":"/img/alex.jpeg","key":"alexander","page":null,"count":44}]}')}}]);
